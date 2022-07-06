@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间,做sql隔离 -->
+
+<mapper namespace="com.mapper.ScMapper">
+    <resultMap id="test" type="com.test.pojo.sc">
+        <result column="cid" property="cid"/>
+    </resultMap>
+    <select id="selectALL" resultMap="test">
+        select *from sc where cid=#{id};
+    </select>
+
+    <select id="selectByCid" resultType="com.test.pojo.sc">
+        select *
+        from sc
+        where  cid=#{cid};
+    </select>
+    <select id="select" resultType="com.test.pojo.sc">
+        select *
+        from  sc
+        where cid=#{cid} and cname=#{cname};
+    </select>
+    <insert id="insert" parameterType="com.test.pojo.sc">
+        insert into sc(cid,cname)
+        values (#{cid},#{cname});
+    </insert>
+</mapper>

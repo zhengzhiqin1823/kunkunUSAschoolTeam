@@ -36,14 +36,12 @@ public class StudentProjectServlet extends HttpServlet {
         List<submission> submissions = mapper.selectByKey(id);
 
         for (submission s:submissions) {
-
         }
 
         sqs.commit();
-
         sqs.close();
 
-        req.getRequestDispatcher("projectDemo.html").forward(req,resp);
+        req.getRequestDispatcher("studentProject.html").forward(req,resp);
     }
 
     @Override

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间,做sql隔离 -->
+
+<mapper namespace="com.mapper.opiniontutorMapper">
+    <select id="selectByKey" resultType="com.test.pojo.opiniontutor">
+        select * from opinion_tutor where rID=#{rID} and tID=#{tID};
+    </select>
+    <select id="selectAll" resultType="com.test.pojo.opiniontutor">
+        select * from opinion_tutor;
+    </select>
+    <insert id="insert" parameterType="com.test.pojo.opiniontutor">
+        insert into opinion_tutor
+        values (#{rID},#{tID},#{score},#{totalsize},#{firstFm},#{submitTime});
+    </insert>
+    <delete id="deleteByKey" parameterType="com.test.pojo.opiniontutor">
+        delete from opinion_tutor where rID=#{rID} and tID=#{tID};
+    </delete>
+</mapper>

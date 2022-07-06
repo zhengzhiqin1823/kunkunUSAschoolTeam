@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间,做sql隔离 -->
+
+<mapper namespace="com.mapper.studentMapper">
+    <insert id="insert" parameterType="com.test.pojo.student">
+        insert into student(sid,password,name,email,tel)
+        values (#{sid},#{password},#{name},#{email},#{tel});
+    </insert>
+    <select id="selectBySid" resultType="com.test.pojo.student">
+        select *from student where sid=#{sid};
+    </select>
+    <select id="selectAll" resultType="com.test.pojo.student">
+        select *from student;
+    </select>
+    <delete id="deleteBySid" parameterType="com.test.pojo.student">
+        delete  from student where sid=#{sid};
+    </delete>
+</mapper>

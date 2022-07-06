@@ -131,7 +131,7 @@
                 </div>
             </div>
             <div class="button">
-                <a href="/0628JavaWebExercise_war/submit?id=123456"></button><button class="button-not-submitted">提交</button></a>
+                <a href="/kunkunUSAschoolTeam_war/submit?id=123456"></button><button class="button-not-submitted">提交</button></a>
             </div>
         </div>
 
@@ -166,33 +166,32 @@
                 </a>
             </div>
         </div>
-
     </div>
 </div>
 </body>
 <script>
 
-    let id = ;
-    var xhttp;
-    if (window.XMLHttpRequest) {
-        xhttp = new XMLHttpRequest();
-    } else {
-        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/task?id="+id);
-    xhttp.send();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText === "true")
-            {
-                alert("用户名已存在！")
-            }
-            else
-            {
-                alert("用户名可以使用！")
-            }
-        }
-    }
+    // let id = ;
+    // var xhttp;
+    // if (window.XMLHttpRequest) {
+    //     xhttp = new XMLHttpRequest();
+    // } else {
+    //     xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    // }
+    // xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/task?id="+id);
+    // xhttp.send();
+    // xhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //         if(this.responseText === "true")
+    //         {
+    //             alert("用户名已存在！")
+    //         }
+    //         else
+    //         {
+    //             alert("用户名可以使用！")
+    //         }
+    //     }
+    // }
 
 </script>
 

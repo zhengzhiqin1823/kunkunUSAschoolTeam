@@ -17,12 +17,9 @@ import java.util.List;
 
 @WebServlet("/login")   //登陆
 public class StudentLoginServlet extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("success.html").forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
@@ -31,7 +28,6 @@ public class StudentLoginServlet extends HttpServlet {
         System.out.println("用户名：" + id);
         System.out.println("密码：" + password);
         System.out.println("在数据库中匹配用户名与密码......");
-
         String resource = "mybatis-config.xml";
         InputStream is = Resources.getResourceAsStream(resource);
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
@@ -47,9 +43,7 @@ public class StudentLoginServlet extends HttpServlet {
 //        mapper.insert("20111","123","zzq","2925@qq.com","12345");
 //        sqs.commit();
         sqs.close();
+        req.getRequestDispatcher("studentHome.html").forward(req, resp);
 
-        if (flag == 1) {
-            req.getRequestDispatcher("studentHome.html").forward(req, resp);
-        }
     }
 }

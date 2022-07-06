@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间,做sql隔离 -->
+
+<mapper namespace="com.mapper.adminMapper">
+    <select id="selectById" resultType="com.test.pojo.admin">
+        select * from admin where aid=#{aid};
+    </select>
+    <select id="selectAll" resultType="com.test.pojo.admin">
+        select * from admin;
+    </select>
+    <insert id="insert" parameterType="com.test.pojo.admin">
+        insert into admin
+        values (#{aid},#{password},#{email},#{tel});
+    </insert>
+    <delete id="deleteById" parameterType="com.test.pojo.admin">
+        delete from admin where aid=#{aid};
+    </delete>
+</mapper>

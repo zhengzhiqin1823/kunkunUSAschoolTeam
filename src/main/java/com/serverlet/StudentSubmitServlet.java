@@ -13,9 +13,6 @@ public class StudentSubmitServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        req.getRequestDispatcher("xxx.html").forward(req,resp);
-
 
     }
 
