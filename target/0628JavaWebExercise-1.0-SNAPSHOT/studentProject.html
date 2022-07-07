@@ -120,52 +120,55 @@
 </body>
 <script>
 
-    let a = document.getElementsByClassName("container");
-    let id = a[0].getAttribute("id");
-    var xhttp;
-    if (window.XMLHttpRequest) {
-        xhttp = new XMLHttpRequest();
-    } else {
-        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/task?id="+id);
-    xhttp.send();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var xmlDoc = toXmlDom(this.responseText);
-            console.log(xmlDoc);
-            var y = xmlDoc.getElementsByTagName("root");
-            var x = y[0].getElementsByTagName("name");
-            console.log(x);
-            console.log(x[0].nodeValue);
-            document.getElementById("xxx").innerHTML = x[0].nodeValue;
-        }
-    }
+//    let a = document.getElementsByClassName("container");
+//    let id = a[0].getAttribute("id");
+//    var xhttp;
+//    if (window.XMLHttpRequest) {
+//        xhttp = new XMLHttpRequest();
+//    } else {
+//        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+//    }
+//    xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/task?id="+id);
+//    xhttp.send();
+//    xhttp.onreadystatechange = function() {
+//        if (this.readyState == 4 && this.status == 200) {
+//            var xmlDoc = toXmlDom(this.responseText);
+//            console.log(xmlDoc);
+//            var y = xmlDoc.getElementsByTagName("root");
+//            var x = y[0].getElementsByTagName("name");
+//            console.log(x);
+//            console.log(x[0].nodeValue);
+//            document.getElementById("xxx").innerHTML = x[0].nodeValue;
+//        }
+//    }
+//    function toXmlDom(source){
+//        var xmlDoc = null;
+//        if (window.ActiveXObject) {
+//            var ARR_ACTIVEX =
+//                ["MSXML4.DOMdocument","MSXML3.DOMdocument","MSXML2.DOMdocument","MSXML.DOMdocument","Microsoft.XmlDom"];
+//            var XmlDomflag = false;
+//            for (var i = 0;i < ARR_ACTIVEX.length && !XmlDomflag ;i++) {
+//                try {
+//                    var objXML = new ActiveXObject(ARR_ACTIVEX[i]);
+//                    xmlDoc = objXML;
+//                    XmlDomflag = true;
+//                } catch (e) {
+//                }
+//            }
+//            if (xmlDoc) {
+//                xmlDoc.async = false;
+//                xmlDoc.loadXML(source);
+//            }
+//        }else{
+//            var parser=new DOMParser();
+//            var xmlDoc=parser.parseFromString(source,"text/xml");
+//        }
+//        return xmlDoc;
+//    }
 
-    function toXmlDom(source){
-        var xmlDoc = null;
-        if (window.ActiveXObject) {
-            var ARR_ACTIVEX =
-                ["MSXML4.DOMdocument","MSXML3.DOMdocument","MSXML2.DOMdocument","MSXML.DOMdocument","Microsoft.XmlDom"];
-            var XmlDomflag = false;
-            for (var i = 0;i < ARR_ACTIVEX.length && !XmlDomflag ;i++) {
-                try {
-                    var objXML = new ActiveXObject(ARR_ACTIVEX[i]);
-                    xmlDoc = objXML;
-                    XmlDomflag = true;
-                } catch (e) {
-                }
-            }
-            if (xmlDoc) {
-                xmlDoc.async = false;
-                xmlDoc.loadXML(source);
-            }
-        }else{
-            var parser=new DOMParser();
-            var xmlDoc=parser.parseFromString(source,"text/xml");
-        }
-        return xmlDoc;
-    }
+
+
+
 </script>
 
 </html>

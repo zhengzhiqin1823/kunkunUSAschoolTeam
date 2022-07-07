@@ -30,8 +30,7 @@ function login(){
     let id=document.getElementById("id").value
     let  password=document.getElementById("password").value
     if(id!=""&&password!="") {
-        alert("登录中！")
-        xmlHttpLogin.send()//"id=" + id.toString() + "&password=" + password.toString());
+        xmlHttpLogin.send("id=" + id.toString() + "&password=" + password.toString());
     }else{
         alert("用户名与密码不能为空!")
     }
