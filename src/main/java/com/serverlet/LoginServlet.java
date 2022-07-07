@@ -61,19 +61,19 @@ public class LoginServlet extends HttpServlet {
         adminMapper adminMapper=sqs.getMapper(com.mapper.adminMapper.class);
         List<admin> admins=adminMapper.selectById(id);
         sqs.commit();
-        if(admins.get(0).password.equals(password)) {
+        if(admins.size()>0&&admins.get(0).password.equals(password)) {
             flag = 1;
         }else{
             tutorMapper tutormapper = sqs.getMapper(tutorMapper.class);
             List<tutor> tutors=tutormapper.selectByTid(id);
             sqs.commit();
-            if(tutors.get(0).password.equals(password)) {
+            if(tutors.size()>0&&tutors.get(0).password.equals(password)) {
                 flag=2;
             }else{
                 studentMapper studentMapper = sqs.getMapper(studentMapper.class);
                 List<student> students = studentMapper.selectBySid(id);
                 sqs.commit();
-                if (students.get(0).password.equals(password)) {
+                if (students.size()>0&&students.get(0).password.equals(password)) {
                     flag = 3;
                 }
             }
