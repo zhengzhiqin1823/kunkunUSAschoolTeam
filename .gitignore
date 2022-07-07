@@ -11,3 +11,5 @@ target/tomcat/logs/access_log.2022-07-07
 target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 
 .idea/dataSources/e165bd47-e799-4ace-b6f9-85c956cb1d09/storage_v2/_src_/schema/javaweb.8lWHkw.meta
+src/main/resources/mybatis-config.xml
+target/tomcat/logs/access_log.2022-07-07
