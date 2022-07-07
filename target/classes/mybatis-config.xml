@@ -12,9 +12,9 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
                 <property name="url"
-                          value="jdbc:mysql:///iosystem" />
+                          value="jdbc:mysql:///system" />
                 <property name="username" value="root" />
-                <property name="password" value="1234" />
+                <property name="password" value="123456" />
             </dataSource>
         </environment>
     </environments>
