@@ -54,7 +54,6 @@ public class LoginServlet extends HttpServlet {
 
         //获取SqlSession对象，来执行sql
         SqlSession sqs = factory.openSession();
-
         int flag = 0;
 
         //执行sql

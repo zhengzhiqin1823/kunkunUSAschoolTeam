@@ -1,6 +1,6 @@
 function checkLogin() {
     let xmlHttpLogin=new XMLHttpRequest();
-    xmlHttpLogin.open("GET", "/login", true)
+    xmlHttpLogin.open("GET", "/0628JavaWebExercise_war/login", true)
     xmlHttpLogin.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlHttpLogin.onreadystatechange = function (){
         if(xmlHttpLogin.readyState==4) {
@@ -16,12 +16,12 @@ function checkLogin() {
 
 function login(){
     let xmlHttpLogin=new XMLHttpRequest();
-    xmlHttpLogin.open("POST", "/login", true)
+    xmlHttpLogin.open("POST", "/0628JavaWebExercise_war/login", true)
     xmlHttpLogin.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlHttpLogin.onreadystatechange = function (){
         if(xmlHttpLogin.readyState==4) {
             if (xmlHttpLogin.status == 200) {
-                location.assign("/studentHome.html")
+                location.assign("/0628JavaWebExercise_war/studentHome.html")
             }else if(xmlHttpLogin.status==401){
                 alert("用户名或密码错误")
             }
