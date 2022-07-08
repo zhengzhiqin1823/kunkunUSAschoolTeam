@@ -25,13 +25,14 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String loginStatus=checkLogin(req);
-
         resp.setContentType("text/text;charset=utf-8");
         resp.setCharacterEncoding("utf-8");
-        if(loginStatus!=null) {
+        HttpSession session=req.getSession();
+        String loginStatus;
+        if(session.getAttribute("type")!=null) {
             resp.setStatus(200);
             PrintWriter printWriter = resp.getWriter();
+            loginStatus = session.getAttribute("type").toString();
             printWriter.write(loginStatus);
         }else{
             resp.sendError(401);
@@ -103,14 +104,5 @@ public class LoginServlet extends HttpServlet {
             }
         }
         //req.getRequestDispatcher("studentHome.html").forward(req, resp);
-    }
-
-    public static String checkLogin(HttpServletRequest request){
-        HttpSession session=request.getSession();
-        if(session.getAttribute("type")!=null) {
-            return session.getAttribute("type").toString();
-        }else{
-            return null;
-        }
     }
 }
