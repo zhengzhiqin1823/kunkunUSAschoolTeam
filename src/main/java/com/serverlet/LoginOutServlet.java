@@ -12,10 +12,14 @@ public class LoginOutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
+        resp.setStatus(200);
+        resp.sendRedirect("/0628JavaWebExercise_war/index.html");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.getSession().invalidate();
+        resp.setStatus(200);
+        resp.sendRedirect("/0628JavaWebExercise_war/index.html");
     }
 }

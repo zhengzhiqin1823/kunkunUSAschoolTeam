@@ -42,3 +42,17 @@ function login(){
         alert("用户名与密码不能为空!")
     }
 }
+
+function loginOut() {
+    let xmlHttpLogin=new XMLHttpRequest();
+    xmlHttpLogin.open("POST", "/0628JavaWebExercise_war/loginOut", true)
+    xmlHttpLogin.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    xmlHttpLogin.onreadystatechange = function (){
+        if(xmlHttpLogin.readyState==4) {
+            if (xmlHttpLogin.status == 200) {
+                location.assign("/0628JavaWebExercise_war/index.html")
+            }
+        }
+    }
+    xmlHttpLogin.send();
+}

@@ -43,9 +43,10 @@ function login(){
     }
 }
 
+/*
 function loginOut() {
     let xmlHttpLogin=new XMLHttpRequest();
-    xmlHttpLogin.open("GET", "/0628JavaWebExercise_war/loginOut", true)
+    xmlHttpLogin.open("POST", "/0628JavaWebExercise_war/loginOut", true)
     xmlHttpLogin.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlHttpLogin.onreadystatechange = function (){
         if(xmlHttpLogin.readyState==4) {
@@ -55,4 +56,4 @@ function loginOut() {
         }
     }
     xmlHttpLogin.send();
-}
+}*/
