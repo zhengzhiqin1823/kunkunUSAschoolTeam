@@ -21,7 +21,14 @@ function login(){
     xmlHttpLogin.onreadystatechange = function (){
         if(xmlHttpLogin.readyState==4) {
             if (xmlHttpLogin.status == 200) {
-                location.assign("/0628JavaWebExercise_war/studentHome.html")
+                if(xmlHttpLogin.responseText=="student") {
+                    location.assign("/0628JavaWebExercise_war/studentHome.html")
+                }else if(xmlHttpLogin.responseText=="tutor"){
+                    location.assign("/0628JavaWebExercise_war/teacherHome.html")
+                }else if(xmlHttpLogin.responseText=="admin") {
+                    alert("请在创建adminHome页面后删除此行")
+                    location.assign("/0628JavaWebExercise_war/adminHome.html")
+                }
             }else if(xmlHttpLogin.status==401){
                 alert("用户名或密码错误")
             }
@@ -34,4 +41,18 @@ function login(){
     }else{
         alert("用户名与密码不能为空!")
     }
+}
+
+function loginOut() {
+    let xmlHttpLogin=new XMLHttpRequest();
+    xmlHttpLogin.open("GET", "/0628JavaWebExercise_war/loginOut", true)
+    xmlHttpLogin.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    xmlHttpLogin.onreadystatechange = function (){
+        if(xmlHttpLogin.readyState==4) {
+            if (xmlHttpLogin.status == 200) {
+                location.assign("/0628JavaWebExercise_war/index.html")
+            }
+        }
+    }
+    xmlHttpLogin.send();
 }
