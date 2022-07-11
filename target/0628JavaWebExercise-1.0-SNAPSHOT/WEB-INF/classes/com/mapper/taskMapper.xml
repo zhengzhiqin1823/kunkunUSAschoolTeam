@@ -5,15 +5,15 @@
 <!-- namespace:命名空间,做sql隔离 -->
 
 <mapper namespace="com.mapper.taskMapper">
- <insert id="insert" parameterType="com.test.pojo.task">
-     insert  into task
-     values(#{taskID},#{name},#{description},#{submitNum},#{firstsm},#{startedline},#{deadline});
- </insert>
+    <insert id="insert" parameterType="com.test.pojo.task">
+        insert  into task
+        values(#{taskID},#{name},#{description},#{submitNum},#{firstsm},#{startedline},#{deadline});
+    </insert>
     <select id="selectByKey" resultType="com.test.pojo.task">
         select * from task where  taskID=#{taskID};
     </select>
     <select id="selectAll" resultType="com.test.pojo.task">
-        select * from opinion_admin;
+        select * from task;
     </select>
     <delete id="deleteByKey" parameterType="com.test.pojo.task">
         delete from task where taskID=#{taskID};

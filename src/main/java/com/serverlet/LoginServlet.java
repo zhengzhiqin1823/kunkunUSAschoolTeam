@@ -10,12 +10,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -25,15 +23,15 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String loginStatus=checkLogin(req);
+        String loginStatus = checkLogin(req);
 
         resp.setContentType("text/text;charset=utf-8");
         resp.setCharacterEncoding("utf-8");
-        if(loginStatus!=null) {
+        if (loginStatus != null) {
             resp.setStatus(200);
             PrintWriter printWriter = resp.getWriter();
             printWriter.write(loginStatus);
-        }else{
+        } else {
             resp.sendError(401);
         }
     }
@@ -57,59 +55,66 @@ public class LoginServlet extends HttpServlet {
         int flag = 0;
 
         //执行sql
-        adminMapper adminMapper=sqs.getMapper(com.mapper.adminMapper.class);
-        List<admin> admins=adminMapper.selectById(id);
-        sqs.commit();
-        if(admins.size()>0&&admins.get(0).password.equals(password)) {
-            flag = 1;
-        }else{
-            tutorMapper tutormapper = sqs.getMapper(tutorMapper.class);
-            List<tutor> tutors=tutormapper.selectByTid(id);
+        try {
+            adminMapper adminMapper = sqs.getMapper(adminMapper.class);
+            List<admin> admins = adminMapper.selectById(id);
             sqs.commit();
-            if(tutors.size()>0&&tutors.get(0).password.equals(password)) {
-                flag=2;
-            }else{
-                studentMapper studentMapper = sqs.getMapper(studentMapper.class);
-                List<student> students = studentMapper.selectBySid(id);
+            if (admins.size() > 0 && admins.get(0).password.equals(password)) {
+                flag = 1;
+            } else {
+                tutorMapper tutormapper = sqs.getMapper(tutorMapper.class);
+                List<tutor> tutors = tutormapper.selectByTid(id);
                 sqs.commit();
-                if (students.size()>0&&students.get(0).password.equals(password)) {
-                    flag = 3;
+                if (tutors.size() > 0 && tutors.get(0).password.equals(password)) {
+                    flag = 2;
+                } else {
+                    studentMapper studentMapper = sqs.getMapper(studentMapper.class);
+                    List<student> students = studentMapper.selectBySid(id);
+                    sqs.commit();
+                    if (students.size() > 0 && students.get(0).password.equals(password)) {
+                        flag = 3;
+                    }
                 }
             }
-        }
-        sqs.close();
+            sqs.close();
 
-        resp.setContentType("text/text;charset=utf-8");
-        resp.setCharacterEncoding("utf-8");
+            resp.setContentType("text/text;charset=utf-8");
+            resp.setCharacterEncoding("utf-8");
 
-        if(flag==0) {
-            resp.sendError(401);
-        }else{
-            resp.setStatus(200);
-            PrintWriter printWriter=resp.getWriter();
+            if (flag == 0) {
+                resp.sendError(401);
+            } else {
+                resp.setStatus(200);
+                PrintWriter printWriter = resp.getWriter();
 
-            HttpSession session = req.getSession();
-            session.setAttribute("id", id);
+                Cookie cookie = new Cookie("id", id);
+                resp.addCookie(cookie);
 
-            if(flag==1){
-                printWriter.write("admin");
-                session.setAttribute("type", "admin");
-            }else if(flag==2){
-                printWriter.write("tutor");
-                session.setAttribute("type", "tutor");
-            }else if(flag==3){
-                printWriter.write("student");
-                session.setAttribute("type", "student");
+                HttpSession session = req.getSession();
+                session.setAttribute("id", id);
+
+                if (flag == 1) {
+                    printWriter.write("admin");
+                    session.setAttribute("type", "admin");
+                } else if (flag == 2) {
+                    printWriter.write("tutor");
+                    session.setAttribute("type", "tutor");
+                } else if (flag == 3) {
+                    printWriter.write("student");
+                    session.setAttribute("type", "student");
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         //req.getRequestDispatcher("studentHome.html").forward(req, resp);
     }
 
-    public static String checkLogin(HttpServletRequest request){
-        HttpSession session=request.getSession();
-        if(session.getAttribute("type")!=null) {
+    public static String checkLogin(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("type") != null) {
             return session.getAttribute("type").toString();
-        }else{
+        } else {
             return null;
         }
     }

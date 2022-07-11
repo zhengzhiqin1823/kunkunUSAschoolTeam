@@ -3,6 +3,11 @@
 	padding:0px;
 }
 
+.body{
+	display: flex;
+	background-color: white;
+}
+
 .heading{
 	width:auto;
 	height:52px;
@@ -10,6 +15,7 @@
 	background: #24292e;
 	border:1px;
 	solid:#ccc;
+
 }
 .heading_img img{
 	border-radius:30px;/*圆角边框*/
@@ -144,25 +150,25 @@ a{
 
 .body_left{
 	float:left;
-	width:22%;
-	height:750px;
+	width:300px;
 	background: white;
 }
+
 .body_left_one{
 	width:280px;
-	height:33px;
+	height:35px;
 	margin:30px 15px 4px 20px;
 }
 .body_left_one h4{
 	color:#24292E;
-	line-height: 18px;
+	line-height: 20px;
 }
 .body_left_one button{
 	float: right;
-	width:62px;
+	width:70px;
 	height:28px;
 	margin-top:-24px;
-	margin-right: 20px;
+	margin-right: 22px;
 	display: block;
 	border:1px solid #e2e3e3;
 	border-radius:3px;
@@ -204,7 +210,7 @@ a{
 }
 .demo01{
 	width:255px;
-	height:80px;
+	height:90px;
 	margin-left: 20px;
 	border:1px solid #4e94e2;
 	border-radius:10px;
@@ -222,12 +228,12 @@ a{
 .demo01 p{
 	float: right;
 	margin-top:10px;
-	margin-left: 5px;
+	margin-left: 8px;
+	margin-right: 8px;
 }
-
 .demo02{
 	width:255px;
-	height:100px;
+	height:110px;
 	margin-top: 10px;
 	margin-left: 20px;
 	border:1px solid #4e94e2;
@@ -246,12 +252,12 @@ a{
 .demo02 p{
 	float: right;
 	margin-top:10px;
-	margin-left: 5px;
+	margin-right: 8px;
+	margin-left: 8px;
 }
-
 .demo03{
 	width:255px;
-	height:100px;
+	height:110px;
 	margin-top: 10px;
 	margin-left: 20px;
 	border:1px solid #4e94e2;
@@ -270,28 +276,40 @@ a{
 .demo03 p{
 	float: right;
 	margin-top:10px;
-	margin-left: 5px;
+	margin-left: 8px;
+	margin-right: 8px;
 }
 
 .body_right{
-	float:right;
-	width:78%;
-	height:750px;
-	position:relative;
-	background: #f6f8fa;
+	height: auto;
+	flex: 1;
+	display: inline-block;
+}
+.submit{
+	position: relative;
+	margin-left: 25px;
+	margin-top: 15px;
+	font-family: 楷体;
 }
 .right_mid{
-	width:60%;
-	height:250px;
-	margin:33px 20px;
-	position:relative;
-	background: white;
+	background-color: rgb(231, 231, 231);
+	margin: 1.5%;
+	padding-bottom: 10px;
+	border-radius: 10px;
+	/* padding: 5px; */
 }
+
+.bottom{
+	display: flex;
+	justify-content: space-between;
+}
+
 .right_mid h4{
-	padding:35px 70px 12px 28px;
+	padding:20px 70px 12px 28px;
 	margin-right: 10px;
 }
 .right_mid p{
+	margin: 10px;
 	font-size:16px;
 	padding-left:28px;
 	padding-right: 40px;
@@ -309,10 +327,8 @@ a{
 .right_mid button{
 	width:130px;
 	height:37px;
-	position: absolute;
-	left:30px;
-	bottom:40px;
-	display: block;
+	margin-left: 20px;
+	display: inline;
 	text-align:center;
 	font-size:15px;
 	font-family:verdana;
@@ -326,67 +342,36 @@ a{
 	background:#0b5ebc;
 	color:white;
 }
-
-.right_mid02{
-	width:60%;
-	height:250px;
-	margin:33px 20px;
-	position:relative;
-	background: white;
-}
-.right_mid02 h4{
-	padding:35px 70px 12px 28px;
-	margin-right: 10px;
-}
-.right_mid02 p{
-	font-size:16px;
-	padding-left:28px;
-	padding-right: 40px;
-	color:#24292E;
-}
-
-.right_mid02 a{
-	display: inline;/*使a不换行*/
-	color:#0366d6;
-	text-decoration: none;
-}
-.right_mid02 a:hover{
-	color:#0366d6;
-	text-decoration: underline;
-}
-.right_mid02 button{
-	width:130px;
-	height:37px;
-	position: absolute;
-	left:30px;
-	bottom:40px;
-	display: block;
+.right_mid .deadline{
+	display: inline;
 	text-align:center;
-	font-size:15px;
-	font-family:verdana;
-	color:#1f75db;
-	border:1px solid #e2e3e3;
-	border-radius:6px;
-	background: white;
-	cursor: pointer;/*光标小手*/
-}
-.right_mid02 button:hover{
-	background:#0b5ebc;
-	color:white;
 }
 
 .right_right{
-	float:right;
-	width:380px;
+	display:inline-block;
+	width:250px;
 	height:700px;
 	margin-top:33px;
 	margin-right:10px;
-	position:absolute;
-	right:0px;
-	top:0px;
+
 }
 .right_right p{
-	font-family: 楷体;
+	/* font-family: 楷体; */
+	font-size: 12px;
+}
+.right_right a{
+	display: flex;
+	color: #222222;
+}
+.right_right .body a{
+	/* font-family: 楷体; */
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.818);
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.right_right a:hover{
+	color:darkgray;
 }
 ul.timeline{
 	list-style: none;
@@ -421,5 +406,7 @@ ul.timeline{
 	font-size: 0.8rem;
 	color: gray;
 }
-
-
+.right_right h3{
+	display: flex;
+	margin-left: 20px;
+}

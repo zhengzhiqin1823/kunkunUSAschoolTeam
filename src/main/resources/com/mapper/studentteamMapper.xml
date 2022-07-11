@@ -15,6 +15,10 @@
     <select id="selectAll" resultType="com.test.pojo.studentteam">
         select * from student_team;
     </select>
+
+    <select id="selectBySid" resultType="com.test.pojo.studentteam">
+        select * from student_team where sid=#{sid};
+    </select>
     <delete id="deleteByKey" parameterType="com.test.pojo.studentteam">
         delete from student_team where sid=#{sid} and teamID=#{teamID};
     </delete>

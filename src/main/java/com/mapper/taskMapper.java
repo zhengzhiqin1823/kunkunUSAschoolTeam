@@ -12,3 +12,5 @@ public interface taskMapper {
     List<task> selectAll();
     void deleteByKey(@Param("taskID")String taskID);
 }
+
+

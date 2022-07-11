@@ -30,10 +30,14 @@
       <scope>test</scope>
     </dependency>
 
-
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>2.2</version>
+    </dependency>
     <!--
-    Servlet 必备依赖
-    -->
+        Servlet 必备依赖
+        -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>

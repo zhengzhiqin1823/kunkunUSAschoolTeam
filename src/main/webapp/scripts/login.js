@@ -21,7 +21,7 @@ function login(){
     xmlHttpLogin.onreadystatechange = function (){
         if(xmlHttpLogin.readyState==4) {
             if (xmlHttpLogin.status == 200) {
-                location.assign("/0628JavaWebExercise_war/studentHome.html")
+                location.assign("/0628JavaWebExercise_war/home")
             }else if(xmlHttpLogin.status==401){
                 alert("用户名或密码错误")
             }

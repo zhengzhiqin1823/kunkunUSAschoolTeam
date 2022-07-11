@@ -5,8 +5,10 @@
 <!-- namespace:命名空间,做sql隔离 -->
 
 <mapper namespace="com.mapper.messageMapper">
+
+
     <select id="selectByKey" resultType="com.test.pojo.message">
-        select * from messageID=#{messageID};
+        select * from message where messageID=#{messageID};
     </select>
     <select id="selectAll" resultType="com.test.pojo.message">
         select * from message;

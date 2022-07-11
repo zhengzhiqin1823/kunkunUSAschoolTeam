@@ -1,11 +1,7 @@
 package com.serverlet;
 
-import com.mapper.submissionMapper;
-import com.mapper.taskMapper;
-import com.test.pojo.submission;
-import com.test.pojo.task;
-import jdk.internal.util.xml.XMLStreamException;
-import jdk.internal.util.xml.impl.XMLWriter;
+import com.mapper.*;
+import com.test.pojo.*;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,19 +9,41 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/task")
 public class StudentTaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
+
+        boolean isLogin = false;
+        HttpSession session = req.getSession();
+        Cookie[] cookies = req.getCookies();
+        Object sid = session.getAttribute("id");
+        System.out.println(sid);
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("id")) {
+                if (cookie.getValue().equals(sid)) {
+                    isLogin = true;
+                    break;
+                }
+            }
+        }
+        //如果没有登陆,则返回登陆
+        if (!isLogin) {
+            resp.sendRedirect("/0628JavaWebExercise_war");
+            return;
+        }
+
+//      获取请求参数taskID
+        String taskID = req.getParameter("taskID");
 
         /*访问数据库，生成一个HTML文件*/
         String resource = "mybatis-config.xml";
@@ -36,47 +54,217 @@ public class StudentTaskServlet extends HttpServlet {
         //执行sql
         taskMapper taskMapper = sqs.getMapper(taskMapper.class);
         submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
+        reportMapper reportMapper = sqs.getMapper(reportMapper.class);
+        studentteamMapper studentteamMapper = sqs.getMapper(studentteamMapper.class);
+        teamMapper teamMapper = sqs.getMapper(teamMapper.class);
+        opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
 
-        List<task> tasks = taskMapper.selectByKey(id);
-
+        List<task> tasks = taskMapper.selectByKey(taskID);
         task t = tasks.get(0);
+        String num = t.getSubmitNum();
+        int submitNum = Integer.parseInt(num);
+        List<submission> submissionArr = new ArrayList<>();
+        if (submitNum > 0) {
+            String firstsm = t.getFirstsm();
+            List<submission> submissions = submissionMapper.selectByKey(firstsm);
+            submissionArr.add(submissions.get(0));
+            submitNum--;
+            while (submitNum > 0) {
+                String next = submissions.get(0).getNext();
+                submissions = submissionMapper.selectByKey(next);
+                submissionArr.add(submissions.get(0));
+                submitNum--;
+            }
+        }
 
-        PrintWriter printWriter = resp.getWriter();
-        StringBuilder response = new StringBuilder();
+        List<studentteam> studentteams = studentteamMapper.selectBySid((String) sid);
+        String teamID = studentteams.get(0).getTeamID();
 
-        response.append("<root>\n" +
-                "<name>项目A101：坤坤的偶像剧评鉴</name>\n" +
-                "<startTime>2022-07-07</startTime>\n" +
-                "<endTime>2022-08-07</endTime>\n" +
-                "<description>\n" +
-                t.getDescription() +
-                "</description>\n");
-        response.append("<submissions num=\"" + t.getSubmitNum() + "\">");
-        int num = Integer.parseInt(t.getSubmitNum());
-        List<submission> submissions = submissionMapper.selectByKey(t.getFirstsm());
-//        while(true)
-//        {
-        response.append("<submission>");
-        response.append("<submissionName>" + "submissions.get(0).getName()" + "</submissionName>");
-        response.append("<data-father>\n" +
-                "守护全世界最好的坤坤️守护全世界最好的坤坤️\n" +
-                "</data-father>");
-        response.append("<data-button>\n" +
-                "                <button class=\"button-submitted\">已提交</button>\n" +
-                "                <button class=\"button-submitted\">查看附件</button>\n" +
-                "            </data-button>");
-        response.append("</submission>");
-//            if(submissions.get(0).getNext()==null)
-//                break;
-//        }
-        sqs.commit();
-        sqs.close();
-        printWriter.write(String.valueOf(response));
+        List<MySubmission> mySubList = new ArrayList<>();
+        int index = 0;
+        for (submission s : submissionArr) {
+            MySubmission mySubmission = new MySubmission();
+            mySubmission.name = s.getName();
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date(System.currentTimeMillis());
+            String time = formatter.format(date);
+
+//            是否开始
+            if (time.compareTo(s.getDeadLine()) > 0) {
+                mySubmission.status = "已结束";
+                mySubmission.statusDate = s.getDeadLine();
+            } else if (time.compareTo(s.getStartTime()) >= 0) {
+                mySubmission.status = "进行中";
+                mySubmission.statusDate = s.getDeadLine();
+            } else {
+                mySubmission.status = "未开始";
+                mySubmission.statusDate = s.getStartTime();
+            }
+
+//            是否提交和评审
+            List<report> reports = reportMapper.selectByTeamIDAndSubmitID(teamID, s.getSubmitID());
+            if (reports.size() == 0) {
+                mySubmission.isSubmit = "未提交";
+                mySubmission.submitDate = "";
+                mySubmission.isJudged = "未评审";
+                mySubmission.judgeDate = "";
+            } else {
+                mySubmission.isSubmit = "已提交";
+                mySubmission.submitDate = reports.get(0).getSubmitTime().substring(0,10);
+                List<opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(reports.get(0).getRid());
+                if (opiniontutors.size() == 0) {
+                    mySubmission.isJudged = "未评审";
+                    mySubmission.judgeDate = "";
+                } else {
+                    mySubmission.isJudged = "已评审";
+                    mySubmission.judgeDate = opiniontutors.get(0).getSubmitTime().substring(0,10);
+                }
+            }
+
+
+            // TODO: 2022/7/11
+            /* 以下信息写死，待修改 */
+            mySubmission.score = "合格(static)";
+
+            mySubList.add(mySubmission);
+        }
+        //重要代码
+        resp.setContentType("text/html;charset=UTF-8");
+
+
+        PrintWriter writer = resp.getWriter();
+        writeHtml(writer, t, mySubList);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
     }
+
+    private void writeHtml(PrintWriter writer, task t, List<MySubmission> list) {
+        writer.write("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>项目页面</title>\n" +
+                "    <link rel=\"stylesheet\" href=\"./css/studentProject.css\"/>\n" +
+                "    <link rel=\"stylesheet\" href=\"./css/demo-navigation.css\"/>\n" +
+                "    <script type=\"module\" src=\"https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js\"></script>\n" +
+                "    <script nomodule src=\"https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js\"></script>\n" +
+                "    <link rel=\"stylesheet\" href=\"./css/demo-button1.css\"/>\n" +
+                "\n" +
+                "</head>\n" +
+                "\n" +
+                "<body>\n" +
+                "<div class=\"demo-navigation1\">\n" +
+                "    <nav>\n" +
+                "        <ul>\n" +
+                "            <li>Home</li>\n" +
+                "            <li>Messages</li>\n" +
+                "            <li>Projects</li>\n" +
+                "            <li>Submits</li>\n" +
+                "            <li>Personal</li>\n" +
+                "        </ul>\n" +
+                "    </nav>\n" +
+                "</div>\n" +
+                "\n" +
+                "<div class=\"top\">\n" +
+                "    <p>" + t.getName() + "</p>\n" +
+                "    <div class=\"head\">\n" +
+                "        <div class=\"description\">\n" +
+                "            &ensp;&ensp;&ensp;&ensp;" +
+                t.getDescription() +
+                "        </div>\n" +
+                "    </div>\n" +
+                "    <br>\n" +
+                "</div>\n" +
+
+
+                //以下为Submission部分
+                "<div class=\"container\">\n");
+
+        for (MySubmission m : list) {
+            writer.write("    <div class=\"container__column\">\n" +
+                    "        <div class=\"container__content\">\n" +
+                    "            <div class=\"title\">\n" +
+                    "                <h3>" + m.name + "</h3>\n" +
+                    "            </div>\n" +
+                    "            <div class=\"father\">\n" +
+                    "                <div class=\"inner-container\">\n" +
+                    "                    <div class=\"menu\">\n" +
+                    "                        <li>\n" +
+                    "                            <span class=\"icon\">\n" +
+                    "                              <ion-icon name=\"time-outline\"></ion-icon>\n" +
+                    "                            </span>\n" +
+                    "                            <span class=\"status\">" + m.status + "</span>\n" +
+                    "                            <span class=\"time\">" + m.statusDate + "</span>\n" +
+                    "                        </li>\n" +
+                    "                        <li>\n" +
+                    "                            <span class=\"icon\">\n" +
+                    "                              <ion-icon name=\"time-outline\"></ion-icon>\n" +
+                    "                            </span>\n" +
+                    "                            <span class=\"status\">" + m.isSubmit + "</span>\n" +
+                    "                            <span class=\"time\">" + m.submitDate + "</span>\n" +
+                    "                        </li>\n" +
+                    "                        <li>\n" +
+                    "                            <span class=\"icon\">\n" +
+                    "                              <ion-icon name=\"time-outline\"></ion-icon>\n" +
+                    "                            </span>\n" +
+                    "                            <span class=\"status\">" + m.isJudged + "</span>\n" +
+                    "                            <span class=\"time\">" + m.judgeDate + "</span>\n" +
+                    "                        </li>\n" +
+                    "                        <li>\n" +
+                    "                <span class=\"icon\">\n" +
+                    "                  <ion-icon name=\"moon-outline\"></ion-icon>\n" +
+                    "                </span>\n" +
+                    "                            <span class=\"status\">成绩：</span>\n" +
+                    "                            <span class=\"time\">" + m.score + "</span>\n" +
+                    "\n" +
+                    "                        </li>\n" +
+                    "                    </div>\n" +
+                    "                </div>\n" +
+                    "            </div>\n" +
+                    "            <div class=\"inner-button\">\n" +
+                    "                <button class=\"demo-button1\">查看详情</button>\n" +
+                    "            </div>\n" +
+                    "        </div>\n" +
+                    "    </div>\n");
+        }
+
+
+        writer.write(
+                "</div>\n" +
+                        "</body>\n" +
+                        "\n" +
+                        "</html>");
+
+    }
+
+    class MySubmission {
+        public String name;
+        public String status;         /* 0 1 2 */
+        public String statusDate;
+        public String isSubmit;     /* false true */
+        public String submitDate;
+        public String isJudged;
+        public String judgeDate;
+        public String score;
+
+        @Override
+        public String toString() {
+            return "MySubmission{" +
+                    "name='" + name + '\'' +
+                    ", status=" + status +
+                    ", statusDate='" + statusDate + '\'' +
+                    ", isSubmit=" + isSubmit +
+                    ", submitDate='" + submitDate + '\'' +
+                    ", isJudged=" + isJudged +
+                    ", judgeDate='" + judgeDate + '\'' +
+                    ", score='" + score + '\'' +
+                    '}';
+        }
+    }
+
 }

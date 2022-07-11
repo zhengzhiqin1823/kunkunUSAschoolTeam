@@ -8,6 +8,9 @@
     <select id="selectByKey" resultType="com.test.pojo.opiniontutor">
         select * from opinion_tutor where rID=#{rID} and tID=#{tID};
     </select>
+    <select id="selectByrID" resultType="com.test.pojo.opiniontutor">
+        select * from opinion_tutor where rID=#{rID};
+    </select>
     <select id="selectAll" resultType="com.test.pojo.opiniontutor">
         select * from opinion_tutor;
     </select>

@@ -11,6 +11,9 @@
     <select id="selectAll" resultType="com.test.pojo.report">
         select * from report;
     </select>
+    <select id="selectByTeamIDAndSubmitID" resultType="com.test.pojo.report">
+        select * from report where teamID=#{teamID} and submitID=#{submitID};
+    </select>
     <insert id="insert" parameterType="com.test.pojo.report">
         insert into report
         values (#{rid},#{submitID},#{teamid},#{totalsize},#{firstFm},#{submitTime});
