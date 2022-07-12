@@ -67,14 +67,14 @@ public class LoginServlet extends HttpServlet {
                 sqs.commit();
                 if (tutors.size() > 0 && tutors.get(0).password.equals(password)) {
                     flag = 2;
-                } else {
+                }/* else {
                     studentMapper studentMapper = sqs.getMapper(studentMapper.class);
                     List<student> students = studentMapper.selectBySid(id);
                     sqs.commit();
                     if (students.size() > 0 && students.get(0).password.equals(password)) {
                         flag = 3;
                     }
-                }
+                }*/
             }
             sqs.close();
 
@@ -99,10 +99,10 @@ public class LoginServlet extends HttpServlet {
                 } else if (flag == 2) {
                     printWriter.write("tutor");
                     session.setAttribute("type", "tutor");
-                } else if (flag == 3) {
+                }/* else if (flag == 3) {
                     printWriter.write("student");
                     session.setAttribute("type", "student");
-                }
+                }*/
             }
         } catch (Exception e) {
             e.printStackTrace();
