@@ -9,6 +9,11 @@ import java.util.List;
 public interface reportcaheMapper {
     List<reportcahe> selectByKey(@Param("cacheID") String cacheID);
     List<reportcahe> selectAll();
-    void insert(@Param("cacheID") String cacheID,@Param("submitID") String submitID,@Param("teamID") String teamID,@Param("firstfm") String firstfm,@Param("totalsize") String totalsize);
+    List<reportcahe> selectByTeamIDAndSubmitID(@Param("teamID") String teamID,@Param("submitID") String submitID);
+    void insert(@Param("cacheID") String cacheID,@Param("submitID") String submitID,
+                @Param("teamID") String teamID,@Param("firstfm") String firstfm,@Param("totalsize") String totalsize);
     void deleteByKey(@Param("cacheID") String cacheID);
+    void deleteByTeamIDAndSubmitID(@Param("teamID") String teamID,@Param("submitID") String submitID);
+
+
 }

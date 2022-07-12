@@ -82,23 +82,24 @@ public class StudentHomeServlet extends HttpServlet {
                 "  <meta charset=\"UTF-8\">\n" +
                 "  <title>首页</title>\n" +
                 "  <link rel=\"stylesheet\" type=\"text/css\" href=\"./css/studentHome.css\">\n" +
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/demo-navigation.css\">"+
-                "<script src=\"./scripts/studentHome.js\"></script>"+
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/demo-navigation.css\">" +
+                "<script src=\"./scripts/studentHome.js\"></script>" +
+                "<script src=\"./scripts/demo-navigation1.js\"></script>" +
                 "</head>\n" +
                 "\n" +
                 "<body>\n" +
                 "\n" +
                 "<div class=\"demo-navigation1\">\n" +
-                        "  <nav>\n" +
-                        "    <ul>\n" +
-                        "      <li>Home</li>\n" +
-                        "      <li>Messages</li>\n" +
-                        "      <li>Projects</li>\n" +
-                        "      <li>Submits</li>\n" +
-                        "      <li>Personal</li>\n" +
-                        "    </ul>\n" +
-                        "  </nav>\n" +
-                        "</div>"+
+                "  <nav>\n" +
+                "    <ul>\n" +
+                "            <li onclick=\"Home_click()\">Home</li>\n" +
+                "            <li onclick=\"Messages_click()\">Messages</li>\n" +
+                "            <li onclick=\"Projects_click()\">Projects</li>\n" +
+                "            <li onclick=\"Submits_click()\">Submits</li>\n" +
+                "            <li onclick=\"Personal_click()\">Personal</li>" +
+                "    </ul>\n" +
+                "  </nav>\n" +
+                "</div>" +
                 "<div class=\"body\">\n" +
                 "\n" +
                 "  <div class=\"body_left\">\n" +
@@ -153,7 +154,7 @@ public class StudentHomeServlet extends HttpServlet {
                             t.getDescription() +
                             "      </p>\n" +
                             "      <div class=\"bottom\">\n" +
-                            "        <button type=\"button\" onclick=\"button_click("+t.getTaskID()+")\">进入项目</button>\n" +
+                            "        <button type=\"button\" onclick=\"button_click(" + t.getTaskID() + ")\">进入项目</button>\n" +
                             "        <p class=\"deadline\">截止日期：" + t.getDeadline() + "</p>\n" +
                             "      </div>\n" +
                             "    </div>\n");

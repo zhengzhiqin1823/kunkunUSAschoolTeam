@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>团队信息界面</title>
+  <link type="text/css" rel="stylesheet" href="./css/team-information.css">
+  <link type="text/css" rel="stylesheet" href="./css/demo-navigation.css">
+  <script type="text/javascript" src="./scripts/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./scripts/demo-navigation1.js"></script>
+</head>
+<body>
+  <div class="demo-navigation1" >
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Messages</li>
+        <li>Projects</li>
+        <li>Personal</li>
+      </ul>
+    </nav>
+  </div>
+  <div class="body">
+    <div class="body_mid">
+      <div class="body_mid_left">
+        <ul>
+          <img src="./image/setting.jpg">
+          <li><a href="#">团队信息</a></li>
+          <img src="./image/setting.jpg">
+          <li><a href="#">修改基本信息</a></li>
+          <img src="./image/setting.jpg">
+          <li><a href="#">修改密码</a></li>
+        </ul>
+      </div>
+      <div class="body_mid_right">
+        <div class="title">
+            <h1><strong>团队信息</strong></h1>
+        </div>
+        <ul>
+          <p>团队名称：蔡徐坤粉丝团</p>
+          <p>团队ID：114514</p>
+          <p>邮箱：114514@qq.com</p>
+          <p>电话：1433223</p>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  var team = new Vue({
+    el: ".body",
+    data:{
+      teamName:"",
+      teamID:"",
+      email:"",
+      tel:""
+    },
+    methods:{
+      initInformation() {
+        axios({
+          method: "get",
+          url: "/0628JavaWebExercise_war/team/personal/getInfor"
+        }).then((res) => {
+          let response= JSON.parse(res.data);
+        })
+      }
+    }
+  })
+
+
+</script>
+</html>
+
+

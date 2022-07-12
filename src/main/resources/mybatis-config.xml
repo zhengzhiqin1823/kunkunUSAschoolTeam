@@ -29,8 +29,6 @@
         <mapper resource="com/mapper/opinionTutorCacheMapper.xml"/>
         <mapper resource="com/mapper/opinionTutorMapper.xml"/>
         <mapper resource="com/mapper/reportcaheMapper.xml"/>
-        <mapper resource="com/mapper/studentMapper.xml"/>
-        <mapper resource="com/mapper/studentteamMapper.xml"/>
         <mapper resource="com/mapper/submissionMapper.xml"/>
         <mapper resource="com/mapper/taskMapper.xml"/>
         <mapper resource="com/mapper/teamMapper.xml"/>

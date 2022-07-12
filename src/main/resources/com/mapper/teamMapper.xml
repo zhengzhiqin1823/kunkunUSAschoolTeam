@@ -6,8 +6,8 @@
 
 <mapper namespace="com.mapper.teamMapper">
     <insert id="insert" parameterType="com.test.pojo.team">
-        insert  into team
-        values(#{teamid},#{name},#{header});
+        insert into team
+        values(#{teamid},#{password},#{eamil},#{name},#{tel});
     </insert>
     <select id="selectByKey" resultType="com.test.pojo.team">
         select * from team where  teamid=#{teamid};

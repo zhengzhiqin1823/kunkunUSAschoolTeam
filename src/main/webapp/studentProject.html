@@ -9,6 +9,9 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="./css/demo-button1.css"/>
+    <script src="./scripts/demo-navigation1.js"></script>
+    <script src="./scripts/studentSubmit.js"></script>
+    <script src="./scripts/studentTask.js"></script>
 
 </head>
 
@@ -16,11 +19,11 @@
 <div class="demo-navigation1">
     <nav>
         <ul>
-            <li>Home</li>
-            <li>Messages</li>
-            <li>Projects</li>
-            <li>Submits</li>
-            <li>Personal</li>
+            <li onclick="Home_click()">Home</li>
+            <li onclick="Messages_click()">Messages</li>
+            <li onclick="Projects_click()">Projects</li>
+            <li onclick="Submits_click()">Submits</li>
+            <li onclick="Personal_click()">Personal</li>
         </ul>
     </nav>
 </div>
@@ -81,7 +84,7 @@
                 </div>
             </div>
             <div class="inner-button">
-                <button class="demo-button1">查看详情</button>
+                <button class="demo-button1" onclick="read_report('/0628JavaWebExercise_war/login')">查看详情</button>
             </div>
         </div>
     </div>

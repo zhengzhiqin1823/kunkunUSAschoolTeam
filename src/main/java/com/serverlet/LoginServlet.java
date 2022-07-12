@@ -1,9 +1,9 @@
 package com.serverlet;
 
-import com.mapper.studentMapper;
+import com.mapper.teamMapper;
 import com.mapper.tutorMapper;
 import com.mapper.adminMapper;
-import com.test.pojo.student;
+import com.test.pojo.team;
 import com.test.pojo.tutor;
 import com.test.pojo.admin;
 import org.apache.ibatis.io.Resources;
@@ -67,14 +67,15 @@ public class LoginServlet extends HttpServlet {
                 sqs.commit();
                 if (tutors.size() > 0 && tutors.get(0).password.equals(password)) {
                     flag = 2;
-                }/* else {
-                    studentMapper studentMapper = sqs.getMapper(studentMapper.class);
-                    List<student> students = studentMapper.selectBySid(id);
+                }
+                else {
+                    teamMapper teamMapper = sqs.getMapper(teamMapper.class);
+                    List<team> teams = teamMapper.selectByKey(id);
                     sqs.commit();
-                    if (students.size() > 0 && students.get(0).password.equals(password)) {
+                    if (teams.size() > 0 && teams.get(0).getPassword().equals(password)) {
                         flag = 3;
                     }
-                }*/
+                }
             }
             sqs.close();
 
@@ -84,6 +85,7 @@ public class LoginServlet extends HttpServlet {
             if (flag == 0) {
                 resp.sendError(401);
             } else {
+
                 resp.setStatus(200);
                 PrintWriter printWriter = resp.getWriter();
 
@@ -99,10 +101,10 @@ public class LoginServlet extends HttpServlet {
                 } else if (flag == 2) {
                     printWriter.write("tutor");
                     session.setAttribute("type", "tutor");
-                }/* else if (flag == 3) {
-                    printWriter.write("student");
-                    session.setAttribute("type", "student");
-                }*/
+                } else if (flag == 3) {
+                    printWriter.write("team");
+                    session.setAttribute("type", "team");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

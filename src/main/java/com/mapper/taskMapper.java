@@ -1,6 +1,7 @@
 package com.mapper;
 
 import com.test.pojo.OpinionAdmin;
+import com.test.pojo.submission;
 import com.test.pojo.task;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,6 +12,7 @@ public interface taskMapper {
     List<task> selectByKey(@Param("taskID")String taskID);
     List<task> selectAll();
     void deleteByKey(@Param("taskID")String taskID);
+    List<submission> getAllSubmission();
 }
 
 

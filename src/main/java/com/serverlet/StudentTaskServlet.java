@@ -26,11 +26,11 @@ public class StudentTaskServlet extends HttpServlet {
         boolean isLogin = false;
         HttpSession session = req.getSession();
         Cookie[] cookies = req.getCookies();
-        Object sid = session.getAttribute("id");
-        System.out.println(sid);
+        Object teamID = session.getAttribute("id");
+        System.out.println(teamID);
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("id")) {
-                if (cookie.getValue().equals(sid)) {
+                if (cookie.getValue().equals(teamID)) {
                     isLogin = true;
                     break;
                 }
@@ -55,7 +55,7 @@ public class StudentTaskServlet extends HttpServlet {
         taskMapper taskMapper = sqs.getMapper(taskMapper.class);
         submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
         reportMapper reportMapper = sqs.getMapper(reportMapper.class);
-        studentteamMapper studentteamMapper = sqs.getMapper(studentteamMapper.class);
+
         teamMapper teamMapper = sqs.getMapper(teamMapper.class);
         opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
 
@@ -77,14 +77,13 @@ public class StudentTaskServlet extends HttpServlet {
             }
         }
 
-        List<studentteam> studentteams = studentteamMapper.selectBySid((String) sid);
-        String teamID = studentteams.get(0).getTeamID();
 
         List<MySubmission> mySubList = new ArrayList<>();
         int index = 0;
         for (submission s : submissionArr) {
             MySubmission mySubmission = new MySubmission();
             mySubmission.name = s.getName();
+            mySubmission.submitID=s.getSubmitID();
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date(System.currentTimeMillis());
@@ -103,7 +102,7 @@ public class StudentTaskServlet extends HttpServlet {
             }
 
 //            是否提交和评审
-            List<report> reports = reportMapper.selectByTeamIDAndSubmitID(teamID, s.getSubmitID());
+            List<report> reports = reportMapper.selectByTeamIDAndSubmitID((String) teamID, s.getSubmitID());
             if (reports.size() == 0) {
                 mySubmission.isSubmit = "未提交";
                 mySubmission.submitDate = "";
@@ -111,14 +110,14 @@ public class StudentTaskServlet extends HttpServlet {
                 mySubmission.judgeDate = "";
             } else {
                 mySubmission.isSubmit = "已提交";
-                mySubmission.submitDate = reports.get(0).getSubmitTime().substring(0,10);
+                mySubmission.submitDate = reports.get(0).getSubmitTime().substring(0, 10);
                 List<opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(reports.get(0).getRid());
                 if (opiniontutors.size() == 0) {
                     mySubmission.isJudged = "未评审";
                     mySubmission.judgeDate = "";
                 } else {
                     mySubmission.isJudged = "已评审";
-                    mySubmission.judgeDate = opiniontutors.get(0).getSubmitTime().substring(0,10);
+                    mySubmission.judgeDate = opiniontutors.get(0).getSubmitTime().substring(0, 10);
                 }
             }
 
@@ -131,9 +130,8 @@ public class StudentTaskServlet extends HttpServlet {
         }
         //重要代码
         resp.setContentType("text/html;charset=UTF-8");
-
-
         PrintWriter writer = resp.getWriter();
+
         writeHtml(writer, t, mySubList);
     }
 
@@ -154,6 +152,8 @@ public class StudentTaskServlet extends HttpServlet {
                 "    <script type=\"module\" src=\"https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js\"></script>\n" +
                 "    <script nomodule src=\"https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js\"></script>\n" +
                 "    <link rel=\"stylesheet\" href=\"./css/demo-button1.css\"/>\n" +
+                "<script src=\"./scripts/studentTask.js\"></script>"+
+                "       <script src=\"./scripts/demo-navigation1.js\"></script>"+
                 "\n" +
                 "</head>\n" +
                 "\n" +
@@ -161,11 +161,11 @@ public class StudentTaskServlet extends HttpServlet {
                 "<div class=\"demo-navigation1\">\n" +
                 "    <nav>\n" +
                 "        <ul>\n" +
-                "            <li>Home</li>\n" +
-                "            <li>Messages</li>\n" +
-                "            <li>Projects</li>\n" +
-                "            <li>Submits</li>\n" +
-                "            <li>Personal</li>\n" +
+                "            <li onclick=\"Home_click()\">Home</li>\n" +
+                "            <li onclick=\"Messages_click()\">Messages</li>\n" +
+                "            <li onclick=\"Projects_click()\">Projects</li>\n" +
+                "            <li onclick=\"Submits_click()\">Submits</li>\n" +
+                "            <li onclick=\"Personal_click()\">Personal</li>" +
                 "        </ul>\n" +
                 "    </nav>\n" +
                 "</div>\n" +
@@ -226,8 +226,9 @@ public class StudentTaskServlet extends HttpServlet {
                     "                    </div>\n" +
                     "                </div>\n" +
                     "            </div>\n" +
-                    "            <div class=\"inner-button\">\n" +
-                    "                <button class=\"demo-button1\">查看详情</button>\n" +
+                    "            <div class=\"inner-button\">\n"+
+                    "<button class=\"demo-button1\" onclick=\"read_report('/0628JavaWebExercise_war/" +
+                    "submit?submitID="+ m.submitID + "&taskID="+ t.getTaskID() +"')\">查看详情</button>" +
                     "            </div>\n" +
                     "        </div>\n" +
                     "    </div>\n");
@@ -243,6 +244,7 @@ public class StudentTaskServlet extends HttpServlet {
     }
 
     class MySubmission {
+        public String submitID;
         public String name;
         public String status;         /* 0 1 2 */
         public String statusDate;
