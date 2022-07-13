@@ -215,7 +215,6 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
     }
 
     public static String getTextByStartfmid(String startfmid) throws IOException {
-        //7.6桂庆薪 这个函数传入fmid，然后返回整个文章，原版在Tutor里面
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -224,7 +223,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
 
         String text = "";
         for (String s = startfmid; (s!=null); s = tm.selectByKey(s).get(0).getNext())
-            text += tm.selectByKey(s).get(0).getData();
+            text += tm.selectByKey(s).get(0).getData().replace("\r\n","<br>");;
         sqlSession.close();
         return text;
     }

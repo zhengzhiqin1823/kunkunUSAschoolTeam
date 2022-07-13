@@ -8,9 +8,14 @@ function getProjectData(rid) {
     xmlHttp.onreadystatechange=function (){
         if(xmlHttp.readyState==4&&xmlHttp.status==200) {
             console.log(xmlHttp.responseText)
-            var rawData=JSON.stringify(xmlHttp.responseText)
-            var data=JSON.parse(rawData)
+            var data=JSON.parse(xmlHttp.responseText)
             console.log(data)
+            let name="<h2><strong>"+data['name']+"</strong></h2>"
+            let description="<small>"+data['description']+"</small>"
+            let details="<p>"+data['details']+"</p>"
+            document.getElementById('project_name').insertAdjacentHTML('beforeend',name)
+            document.getElementById('project_description').insertAdjacentHTML('beforeend',description)
+            document.getElementById('project_details').insertAdjacentHTML('beforeend',details)
         }
     }
     xmlHttp.send()
@@ -34,10 +39,6 @@ function getAllProjects(){
                 xmlHttpDemo.open("GET","/0628JavaWebExercise_war/teacherGetProjectData?need=demo&rid="+rID.toString(), true)
                 xmlHttpDemo.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
                 xmlHttpDemo.onreadystatechange=function (){
-<<<<<<< Updated upstream
-                    if(xmlHttpDemo.readyState==4&&xmlHttpDemo.status==200){
-                        let x=JSON.parse(xmlHttpDemo.responseText)
-=======
                     if(xmlHttpDemo.readyState==4&&xmlHttpDemo.status==200) {
                         console.log(xmlHttpDemo.responseText)
                         let x = JSON.parse(xmlHttpDemo.responseText)
@@ -53,7 +54,6 @@ function getAllProjects(){
                             + "<button type=\"button\" value=\"" + rID + "\" onclick=\"openProject(\'"+rID.toString()+"\')\">评审</button>"
                             + "</div>"
                         projects_container.insertAdjacentHTML('beforeend',project_demo)
->>>>>>> Stashed changes
                     }
                 }
                 xmlHttpDemo.send();
@@ -62,4 +62,27 @@ function getAllProjects(){
     }
     xmlHttp.send()
 
+}
+
+function sendData(){
+    function getParams(key) {
+        let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        let r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    };
+    let judge_text=document.getElementById('judge_text').value
+    let score=document.getElementById('score').value
+    let rid=getParams("rid")
+    let xmlHttpRequest = new XMLHttpRequest()
+    xmlHttpRequest.open("POST", "/0628JavaWebExercise_war/teacherJudgeServlet", true)
+    xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    xmlHttpRequest.onreadystatechange=function (){
+        if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200) {
+            location.assign("/0628JavaWebExercise_war/teacherHome.html")
+        }
+    }
+    xmlHttpRequest.send("rid="+rid+"&score="+score+"&judge_text="+judge_text)
 }
