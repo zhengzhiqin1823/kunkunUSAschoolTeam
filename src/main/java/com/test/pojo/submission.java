@@ -8,6 +8,9 @@ public class submission {
     String next;
     String startTime;
     String deadLine;
+    String submitTeams;
+
+    String taskID;
 
     @Override
     public String toString() {
@@ -20,18 +23,16 @@ public class submission {
                 ", startTime='" + startTime + '\'' +
                 ", deadLine='" + deadLine + '\'' +
                 ", submitTeams='" + submitTeams + '\'' +
+                ", taskID='" + taskID + '\'' +
                 '}';
     }
 
-    public submission(String submitID, String name, String submitStatus, String judgeStatus, String next, String startTime, String deadLine, String submitTeams) {
-        this.submitID = submitID;
-        this.name = name;
-        this.submitStatus = submitStatus;
-        this.judgeStatus = judgeStatus;
-        this.next = next;
-        this.startTime = startTime;
-        this.deadLine = deadLine;
-        this.submitTeams = submitTeams;
+    public String getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
     }
 
     public String getSubmitID() {
@@ -97,6 +98,4 @@ public class submission {
     public void setSubmitTeams(String submitTeams) {
         this.submitTeams = submitTeams;
     }
-
-    String submitTeams;
 }

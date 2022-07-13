@@ -8,7 +8,7 @@ public class task {
     private String firstsm;
     private String startedline;
     private String deadline;
-
+    private String taskid;
 
     public String getName() {
         return name;
