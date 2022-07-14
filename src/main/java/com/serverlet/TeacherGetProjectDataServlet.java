@@ -33,14 +33,29 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
                 resp.sendRedirect("/0628JavaWebExercise_war/index.html");
             }
 
+            List<String> Judged_rids = null;
+
             List<String> rids = (List<String>)session.getAttribute("r");
+            try {
+                Judged_rids =getrIDbytID(tID);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
             String rIDs="[";
             for(String rid:rids){
-                rIDs = rIDs+"\""+rid.toString()+"\",";
+                for(String r:Judged_rids){
+                    if(r.equals(rid)&&r!=null)
+                        rid=null;
+                }
+                if(rid!=null) {
+                    rIDs = rIDs + "\"" + rid.toString() + "\",";
+                }
             }
-
-            rIDs=rIDs.substring(0,rIDs.length()-1);
+            if(rIDs.length()>1) {
+                rIDs = rIDs.substring(0, rIDs.length() - 1);
+            }
             rIDs=rIDs+"]";
 
             resp.setContentType("text/text;charset=utf-8");

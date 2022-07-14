@@ -117,7 +117,6 @@ public class teacherJudgeServlet extends HttpServlet {
             //查找next
             startFmid+=1;
             String next=data[i];
-            System.out.println("\n\ntext:"+next+"\n\n");
             if(i!=data.length-1)
             {
                 tm.insert(""+startFmid,""+(startFmid+1),next);
