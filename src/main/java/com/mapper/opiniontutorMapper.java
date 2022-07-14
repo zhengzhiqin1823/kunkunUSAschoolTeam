@@ -14,6 +14,6 @@ public interface opiniontutorMapper {
     @Select("select * from opinion_tutor where tID=#{tid}")
     List<opiniontutor> selectBytID(String tid);
 
-    void insert(@Param("rID") String rID,@Param("tID") String tID,@Param("score") String score,@Param("totalsize") String totalsize,@Param("firstFm") String firstFm,@Param("submitTime") String submitTime);
+    void insert(@Param("rID") String rID,@Param("tID") String tID,@Param("score") int score,@Param("totalsize") String totalsize,@Param("firstFm") String firstFm,@Param("submitTime") String submitTime);
     void deleteByKey(@Param("rID") String rID, @Param("tID")String tID);
 }

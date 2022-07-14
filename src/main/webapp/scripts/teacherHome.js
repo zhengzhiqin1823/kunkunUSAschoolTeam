@@ -32,6 +32,7 @@ function getAllProjects(){
     xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlHttp.onreadystatechange=function (){
         if(xmlHttp.readyState==4&&xmlHttp.status==200){
+            console.log(xmlHttp.responseText)
             let rIDs = JSON.parse(xmlHttp.responseText)
             for(let index in rIDs){
                 rID=rIDs[index]
@@ -84,5 +85,8 @@ function sendData(){
             location.assign("/0628JavaWebExercise_war/teacherHome.html")
         }
     }
+    console.log("rid:"+rid)
+    console.log("score:"+score)
+    console.log("judge_text:"+judge_text)
     xmlHttpRequest.send("rid="+rid+"&score="+score+"&judge_text="+judge_text)
 }

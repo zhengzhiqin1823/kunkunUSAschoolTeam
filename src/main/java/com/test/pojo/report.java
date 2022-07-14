@@ -7,6 +7,7 @@ public class report {
     String toyalsize;
     String firstFm;
     String submitTime;
+    String taskID;
 
     public String getRid() {
         return rid;

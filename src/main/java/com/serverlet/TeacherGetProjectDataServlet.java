@@ -1,6 +1,7 @@
 package com.serverlet;
 
 import com.mapper.*;
+import com.test.pojo.fragment;
 import com.test.pojo.opiniontutor;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -25,18 +26,14 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String need=req.getParameter("need").toString();
         if(need.equals("rid")){
+            System.out.println("need rid");
             HttpSession session = req.getSession();
-            String tID = session.getAttribute("id").toString();
+            String tID = session.getAttribute("t").toString();
             if(tID==null) {
                 resp.sendRedirect("/0628JavaWebExercise_war/index.html");
             }
 
-            List<String> rids = null;
-            try {
-                rids= getrIDbytID(tID);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            List<String> rids = (List<String>)session.getAttribute("r");
 
             String rIDs="[";
             for(String rid:rids){
@@ -52,15 +49,18 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
             PrintWriter printWriter = resp.getWriter();
 
             printWriter.write(rIDs);
+            System.out.println("rid ok");
         }
         else if(need.equals("demo")) {
+            System.out.println("need demo");
             HttpSession session = req.getSession();
-            String tID = session.getAttribute("id").toString();
+            String tID = session.getAttribute("t").toString();
             if (tID == null) {
                 resp.sendRedirect("/0628JavaWebExercise_war/index.html");
             }
 
             String rID = req.getParameter("rid").toString();
+            System.out.println("rid="+rID);
             String description="";
             String name="";
 
@@ -84,11 +84,12 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
             PrintWriter printWriter = resp.getWriter();
 
             printWriter.write("{ \"description\":\"" + description + "\", \"name\":\"" + name + "\" }");
-
+            System.out.println("demo ok");
         }
         else if(need.equals("all")){
+            System.out.println("need all");
             HttpSession session = req.getSession();
-            String tID = session.getAttribute("id").toString();
+            String tID = session.getAttribute("t").toString();
             if (tID == null) {
                 resp.sendRedirect("/0628JavaWebExercise_war/index.html");
             }
@@ -126,6 +127,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
             PrintWriter printWriter = resp.getWriter();
 
             printWriter.write("{\"name\":\""+name+"\",\"description\":\""+description+"\",\"details\":\""+details+"\"}");
+            System.out.println("all ok");
         }
     }
 
@@ -161,6 +163,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
 
     public static String gettaskIDByrID(String rid) throws Exception{
         String submitID=getSubmitIDByrID(rid);
+        System.out.println("submitID"+submitID);
 
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -174,6 +177,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
     }
     public static String getnameByrid(String rid) throws Exception{
         String taskID=gettaskIDByrID(rid);
+        System.out.println("taskID"+taskID);
 
         String resource = "mybatis-config.xml";
         InputStream inputStream=Resources.getResourceAsStream(resource);
@@ -214,25 +218,46 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         return s;
     }
 
-    public static String getTextByStartfmid(String startfmid) throws IOException {
+//    public static String getTextByStartfmid(String startfmid) throws IOException {
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+//
+//        String text = "";
+//        for (String s = startfmid; (s!=null||s.equals("")); s = tm.selectByKey(s).get(0).getNext()) {
+//            System.out.println(tm.selectByKey(s).get(0).getData());
+//            text += tm.selectByKey(s).get(0).getData().replace("\r\n", "<br>");
+//        }
+//        sqlSession.close();
+//        System.out.println("text:"+text);
+//        return text;
+//    }
+
+    public static String getTextByFirstFm(String firstFm, fragmentMapper mapper) {
+        StringBuilder text = new StringBuilder();
+        fragment f1 = mapper.selectByKey(firstFm).get(0);
+        text.append(f1.getData());
+        while (!f1.getNext().equals("")) {
+            f1 = mapper.selectByKey(f1.getNext()).get(0);
+            text.append(f1.getData());
+        }
+        return text.toString();
+    }
+
+
+    public static String getTextByrid(String rid) throws IOException {//可以通过rid返回文章内容
+        String fm=getfmidByrid(rid);
+        System.out.println("fm:"+fm);
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
         fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
-
-        String text = "";
-        for (String s = startfmid; (s!=null); s = tm.selectByKey(s).get(0).getNext())
-            text += tm.selectByKey(s).get(0).getData().replace("\r\n","<br>");;
-        sqlSession.close();
-        return text;
+        //return getTextByStartfmid(getfmidByrid(rid));
+        return getTextByFirstFm(fm,tm).replace("\r\n", "<br>");
     }
-
-
-    public static String getTextByrid(String rid) throws IOException {//可以通过rid返回文章内容
-        return getTextByStartfmid(getfmidByrid(rid));
-    }
-
 
 }
 
