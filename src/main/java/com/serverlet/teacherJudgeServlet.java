@@ -29,6 +29,7 @@ public class teacherJudgeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
         System.out.println("post");
         HttpSession session = req.getSession();
         String tID = session.getAttribute("t").toString();
@@ -89,8 +90,7 @@ public class teacherJudgeServlet extends HttpServlet {
         sqlSession.close();
         return addFrontZero(startFmid);
     }
-    public static void storeTextTofragment(String text) throws Exception
-    {
+    public static void storeTextTofragment(String text) throws Exception {
         //首先要查到fragment中的第一个fmid
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -117,6 +117,7 @@ public class teacherJudgeServlet extends HttpServlet {
             //查找next
             startFmid+=1;
             String next=data[i];
+            System.out.println("\n\ntext:"+next+"\n\n");
             if(i!=data.length-1)
             {
                 tm.insert(""+startFmid,""+(startFmid+1),next);
@@ -136,26 +137,49 @@ public class teacherJudgeServlet extends HttpServlet {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-
         reportMapper tm=sqlSession.getMapper(reportMapper.class);
         String res=tm.selectByKey(rid).get(0).getFirstFm();
         sqlSession.close();
         return res;
     }
-    public static void storeText(String rid,String tid,int score,String text) throws Exception
-    {
+
+    private static String getFmid() throws IOException {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        opiniontutorMapper tm=sqlSession.getMapper(opiniontutorMapper.class);
-        tm.insert(rid,tid,score,getFirstFmidbyrid(rid),null, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+
+        long maxFmid = -1;
+        for(int i = 0; i < tm.selectAllFmid().size(); i++)
+        {
+            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
+            {
+                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
+            }
+        }
+        sqlSession.close();
+        return ""+maxFmid;
+    }
+
+
+    public static void storeText(String rid,String tid,int score,String text) throws Exception {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        opiniontutorMapper tm = sqlSession.getMapper(opiniontutorMapper.class);
+
+        int f = Integer.valueOf(getFmid()) + 1;
 
         storeTextTofragment(text);
+
+        tm.insert(rid, tid, score, "" + f, null, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+
         sqlSession.commit();
         sqlSession.close();
     }
-
 
 }
