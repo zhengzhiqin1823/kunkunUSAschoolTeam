@@ -16,11 +16,9 @@ public class StaticMethods {
         return text.toString();
     }
 
-    public static void deleteFmByFirstFm(String firstFm, fragmentMapper mapper)
-    {
+    public static void deleteFmByFirstFm(String firstFm, fragmentMapper mapper) {
         fragment f1 = mapper.selectByKey(firstFm).get(0);
-        while (!f1.getNext().equals(""))
-        {
+        while (!f1.getNext().equals("")) {
             String id = f1.getNext();
             mapper.deleteByKey(f1.getFmid());
             f1 = mapper.selectByKey(id).get(0);

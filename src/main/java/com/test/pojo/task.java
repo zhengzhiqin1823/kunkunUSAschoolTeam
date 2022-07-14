@@ -1,5 +1,16 @@
 package com.test.pojo;
 
+import com.mapper.submissionMapper;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 public class task {
     private String taskID;
     private String name;
@@ -9,6 +20,31 @@ public class task {
     private String startedline;
     private String deadline;
 
+    public List<submission> getAllSubmissions()
+    {
+        /*访问数据库，生成一个HTML文件*/
+        String resource = "mybatis-config.xml";
+        InputStream is = null;
+        try {
+            is = Resources.getResourceAsStream(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
+        //获取SqlSession对象，来执行sql
+        SqlSession sqs = factory.openSession();
+        //执行sql
+        submissionMapper subM = sqs.getMapper(submissionMapper.class);
+        List<submission> list = new ArrayList<>();
+        submission s = subM.selectByKey(firstsm).get(0);
+        list.add(s);
+        while(!s.getNext().equals(""))
+        {
+            s = subM.selectByKey(s.getNext()).get(0);
+            list.add(s);
+        }
+        return list;
+    }
 
     public String getName() {
         return name;
