@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>项目页面</title>
+    <link rel="stylesheet" href="./css/demo-navigation.css"/>
+    <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="./scripts/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./scripts/jquery.slim.min.js"></script>
+    <link rel="stylesheet" href="./css/demo-button1.css"/>
+    <script src="./scripts/teacherHome.js"></script>
+    <script type="text/javascript">
+        window.onload=function (){
+            function getParams(key) {
+                let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+                let r = window.location.search.substr(1).match(reg);
+                if (r != null) {
+                    return unescape(r[2]);
+                }
+                return null;
+            };
+            getProjectData(getParams("rid"))
+        }
+    </script>
+</head>
+
+<body>
+<div class="demo-navigation1">
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>Messages</li>
+            <li>Projects</li>
+            <li>Submits</li>
+            <li>Personal</li>
+        </ul>
+    </nav>
+</div>
+
+<div class="d-md-flex" style="min-height: 100vh;">
+    <div id="project_data" class="col-lg-8">
+        <div style="border:1px solid darkgray;border-radius: 1em;margin-top: 2em;width: 100%;min-height: 80%">
+            <div id="project_name" style="text-align: center;color: #4e555b">
+
+            </div>
+
+            <div id="project_description" class="border-bottom" style="width: 80%;margin: 2em;">
+
+            </div>
+
+            <div id="project_details" style="width: 80%;margin: 2em;">
+
+            </div>
+        </div>
+    </div>
+    <aside id="judge" class="col-lg-4 border-left">
+        <div class="container" style="margin: 1em">
+            <textarea id="judge_text" style="min-height: 30em;width: 100%">
+            </textarea>
+            <input id="score" value="0" oninput="if(value>100)value=100;if(value.length>4)value=value.slice(0,4);if(value<0)value=0" type="number" style="width: 100%;margin-bottom: 1em">
+            <button onclick="sendData()" style="width: 100%;">提交评审结果</button>
+        </div>
+    </aside>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+.bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(220, 220, 220);
+    padding: 3ch;
+}
+
+.report_name{
+    font-family: "STSong";
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0.3ch;
+}
+.tutor .title .t span{
+    color: red;
+    font-family: "STSong";
+    font-weight: 600;
+}
+
+.report{
+    margin-top: 2ch;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1.5ch;
+    width: 80%;
+    border: 1px solid black;
+}
+
+.time_and_title{
+    display: flex;
+    flex-direction: column;
+}
+
+.report .data{
+    margin: 2.5ch;
+    max-height: 300px;
+    overflow-y: scroll;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 2em;
+}
+
+.team_and_time {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 3ch;
+    margin-right: 3ch;
+    margin-top: 1.2ch;
+}
+
+
+.team_and_time .team{
+    font-family: "STSong";
+    color: red;
+}
+
+.team_and_time .time{
+    font-family:'Times New Roman', Times, serif;
+    color: rgb(44, 188, 44);
+
+}
+
+
+.tutor{
+    margin-top: 2ch;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1.5ch;
+    width: 80%;
+    border: 1px solid black;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 3ch;
+    margin-right: 3ch;
+    margin-top: 1.2ch;
+}
+
+.tutor .title .t,.score{
+    font-family: "STSong";
+}
+
+.tutor .title .score{
+    font-weight: 600;
+}
+
+.score span{
+    color: red;
+}
+
+.data-judgement{
+    margin: 2.5ch;
+    max-height: 300px;
+    overflow-y: scroll;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 2em;
+}
+
+.admin{
+    display: flex;
+    flex-direction: row;
+    margin: 3ch;
+
+}
+
+.admin .title{
+    margin-right: 10ch;
+    font-family: "STSong";
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.admin select{
+    width: 140px;
+    height: 30px;
+    border-radius: 0.4ch;
+    font-size: 16px;
+}
+
+::-webkit-scrollbar{
+    width:16px;
+    height:16px;
+    background-color:#ffffff60;
+}
+
+::-webkit-scrollbar-track{
+    -webkit-box-shadow:inset 0 0 6px rgba(255, 255, 255, 0.3);
+    border-radius:10px;
+    background-color:#F5F5F5;
+}
+/*定义滑块
+内阴影+圆角*/
+::-webkit-scrollbar-thumb{
+    border-radius:10px;
+    -webkit-box-shadow:inset 0 0 6px rgba(255, 255, 255, 0.3);
+    background-color:rgba(58, 58, 58, 0.63);
+}
+
+.button{
+    margin-top: 10px;
+
+}
+
+
+.file{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-content: cente; */
+    margin-bottom: 1.5ch;
+    margin-left: 3ch;
+    margin-right: 3ch;
+    font-family: "STSong";
+}
+
+.file div{
+    font-family: "STSong";
+    font-weight: 600;
+    color: rgb(255, 0, 0);
+}
+
+.demo-button2 {
+    width:   100px;
+    height:  30px;
+    display: block;
+    text-align:center;
+    font-size:15px;
+    font-family:verdana;
+    color:#ffffff;
+    border:1px solid #0000007d;
+    border-radius:0.5ch;
+    background: rgba(32, 32, 32, 0.79);
+    cursor: pointer;/*光标小手*/
+}
+
+/*鼠标交互*/
+.demo-button2:hover {
+    background:#ffffffad;
+    color:rgb(0, 0, 0);
+    transition: 0.5s;
+
+}
+
