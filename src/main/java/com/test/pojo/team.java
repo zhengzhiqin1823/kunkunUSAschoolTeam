@@ -1,12 +1,21 @@
 package com.test.pojo;
 
 public class team {
+
     String teamid;
     String password;
     String name;
     String email;
     String tel;
+    String taskID;
 
+    public String getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
+    }
 
     public String getTeamid() {
         return teamid;
@@ -56,7 +65,7 @@ public class team {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", tel='" + tel + '\'' +
+                ", taskID='" + taskID + '\'' +
                 '}';
     }
-
 }

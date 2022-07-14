@@ -1,6 +1,5 @@
 package com.mapper;
 
-import com.test.pojo.judgelink;
 import com.test.pojo.message;
 import org.apache.ibatis.annotations.Param;
 

@@ -10,6 +10,12 @@ public interface teamMapper {
     void insert(@Param("teamid") String teamid,@Param("name") String name,
                 @Param("password") String password,@Param("email") String email,@Param("tel") String tel);
 
+    void updateName(@Param("teamid") String teamid,@Param("name") String name);
+    void updatePassword(@Param("teamid") String teamid,@Param("password") String password);
+    void updateEmail(@Param("teamid") String teamid,@Param("email") String email);
+    void updateTel(@Param("teamid") String teamid,@Param("tel") String tel);
+
+
     List<team> selectByKey(@Param("teamid")String teamid);
     List<team> selectAll();
     void deleteByKey(@Param("teamid")String teamid);

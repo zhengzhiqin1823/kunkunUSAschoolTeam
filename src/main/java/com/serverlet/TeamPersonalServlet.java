@@ -6,8 +6,8 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 
-@WebServlet("/personal")
-public class StudentPersonalServlet extends HttpServlet {
+@WebServlet("/team/personal")
+public class TeamPersonalServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class StudentPersonalServlet extends HttpServlet {
             return;
         }
 
-        req.getRequestDispatcher("studentPersonal.html").forward(req,resp);
+        req.getRequestDispatcher("/studentChangeInfor.html").forward(req,resp);
 
     }
 

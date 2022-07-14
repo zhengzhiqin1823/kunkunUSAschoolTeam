@@ -1,7 +1,6 @@
 package com.serverlet;
 
 import com.alibaba.fastjson.JSONObject;
-import com.jcraft.jsch.Session;
 import com.mapper.*;
 import com.test.pojo.*;
 import org.apache.ibatis.io.Resources;
@@ -21,7 +20,7 @@ import java.util.List;
 
 
 @WebServlet("/submit")
-public class StudentSubmitServlet extends HttpServlet {
+public class TeamSubmitServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -67,7 +66,7 @@ public class StudentSubmitServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = resp.getWriter();
         List<report> reports = reportMapper.selectByTeamIDAndSubmitID((String) id, submitID);
-        fragmentMapper fragmentMapper = sqs.getMapper(fragmentMapper.class);
+        fragmentMapper fragmentMapper = sqs.getMapper(com.mapper.fragmentMapper.class);
         if (reports.size() == 0) {
             List<reportcahe> reportcahes = reportcaheMapper.selectByTeamIDAndSubmitID(id.toString(), submitID);
             if (reportcahes.size() == 0) {
@@ -99,15 +98,15 @@ public class StudentSubmitServlet extends HttpServlet {
 
             req.setCharacterEncoding("UTF-8");//请求编码类型
             resp.setCharacterEncoding("UTF-8");//响应编码类型
-            resp.setContentType("application/json");//响应数据类型
+
             JSONObject reqData = HttpGetJson.getJson(req);
 
             //submitID
             submitID = String.valueOf(reqData.get("submitID"));
 
             String text = reqData.get("text").toString();
-            int length = text.toString().length();
-            String totalsize = length + "";
+
+
             /*访问数据库，生成一个HTML文件*/
             String resource = "mybatis-config.xml";
             InputStream is = Resources.getResourceAsStream(resource);
@@ -117,17 +116,18 @@ public class StudentSubmitServlet extends HttpServlet {
             //执行sql
             reportMapper reportMapper = sqs.getMapper(reportMapper.class);
 
-
             //rID
             List<report> reports = reportMapper.selectAll();
             int reportSize = reports.size();
             rID = reportSize + 1 + "";
 
             fragmentMapper fragmentMapper = sqs.getMapper(com.mapper.fragmentMapper.class);
+
             List<fragment> fragments = fragmentMapper.selectAll();
             int size = fragments.size() + 1;
             int init_size = size;
-
+            int length = text.toString().length();
+            String totalsize = length + "";
             //insert into table fragment
             int now = 0;
             while (length > 255) {

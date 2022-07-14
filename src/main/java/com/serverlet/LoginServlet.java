@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 
         //执行sql
         try {
-            adminMapper adminMapper = sqs.getMapper(adminMapper.class);
+            adminMapper adminMapper = sqs.getMapper(com.mapper.adminMapper.class);
             List<admin> admins = adminMapper.selectById(id);
             sqs.commit();
             if (admins.size() > 0 && admins.get(0).password.equals(password)) {

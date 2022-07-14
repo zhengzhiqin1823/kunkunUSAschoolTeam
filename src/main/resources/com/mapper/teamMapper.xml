@@ -18,4 +18,16 @@
     <delete id="deleteByKey" parameterType="com.test.pojo.team">
         delete from team where teamid=#{teamid};
     </delete>
+    <update id="updatePassword" parameterType="com.test.pojo.team">
+        update team set password=#{password} where teamid=#{teamid};
+    </update>
+    <update id="updateEmail" parameterType="com.test.pojo.team">
+        update team set email=#{email} where teamid=#{teamid};
+    </update>
+    <update id="updateName" parameterType="com.test.pojo.team">
+        update team set name=#{name} where teamid=#{teamid};
+    </update>
+    <update id="updateTel" parameterType="com.test.pojo.team">
+        update team set tel=#{tel} where teamid=#{teamid};
+    </update>
 </mapper>

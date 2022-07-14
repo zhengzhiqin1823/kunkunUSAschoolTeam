@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet("/task")
-public class StudentTaskServlet extends HttpServlet {
+@WebServlet("/team/home")
+public class TeamTaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -43,7 +43,8 @@ public class StudentTaskServlet extends HttpServlet {
         }
 
 //      获取请求参数taskID
-        String taskID = req.getParameter("taskID");
+        String taskID;
+        
 
         /*访问数据库，生成一个HTML文件*/
         String resource = "mybatis-config.xml";
@@ -57,6 +58,9 @@ public class StudentTaskServlet extends HttpServlet {
         reportMapper reportMapper = sqs.getMapper(reportMapper.class);
 
         teamMapper teamMapper = sqs.getMapper(teamMapper.class);
+        team team = teamMapper.selectByKey((String) teamID).get(0);
+
+        taskID = team.getTaskID();
         opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
 
         List<task> tasks = taskMapper.selectByKey(taskID);
@@ -121,7 +125,6 @@ public class StudentTaskServlet extends HttpServlet {
                 }
             }
 
-
             // TODO: 2022/7/11
             /* 以下信息写死，待修改 */
             mySubmission.score = "合格(static)";
@@ -147,18 +150,18 @@ public class StudentTaskServlet extends HttpServlet {
                 "<head>\n" +
                 "    <meta charset=\"UTF-8\">\n" +
                 "    <title>项目页面</title>\n" +
-                "    <link rel=\"stylesheet\" href=\"./css/studentProject.css\"/>\n" +
-                "    <link rel=\"stylesheet\" href=\"./css/demo-navigation.css\"/>\n" +
+                "    <link rel=\"stylesheet\" href=\"../css/studentProject.css\"/>\n" +
+                "    <link rel=\"stylesheet\" href=\"../css/demo-navigation.css\"/>\n" +
                 "    <script type=\"module\" src=\"https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js\"></script>\n" +
                 "    <script nomodule src=\"https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js\"></script>\n" +
-                "    <link rel=\"stylesheet\" href=\"./css/demo-button1.css\"/>\n" +
-                "<script src=\"./scripts/studentTask.js\"></script>"+
-                "       <script src=\"./scripts/demo-navigation1.js\"></script>"+
+                "    <link rel=\"stylesheet\" href=\"../css/demo-button1.css\"/>\n" +
+                "    <script src=\"../scripts/studentTask.js\"></script>"+
+                "    <script src=\"../scripts/demo-navigation1.js\"></script>"+
                 "\n" +
-                "</head>\n" +
+                "   </head>\n" +
                 "\n" +
-                "<body>\n" +
-                "<div class=\"demo-navigation1\">\n" +
+                "   <body>\n" +
+                "   <div class=\"demo-navigation1\">\n" +
                 "    <nav>\n" +
                 "        <ul>\n" +
                 "            <li onclick=\"Home_click()\">Home</li>\n" +

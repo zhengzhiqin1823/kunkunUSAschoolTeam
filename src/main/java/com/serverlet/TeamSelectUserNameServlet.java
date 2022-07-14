@@ -12,7 +12,7 @@ import java.io.IOException;
 
 
 @WebServlet("/id")  //注册时，查询id是否已存在
-public class StudentSelectUserNameServlet extends HttpServlet {
+public class TeamSelectUserNameServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

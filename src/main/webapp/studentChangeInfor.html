@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改基本信息</title>
+    <link type="text/css" rel="stylesheet" href="../css/edit-information.css">
+    <link type="text/css" rel="stylesheet" href="../css/demo-navigation.css">
+    <link type="text/css" rel="stylesheet" href="../css/demo-input1.css">
+    <link type="text/css" rel="stylesheet" href="../css/demo-button1.css">
+    <script type="text/javascript" src="../scripts/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../scripts/demo-navigation1.js"></script>
+</head>
+<body>
+<div class="demo-navigation1">
+    <nav>
+        <ul>
+            <li onclick="Home_click()">Home</li>
+            <li onclick="Submits_click()">Submits</li>
+            <li onclick="Personal_click()">Personal</li>
+        </ul>
+    </nav>
+</div>
+
+<div class="body">
+    <div class="body_mid">
+        <div class="body_mid_left">
+            <ul>
+                <img src="./image/setting.jpg">
+                <li><a href="#" @click="f1">团队信息</a></li>
+                <img src="./image/setting.jpg">
+                <li><a href="#" @click="f2">修改基本信息</a></li>
+                <img src="./image/setting.jpg">
+                <li><a href="#" @click="f3">修改密码</a></li>
+            </ul>
+        </div>
+        <div class="body_mid_right">
+            <div class="title">
+                <h1><strong>修改基本信息</strong></h1>
+            </div>
+
+            <ul v-if="h1">
+                <p>团队名称：{{teamName}}</p>
+                <p>团队ID：{{teamID}}</p>
+                <p>邮箱：{{email}}</p>
+                <p>电话：{{tel}}</p>
+            </ul>
+            <ul v-if="h2">
+                <p id="name">团队名称：<input name="id" class="demo-input1" type="text" v-model:value="teamName"></p>
+                <p id="email">邮箱：&emsp;&emsp;<input name="email" class="demo-input1" type="text" v-model:value="email"></p>
+                <p id="tel">电话：&emsp;&emsp;<input name="tel" class="demo-input1" type="text" v-model:value="tel"></p>
+            </ul>
+            <ul v-if="h3">
+                <p>原始密码：&emsp;<input v-model:value="old" class="demo-input1" type="password" name="password" id="old-password" placeholder="原始密码"></p>
+                <p>新的密码：&emsp;<input v-model:value="Newpass" class="demo-input1" type="password" name="password" id="password" placeholder="新密码"></p>
+                <p>确认密码：&emsp;<input v-model:value="check" class="demo-input1" type="password" name="newPassword" id="new-password" placeholder="确认密码"></p>
+            </ul>
+
+            <button @click="submit" class="demo-button1" v-if="h2">提交</button>
+            <button @click="password" class="demo-button1" v-if="h3">提交</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var team = new Vue({
+        el: ".body",
+        data: {
+            h1:true,
+            h2:false,
+            h3:false,
+            h4:false,
+            teamName: "坤坤的美国校队",
+            email: "222@11.com",
+            tel: "12312312312",
+            old:"",
+            Newpass:"",
+            check:""
+        },
+        methods: {
+            initInformation() {
+                axios({
+                    method: "get",
+                    url: "/0628JavaWebExercise_war/team/personal/getInfor"
+                }).then((res) => {
+                    let rj = JSON.stringify(res.data);
+                    let js = JSON.parse(rj);
+                    console.log(js);
+                    this.teamName = js.name;
+                    this.teamID = js.teamID;
+                    this.email = js.email;
+                    this.tel = js.tel;
+                })
+            },
+            submit() {
+                let data = {
+                    'name': this.teamName,
+                    'email': this.email,
+                    'tel': this.tel
+                }
+                axios
+                    .post('/0628JavaWebExercise_war/team/personal/changeInfor', data)
+                    .then((res) => {
+                        alert("修改成功!")
+                    })
+            },
+            password()
+            {
+                if(this.Newpass!==this.check) {
+                    alert("两次输入的密码不同！");
+                    return;
+                }
+                let data = {
+                    'old': this.old,
+                    'new': this.Newpass
+                }
+                axios
+                    .post('/0628JavaWebExercise_war/team/personal/changePassword', data)
+                    .then((res) => {
+                        alert(res.data);
+                    })
+            }
+            ,
+            f1(){
+                this.h2=false;
+                this.h3=false;
+                this.h4=false;
+                this.h1=true;
+            },
+            f2(){
+                this.h1=false;
+                this.h3=false;
+                this.h2=true;
+                this.h4=true;
+            } ,
+            f3(){
+                this.h2=false;
+                this.h1=false;
+                this.h3=true;
+                this.h4=true;
+            }
+        }
+    })
+
+    team.initInformation();
+
+
+</script>
+</html>

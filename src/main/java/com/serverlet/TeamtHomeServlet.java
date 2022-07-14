@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@WebServlet("/home")
-public class StudentHomeServlet extends HttpServlet {
+//@WebServlet("/team/home")
+public class TeamtHomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -67,7 +67,7 @@ public class StudentHomeServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = resp.getWriter();
         writeHtml(writer, tasks, messages);
-//        req.getRequestDispatcher("studentProject.html").forward(req,resp);
+
     }
 
     @Override
@@ -76,25 +76,22 @@ public class StudentHomeServlet extends HttpServlet {
     }
 
     private void writeHtml(PrintWriter writer, List<task> tasks, List<message> messages) {
-        writer.write("<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
+        writer.write(
                 "<head>\n" +
-                "  <meta charset=\"UTF-8\">\n" +
-                "  <title>首页</title>\n" +
-                "  <link rel=\"stylesheet\" type=\"text/css\" href=\"./css/studentHome.css\">\n" +
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/demo-navigation.css\">" +
-                "<script src=\"./scripts/studentHome.js\"></script>" +
-                "<script src=\"./scripts/demo-navigation1.js\"></script>" +
-                "</head>\n" +
+                        "  <meta charset=\"UTF-8\">\n" +
+                        "  <title>首页</title>\n" +
+                        "  <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/studentHome.css\">\n" +
+                        "  <script src=\"../scripts/studentHome.js\"></script>\n" +
+                        "  <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/demo-navigation.css\">\n" +
+                        "  <script src=\"../scripts/demo-navigation1.js\"></script>\n" +
+                        "</head>\n"+
                 "\n" +
                 "<body>\n" +
                 "\n" +
                 "<div class=\"demo-navigation1\">\n" +
                 "  <nav>\n" +
                 "    <ul>\n" +
-                "            <li onclick=\"Home_click()\">Home</li>\n" +
-                "            <li onclick=\"Messages_click()\">Messages</li>\n" +
-                "            <li onclick=\"Projects_click()\">Projects</li>\n" +
+                "            <li onclick=\"Projects_click()\">Reports</li>\n" +
                 "            <li onclick=\"Submits_click()\">Submits</li>\n" +
                 "            <li onclick=\"Personal_click()\">Personal</li>" +
                 "    </ul>\n" +
