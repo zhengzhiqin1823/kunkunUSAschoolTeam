@@ -3,7 +3,7 @@ package com.test.pojo;
 public class opiniontutor {
     String rID;
     String tID;
-    String score;
+    int score;
     String firstFm;
     String totalsize;
     String submitTime;
@@ -16,7 +16,7 @@ public class opiniontutor {
         return tID;
     }
 
-    public String getScore() {
+    public int getScore() {
         return score;
     }
 
@@ -40,7 +40,7 @@ public class opiniontutor {
         this.tID = tID;
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         this.score = score;
     }
 

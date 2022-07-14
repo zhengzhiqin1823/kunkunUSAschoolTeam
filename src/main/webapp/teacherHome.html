@@ -4,42 +4,26 @@
   <meta charset="UTF-8">
   <title>MyGitHub</title>
   <link rel="stylesheet" type="text/css" href="./css/studentHome.css">
+  <link rel="stylesheet" type="text/css" href="./css/demo-navigation.css">
   <script src="./scripts/teacherHome.js"></script>
   <script type="text/javascript">
     window.onload=function (){
+      console.log("onload ok")
       getAllProjects()
     }
   </script>
 </head>
 
 <body>
-<div class="heading">
-  <div class="heading_img">
-    <img src="./image/" alt="头像"/>
-  </div>
-  <div class="heading_searchbox">
-    <form><input type="text" placeholder="Search or jump to...">
-    </form>
-  </div>
-  <div class="heading_navbar">
+
+<div class="demo-navigation1">
+  <nav>
     <ul>
-      <li><a href="#">首页</a></li>
-      <li><a href="#">项目评审</a></li>
-      <li><a href="#">项目排名</a></li>
+      <li>Home</li>
+      <li>Messages</li>
+      <li>Projects</li>
     </ul>
-  </div>
-  <div class="heading_right">
-    <ul class="shell">
-      <li class="portrait">
-        <ul class="information">
-          <li><a href="#">个人信息</a></li>
-          <li><a href="#">项目评审</a></li>
-          <li><a href="#">反馈</a></li>
-          <li><a href="/0628JavaWebExercise_war/loginOut">退出</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+  </nav>
 </div>
 
 <div class="body">
@@ -87,17 +71,7 @@
     </div>
   </div>
 
-
   <div id="projects_container" class="body_right">
-    <div class="right_mid">
-      <h4>Discover interesting projects and people to populate your personal news feed.</h4>
-      <p>Your news feed helps you keep up with recent activity on repositories you
-        <a href="#">watch</a>
-        and people you
-        <a href="#">follow</a>.
-      </p>
-      <button type="button" onclick="">进入项目</button>
-    </div>
   </div>
 
 </div>

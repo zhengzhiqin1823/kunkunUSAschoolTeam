@@ -5,6 +5,36 @@ public class judgelink {
     String link;
     String submitID;
     String tid;
+    String taskID;
+    String rID;
+
+    @Override
+    public String toString() {
+        return "judgelink{" +
+                "lid='" + lid + '\'' +
+                ", link='" + link + '\'' +
+                ", submitID='" + submitID + '\'' +
+                ", tid='" + tid + '\'' +
+                ", taskID='" + taskID + '\'' +
+                ", rID='" + rID + '\'' +
+                '}';
+    }
+
+    public void setrID(String rID) {
+        this.rID = rID;
+    }
+
+    public String getrID() {
+        return rID;
+    }
+
+    public String getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
+    }
 
     public String getLid() {
         return lid;
@@ -38,13 +68,4 @@ public class judgelink {
         this.tid = tid;
     }
 
-    @Override
-    public String toString() {
-        return "judgelink{" +
-                "lid='" + lid + '\'' +
-                ", link='" + link + '\'' +
-                ", submitID='" + submitID + '\'' +
-                ", tid='" + tid + '\'' +
-                '}';
-    }
 }
