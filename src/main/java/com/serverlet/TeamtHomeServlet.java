@@ -91,8 +91,7 @@ public class TeamtHomeServlet extends HttpServlet {
                 "<div class=\"demo-navigation1\">\n" +
                 "  <nav>\n" +
                 "    <ul>\n" +
-                "            <li onclick=\"Projects_click()\">Reports</li>\n" +
-                "            <li onclick=\"Submits_click()\">Submits</li>\n" +
+                "            <li onclick=\"Projects_click()\">Project</li>\n" +
                 "            <li onclick=\"Personal_click()\">Personal</li>" +
                 "    </ul>\n" +
                 "  </nav>\n" +

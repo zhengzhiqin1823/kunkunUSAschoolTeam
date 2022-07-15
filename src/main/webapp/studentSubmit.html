@@ -11,8 +11,9 @@
     <script type="text/javascript" src="./scripts/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
-<div class="demo-navigation1">
+<div class="demo-navigation1">onclick="Home_click()"
     <nav>
         <ul>
             <li onclick="Home_click()">Home</li>
@@ -26,82 +27,88 @@
 
 <div class="body">
     <div class="body_mid">
-        <ul>
-            <p><strong>项目名称：</strong>关于你干嘛的深入研究</p>
-            <p><strong>提交内容：</strong></p>
-        </ul>
-        <textarea class="demo-textarea" v-model="report_text"></textarea>
-        <div class="button">
-            <button class="demo-button1" type="button" @click="cache">暂存</button>
-            <button class="demo-button1" type="button" @click="submit">提交</button>
+        <div class="report" id="description">
+            <div class="team_and_time">
+                <div class="team">{{submitName}}</div>
+                <div class="time">{{deadLine}}</div>
+            </div>
+            <div class="data">
+                {{description}}
+
+            </div>
         </div>
+        <div class="text">
+            <div class="text-title">报告内容</div>
+        </div>
+        <textarea class="demo-textarea" id="text"
+                  placeholder="请在这里输入报告内容">asda&#13;dasd
+
+        </textarea>
     </div>
-    <script>
-        var app = new Vue({
-            el: '.body_mid',
-            data: {
-                submitID:'',
-                report_text: '请在这里输入内容...',
-                upath: ""
+    <div class="file">
+        <div>添加附件，只能添加一个文件，多个文件请打包后上传</div>
+        <input type="file" v-on:value="upath" @change="preview($event)" id="filepath">
+    </div>
+    <div class="button">
+        <button class="demo-button1" type="button" @click="cache">暂存</button>
+        <button class="demo-button1" type="button" @click="submit">提交</button>
+    </div>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '.body',
+        data: {
+            submitID: '',
+            report_text: 'sss',
+            upath: "",
+            description:'',
+            deadLine:'',
+            submitName:''
+        },
+        methods: {
+            submit: function () {
+                alert("submit!")
+                this.post_data()
             },
-            methods: {
-                submit: function () {
-                    alert("submit!")
-                    this.post_data()
-                },
-                cache: function () {
-                    alert("cache!")
-                    this.post_cache()
-                },
-
-                //上传文件函数
-                upload: function () {
-                    var zipFormData = new FormData();
-                    zipFormData.append('filename', this.upath); //filename是键，file是值，就是要传的文件，test.zip是要传的文件名
-                    let config = {headers: {'Content-Type': 'multipart/form-data'}};
-                    this.uping = 1;
-                    this.$http.post('http://localhost:42565/home/up', zipFormData, config).then(function (response) {
-                        console.log(response);
-                        console.log(response.data);
-                        console.log(response.bodyText);
-                        var resultobj = response.data;
-                        this.uping = 0;
-                        this.result = resultobj.msg;
-                    })
-                },
-
-                //    post上传数据
-                post_data: function () {
-                    let data = {
-                        'type':"data",
-                        'submitID':this.submitID,
-                        'text': this.report_text
-                    }
-                    axios({
-                        method: "post",
-                        url: "/0628JavaWebExercise_war/submit",
-                        data
-                    }).then((res) => {
+            cache: function () {
+                alert("cache!")
+                this.post_cache()
+            },
+            //    post上传数据
+            post_data: function () {
+                let element = document.querySelector("#text");
+                let data = {
+                    'type': "data",
+                    'submitID': this.submitID,
+                    'text': element.innerHTML
+                }
+                alert(element.innerHTML);
+                axios({
+                    method: "post",
+                    url: "/0628JavaWebExercise_war/submit",
+                    data
+                }).then((res) => {
+                    alert(res.toString())
+                })
+            },
+            post_cache: function () {
+                let element = document.querySelector("#text");
+                let data = {
+                    'type': "cache",
+                    'submitID': this.submitID,
+                    'text': element.innerHTML
+                }
+                alert(this.report_text);
+                axios
+                    .post('/0628JavaWebExercise_war/cache', data)
+                    .then((res) => {
                         alert(res.toString())
                     })
-                },
-                post_cache: function () {
-                    let data = {
-                        'type':"cache",
-                        'submitID':this.submitID,
-                        'text': this.report_text
-                    }
-                    this.$axios
-                        .post('/0628JavaWebExercise_war/cache', data)
-                        .then((res) => {
-                            alert(res.toString())
-                        })
-                }
             }
-        })
+        }
+    })
 
-    </script>
-</div>
+</script>
 
-</body>
 </html>

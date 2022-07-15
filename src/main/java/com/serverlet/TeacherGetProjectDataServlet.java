@@ -29,6 +29,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
             System.out.println("need rid");
             HttpSession session = req.getSession();
             String tID = session.getAttribute("t").toString();
+
             if(tID==null) {
                 resp.sendRedirect("/0628JavaWebExercise_war/index.html");
             }

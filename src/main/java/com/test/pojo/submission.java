@@ -9,8 +9,16 @@ public class submission {
     String startTime;
     String deadLine;
     String submitTeams;
-
+    String description;
     String taskID;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Override
     public String toString() {
