@@ -2,9 +2,10 @@
 .demo-navigation1{
     background-color: rgb(2, 2, 2);
     width: 100%;
+    height: 6%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 /* 导航本体 */
@@ -24,10 +25,10 @@
     margin: 0.5ch 1ch 0.5ch 1ch;
     font-size: 1.8ch;
     /* font-weight: 500; */
-    color: rgba(255, 255, 255, 0.84);
+    color: rgb(255, 255, 255);
     position: relative;
     border-radius: 1.7ch;
-    transition: 0.5s;
+    transform: 1s;
     /* z-index: 2; */
 }
 
@@ -51,18 +52,53 @@
     font-family: "Poppins",sans-serif;
 }
 
+.demo-navigation1 .logo{
+    margin-left: 5ch;
+    margin-right: 8ch;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: aliceblue;
+}
+
+.demo-navigation1 .logo2{
+
+    margin-right: 3ch;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: aliceblue;
+}
+
 
 /*
 
     <div class="demo-navigation1" >
+        <div class="logo">坤坤的美国校队</div>
         <nav>
             <ul>
-                <li>Home</li>
-                <li>Messages</li>
+                <li onclick>Home</li>
                 <li>Projects</li>
                 <li>Personal</li>
             </ul>
         </nav>
+        <div class="logo2">KunKunのUSA SchoolTeam</div>
+    </div>
+*/
+
+
+
+/*
+
+    <div class="demo-navigation1" >
+        <div class="logo">坤坤的美国校队</div>
+        <nav>
+            <ul>
+                <li onclick = Home_click()>Home</li>
+                <li onclick = Personal_click()>Projects</li>
+            </ul>
+        </nav>
+        <div class="logo2">KunKunのUSA SchoolTeam</div>
     </div>
 
 */

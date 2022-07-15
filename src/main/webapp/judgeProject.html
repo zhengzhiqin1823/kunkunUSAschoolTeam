@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <title>项目页面</title>
     <link rel="stylesheet" href="./css/demo-navigation.css"/>
-    <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+<!--    <link rel="stylesheet" href="./css/bootstrap.min.css"/>-->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script type="module" src="./scripts/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./scripts/jquery.slim.min.js"></script>
+    <link rel="stylesheet" href="./css/judgeProject.css">
     <link rel="stylesheet" href="./css/demo-button1.css"/>
     <link rel="stylesheet" href="./css/judgeHome.css"/>
     <script src="./scripts/teacherHome.js"></script>
@@ -58,17 +57,22 @@
             </div>
         </div>
     </div>
-    <aside id="judge" class="col-lg-4 border-left">
+    <div id="judge" class="col-lg-4 border-left">
         <div class="container" style="margin: 1em">
-            <textarea id="judge_text" style="border-radius: 2em;min-height: 30em;width: 100%;resize: none">
+            <textarea id="judge_text">
             </textarea>
-            <center>
-                <input id="score" value="0" oninput="if(value>100)value=100;if(value.length>4)value=value.slice(0,4);if(value<0)value=0" type="number" style="width: 80%;border-radiu: 1em;margin-bottom: 1em">
-                <button onclick="sendData()" style="width: 80%;" class="demo-button1">提交评审结果</button>
-                <button onclick="saveData()" style="width: 80%;" class="demo-button1">暂存评审结果</button>
-            </center>
+            <div class="input_line">
+                <span>得分 </span>
+                <input id="score" value="0"
+                       oninput="if(value>100)value=100;if(value.length>4)value=value.slice(0,4);if(value<0)value=0"
+                       type="number">
+            </div>
+            <div class="button">
+                <button onclick="sendData()" class="demo-button2">提交评审结果</button>
+                <button onclick="saveData()" class="demo-button2">暂存评审结果</button>
+            </div>
         </div>
-    </aside>
+    </div>
 </div>
 </body>
 

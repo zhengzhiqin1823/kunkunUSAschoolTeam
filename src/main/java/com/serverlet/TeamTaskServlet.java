@@ -112,6 +112,7 @@ public class TeamTaskServlet extends HttpServlet {
                 mySubmission.submitDate = "";
                 mySubmission.isJudged = "未评审";
                 mySubmission.judgeDate = "";
+                mySubmission.score = "";
             } else {
                 mySubmission.isSubmit = "已提交";
                 mySubmission.submitDate = reports.get(0).getSubmitTime().substring(0, 10);
@@ -119,15 +120,17 @@ public class TeamTaskServlet extends HttpServlet {
                 if (opiniontutors.size() == 0) {
                     mySubmission.isJudged = "未评审";
                     mySubmission.judgeDate = "";
+                    mySubmission.score = "";
                 } else {
                     mySubmission.isJudged = "已评审";
                     mySubmission.judgeDate = opiniontutors.get(0).getSubmitTime().substring(0, 10);
+                    mySubmission.score = opiniontutors.get(0).getScore()+"";
+                    if(false)
+                    {
+                        // TODO: 2022/7/15  
+                    }
                 }
             }
-
-            // TODO: 2022/7/11
-            /* 以下信息写死，待修改 */
-            mySubmission.score = "合格(static)";
 
             mySubList.add(mySubmission);
         }
@@ -161,17 +164,16 @@ public class TeamTaskServlet extends HttpServlet {
                 "   </head>\n" +
                 "\n" +
                 "   <body>\n" +
-                "   <div class=\"demo-navigation1\">\n" +
-                "    <nav>\n" +
-                "        <ul>\n" +
-                "            <li onclick=\"Home_click()\">Home</li>\n" +
-                "            <li onclick=\"Messages_click()\">Messages</li>\n" +
-                "            <li onclick=\"Projects_click()\">Projects</li>\n" +
-                "            <li onclick=\"Submits_click()\">Submits</li>\n" +
-                "            <li onclick=\"Personal_click()\">Personal</li>" +
-                "        </ul>\n" +
-                "    </nav>\n" +
-                "</div>\n" +
+                "<div class=\"demo-navigation1\" >\n" +
+                "        <div class=\"logo\">坤坤的美国校队</div>\n" +
+                "        <nav>\n" +
+                "            <ul>\n" +
+                "                <li onclick = Home_click()>Home</li>\n" +
+                "                <li onclick = Personal_click()>Projects</li>\n" +
+                "            </ul>\n" +
+                "        </nav>\n" +
+                "        <div class=\"logo2\">KunKunのUSA SchoolTeam</div>\n" +
+                "</div>" +
                 "\n" +
                 "<div class=\"top\">\n" +
                 "    <p>" + t.getName() + "</p>\n" +

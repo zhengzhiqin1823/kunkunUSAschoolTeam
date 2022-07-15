@@ -239,14 +239,16 @@ public class TeamSubmitServlet extends HttpServlet {
                         "</head>\n" +
                         "\n" +
                         "<body>\n" +
-                        "<div class=\"demo-navigation1\">\n" +
-                        "    <nav>\n" +
-                        "        <ul>\n" +
-                        "            <li onclick=\"Home_click()\">Project</li>\n" +
-                        "            <li onclick=\"Personal_click()\">Personal</li>\n" +
-                        "        </ul>\n" +
-                        "    </nav>\n" +
-                        "</div>\n" +
+                        "<div class=\"demo-navigation1\" >\n" +
+                        "        <div class=\"logo\">坤坤的美国校队</div>\n" +
+                        "        <nav>\n" +
+                        "            <ul>\n" +
+                        "                <li onclick = Home_click()>Home</li>\n" +
+                        "                <li onclick = Personal_click()>Projects</li>\n" +
+                        "            </ul>\n" +
+                        "        </nav>\n" +
+                        "        <div class=\"logo2\">KunKunのUSA SchoolTeam</div>\n" +
+                        "</div>" +
                         "\n" +
                         "<div class=\"body\">\n" +
                         "    <div class=\"body_mid\">\n" +
@@ -376,14 +378,16 @@ public class TeamSubmitServlet extends HttpServlet {
                 "</head>\n" +
                 "\n" +
                 "<body>\n" +
-                "<div class=\"demo-navigation1\">\n" +
-                "    <nav>\n" +
-                "        <ul>\n" +
-                "            <li onclick=\"Home_click()\">Project</li>\n" +
-                "            <li onclick=\"Personal_click()\">Personal</li>\n" +
-                "        </ul>\n" +
-                "    </nav>\n" +
-                "</div>\n" +
+                "<div class=\"demo-navigation1\" >\n" +
+                "        <div class=\"logo\">坤坤的美国校队</div>\n" +
+                "        <nav>\n" +
+                "            <ul>\n" +
+                "                <li onclick = Home_click()>Home</li>\n" +
+                "                <li onclick = Personal_click()>Projects</li>\n" +
+                "            </ul>\n" +
+                "        </nav>\n" +
+                "        <div class=\"logo2\">KunKunのUSA SchoolTeam</div>\n" +
+                "</div>" +
 
                 "<div class=\"bottom\" >\n" +
                 "    <div class=\"report_name\">" + t.getName() + "</div>\n" +
