@@ -3,7 +3,7 @@ package com.test.pojo;
 public class opinionTutorCache {
     String rID;
     String tID;
-    String score;
+    int score;
     String totalsize;
     String firstFm;
 
@@ -15,7 +15,7 @@ public class opinionTutorCache {
         return tID;
     }
 
-    public String getScore() {
+    public int getScore() {
         return score;
     }
 
@@ -35,7 +35,7 @@ public class opinionTutorCache {
         this.tID = tID;
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         this.score = score;
     }
 

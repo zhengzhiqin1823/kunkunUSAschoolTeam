@@ -1,7 +1,6 @@
+
 function getProjectData(rid) {
-
-    console.log(rid)
-
+    //console.log(rid)
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "/0628JavaWebExercise_war/teacherGetProjectData?need=all&rid="+rid.toString(), true)
     xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
