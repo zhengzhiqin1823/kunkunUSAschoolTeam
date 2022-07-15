@@ -52,12 +52,17 @@ public class teacherJudgeServlet extends HttpServlet {
             System.out.println("judge_text error");
         }
 
-        try {
-            storeText(rID,tID,score,judge_text);
-            System.out.println("好耶");
-        } catch (Exception e) {
-            System.out.println("尼玛");
-            e.printStackTrace();
+        String type=req.getParameter("type").toString();
+        if(type.equals("save")) {
+            try {
+                storeText(rID, tID, score, judge_text);
+                System.out.println("好耶");
+            } catch (Exception e) {
+                System.out.println("尼玛");
+                e.printStackTrace();
+            }
+        }else if(type.equals("cache")){
+            
         }
 
     }
