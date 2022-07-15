@@ -73,23 +73,27 @@ public class TeamSubmitServlet extends HttpServlet {
         fragmentMapper fragmentMapper = sqs.getMapper(com.mapper.fragmentMapper.class);
         if (s.getSubmitStatus().equals("0")) {
             opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
-            List<opiniontutor> opiniontutors = opiniontutorMapper.selectByKey(reports.get(0).getRid(), id.toString());
+
+            List<opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(reports.get(0).getRid());
             opiniontutor ot;
             String tutorName;
             String text;
+            String sc;
             if(opiniontutors.size()==0) {
                 ot = new opiniontutor();
                 ot.setScore(-1);
                 tutorName = "等待评审";
                 text = "";
+                sc="-1";
             }
             else {
                 ot = opiniontutors.get(0);
                 text = StaticMethods.getTextByFirstFm(ot.getFirstFm(),mapper);
                 tutorMapper tutorMapper = sqs.getMapper(tutorMapper.class);
                 tutorName = tutorMapper.selectByTid(ot.gettID()).get(0).getName();
+                sc = opiniontutors.get(0).getScore() + "";
             }
-            writeHtml2(writer, t, s,team,ot,tutorName,mapper,reports.get(0),text);
+            writeHtml2(writer, t, s, team, ot,tutorName,mapper,reports.get(0),text, sc);
             return;
         }
 //        else {
@@ -358,7 +362,7 @@ public class TeamSubmitServlet extends HttpServlet {
 
     private void writeHtml2(PrintWriter writer, task t, submission s,  team team,
                             opiniontutor opiniontutor, String tutorName,fragmentMapper mapper,
-                            report report,String text) {
+                            report report,String text, String score) {
         writer.write("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "\n" +
@@ -416,9 +420,9 @@ public class TeamSubmitServlet extends HttpServlet {
                  tutorName+
                 "               </span></div>\n" +
                 "            <div class=\"score\">得分：<span>");
-                if(opiniontutor.getScore()!=-1)
+                if(!score.equals("-1"))
                 {
-                    writer.write(opiniontutor.getScore());
+                    writer.write(score);
                 }
                 writer.write(
 
