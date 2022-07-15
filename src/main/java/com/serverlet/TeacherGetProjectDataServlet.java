@@ -114,6 +114,18 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
             String name="";
             String description="";
             String details="";
+            String cache="false";
+
+            try {
+                List<String> cache_rids=getrIDbytID(tID);
+                for(String rid:cache_rids){
+                    if(rid.equals(rID)){
+                        cache="true";
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             try {
                 name = getnameByrid(rID);
@@ -141,7 +153,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
             resp.setStatus(200);
             PrintWriter printWriter = resp.getWriter();
 
-            printWriter.write("{\"name\":\""+name+"\",\"description\":\""+description+"\",\"details\":\""+details+"\"}");
+            printWriter.write("{\"name\":\""+name+"\",\"description\":\""+description+"\",\"details\":\""+details+"\",\"cache\":\""+cache+"\"}");
             System.out.println("all ok");
         }
     }

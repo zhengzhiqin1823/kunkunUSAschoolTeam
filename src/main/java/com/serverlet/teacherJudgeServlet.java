@@ -62,39 +62,39 @@ public class teacherJudgeServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }else if(type.equals("cache")){
-            
+
         }
 
     }
 
-    private static String addFrontZero(long a)//当a不足10位数时，这个函数在a前补0
-    {
-        String s = String.valueOf(a);
-        while(s.length()<10)
-            s = "0"+s;
-        return s;
-    }
+//    private static String addFrontZero(long a)//当a不足10位数时，这个函数在a前补0
+//    {
+//        String s = String.valueOf(a);
+//        while(s.length()<10)
+//            s = "0"+s;
+//        return s;
+//    }
 
-    private static String findStartFmid() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
-
-        long maxFmid = -1;
-        for(int i = 0; i < tm.selectAllFmid().size(); i++)
-        {
-            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
-            {
-                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
-            }
-        }
-        long startFmid=maxFmid+1;
-        sqlSession.close();
-        return addFrontZero(startFmid);
-    }
+//    private static String findStartFmid() throws IOException {
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+//        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+//
+//        long maxFmid = -1;
+//        for(int i = 0; i < tm.selectAllFmid().size(); i++)
+//        {
+//            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
+//            {
+//                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
+//            }
+//        }
+//        long startFmid=maxFmid+1;
+//        sqlSession.close();
+//        return addFrontZero(startFmid);
+//    }
     public static void storeTextTofragment(String text) throws Exception {
         //首先要查到fragment中的第一个fmid
         String resource = "mybatis-config.xml";
@@ -135,17 +135,17 @@ public class teacherJudgeServlet extends HttpServlet {
         sqlSession.close();
     }
 
-    public static String getFirstFmidbyrid(String rid) throws Exception
-    {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        reportMapper tm=sqlSession.getMapper(reportMapper.class);
-        String res=tm.selectByKey(rid).get(0).getFirstFm();
-        sqlSession.close();
-        return res;
-    }
+//    public static String getFirstFmidbyrid(String rid) throws Exception
+//    {
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//        reportMapper tm=sqlSession.getMapper(reportMapper.class);
+//        String res=tm.selectByKey(rid).get(0).getFirstFm();
+//        sqlSession.close();
+//        return res;
+//    }
 
     private static String getFmid() throws IOException {
         String resource = "mybatis-config.xml";
