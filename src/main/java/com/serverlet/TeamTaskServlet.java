@@ -94,10 +94,10 @@ public class TeamTaskServlet extends HttpServlet {
             String time = formatter.format(date);
 
 //            是否开始
-            if (time.compareTo(s.getDeadLine()) > 0) {
+            if (time.compareTo(s.getDeadLine()) > 0 && s.getSubmitStatus().equals("0")) {
                 mySubmission.status = "已结束";
                 mySubmission.statusDate = s.getDeadLine();
-            } else if (time.compareTo(s.getStartTime()) >= 0) {
+            } else if (s.getSubmitStatus().equals("1")) {
                 mySubmission.status = "进行中";
                 mySubmission.statusDate = s.getDeadLine();
             } else {
@@ -127,7 +127,7 @@ public class TeamTaskServlet extends HttpServlet {
                     mySubmission.score = opiniontutors.get(0).getScore()+"";
                     if(false)
                     {
-                        // TODO: 2022/7/15  
+                        // TODO: 2022/7/15
                     }
                 }
             }
