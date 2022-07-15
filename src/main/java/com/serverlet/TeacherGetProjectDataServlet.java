@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,46 +31,54 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         String need=req.getParameter("need").toString();
-        if(need.equals("rid")){
+        if(need.equals("rid")) {
             //System.out.println("need rid");
             HttpSession session = req.getSession();
             String tID = session.getAttribute("t").toString();
 
-            if(tID==null) {
+            if (tID == null) {
                 resp.sendRedirect("/0628JavaWebExercise_war/index.html");
             }
 
             List<String> Judged_rids = null;
 
-            List<String> rids = (List<String>)session.getAttribute("r");
+            List<String> rids = (List<String>) session.getAttribute("r");
             try {
-                Judged_rids =getrIDbytID(tID);
+                Judged_rids = getrIDbytID(tID);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
 
-            String rIDs="[";
-            for(String rid:rids){
-                for(String r:Judged_rids){
-                    if(r.equals(rid)&&r!=null)
-                        rid=null;
-                }
-                if(rid!=null) {
-                    rIDs = rIDs + "\"" + rid.toString() + "\",";
+            String rIDs = "[";
+            String rIDs_judged = "[";
+            for (String rid : rids) {
+                //System.out.println(isLegaltoaudit(rid));
+                if (rid != null && isLegaltoaudit(rid)) {
+                    for (String r : Judged_rids) {
+                        if (r.equals(rid)) {
+                            rIDs_judged = rIDs_judged + "\"" + rid.toString() + "\",";
+                        } else {
+                            rIDs = rIDs + "\"" + rid.toString() + "\",";
+                        }
+                    }
                 }
             }
-            if(rIDs.length()>1) {
+            if (rIDs.length() > 1) {
                 rIDs = rIDs.substring(0, rIDs.length() - 1);
             }
-            rIDs=rIDs+"]";
+            if (rIDs_judged.length() > 1) {
+                rIDs_judged = rIDs_judged.substring(0, rIDs_judged.length() - 1);
+            }
+            rIDs = rIDs + "]";
+            rIDs_judged = rIDs_judged + "]";
 
             resp.setContentType("text/text;charset=utf-8");
             resp.setCharacterEncoding("utf-8");
             resp.setStatus(200);
             PrintWriter printWriter = resp.getWriter();
 
-            printWriter.write(rIDs);
+            printWriter.write("{\"rids\":"+rIDs+",\"judged\":"+rIDs_judged+"}");
             //System.out.println("rid ok");
         }
         else if(need.equals("demo")) {
@@ -80,7 +90,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
             }
 
             String rID = req.getParameter("rid").toString();
-            //System.out.println("rid="+rID);
+            System.out.println("rid="+rID);
             String description="";
             String name="";
 
@@ -176,8 +186,22 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         String rID = req.getParameter("rid");
         HttpSession session = req.getSession();
         String tID = session.getAttribute("t").toString();
-        String fm = getFmidByridAndtid(rID, tID);
+        String fm = "";
 
+        String status = req.getParameter("status");
+        //System.out.println(status);
+        if(status.equals("judged")) {
+            System.out.println("judged!");
+            try {
+                fm=getFirstfmidByrID(rID);
+                System.out.println("!fm:"+fm);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            System.out.println("unjudged!");
+            fm = getFmidByridAndtid(rID, tID);
+        }
         //System.out.println("fm:"+fm);
 
         String resource = "mybatis-config.xml";
@@ -225,16 +249,15 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         return s.stream().map(opinionTutorCache::getrID).collect(Collectors.toList());
     }
 
-    public static String getSubmitIDByrID(String rid) throws Exception
-    {
+    public static String getSubmitIDByrID(String rid) throws Exception {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-
         reportMapper tm = sqlSession.getMapper(reportMapper.class);
+        //System.out.println("rid"+rid);
         String s=tm.selectByKey(rid).get(0).getSubmitID();
-        sqlSession.close();;
+        sqlSession.close();
         return s;
     }
 
@@ -282,9 +305,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         return name;
     }
 
-
-    public static String getfmidByrid(String rid) throws IOException//这个是通过rid去查report表中的fmid
-    {
+    public static String getfmidByrid(String rid) throws IOException {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -324,6 +345,20 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         return text.toString();
     }
 
+    public static boolean isLegaltoaudit(String rid) throws IOException{
+        //先去report里面找submitid，然后再返回1或0
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        reportMapper tm=sqlSession.getMapper(reportMapper.class);
+        String submitID=tm.selectByKey(rid).get(0).getSubmitID();
+        submissionMapper tm1=sqlSession.getMapper(submissionMapper.class);
+        int state=Integer.parseInt(tm1.selectByKey(submitID).get(0).getJudgeStatus());
+        sqlSession.close();
+        return state==1?true:false;
+    }
 
     public static String getTextByrid(String rid) throws IOException {//可以通过rid返回文章内容
         String fm=getfmidByrid(rid);
@@ -348,6 +383,25 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
 
         return fmid;
     }
+
+    public static String getFirstfmidByrID(String rid) throws Exception{
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        opiniontutorMapper tm=sqlSession.getMapper(opiniontutorMapper.class);
+        //找到rid对应的fmid
+        List<opiniontutor> l=tm.selectAll();
+        //遍历l，找到rID为rid的opiniontutor对象
+        String fmid=null;
+        for(opiniontutor o:l){
+            if(o.getrID().equals(rid)){
+                fmid=o.getFirstFm();
+                break;
+            }
+        }
+        sqlSession.close();
+        return fmid;
+    }
 }
-
-
