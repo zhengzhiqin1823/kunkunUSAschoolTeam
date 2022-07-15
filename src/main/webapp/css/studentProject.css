@@ -5,7 +5,6 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
-
 .top {
     display: flex;
     flex-direction: column;
@@ -104,7 +103,6 @@ body {
     transition: 0.5s;
 
 }
-
 
 .title {
     align-items: center;

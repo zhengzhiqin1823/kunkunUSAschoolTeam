@@ -65,11 +65,11 @@
 .title h1{
   width: 500px;
   height: 70px;
-  color: #4e94e2;
+  color: #3c3c3c;
   position: relative;
   top: 25px;
   left: 100px;
-  border-bottom: solid #4e94e2 5px;
+  border-bottom: solid #000000 5px;
 }
 .body_mid_right ul{
   text-align: left;
@@ -90,9 +90,34 @@
   margin-top: 25px;
   font-family: "Poppins", sans-serif;
   font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
 
+.demo-button2 {
+  transform: translateX(50%);
+  width:120px;
+  height:40px;
+  display: block;
+  text-align:center;
+  font-size:15px;
+  font-family:verdana;
+  color: #ffffff;
+  border:1px solid #3535357d;
+  border-radius:0.5ch;
+  background: rgba(0, 0, 0, 0.7);
+  cursor: pointer;      /*光标小手*/
+}
+
+/*鼠标交互*/
+.demo-button2:hover {
+  background: rgba(255, 255, 255, 0.68);
+  color: #000000;
+  transition: 0.5s;
+}
 
 
 
