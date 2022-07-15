@@ -1,7 +1,6 @@
+
 function getProjectData(rid) {
-
-    console.log(rid)
-
+    //console.log(rid)
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "/0628JavaWebExercise_war/teacherGetProjectData?need=all&rid="+rid.toString(), true)
     xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -16,6 +15,20 @@ function getProjectData(rid) {
             document.getElementById('project_name').insertAdjacentHTML('beforeend',name)
             document.getElementById('project_description').insertAdjacentHTML('beforeend',description)
             document.getElementById('project_details').insertAdjacentHTML('beforeend',details)
+
+            let cache=data['cache']
+            if(cache=='true'){
+                let xmlHttpRequest = new XMLHttpRequest()
+                xmlHttpRequest.open("POST", "/0628JavaWebExercise_war/teacherGetProjectData", true)
+                xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+                xmlHttpRequest.onreadystatechange=function (){
+                    if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200) {
+                        let judge_text=document.getElementById('judge_text')
+                        judge_text.value=xmlHttpRequest.responseText;
+                    }
+                }
+                xmlHttpRequest.send("rid="+rid)
+            }
         }
     }
     xmlHttp.send()
@@ -65,15 +78,16 @@ function getAllProjects(){
 
 }
 
+function getParams(key) {
+    let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+    let r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+};
+
 function sendData(){
-    function getParams(key) {
-        let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
-        let r = window.location.search.substr(1).match(reg);
-        if (r != null) {
-            return unescape(r[2]);
-        }
-        return null;
-    };
     let judge_text=document.getElementById('judge_text').value
     let score=document.getElementById('score').value
     let rid=getParams("rid")
@@ -88,5 +102,23 @@ function sendData(){
     console.log("rid:"+rid)
     console.log("score:"+score)
     console.log("judge_text:"+judge_text)
-    xmlHttpRequest.send("rid="+rid+"&score="+score+"&judge_text="+judge_text)
+    xmlHttpRequest.send("rid="+rid+"&score="+score+"&judge_text="+judge_text+"&type=save")
+}
+
+function saveData(){
+    let judge_text=document.getElementById('judge_text').value
+    let score=document.getElementById('score').value
+    let rid=getParams("rid")
+    let xmlHttpRequest = new XMLHttpRequest()
+    xmlHttpRequest.open("POST", "/0628JavaWebExercise_war/teacherJudgeServlet", true)
+    xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    xmlHttpRequest.onreadystatechange=function (){
+        if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200) {
+            location.assign("/0628JavaWebExercise_war/teacherHome.html")
+        }
+    }
+    console.log("rid:"+rid)
+    console.log("score:"+score)
+    console.log("judge_text:"+judge_text)
+    xmlHttpRequest.send("rid="+rid+"&score="+score+"&judge_text="+judge_text+"&type=cache")
 }
