@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.servlet;
 
 import com.mapper.submissionMapper;
 import org.apache.ibatis.io.Resources;

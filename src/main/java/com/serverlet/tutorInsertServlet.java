@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.servlet;
 
 import com.mapper.studentMapper;
 import com.mapper.tutorMapper;

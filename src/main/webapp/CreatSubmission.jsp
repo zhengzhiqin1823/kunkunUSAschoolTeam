@@ -87,7 +87,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/newSubmiServlet?taskid="+taskid+"&name="+name+"&startTime="+st+"&deadline="+dt+"&description="+des);
+        xhttp.open("GET","/0628JavaWebExercise_war/newSubmiServlet?taskid="+taskid+"&name="+name+"&startTime="+st+"&deadline="+dt+"&description="+des);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
