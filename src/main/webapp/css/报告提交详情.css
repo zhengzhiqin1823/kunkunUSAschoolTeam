@@ -1,0 +1,186 @@
+.demo-button2 {
+    margin-top: 30px;
+    width:110px;
+    height:30px;
+    display: block;
+    text-align:center;
+    font-size:15px;
+    font-family:verdana;
+    color:#ffffff;
+    border:1px solid #0000007d;
+    border-radius:0.5ch;
+    background: rgba(32, 32, 32, 0.79);
+    cursor: pointer;/*光标小手*/
+}
+
+/*鼠标交互*/
+.demo-button2:hover {
+    background:#ffffffad;
+    color:rgb(0, 0, 0);
+    transition: 0.5s;
+}
+
+.demo-button3 {
+    width:110px;
+    height:30px;
+    display: block;
+    text-align:center;
+    font-size:15px;
+    font-family:verdana;
+    color:#ffffff;
+    border:1px solid #0000007d;
+    border-radius:0.5ch;
+    background: rgba(32, 32, 32, 0.79);
+    cursor: pointer;/*光标小手*/
+}
+
+/*鼠标交互*/
+.demo-button3:hover {
+    background:#ffffffad;
+    color:rgb(0, 0, 0);
+    transition: 0.5s;
+}
+
+.body{
+    display: flex;
+}
+
+
+.bottom {
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    background-color: rgb(255, 255, 255);
+    flex: 1;
+    height: 94%;
+}
+
+
+.left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-content: center; */
+    align-items: center;
+    width: 30%;
+    border: 1px solid black;
+    /* margin: 2ch; */
+    padding: 2ch;
+    /* height: 330%; */
+    background-color: rgba(238, 238, 238, 0.5);
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* justify-content: center; */
+    align-items: center;
+    /* border: 1px solid black; */
+}
+
+.project_title{
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "STSong";
+
+}
+
+#submissions{
+    /* background-color: aqua; */
+    padding: 2ch;
+}
+
+#ProjectDetail tbody td{
+    font-family: "STSong";
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.25ch;
+    padding: 2ch;
+}
+
+.description{
+    font-family: "STSong";
+    margin-top: 0px;
+    line-height: 2.2em;
+    width: 90%;
+    margin: auto;
+    color: rgb(64, 64, 64);
+    max-height: 400px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+    border-radius: 1ch;
+    padding: 1ch;
+}
+
+.demo-button1{
+    /* margin-left: 40%; */
+    margin-top: 3ch;
+    margin-bottom: 4ch;
+
+}
+
+::-webkit-scrollbar{
+    width:16px;
+    height:16px;
+    background-color:#ffffff60;
+}
+
+::-webkit-scrollbar-track{
+    -webkit-box-shadow:inset 0 0 6px rgba(255, 255, 255, 0.3);
+    border-radius:10px;
+    background-color:#F5F5F5;
+}
+/*定义滑块
+内阴影+圆角*/
+::-webkit-scrollbar-thumb{
+    border-radius:10px;
+    -webkit-box-shadow:inset 0 0 6px rgba(255, 255, 255, 0.3);
+    background-color:rgba(58, 58, 58, 0.63);
+}
+
+a{
+    text-decoration: none;
+}
+
+
+.right nav a{
+    margin: 1ch;
+}
+
+.right nav{
+    margin: 1ch;
+}
+
+/* .right nav div{
+    background-color: aqua;
+} */
+
+
+
+
+#submissions{
+    text-align: left;
+}
+
+
+
+#submissions td input{
+    /* padding: 5px; */
+    /* background-color: beige; */
+    padding:0;
+    margin-top: 30px;
+    border-collapse:collapse;
+    /* margin; */
+}
+
+
+
+#submissions th{
+    /* border:1px solid #aaa;     */
+    font-size: 16px;
+    /* border: px solid black; */
+    font-family:'Courier New', Courier, monospace;
+    /* padding: 5px; */
+    /* background-color: rgb(82, 82, 82); */
+}

@@ -10,15 +10,6 @@ public class submission {
     String deadLine;
     String submitTeams;
     String description;
-    String taskID;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     @Override
     public String toString() {
@@ -31,17 +22,11 @@ public class submission {
                 ", startTime='" + startTime + '\'' +
                 ", deadLine='" + deadLine + '\'' +
                 ", submitTeams='" + submitTeams + '\'' +
-                ", taskID='" + taskID + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 
-    public String getTaskID() {
-        return taskID;
-    }
 
-    public void setTaskID(String taskID) {
-        this.taskID = taskID;
-    }
 
     public String getSubmitID() {
         return submitID;
@@ -57,6 +42,14 @@ public class submission {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getSubmitStatus() {

@@ -1,7 +1,7 @@
 package com.test.pojo;
 
 public class task {
-    private String taskID;
+    private String taskid;
     private String name;
     private String description;
     private String submitNum;
@@ -58,24 +58,16 @@ public class task {
         this.deadline = deadline;
     }
 
-    public String getTaskID() {
-        return taskID;
+    public String getTaskid() {
+        return taskid;
     }
 
-    public void setTaskID(String taskID) {
-        this.taskID = taskID;
+    public void setTaskid(String taskid) {
+        this.taskid = taskid;
     }
 
     @Override
     public String toString() {
-        return "task{" +
-                "taskID='" + taskID + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", submitNum='" + submitNum + '\'' +
-                ", firstsm='" + firstsm + '\'' +
-                ", startedline='" + startedline + '\'' +
-                ", deadline='" + deadline + '\'' +
-                '}';
+        return taskid+","+name+","+submitNum+","+description+","+startedline+","+deadline+";";
     }
 }

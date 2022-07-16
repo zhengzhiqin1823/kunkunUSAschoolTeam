@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="../main.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/查看团队项目报告详情.css">
+    <link rel="stylesheet" href="./css/导航栏.css">
+    <link rel="stylesheet" href="./css/按钮.css ">
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <title>后台管理系统</title>
+</head>
+<body onload="init()">
+    <!--
+        首部栏: header
+    -->
+<!--    <header id="header" class="navbar navbar-expand flex-column flex-md-row bd-navbar bg-dark sticky-top">-->
+    <div class="demo-navigation1" >
+        <nav>
+            <ul>
+                <li><a href="admin.html">TeamAdmin</a></li>
+                <li><a href="adminTutor.html">TutorAdmin</a></li>
+                <li><a href="adminTask.html">TaskAdmin</a></li>
+            </ul>
+        </nav>
+    </div>
+<!--    </header>-->
+
+    <div class="d-md-flex color-bg-inset" style="min-height: 100vh;">
+
+        <!--
+            左侧边栏:   aside-container
+        -->
+        <aside id="aside-container" class="team-left-column col-md-4 col-lg-3 color-border-muted border-bottom hide-md hide-sm border-right color-bg-default">
+            <div class="border-bottom text-center text-muted" style="margin: 1em;">
+                教务处通知
+            </div>
+            <div class="border-bottom">
+
+                <div class="card" style="margin: 1em;">
+                    <div class="card-body">
+                        <a class="card-text" href="#">
+                            <span class="badge badge-secondary">最新</span>关于各学院有序开展全体学生退学工作的通知与注意事项
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card" style="margin: 1em;">
+                    <div class="card-body">
+                        <a class="card-text" href="#">
+                            <span class="badge badge-secondary">最新</span>关于坤坤篮球队外援招募的通知
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </aside>
+
+        <!--
+            显示项目概览的部分
+        -->
+        <div class="flex-auto col-md-8 col-lg-8 px-3 px-lg-5">
+
+            <!--
+                项目选项栏, 用于选择全部项目, 未结题项目等: project-tab
+            -->
+            <!--
+                项目页表
+            -->
+            <div id="project-tabContent" class="tab-content">
+                <!--
+               隐藏修改框
+            -->
+                <div id="student_admin" class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-home-tab"style="z-index: 1">
+                    <dialog style="display: none;margin-top: 0%;margin-left: 40%;width: 400px;height: 230px;z-index:20;position: fixed ;" id="StudentInfoInsert">
+                        <div>
+                            团队编号<input type="text" id="InsertStudentId" value="default">
+                            <span id="InsertStudentMsg"></span><br>
+                            团队名称<input type="text" id="InsertStudentName"><br>
+                            团队邮箱<input type="text" id="InsertStudentEmail"><br>
+                            团队电话<input type="text" id="InsertStudentTel"><br>
+                            <input class="demo-button3" type="button" value="确认提交" id="StudentInfoInsertConfirm">
+                            <input class="demo-button3" type="button" value="关闭窗口" id="StudentInfoInsertCancel">
+                        </div>
+                    </dialog>
+                    <div>
+                        <!--这里显示一个详细按钮-->
+                        <form method="post" action="#student_admin">
+                                <input type="submit" value="查看详情" >
+<!-- 新建团队到项目管理里了                              <input  type="button" value="新增团队" id="InsertStudent" >-->
+                                <input type="text" value="按团队编号搜索" id="SelectStudentBySid"  style="color: #6c757d">
+                                <input  type="button" value="搜索" id="SelectStudentBySidConfirm" style="margin-right: 0%">
+                        </form>
+
+                    </div>
+                    <!--这里显示学生表-->
+                    <div class="card">
+                        <table id="students"></table>
+                    </div>
+                    <br/>
+                </div>
+
+
+                <div id="tutor_admin" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-profile-tab"style="z-index: 1">
+                    <dialog style="display: none;margin-top: 0%;margin-left: 40%;width: 400px;height: 230px;z-index:20;position: fixed ;" id="TutorInfoInsert">
+                        <div>
+                            导师编号<input type="text" id="InsertTutorId" value="default">
+                            <span id="InsertTutorMsg"></span>
+                            <br>
+                            导师姓名<input type="text" id="InsertTutorName"><br>
+                            导师邮箱<input type="text" id="InsertTutorEmail"><br>
+                            导师电话<input type="text" id="InsertTutorTel"><br>
+                            <input class="demo-button3" type="button" value="确认提交" id="TutorInfoInsertConfirm">
+                            <input class="demo-button3" type="button" value="关闭窗口" id="TutorInfoInsertCancel">
+                        </div>
+                    </dialog>
+                    <div>
+                        <!--这里显示一个详细按钮-->
+                        <form  method="post" action="#tutor_admin">
+                            <input type="submit" value="查看详情">
+                            <input  type="button" value="新增导师" id="InsertTutor">
+                            <input type="text" value="按导师编号搜索" id="SelectTutorByTid" style="color: #6c757d">
+                            <input  type="button" value="搜索" id="SelectTutorByTidConfirm" style="margin-right: 0%">
+                        </form>
+
+                    </div>
+                    <div class="card">
+                        <table id="tutors"></table>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--
+        网页末尾
+        如果要加备案信息在这里加
+    -->
+      <script>
+          function init()
+          {
+              let xhttp;
+              if (window.XMLHttpRequest) {
+                  xhttp = new XMLHttpRequest();
+              } else {
+                  // code for IE6, IE5
+                  xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=1");
+              xhttp.send();
+              xhttp.onreadystatechange=function ()
+              {
+                  if (this.readyState == 4 && this.status == 200) {
+                      let str=this.responseText;
+                      let student=str.split(";")
+                      let i;
+                      let j;
+                      let table="";
+                      table+="<tr><th>团队编号</th><th>团队邮箱</th><th>团队名称</th><th>团队联系电话</th><th>参与项目</th></tr>"
+                      for(i=0;i<student.length-1;i++)
+                      {
+                          let studentinfo=student[i].split(",");
+                          table+="<tr>"
+                          for(j=0;j<studentinfo.length;j++) {
+                              table += "<td>" + studentinfo[j] + "</td>";
+                          }
+                          table+="<td><input class=\"demo-button3\" type='button' value='重置密码' style='width: 100px;height: 40px' onclick=\"UpdateStudent("+studentinfo[0]+")\"></td>"//弹出编辑框
+                          table+="<td><form method='get' action='/demo_war_exploded/delStudentServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
+                          table+="<input style='display:none' name='sid' value="+studentinfo[0]+">";
+                          table+="<input class=\"demo-button3\" type='submit' value='删除' style='margin-left:-60px;width: 60px;height: 40px''>";
+                          table+="</form>";
+                          table+="</td></tr>";
+                      }
+                      document.getElementById("students").innerHTML=table;
+
+                      //let table="<tr><th>学号</th><th>姓名</th><th>邮箱</th><th>电话</th></tr>";
+                      //for(int i)
+                  }
+              }
+          }
+          // 下面是删除时确认框
+          function confirmdel()
+          {
+              var res=confirm("确认删除？")
+              return(res);
+          }
+          //  团队密码重置
+          function UpdateStudent(tid)
+          {
+              let xhttp;
+              if (window.XMLHttpRequest) {
+                  xhttp = new XMLHttpRequest();
+              } else {
+                  // code for IE6, IE5
+                  xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=2&tid="+tid);
+              xhttp.send();
+          }
+              //新增团队
+          document.getElementById("InsertStudent").onclick=function () {
+              document.getElementById("StudentInfoInsert").style.display="block";
+          }
+          //提交新增信息
+          document.getElementById("StudentInfoInsertConfirm").onclick=function ()
+          {
+              let id=document.getElementById("InsertStudentId").value;
+              let name=document.getElementById("InsertStudentName").value;
+              let email=document.getElementById("InsertStudentEmail").value;
+              let tel=document.getElementById("InsertStudentTel").value;
+              if(id==""||name==""||email==""||tel=="")
+              {
+                  alert("请输入详细信息!");
+                  return;
+              }
+              let xhttp;
+              if (window.XMLHttpRequest) {
+                  xhttp = new XMLHttpRequest();
+              } else {
+                  // code for IE6, IE5
+                  xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=3&tid="+id+"&name="+name+"&email="+email+"&tel="+tel);
+              xhttp.send();
+              xhttp.onreadystatechange=function ()
+              {
+                  if (this.readyState == 4 && this.status == 200) {
+                      let str=this.responseText;
+                      if(str=="1")
+                      {
+                          document.getElementById("InsertStudentMsg").innerText="团队已存在";
+                      }
+                      else
+                      {
+                          document.getElementById("InsertStudentMsg").innerText="创建成功";
+                      }
+                  }
+              }
+          }
+          //关闭窗口
+          document.getElementById("StudentInfoInsertCancel").onclick=function ()
+          {
+              document.getElementById("StudentInfoInsert").style.display="none";
+              document.getElementById("InsertStudentId").value="default";
+              document.getElementById("InsertStudentName").value="";
+              document.getElementById("InsertStudentEmail").value="";
+              document.getElementById("InsertStudentTel").value="";
+          }
+           //搜索团队(编号)
+          document.getElementById("SelectStudentBySid").onfocus=function ()
+          {
+              let id=document.getElementById("SelectStudentBySid").value;
+              if(id=="按团队编号搜索")
+                  document.getElementById("SelectStudentBySid").value="";
+              document.getElementById("SelectStudentBySid").style.color="black";
+          }
+          document.getElementById("SelectStudentBySid").onblur=function ()
+          {
+              let id=document.getElementById("SelectStudentBySid").value;
+              if(id=="")
+                  document.getElementById("SelectStudentBySid").value="按团队编号搜索";
+              document.getElementById("SelectStudentBySid").style.color="#6c757d";
+          }
+          document.getElementById("SelectStudentBySidConfirm").onclick=function ()
+          {
+              let id=document.getElementById("SelectStudentBySid").value;
+              if(id=="") document.getElementById("SelectStudentBySid").value="请输入学生学号";
+              else {
+                  let xhttp;
+                  if (window.XMLHttpRequest) {
+                      xhttp = new XMLHttpRequest();
+                  } else {
+                      // code for IE6, IE5
+                      xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                  }
+                  xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=4&tid="+id);
+                  xhttp.send();
+                  xhttp.onreadystatechange=function ()
+                  {
+                      if (this.readyState == 4 && this.status == 200) {
+                          let str=this.responseText;
+                          let student=str.split(";")
+                          let i;
+                          let j;
+                          let table="";
+                          table+="<tr><th>团队编号</th><th>团队邮箱</th><th>团队名称</th><th>团队电话</th><th>参与项目</th></tr>"
+                          for(i=0;i<student.length-1;i++)
+                          {
+                              let studentinfo=student[i].split(",");
+                              table+="<tr>"
+                              for(j=0;j<studentinfo.length;j++) {
+                                  table += "<td>" + studentinfo[j] + "</td>";
+                              }
+                              table+="<td><input class=\"demo-button3\" type='button' value='重置密码' style='width: 100px;height: 40px' onclick=\"UpdateStudent("+studentinfo[0]+")\"></td>"//弹出编辑框
+                              table+="<td><form method='get' action='/demo_war_exploded/delStudentServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
+                              table+="<input style='display:none' name='sid' value="+studentinfo[0]+">";
+                              table+="<input class=\"demo-button3\" type='submit' value='删除' style='margin-left:-60px;width: 60px;height: 40px''>";
+                              table+="</form>";
+                              table+="</td></tr>";
+                          }
+                          document.getElementById("students").innerHTML=table;
+
+                          //let table="<tr><th>学号</th><th>姓名</th><th>邮箱</th><th>电话</th></tr>";
+                          //for(int i)
+                      }
+                  }
+              }
+          }
+      </script>
+</body>
+</html>
