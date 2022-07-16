@@ -7,7 +7,7 @@
 <mapper namespace="com.mapper.submissionMapper">
     <insert id="insert" parameterType="com.test.pojo.submission">
         insert  into submission
-        values(#{submitID},#{name},#{submitStatus},#{judgeStatus},#{next},#{startTime},#{deadline},#{submitTeams});
+        values(#{submitID},#{name},#{submitStatus},#{judgeStatus},#{next},#{startTime},#{deadline},#{submitTeams},#{description});
     </insert>
     <select id="selectByKey" resultType="com.test.pojo.submission">
         select * from submission where  submitID=#{submitID};

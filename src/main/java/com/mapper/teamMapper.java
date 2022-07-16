@@ -7,8 +7,12 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface teamMapper {
-    void insert(@Param("teamid") String teamid,@Param("name") String name,
-                @Param("password") String password,@Param("email") String email,@Param("tel") String tel);
+    void insert(@Param("teamid") String teamid,
+                @Param("name") String name,
+                @Param("password") String password,
+                @Param("email") String email,
+                @Param("tel") String tel,
+                @Param("taskid") String taskid);
 
     void updateName(@Param("teamid") String teamid,@Param("name") String name);
     void updatePassword(@Param("teamid") String teamid,@Param("password") String password);

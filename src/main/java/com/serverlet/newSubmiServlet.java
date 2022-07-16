@@ -1,4 +1,4 @@
-package com.servlet;
+package com.serverlet;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -48,7 +48,17 @@ public class newSubmiServlet extends HttpServlet {
         }
         List<submission> submissions = submissionMapper.selectAll();
         String submitid=String.valueOf(Integer.valueOf(submissions.get(submissions.size()-1).getSubmitID())+1);
-        submissionMapper.insert(submitid,name,submitStatus,judgeStatus,null,startTime,deadLine,submitTeams,description);
+        submissionMapper.insert(
+                submitid,
+                name,
+                submitStatus,
+                judgeStatus,
+                null,
+                startTime,
+                deadLine,
+                submitTeams,
+                description);
+
         submissionMapper.updateNextByKey(fm,submitid);
 
         String submitNum=String.valueOf(snum+1);

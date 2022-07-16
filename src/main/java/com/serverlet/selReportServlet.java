@@ -1,4 +1,4 @@
-package com.servlet;
+package com.serverlet;
 
 import com.mapper.fragmentMapper;
 import com.mapper.reportMapper;

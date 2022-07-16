@@ -1,4 +1,4 @@
-package com.servlet;
+package com.serverlet;
 
 import com.mapper.teamMapper;
 import com.test.pojo.team;
@@ -62,7 +62,13 @@ public class teamAdminServlet extends HttpServlet {
                     int num=Integer.parseInt(teamid);
                     num++;
                     id+=num;
-                    mapper.insert(id,name,email,"123456",tel,taskid);
+                    mapper.insert(
+                            id,
+                            name,
+                            "123456",
+                            email,
+                            tel,
+                            taskid);
                 }
                 else
                 {

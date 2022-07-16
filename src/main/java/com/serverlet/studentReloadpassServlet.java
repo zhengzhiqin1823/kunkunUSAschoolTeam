@@ -1,4 +1,4 @@
-package com.servlet;
+package com.serverlet;
 
 import com.mapper.studentMapper;
 import com.test.pojo.student;

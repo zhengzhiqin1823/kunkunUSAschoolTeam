@@ -10,6 +10,7 @@ public class submission {
     String deadLine;
     String submitTeams;
     String description;
+    String taskID;
 
     @Override
     public String toString() {
@@ -23,10 +24,17 @@ public class submission {
                 ", deadLine='" + deadLine + '\'' +
                 ", submitTeams='" + submitTeams + '\'' +
                 ", description='" + description + '\'' +
+                ", taskID='" + taskID + '\'' +
                 '}';
     }
 
+    public String getTaskID() {
+        return taskID;
+    }
 
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
+    }
 
     public String getSubmitID() {
         return submitID;

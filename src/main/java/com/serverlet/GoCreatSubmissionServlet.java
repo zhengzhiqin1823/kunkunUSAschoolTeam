@@ -1,5 +1,4 @@
-package com.servlet;
-
+package com.serverlet;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;

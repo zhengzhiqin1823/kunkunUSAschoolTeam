@@ -234,7 +234,7 @@ public class TeamTaskServlet extends HttpServlet {
                     "            </div>\n" +
                     "            <div class=\"inner-button\">\n"+
                     "<button class=\"demo-button1\" onclick=\"read_report('/0628JavaWebExercise_war/" +
-                    "submit?submitID="+ m.submitID + "&taskID="+ t.getTaskID() +"')\">查看详情</button>" +
+                    "submit?submitID="+ m.submitID + "&taskID="+ t.getTaskid() +"')\">查看详情</button>" +
                     "            </div>\n" +
                     "        </div>\n" +
                     "    </div>\n");
