@@ -18,4 +18,9 @@
             <delete id="deleteByTid" parameterType="com.test.pojo.tutor">
                     delete  from tutor where tid=#{tid};
                 </delete>
+                                <update id="updatePass" parameterType="com.test.pojo.tutor">
+                                        update tutor
+                                        set password=#{password}
+                                        where tid=#{tid};
+                                    </update>
 </mapper>

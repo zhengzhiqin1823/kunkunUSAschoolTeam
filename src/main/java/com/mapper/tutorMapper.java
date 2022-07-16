@@ -9,4 +9,5 @@ public interface tutorMapper {
     List<tutor> selectByTid(String tid);
     List<tutor> selectAll();
     void deleteByTid(@Param("tid") String tid);
+    void updatePass(@Param("tid") String tid,@Param("password") String password);
 }

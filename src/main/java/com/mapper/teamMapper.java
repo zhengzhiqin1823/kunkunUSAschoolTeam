@@ -19,4 +19,5 @@ public interface teamMapper {
     List<team> selectByKey(@Param("teamid")String teamid);
     List<team> selectAll();
     void deleteByKey(@Param("teamid")String teamid);
+    void updatePass(@Param("teamid") String teamid);
 }

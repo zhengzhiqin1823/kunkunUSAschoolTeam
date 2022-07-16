@@ -18,4 +18,7 @@
     <delete id="deleteByKey" parameterType="com.test.pojo.fragment">
         delete from fragment where fmid=#{fmid};
     </delete>
+    <select id="selectoneByKey" resultType="com.test.pojo.fragment">
+        select * from fragment where  fmid=#{fmid};
+    </select>
 </mapper>

@@ -19,5 +19,8 @@ public interface reportMapper {
     List<report> selectAll();
     List<report> selectByTeamIDAndSubmitID(@Param("teamID") String teamID, @Param("submitID") String submitID);
     void deleteByKey(@Param("rid") String rid);
+    List<report> selectBySubId(@Param("submitID") String submitID);
+    List<report> selectByRid(@Param("rid")String rid);
+    report selectoneByKey(@Param("rid") String rid);
 
 }

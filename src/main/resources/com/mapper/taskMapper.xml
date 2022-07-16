@@ -18,4 +18,12 @@
     <delete id="deleteByKey" parameterType="com.test.pojo.task">
         delete from task where taskID=#{taskID};
     </delete>
+    <update id="UpdateByKey" parameterType="com.test.pojo.task">
+        update task
+        set description=#{description},name=#{name},startedline=#{startedline},deadline=#{deadline},submitNum=#{submitNum}
+        where  taskid=#{taskid};
+    </update>
+    <update id="updateSubmitnumByKey" parameterType="com.test.pojo.task">
+        update task set submitNum=#{submitNum} where taskid=#{taskID};
+    </update>
 </mapper>
