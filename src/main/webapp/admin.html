@@ -151,7 +151,7 @@
                   // code for IE6, IE5
                   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
               }
-              xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=1");
+              xhttp.open("GET","/0628JavaWebExercise_war/teamAdminServlet?ret=1");
               xhttp.send();
               xhttp.onreadystatechange=function ()
               {
@@ -199,7 +199,7 @@
                   // code for IE6, IE5
                   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
               }
-              xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=2&tid="+tid);
+              xhttp.open("GET","/0628JavaWebExercise_war/teamAdminServlet?ret=2&tid="+tid);
               xhttp.send();
           }
               //新增团队
@@ -225,7 +225,7 @@
                   // code for IE6, IE5
                   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
               }
-              xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=3&tid="+id+"&name="+name+"&email="+email+"&tel="+tel);
+              xhttp.open("GET","/0628JavaWebExercise_war/teamAdminServlet?ret=3&tid="+id+"&name="+name+"&email="+email+"&tel="+tel);
               xhttp.send();
               xhttp.onreadystatechange=function ()
               {
@@ -278,7 +278,7 @@
                       // code for IE6, IE5
                       xhttp = new ActiveXObject("Microsoft.XMLHTTP");
                   }
-                  xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=4&tid="+id);
+                  xhttp.open("GET","/0628JavaWebExercise_war/teamAdminServlet?ret=4&tid="+id);
                   xhttp.send();
                   xhttp.onreadystatechange=function ()
                   {
@@ -297,7 +297,7 @@
                                   table += "<td>" + studentinfo[j] + "</td>";
                               }
                               table+="<td><input class=\"demo-button3\" type='button' value='重置密码' style='width: 100px;height: 40px' onclick=\"UpdateStudent("+studentinfo[0]+")\"></td>"//弹出编辑框
-                              table+="<td><form method='get' action='/demo_war_exploded/delStudentServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
+                              table+="<td><form method='get' action='/0628JavaWebExercise_war/delStudentServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
                               table+="<input style='display:none' name='sid' value="+studentinfo[0]+">";
                               table+="<input class=\"demo-button3\" type='submit' value='删除' style='margin-left:-60px;width: 60px;height: 40px''>";
                               table+="</form>";

@@ -143,7 +143,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=8&tid="+tid+"&sid="+sid);
+        xhttp.open("GET","/0628JavaWebExercise_war/AdminServlet?ret=8&tid="+tid+"&sid="+sid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -176,7 +176,7 @@
             // code for IE6, IE5
             xhtp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhtp.open("GET","http://localhost:8080/0628JavaWebExercise_war/reportServlet?ret=4&sid="+sid);
+        xhtp.open("GET","/0628JavaWebExercise_war/reportServlet?ret=4&sid="+sid);
         xhtp.send();
         xhtp.onreadystatechange=function ()
         {
@@ -212,7 +212,7 @@
             // code for IE6, IE5
             xhp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=2");
+        xhp.open("GET","/0628JavaWebExercise_war/AdminServlet?ret=2");
         xhp.send();
         xhp.onreadystatechange=function ()
         {
@@ -290,7 +290,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("POST","http://localhost:8080/0628JavaWebExercise_war/linkGenerateServlet");
+        xhttp.open("POST","/0628JavaWebExercise_war/linkGenerateServlet");
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("rids="+ridList+"&submitID="+sid+"&taskid="+tid+"&tid="+tutorId);
         xhttp.onreadystatechange=function ()
@@ -334,7 +334,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/reportServlet?ret=2&rid="+rid);
+        xhttp.open("GET","/0628JavaWebExercise_war/reportServlet?ret=2&rid="+rid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -358,7 +358,7 @@
             // code for IE6, IE5
             xhtp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhtp.open("GET","http://localhost:8080/0628JavaWebExercise_war/selReportServlet?rid="+rid);
+        xhtp.open("GET","/0628JavaWebExercise_war/selReportServlet?rid="+rid);
         xhtp.send();
         xhtp.onreadystatechange=function ()
         {

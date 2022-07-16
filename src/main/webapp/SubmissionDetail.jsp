@@ -78,7 +78,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/submissionServlet?ret=3&sid="+sid);
+        xhttp.open("GET","/0628JavaWebExercise_war/submissionServlet?ret=3&sid="+sid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -98,7 +98,7 @@
             // code for IE6, IE5
             xhtp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhtp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminTaskServlet?ret=4&tid="+tid);
+        xhtp.open("GET","/0628JavaWebExercise_war/AdminTaskServlet?ret=4&tid="+tid);
         xhtp.send();
         xhtp.onreadystatechange=function ()
         {
@@ -136,7 +136,7 @@
                 // code for IE6, IE5
                 xhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/submiUpdateServlet?submitID="+sid+"&name="+name+"&startTime="+st+"&deadLine="+dt+"&description="+des);
+            xhttp.open("GET","/0628JavaWebExercise_war/submiUpdateServlet?submitID="+sid+"&name="+name+"&startTime="+st+"&deadLine="+dt+"&description="+des);
             xhttp.send();
             xhttp.onreadystatechange=function ()
             {

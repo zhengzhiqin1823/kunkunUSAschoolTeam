@@ -139,7 +139,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=6&tid="+tid);
+        xhttp.open("GET","/0628JavaWebExercise_war/AdminServlet?ret=6&tid="+tid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -172,7 +172,7 @@
             // code for IE6, IE5
             xhtp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhtp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminTaskServlet?ret=3&tid="+tid);
+        xhtp.open("GET","/0628JavaWebExercise_war/AdminTaskServlet?ret=3&tid="+tid);
         xhtp.send();
         xhtp.onreadystatechange=function ()
         {
@@ -237,7 +237,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/submissionServlet?ret=1&sid="+sid);
+        xhttp.open("GET","/0628JavaWebExercise_war/submissionServlet?ret=1&sid="+sid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -268,7 +268,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/submissionServlet?ret=2&sid="+sid);
+        xhttp.open("GET","/0628JavaWebExercise_war/submissionServlet?ret=2&sid="+sid);
         xhttp.send();
 
         xhttp.onreadystatechange=function ()
@@ -324,7 +324,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=3&tid="+tid+"&name="+name+"&email="+email+"&tel="+tel+"&taskid="+taskid);
+        xhttp.open("GET","/0628JavaWebExercise_war/teamAdminServlet?ret=3&tid="+tid+"&name="+name+"&email="+email+"&tel="+tel+"&taskid="+taskid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
