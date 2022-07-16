@@ -3,142 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="../main.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../main.ico" type="image/x-icon"/>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/查看团队项目报告详情.css">
-    <link rel="stylesheet" href="./css/导航栏.css">
-    <link rel="stylesheet" href="./css/按钮.css ">
+    <link rel="stylesheet" href="./css/demo-navigation.css">
+    <link rel="stylesheet" href="./css/demo-button1.css ">
     <script src="js/jquery.slim.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/demo-navigation1.js"></script>
     <title>后台管理系统</title>
 </head>
-<body onload="init()">
-<!--
-    首部栏: header
--->
-<!--    <header id="header" class="navbar navbar-expand flex-column flex-md-row bd-navbar bg-dark sticky-top">-->
-<div class="demo-navigation1" >
+
+<div class="demo-navigation2">
+    <div class="logo">坤坤的美国校队</div>
     <nav>
         <ul>
-            <li><a href="admin.html">TeamAdmin</a></li>
-            <li><a href="adminTutor.html">TutorAdmin</a></li>
-            <li><a href="adminTask.html">TaskAdmin</a></li>
+            <li onclick="admin_team()">Team</li>
+            <li onclick="admin_tutor()">Tutor</li>
+            <li onclick="admin_project()">Task</li>
         </ul>
     </nav>
+    <div class="logo2">KunKunのUSA SchoolTeam</div>
 </div>
-<!--    </header>-->
+<style>
+    tr{
+        margin-top: 1ch;
+    }
+</style>
 
-<div class="d-md-flex color-bg-inset" style="min-height: 100vh;">
+<body onload="init()">
 
-    <!--
-        左侧边栏:   aside-container
-    -->
-    <aside id="aside-container" class="team-left-column col-md-4 col-lg-3 color-border-muted border-bottom hide-md hide-sm border-right color-bg-default">
-        <div class="border-bottom text-center text-muted" style="margin: 1em;">
-            教务处通知
-        </div>
-        <div class="border-bottom">
 
-            <div class="card" style="margin: 1em;">
-                <div class="card-body">
-                    <a class="card-text" href="#">
-                        <span class="badge badge-secondary">最新</span>关于各学院有序开展全体学生退学工作的通知与注意事项
-                    </a>
-                </div>
-            </div>
+<div style="min-height: 100vh;width: 88%;padding: 2ch;margin: auto;">
 
-            <div class="card" style="margin: 1em;">
-                <div class="card-body">
-                    <a class="card-text" href="#">
-                        <span class="badge badge-secondary">最新</span>关于坤坤篮球队外援招募的通知
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-    </aside>
-
-    <!--
-        显示项目概览的部分
-    -->
-    <div class="flex-auto col-md-8 col-lg-8 px-3 px-lg-5">
-                <div style="display:none;margin-top: 1%;margin-left: 5%;width: 850px;height: 660px;z-index:20;position: fixed ;background-color: white;border: 3px;
-                    border: 3px solid #ffc107;border-radius: 5px;font-family: 华文宋体;font-size: 20px;overflow-y: auto;" id="TaskInfoDetail">
-                    <table id="TaskInfoHeaderDetail" cellspacing="20" cellpadding="10px">
-                        <th>项目编号</th><th>项目名称</th><th>报告提交次数</th><th>项目开始时间</th><th>项目提交截止时间</th>
-                        <tr>
-                            <td><input id="TaskDetailInfoId" type="text" readonly="readonly" style="width:100px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center"></td>
-                            <td><input id="TaskDetailInfoName" type="text" readonly="readonly" style="width:180px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center"></td>
-                            <td><input id="TaskDetailSubmitNum" type="text" readonly="readonly" style="width:160px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center"></td>
-                            <td><input id="TaskDetailInfoStartline" type="text" readonly="readonly" style="width:160px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center"></td>
-                            <td><input id="TaskDetailInfoDeadline" type="text" readonly="readonly" style="width:160px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center"></td>
-                        </tr>
-                    </table><br>
-                    <table id="TaskInfoReportDetail" readonly="readonly"></table>
-                    <h1 style="font-family: 华文宋体;margin-left:15px">项目描述:</h1>
-                    <textarea id="TaskDescriptionInfo" style="margin-left: 40px;width:760px;margin-right: 40px;height: 400px;resize: none; overflow-x:auto;" readonly="readonly">
+    <div>
+        <div style="display:none;margin-top: 1%;margin-left: 5%;width: 850px;height: 660px;z-index:20;position: fixed ;background-color: white;border: 3px;
+                    border: 3px solid #ffc107;border-radius: 5px;font-family:STSong ;font-size: 20px;overflow-y: auto;"
+             id="TaskInfoDetail">
+            <table id="TaskInfoHeaderDetail" cellspacing="20" cellpadding="10px">
+                <th>项目编号</th>
+                <th>项目名称</th>
+                <th>报告提交次数</th>
+                <th>项目开始时间</th>
+                <th>项目提交截止时间</th>
+                <tr>
+                    <td><input id="TaskDetailInfoId" type="text" readonly="readonly"
+                               style="width:100px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center">
+                    </td>
+                    <td><input id="TaskDetailInfoName" type="text" readonly="readonly"
+                               style="width:180px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center">
+                    </td>
+                    <td><input id="TaskDetailSubmitNum" type="text" readonly="readonly"
+                               style="width:160px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center">
+                    </td>
+                    <td><input id="TaskDetailInfoStartline" type="text" readonly="readonly"
+                               style="width:160px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center">
+                    </td>
+                    <td><input id="TaskDetailInfoDeadline" type="text" readonly="readonly"
+                               style="width:160px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);text-align: center">
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table id="TaskInfoReportDetail" readonly="readonly"></table>
+            <h1 style="font-family: 华文宋体;margin-left:15px">项目描述:</h1>
+            <textarea id="TaskDescriptionInfo"
+                      style="margin-left: 40px;width:760px;margin-right: 40px;height: 400px;resize: none; overflow-x:auto;"
+                      readonly="readonly">
                     </textarea>
-                    <table>
-                        <tr>
-                            <td style="width: 0%"><input type="text" id="TaskInfoDetailUpdateRet" style="display: none" value="1"></td>
-                            <td style="width: 25%"><input class="demo-button3" type="button" id="TaskInfoDetailUpdate" style="width: 75px;margin-left: 40px" value="修改"></td>
-                            <td style="width: 25%"><input class="demo-button3" type="button" id="CloseSubmit" style="width: 170px;" value="关闭报告提交"></td>
-                            <td style="width: 25%"><input class="demo-button3" type="button" id="CloseTutorEvaluate" style="margin-left:100px;width: 170px;" value="关闭导师审评"></td>
-                            <td style="width: 25%"><input class="demo-button3" type="button" id="TaskInfoDetailClose" style="width: 75px;margin-left: 90px" value="关闭"></td>
-                        </tr>
-                    </table>
-                </div>
+            <table>
+                <tr>
+                    <td style="width: 0%"><input type="text" id="TaskInfoDetailUpdateRet" style="display: none"
+                                                 value="1"></td>
+                    <td style="width: 25%"><input class="demo-button3" type="button" id="TaskInfoDetailUpdate"
+                                                  style="width: 75px;margin-left: 40px" value="修改"></td>
+                    <td style="width: 25%"><input class="demo-button3" type="button" id="CloseSubmit"
+                                                  style="width: 170px;" value="关闭报告提交"></td>
+                    <td style="width: 25%"><input class="demo-button3" type="button" id="CloseTutorEvaluate"
+                                                  style="margin-left:100px;width: 170px;" value="关闭导师审评"></td>
+                    <td style="width: 25%"><input class="demo-button3" type="button" id="TaskInfoDetailClose"
+                                                  style="width: 75px;margin-left: 90px" value="关闭"></td>
+                </tr>
+            </table>
+        </div>
 
-                <!--                    这里隐藏新增项目的文本框-->
-                <div style="display:none;margin-top: 1%;margin-left: 5%;width: 850px;height: 680px;z-index:20;position: fixed ;background-color: #ffffff;
+        <!--                    这里隐藏新增项目的文本框-->
+        <div style="display:none;margin-top: 1%;margin-left: 5%;width: 850px;height: 680px;z-index:20;position: fixed ;background-color: #ffffff;
                     border: #1d2124 solid 3px;border-radius: 5px;font-family: 华文宋体;font-size: 20px;" id="CreatTask">
-                    <form action="#" method="post">
-                        <table>
-                            <tr>
-                                <td >项目名称:</td>
-                                <td><input type="text" value="请输入项目名称" style="width: 300px;color: #6c757d" name="name" id="CreatTaskName" ></td>
-                            <tr>
-                                <td >报告提交次数:</td>
-                                <td><input type="text" value="请输入项目报告提交次数" style="width: 300px;color: #6c757d"name="submitNum" id="CreatTaskSubmitNum"></td>
-                            </tr>
-                            <tr>
-                                <td >项目开始时间:</td>
-                                <td><input type="text" value="项目开始时间(yyyy-mm-dd)" style="width: 300px;color: #6c757d" name="startline" id="CreatTaskStartline"></td>
-                            </tr>
-                            <tr>
-                                <td >项目结束时间:</td>
-                                <td><input type="text" value="项目结束时间(yyyy-mm-dd)"  style="width: 300px;color: #6c757d" name="deadline" id="CreatTaskDeadline"></td>
-                            </tr>
-                        </table>
-                        <h1>项目描述</h1>
-                        <textarea id="CreatTaskdescription" style="margin-left: 40px;width:760px;margin-right: 40px;height: 400px;resize: none; overflow-x:auto;">请输入项目描述</textarea><br>
-                        <table>
-                            <tr>
-                                <td>
-                                    <input class="demo-button3" type="button" id="creatTaskConfirm" value="新建项目">
-                                </td>
-                                <td><input class="demo-button3" style="margin-left: 610px" type="button" value="关闭" id="CreatTaskClose"></td>
-                            </tr>
-                        </table>
-                        <span id="msg" style="color: #dc3545"></span>
-                    </form>
-                </div>
-                <div>
-                    <!--这里显示一个详细按钮-->
-                    <form  method="post" action="#project_admin">
-                        <input type="submit" value="查看详情">
-                        <input  type="button" value="新增项目" id="InsertTask">
-                        <input type="text" value="按项目编号搜索" id="SelectTaskByTid" style="color: #6c757d">
-                        <input  type="button" value="搜索" id="SelectTaskByTidConfirm" style="margin-right: 0%">
-                    </form>
-                </div>
-                <div class="card">
-                </div>
-                <div class="card">
-                    <table id="projects"></table>
-                </div>
+            <form action="#" method="post">
+                <table>
+                    <tr>
+                        <td>项目名称:</td>
+                        <td><input type="text" value="请输入项目名称" style="width: 300px;color: #6c757d" name="name"
+                                   id="CreatTaskName"></td>
+                    <tr>
+                        <td>报告提交次数:</td>
+                        <td><input type="text" value="请输入项目报告提交次数" style="width: 300px;color: #6c757d" name="submitNum"
+                                   id="CreatTaskSubmitNum"></td>
+                    </tr>
+                    <tr>
+                        <td>项目开始时间:</td>
+                        <td><input type="text" value="项目开始时间(yyyy-mm-dd)" style="width: 300px;color: #6c757d"
+                                   name="startline" id="CreatTaskStartline"></td>
+                    </tr>
+                    <tr>
+                        <td>项目结束时间:</td>
+                        <td><input type="text" value="项目结束时间(yyyy-mm-dd)" style="width: 300px;color: #6c757d"
+                                   name="deadline" id="CreatTaskDeadline"></td>
+                    </tr>
+                </table>
+                <h1>项目描述</h1>
+                <textarea id="CreatTaskdescription"
+                          style="margin-left: 40px;width:760px;margin-right: 40px;height: 400px;resize: none; overflow-x:auto;">请输入项目描述</textarea><br>
+                <table>
+                    <tr>
+                        <td>
+                            <input class="demo-button3" type="button" id="creatTaskConfirm" value="新建项目">
+                        </td>
+                        <td><input class="demo-button3" style="margin-left: 610px" type="button" value="关闭"
+                                   id="CreatTaskClose"></td>
+                    </tr>
+                </table>
+                <span id="msg" style="color: #dc3545"></span>
+            </form>
+        </div>
+        <div>
+            <!--这里显示一个详细按钮-->
+            <form method="post" action="#project_admin">
+                <input type="submit" value="查看详情">
+                <input type="button" value="新增项目" id="InsertTask">
+                <input type="text" value="按项目编号搜索" id="SelectTaskByTid" style="color: #6c757d">
+                <input type="button" value="搜索" id="SelectTaskByTidConfirm" style="margin-right: 0%">
+            </form>
+        </div>
+        <div class="card">
+        </div>
+        <div class="card">
+            <table id="projects"></table>
+        </div>
 
     </div>
 </div>
@@ -147,8 +150,7 @@
     如果要加备案信息在这里加
 -->
 <script>
-    function init()
-    {
+    function init() {
         let xhttp;
         if (window.XMLHttpRequest) {
             xhttp = new XMLHttpRequest();
@@ -156,61 +158,57 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=5");
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=5");
         xhttp.send();
-        xhttp.onreadystatechange=function ()
-        {
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                let str=this.responseText;
-                let student=str.split(";")
+                let str = this.responseText;
+                let student = str.split(";")
                 let i;
                 let j;
-                let table="";
-                table+="<tr><th>项目编号</th><th>项目名称</th><th>项目提交开始时间</th><th>项目提交截止时间</th></tr>"
-                for(i=0;i<student.length-1;i++)
-                {
-                    let studentinfo=student[i].split(",");
-                    table+="<tr>"
-                    for(j=0;j<studentinfo.length;j++) {
-                        if(j==2||j==3) continue;
+                let table = "";
+                table += "<tr><th>项目编号</th><th>项目名称</th><th>项目提交开始时间</th><th>项目提交截止时间</th></tr>"
+                for (i = 0; i < student.length - 1; i++) {
+                    let studentinfo = student[i].split(",");
+                    table += "<tr>"
+                    for (j = 0; j < studentinfo.length; j++) {
+                        if (j == 2 || j == 3) continue;
                         table += "<td>" + studentinfo[j] + "</td>";
                     }
-                    table+="<td><input class=\"demo-button3\" type='button' value='项目详情' style='width: 140px;height: 40px' " +
-                        "onclick="+"UpdateTask(\'"+studentinfo[0]+"\')"+"></td>"
-                    table+="<td><form method='get' action='/0628JavaWebExercise_war/TaskAdminServlet' >";//转到管理页面
-                    table+="<input style='display:none' name='taskid' value="+studentinfo[0]+">";
-                    table+="<input class=\"demo-button3\" type='submit' value='项目管理' style='margin-left:-120px;width: 140px;height: 40px' id='ReportResultButton' >"
-                    table+="</form>";
-                    table+="</td></tr>";
+                    table += "<td><input class=\"demo-button3\" type='button' value='项目详情' style='width: 140px;height: 40px' " +
+                        "onclick=" + "UpdateTask(\'" + studentinfo[0] + "\')" + "></td>"
+                    table += "<td><form method='get' action='/0628JavaWebExercise_war/TaskAdminServlet' >";//转到管理页面
+                    table += "<input style='display:none' name='taskid' value=" + studentinfo[0] + ">";
+                    table += "<input class=\"demo-button3\" type='submit' value='项目管理' style='margin-left:-120px;width: 140px;height: 40px' id='ReportResultButton' >"
+                    table += "</form>";
+                    table += "</td></tr>";
                 }
-                document.getElementById("projects").innerHTML=table;
+                document.getElementById("projects").innerHTML = table;
             }
         }
     }
+
     // 下面是删除时确认框
-    function confirmdel()
-    {
-        var res=confirm("确认删除？")
-        return(res);
+    function confirmdel() {
+        var res = confirm("确认删除？")
+        return (res);
     }
+
     //搜索项目(项目编号)
-    document.getElementById("SelectTaskByTid").onfocus=function ()
-    {
-        let id=document.getElementById("SelectTaskByTid").value;
-        if(id=="按项目编号搜索")
-            document.getElementById("SelectTaskByTid").value="";
-        document.getElementById("SelectTaskByTid").style.color="black";
+    document.getElementById("SelectTaskByTid").onfocus = function () {
+        let id = document.getElementById("SelectTaskByTid").value;
+        if (id == "按项目编号搜索")
+            document.getElementById("SelectTaskByTid").value = "";
+        document.getElementById("SelectTaskByTid").style.color = "black";
     }
-    document.getElementById("SelectTaskByTid").onblur=function ()
-    {
-        let id=document.getElementById("SelectTaskByTid").value;
-        if(id=="")
-            document.getElementById("SelectTaskByTid").value="按项目编号搜索";
-        document.getElementById("SelectTaskByTid").style.color="#6c757d";
+    document.getElementById("SelectTaskByTid").onblur = function () {
+        let id = document.getElementById("SelectTaskByTid").value;
+        if (id == "")
+            document.getElementById("SelectTaskByTid").value = "按项目编号搜索";
+        document.getElementById("SelectTaskByTid").style.color = "#6c757d";
     }
-    document.getElementById("SelectTaskByTidConfirm").onclick=function ()
-    {
-        let id=document.getElementById("SelectTaskByTid").value;
+    document.getElementById("SelectTaskByTidConfirm").onclick = function () {
+        let id = document.getElementById("SelectTaskByTid").value;
         let xhttp;
         if (window.XMLHttpRequest) {
             xhttp = new XMLHttpRequest();
@@ -218,41 +216,39 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=6&tid="+id);
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=6&tid=" + id);
         xhttp.send();
-        xhttp.onreadystatechange=function ()
-        {
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                let str=this.responseText;
-                let student=str.split(";")
+                let str = this.responseText;
+                let student = str.split(";")
                 let i;
                 let j;
-                let table="";
-                table+="<tr><th>项目编号</th><th>项目名称</th><th>项目提交开始时间</th><th>项目提交截止时间</th></tr>"
-                for(i=0;i<student.length-1;i++)
-                {
-                    let studentinfo=student[i].split(",");
-                    table+="<tr>"
-                    for(j=0;j<studentinfo.length;j++) {
-                        if(j==2||j==3) continue;
+                let table = "";
+                table += "<tr><th>项目编号</th><th>项目名称</th><th>项目提交开始时间</th><th>项目提交截止时间</th></tr>"
+                for (i = 0; i < student.length - 1; i++) {
+                    let studentinfo = student[i].split(",");
+                    table += "<tr>"
+                    for (j = 0; j < studentinfo.length; j++) {
+                        if (j == 2 || j == 3) continue;
                         table += "<td>" + studentinfo[j] + "</td>";
                     }
-                    table+="<td><input class=\"demo-button3\" type='button' value='项目详情' style='width: 140px;height: 40px' onclick="+"UpdateTask(\'"+studentinfo[0]+"\')></td>"//弹出项目详情
-                    table+="<td><form method='get' action='http://localhost:8080/0628JavaWebExercise_war/TaskAdminServlet' >";//生成对应的删除学生的按钮
-                    table+="<input style='display:none' name='taskid' value="+studentinfo[0]+">";
-                    table+="<input class=\"demo-button3\" type='submit' value='项目管理' style='margin-left:-120px;width: 140px;height: 40px' id='ReportResultButton' onclick="+"SelectReportResultDetail(\'"+studentinfo[0]+"\')"+">"
-                    table+="</form>";
-                    table+="</td></tr>";
+                    table += "<td><input class=\"demo-button3\" type='button' value='项目详情' style='width: 140px;height: 40px' onclick=" + "UpdateTask(\'" + studentinfo[0] + "\')></td>"//弹出项目详情
+                    table += "<td><form method='get' action='http://localhost:8080/0628JavaWebExercise_war/TaskAdminServlet' >";//生成对应的删除学生的按钮
+                    table += "<input style='display:none' name='taskid' value=" + studentinfo[0] + ">";
+                    table += "<input class=\"demo-button3\" type='submit' value='项目管理' style='margin-left:-120px;width: 140px;height: 40px' id='ReportResultButton' onclick=" + "SelectReportResultDetail(\'" + studentinfo[0] + "\')" + ">"
+                    table += "</form>";
+                    table += "</td></tr>";
                 }
-                document.getElementById("projects").innerHTML=table;
+                document.getElementById("projects").innerHTML = table;
             }
         }
 
     }
+
     //查看项目详情
-    function  UpdateTask(tid)
-    {
-        document.getElementById("TaskInfoDetail").style.display="block";
+    function UpdateTask(tid) {
+        document.getElementById("TaskInfoDetail").style.display = "block";
         let xhttp;
         if (window.XMLHttpRequest) {
             xhttp = new XMLHttpRequest();
@@ -260,46 +256,43 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=7&tid="+tid);
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=7&tid=" + tid);
         xhttp.send();
-        xhttp.onreadystatechange=function ()
-        {
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                let str=this.responseText;
-                let student=str.split(";")
+                let str = this.responseText;
+                let student = str.split(";")
                 let i;
                 let j;
-                for(i=0;i<student.length-1;i++)
-                {
-                    let studentinfo=student[i].split(",");
-                    document.getElementById("TaskDetailInfoId").value=studentinfo[0];
-                    document.getElementById("TaskDetailInfoName").value=studentinfo[1];
-                    document.getElementById("TaskDetailInfoStartline").value=studentinfo[4];
-                    document.getElementById("TaskDetailSubmitNum").value=studentinfo[2];
-                    document.getElementById("TaskDetailInfoDeadline").value=studentinfo[5];
-                    document.getElementById("TaskDescriptionInfo").innerText=studentinfo[3];
+                for (i = 0; i < student.length - 1; i++) {
+                    let studentinfo = student[i].split(",");
+                    document.getElementById("TaskDetailInfoId").value = studentinfo[0];
+                    document.getElementById("TaskDetailInfoName").value = studentinfo[1];
+                    document.getElementById("TaskDetailInfoStartline").value = studentinfo[4];
+                    document.getElementById("TaskDetailSubmitNum").value = studentinfo[2];
+                    document.getElementById("TaskDetailInfoDeadline").value = studentinfo[5];
+                    document.getElementById("TaskDescriptionInfo").innerText = studentinfo[3];
                 }
             }
         }
-        document.getElementById("TaskInfoDetailUpdateRet").value="1";
-        document.getElementById("TaskInfoDetailUpdate").value="修改";
-        document.getElementById("TaskDetailInfoId").setAttribute("readonly","true");
-        document.getElementById("TaskDetailInfoName").setAttribute("readonly","true");
-        document.getElementById("TaskDetailInfoStartline").setAttribute("readonly","true");
-        document.getElementById("TaskDetailInfoDeadline").setAttribute("readonly","true");
-        document.getElementById("TaskDescriptionInfo").setAttribute("readonly","true");
+        document.getElementById("TaskInfoDetailUpdateRet").value = "1";
+        document.getElementById("TaskInfoDetailUpdate").value = "修改";
+        document.getElementById("TaskDetailInfoId").setAttribute("readonly", "true");
+        document.getElementById("TaskDetailInfoName").setAttribute("readonly", "true");
+        document.getElementById("TaskDetailInfoStartline").setAttribute("readonly", "true");
+        document.getElementById("TaskDetailInfoDeadline").setAttribute("readonly", "true");
+        document.getElementById("TaskDescriptionInfo").setAttribute("readonly", "true");
     }
-    document.getElementById("TaskInfoDetailClose").onclick=function ()
-    {
-        document.getElementById("TaskInfoDetail").style.display="none";
+
+    document.getElementById("TaskInfoDetailClose").onclick = function () {
+        document.getElementById("TaskInfoDetail").style.display = "none";
     }
     //修改项目详情信息  a值为1时不可修改，为2时克修改，按钮变为提交
-    document.getElementById("TaskInfoDetailUpdate").onclick=function (){
-        let a=document.getElementById("TaskInfoDetailUpdateRet").value
-        if("1"==a)
-        {
-            document.getElementById("TaskInfoDetailUpdateRet").value="2";
-            document.getElementById("TaskInfoDetailUpdate").value="提交";
+    document.getElementById("TaskInfoDetailUpdate").onclick = function () {
+        let a = document.getElementById("TaskInfoDetailUpdateRet").value
+        if ("1" == a) {
+            document.getElementById("TaskInfoDetailUpdateRet").value = "2";
+            document.getElementById("TaskInfoDetailUpdate").value = "提交";
             document.getElementById("TaskDetailInfoId").removeAttribute("readonly");
             document.getElementById("TaskDetailInfoName").removeAttribute("readonly");
             document.getElementById("TaskDetailInfoStartline").removeAttribute("readonly");
@@ -308,24 +301,23 @@
             document.getElementById("TaskInfoReportDetail").removeAttribute("readonly");
             document.getElementById("TaskDetailSubmitNum").removeAttribute("readonly");
         }
-        if("2"==a)
-        {
-            document.getElementById("TaskInfoDetailUpdateRet").value="1";
-            document.getElementById("TaskInfoDetailUpdate").value="修改";
-            document.getElementById("TaskDetailInfoId").setAttribute("readonly","true");
-            document.getElementById("TaskDetailInfoName").setAttribute("readonly","true");
-            document.getElementById("TaskDetailInfoStartline").setAttribute("readonly","true");
-            document.getElementById("TaskDetailInfoDeadline").setAttribute("readonly","true");
-            document.getElementById("TaskDescriptionInfo").setAttribute("readonly","true");
-            document.getElementById("TaskInfoReportDetail").setAttribute("readonly","true");
-            document.getElementById("TaskDetailSubmitNum").setAttribute("readonly","true");
-            let tid=document.getElementById("TaskDetailInfoId").value;
-            let name=document.getElementById("TaskDetailInfoName").value;
-            let startline=document.getElementById("TaskDetailInfoStartline").value;
-            let deadline=document.getElementById("TaskDetailInfoDeadline").value;
-            let description=document.getElementById("TaskDescriptionInfo").value;
-            let submitnum=document.getElementById("TaskDetailSubmitNum").value;
-            let reportdetail=document.getElementById("TaskInfoReportDetail").innerText;
+        if ("2" == a) {
+            document.getElementById("TaskInfoDetailUpdateRet").value = "1";
+            document.getElementById("TaskInfoDetailUpdate").value = "修改";
+            document.getElementById("TaskDetailInfoId").setAttribute("readonly", "true");
+            document.getElementById("TaskDetailInfoName").setAttribute("readonly", "true");
+            document.getElementById("TaskDetailInfoStartline").setAttribute("readonly", "true");
+            document.getElementById("TaskDetailInfoDeadline").setAttribute("readonly", "true");
+            document.getElementById("TaskDescriptionInfo").setAttribute("readonly", "true");
+            document.getElementById("TaskInfoReportDetail").setAttribute("readonly", "true");
+            document.getElementById("TaskDetailSubmitNum").setAttribute("readonly", "true");
+            let tid = document.getElementById("TaskDetailInfoId").value;
+            let name = document.getElementById("TaskDetailInfoName").value;
+            let startline = document.getElementById("TaskDetailInfoStartline").value;
+            let deadline = document.getElementById("TaskDetailInfoDeadline").value;
+            let description = document.getElementById("TaskDescriptionInfo").value;
+            let submitnum = document.getElementById("TaskDetailSubmitNum").value;
+            let reportdetail = document.getElementById("TaskInfoReportDetail").innerText;
             let xhttp;
             if (window.XMLHttpRequest) {
                 xhttp = new XMLHttpRequest();
@@ -333,11 +325,10 @@
                 // code for IE6, IE5
                 xhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            xhttp.open("POST","http://localhost:8080/0628JavaWebExercise_war/UpdateTaskServlet");
+            xhttp.open("POST", "http://localhost:8080/0628JavaWebExercise_war/UpdateTaskServlet");
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("tid="+tid+"&name="+name+"&startline="+startline+"&deadline="+deadline+"&description="+description+"&submitNum="+submitnum);
-            xhttp.onreadystatechange=function ()
-            {
+            xhttp.send("tid=" + tid + "&name=" + name + "&startline=" + startline + "&deadline=" + deadline + "&description=" + description + "&submitNum=" + submitnum);
+            xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     ;
                 }
@@ -345,9 +336,9 @@
         }
     }
     //关闭项目提交
-    document.getElementById("CloseSubmit").onclick=function () {
-        var res=confirm("确认关闭？");
-        if(!res) return;
+    document.getElementById("CloseSubmit").onclick = function () {
+        var res = confirm("确认关闭？");
+        if (!res) return;
         let Tid = document.getElementById("TaskDetailInfoId").value;
         let xhttp;
         if (window.XMLHttpRequest) {
@@ -356,7 +347,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminTaskServlet?ret=1&tid="+Tid);
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminTaskServlet?ret=1&tid=" + Tid);
         xhttp.send();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -365,9 +356,9 @@
         }
     }
     //关闭导师评分
-    document.getElementById("CloseTutorEvaluate").onclick=function (){
-        var res=confirm("确认关闭？");
-        if(!res) return;
+    document.getElementById("CloseTutorEvaluate").onclick = function () {
+        var res = confirm("确认关闭？");
+        if (!res) return;
         let Tid = document.getElementById("TaskDetailInfoId").value;
         let xhttp;
         if (window.XMLHttpRequest) {
@@ -376,7 +367,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminTaskServlet?ret=2&tid="+Tid);
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminTaskServlet?ret=2&tid=" + Tid);
         xhttp.send();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -386,72 +377,71 @@
     }
     //
     //新建项目
-    document.getElementById("InsertTask").onclick=function (){
-        document.getElementById("CreatTask").style.display="block";
+    document.getElementById("InsertTask").onclick = function () {
+        document.getElementById("CreatTask").style.display = "block";
     }
-    document.getElementById("CreatTaskClose").onclick=function () {
-        document.getElementById("CreatTask").style.display="none";
-        document.getElementById("msg").innerText=""
+    document.getElementById("CreatTaskClose").onclick = function () {
+        document.getElementById("CreatTask").style.display = "none";
+        document.getElementById("msg").innerText = ""
 
     }
     //新建项目输入框的js
-    document.getElementById("CreatTaskName").onfocus=function () {
-        let id=document.getElementById("CreatTaskName").value;
-        if(id=="请输入项目名称")
-            document.getElementById("CreatTaskName").value="";
-        document.getElementById("CreatTaskName").style.color="black";
+    document.getElementById("CreatTaskName").onfocus = function () {
+        let id = document.getElementById("CreatTaskName").value;
+        if (id == "请输入项目名称")
+            document.getElementById("CreatTaskName").value = "";
+        document.getElementById("CreatTaskName").style.color = "black";
     }
-    document.getElementById("CreatTaskName").onblur=function () {
-        let id=document.getElementById("CreatTaskName").value;
-        if(id=="")
-            document.getElementById("CreatTaskName").value="请输入项目名称";
-        document.getElementById("CreatTaskName").style.color="#6c757d";
+    document.getElementById("CreatTaskName").onblur = function () {
+        let id = document.getElementById("CreatTaskName").value;
+        if (id == "")
+            document.getElementById("CreatTaskName").value = "请输入项目名称";
+        document.getElementById("CreatTaskName").style.color = "#6c757d";
     }
-    document.getElementById("CreatTaskSubmitNum").onfocus=function () {
-        let id=document.getElementById("CreatTaskSubmitNum").value;
-        if(id=="请输入项目报告提交次数")
-            document.getElementById("CreatTaskSubmitNum").value="";
-        document.getElementById("CreatTaskSubmitNum").style.color="black";
+    document.getElementById("CreatTaskSubmitNum").onfocus = function () {
+        let id = document.getElementById("CreatTaskSubmitNum").value;
+        if (id == "请输入项目报告提交次数")
+            document.getElementById("CreatTaskSubmitNum").value = "";
+        document.getElementById("CreatTaskSubmitNum").style.color = "black";
     }
-    document.getElementById("CreatTaskSubmitNum").onblur=function () {
-        let id=document.getElementById("CreatTaskSubmitNum").value;
-        if(id=="")
-            document.getElementById("CreatTaskSubmitNum").value="请输入项目报告提交次数";
-        document.getElementById("CreatTaskSubmitNum").style.color="#6c757d";
+    document.getElementById("CreatTaskSubmitNum").onblur = function () {
+        let id = document.getElementById("CreatTaskSubmitNum").value;
+        if (id == "")
+            document.getElementById("CreatTaskSubmitNum").value = "请输入项目报告提交次数";
+        document.getElementById("CreatTaskSubmitNum").style.color = "#6c757d";
     }
-    document.getElementById("CreatTaskDeadline").onfocus=function () {
-        let id=document.getElementById("CreatTaskDeadline").value;
-        if(id=="项目结束时间(yyyy-mm-dd)")
-            document.getElementById("CreatTaskDeadline").value="";
-        document.getElementById("CreatTaskDeadline").style.color="black";
+    document.getElementById("CreatTaskDeadline").onfocus = function () {
+        let id = document.getElementById("CreatTaskDeadline").value;
+        if (id == "项目结束时间(yyyy-mm-dd)")
+            document.getElementById("CreatTaskDeadline").value = "";
+        document.getElementById("CreatTaskDeadline").style.color = "black";
     }
-    document.getElementById("CreatTaskDeadline").onblur=function () {
-        let id=document.getElementById("CreatTaskDeadline").value;
-        if(id=="")
-            document.getElementById("CreatTaskDeadline").value="项目结束时间(yyyy-mm-dd)";
-        document.getElementById("CreatTaskDeadline").style.color="#6c757d";
+    document.getElementById("CreatTaskDeadline").onblur = function () {
+        let id = document.getElementById("CreatTaskDeadline").value;
+        if (id == "")
+            document.getElementById("CreatTaskDeadline").value = "项目结束时间(yyyy-mm-dd)";
+        document.getElementById("CreatTaskDeadline").style.color = "#6c757d";
     }
-    document.getElementById("CreatTaskStartline").onfocus=function () {
-        let id=document.getElementById("CreatTaskStartline").value;
-        if(id=="项目开始时间(yyyy-mm-dd)")
-            document.getElementById("CreatTaskStartline").value="";
-        document.getElementById("CreatTaskStartline").style.color="black";
+    document.getElementById("CreatTaskStartline").onfocus = function () {
+        let id = document.getElementById("CreatTaskStartline").value;
+        if (id == "项目开始时间(yyyy-mm-dd)")
+            document.getElementById("CreatTaskStartline").value = "";
+        document.getElementById("CreatTaskStartline").style.color = "black";
     }
-    document.getElementById("CreatTaskStartline").onblur=function () {
-        let id=document.getElementById("CreatTaskStartline").value;
-        if(id=="")
-            document.getElementById("CreatTaskStartline").value="项目开始时间(yyyy-mm-dd)";
-        document.getElementById("CreatTaskStartline").style.color="#6c757d";
+    document.getElementById("CreatTaskStartline").onblur = function () {
+        let id = document.getElementById("CreatTaskStartline").value;
+        if (id == "")
+            document.getElementById("CreatTaskStartline").value = "项目开始时间(yyyy-mm-dd)";
+        document.getElementById("CreatTaskStartline").style.color = "#6c757d";
     }
-    document.getElementById("creatTaskConfirm").onclick=function () {
-        let name=document.getElementById("CreatTaskName").value;
-        let submitNum=document.getElementById("CreatTaskSubmitNum").value;
-        let dt=document.getElementById("CreatTaskDeadline").value;
-        let st=document.getElementById("CreatTaskStartline").value;
-        let des=document.getElementById("CreatTaskdescription").value;
-        if(name=="请输入项目名称"||submitNum=="请输入项目报告提交次数"||dt=="项目结束时间(yyyy-mm-dd)"||st=="项目开始时间(yyyy-mm-dd)"||des=="请输入项目描述")
-        {
-            document.getElementById("msg").innerText="请输入详细信息!"
+    document.getElementById("creatTaskConfirm").onclick = function () {
+        let name = document.getElementById("CreatTaskName").value;
+        let submitNum = document.getElementById("CreatTaskSubmitNum").value;
+        let dt = document.getElementById("CreatTaskDeadline").value;
+        let st = document.getElementById("CreatTaskStartline").value;
+        let des = document.getElementById("CreatTaskdescription").value;
+        if (name == "请输入项目名称" || submitNum == "请输入项目报告提交次数" || dt == "项目结束时间(yyyy-mm-dd)" || st == "项目开始时间(yyyy-mm-dd)" || des == "请输入项目描述") {
+            document.getElementById("msg").innerText = "请输入详细信息!"
             return;
         }
         let xhttp;
@@ -461,11 +451,11 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/newTaskServlet?name="+name+"&description="+des+"&submitNum="+submitNum+"&deadline="+dt+"&startedline="+st);
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/newTaskServlet?name=" + name + "&description=" + des + "&submitNum=" + submitNum + "&deadline=" + dt + "&startedline=" + st);
         xhttp.send();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("msg").innerText="项目创建成功!"
+                document.getElementById("msg").innerText = "项目创建成功!"
             }
         }
 

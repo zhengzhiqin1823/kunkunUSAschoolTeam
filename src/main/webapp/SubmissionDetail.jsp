@@ -5,6 +5,7 @@
   Time: 17:09
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh-CN">
 
@@ -13,7 +14,7 @@
     <title>项目页面</title>
     <link rel="stylesheet" href="./css/评审信息.css" />
     <link rel="stylesheet" href="./css/导航栏.css" />
-    <link rel="stylesheet" href="./css/按钮.css"></link>
+    <link rel="stylesheet" href="./css/按钮.css">
 </head>
 
 <body onload="init(${sid},${tid})">

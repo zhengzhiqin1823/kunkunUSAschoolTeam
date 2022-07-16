@@ -5,6 +5,7 @@
   Time: 17:09
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -12,25 +13,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="../main.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./css/查看团队项目报告详情.css">
-    <link rel="stylesheet" href="./css/导航栏.css">
-    <link rel="stylesheet" href="./css/按钮.css ">
+    <link rel="stylesheet" href="./css/demo-navigation.css">
+    <link rel="stylesheet" href="./css/demo-button1.css ">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery.slim.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/demo-navigation1.js"></script>
     <title>报告提交详情</title>
 </head>
 <body onload="init(${submitID},${taskid})">
 <!--
     首部栏: header
 -->
-<div class="demo-navigation1" >
+<div class="demo-navigation2" >
+    <div class="logo">坤坤的美国校队</div>
     <nav>
         <ul>
-            <li><a href="admin.html">TeamAdmin</a></li>
-            <li><a href="adminTutor.html">TutorAdmin</a></li>
-            <li><a href="adminTask.html">TaskAdmin</a></li>
+            <li onclick="admin_team()">Team</li>
+            <li onclick="admin_tutor()">Tutor</li>
+            <li onclick="admin_project()">Task</li>
         </ul>
     </nav>
+    <div class="logo2">KunKunのUSA SchoolTeam</div>
 </div>
 
 <div class="d-md-flex color-bg-inset" style="min-height: 100vh;">
@@ -197,7 +201,7 @@
                     table+="<td>"+studentinfo[5]+"</td>";
                     table+="<td>"+studentinfo[6]+"</td>";
                     table+="<td><input  class='demo-button2' type='button' style='margin-top: 0px;'value='查看报告内容' onclick='reportDetail("+studentinfo[2]+")'></td>"
-                    table+="<td><form action='http://localhost:8080/demo_war_exploded/ReportJudgeServlet' method='get'>"
+                    table+="<td><form action='http://localhost:8080/0628JavaWebExercise_war/ReportJudgeServlet' method='get'>"
                     table+="<input style='display: none'; type='text' name='rid' value=\""+studentinfo[0]+"\">"
                     table+="<input class='demo-button2' style='margin-top: 0px;margin-left:-100px ' type='submit' value='报告审批详情' ></form></td>";
                     table+="</tr>"

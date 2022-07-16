@@ -9,14 +9,14 @@
     /* align-items: center; */
     background-color: rgb(255, 255, 255);
     flex: 1;
-    height: 94%;
+    height: 90%;
+    flex-direction: row;
 }
 
 
 .left{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     /* align-content: center; */
     align-items: center;
     width: 30%;
@@ -59,11 +59,11 @@
 .description{
     font-family: "STSong";
     margin-top: 0px;
-    line-height: 2.2em;
-    width: 90%;
+
+    width: 100%;
     margin: auto;
     color: rgb(64, 64, 64);
-    max-height: 400px;
+    max-height: 40ch;
     overflow-y: scroll;
     background-color: #ffffff;
     border-radius: 1ch;
@@ -96,11 +96,6 @@
     background-color:rgba(58, 58, 58, 0.63);
 }
 
-a{
-    text-decoration: none;
-}
-
-
 .right nav a{
     margin: 1ch;
 }
@@ -113,7 +108,9 @@ a{
     background-color: aqua;
 } */
 
-
+.tab-content{
+    margin-top: 4ch;
+}
 
 
 #submissions{

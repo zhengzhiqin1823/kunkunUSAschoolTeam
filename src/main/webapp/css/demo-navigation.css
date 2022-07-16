@@ -28,7 +28,7 @@
     color: rgb(255, 255, 255);
     position: relative;
     border-radius: 1.7ch;
-    transform: 1s;
+    transition: 1s;
     /* z-index: 2; */
 }
 
@@ -69,6 +69,81 @@
     font-weight: 700;
     color: aliceblue;
 }
+
+
+
+/* 导航外围容器 */
+.demo-navigation2{
+    background-color: rgb(2, 2, 2);
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 导航本体 */
+.demo-navigation2 nav{
+    /* background-color: rgba(255, 255, 255, 0); */
+    /* border-radius: 50px; */
+    padding: 5px 10px 5px 30px;
+    /* box-shadow: 0 25px 20px -20px rgba(0, 0, 0, 0.507); */
+}
+
+/* 导航的每一个元素 */
+.demo-navigation2 nav ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 10px 30px;
+    /* flex-wrap: nowrap; */
+    margin: 0.5ch 1ch 0.5ch 1ch;
+    font-size: 1.8ch;
+    /* font-weight: 500; */
+    color: rgb(255, 255, 255);
+    position: relative;
+    border-radius: 1.7ch;
+    transition: 1s;
+    /* z-index: 2; */
+}
+
+/* 鼠标交互 */
+.demo-navigation2 nav ul li:hover{
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    transition: 0.5s;
+}
+
+/* 鼠标交互 */
+.demo-navigation2:hover{
+    cursor: default;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins",sans-serif;
+}
+
+.demo-navigation2 .logo{
+    margin-left: 5ch;
+    margin-right: 8ch;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: aliceblue;
+}
+
+.demo-navigation2 .logo2{
+
+    margin-right: 3ch;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: aliceblue;
+}
+
 
 
 /*
