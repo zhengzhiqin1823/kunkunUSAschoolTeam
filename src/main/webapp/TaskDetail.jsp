@@ -109,7 +109,7 @@
                                 </button>
                             </td>
                             <td>
-                                <form method="get" action="/0628JavaWebExercise_war/GoCreatSubmissionServlet">
+                                <form method="get" action="http://localhost:8080/0628JavaWebExercise_war/GoCreatSubmissionServlet">
                                 <input value="${taskid}" name="tid" style="display: none">
                                     <input class="demo-button1" type="submit" value="新建报告">
                                 </form>
@@ -139,7 +139,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","/0628JavaWebExercise_war/AdminServlet?ret=6&tid="+tid);
+        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=6&tid="+tid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -172,7 +172,7 @@
             // code for IE6, IE5
             xhtp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhtp.open("GET","/0628JavaWebExercise_war/AdminTaskServlet?ret=3&tid="+tid);
+        xhtp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminTaskServlet?ret=3&tid="+tid);
         xhtp.send();
         xhtp.onreadystatechange=function ()
         {
@@ -210,11 +210,11 @@
                     table+="<td >"+"<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);' id=\""+studentinfo[0]+"Num\" value='"+studentinfo[6]+"'</td>";
                     table+="<td><input id=\'"+studentinfo[0]+"updateStatus\' style='display: none;' value='1'>"+"</td>"
 
-                    table+="<td><form action='/demo_war_exploded/GoSubmissionDetailServlet' method='get'><input type='text' style='display: none' name='sid' value=\""+studentinfo[0]+"\">"
+                    table+="<td><form action='http://localhost:8080/demo_war_exploded/GoSubmissionDetailServlet' method='get'><input type='text' style='display: none' name='sid' value=\""+studentinfo[0]+"\">"
                     table+="<input style='display: none'; type='text' name='taskid' value=\""+tid+"\">"
                     table+="<input class='demo-button2' type='submit' value='查看报告详情'></td></form>"//这个表单查看详情
 
-                    table+="<td><form action='/demo_war_exploded/SubmissionReportResultServlet' method='get'>"
+                    table+="<td><form action='http://localhost:8080/demo_war_exploded/SubmissionReportResultServlet' method='get'>"
                     table+="<input style='display: none'; type='text' name='submitID' value=\""+studentinfo[0]+"\">"
                     table+="<input style='display: none'; type='text' name='taskid' value=\""+tid+"\">"
                     table+="<input class='demo-button2' style='margin-top: 30px;' type='submit' value='查看提交报告' ></form></td>";
@@ -237,7 +237,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","/0628JavaWebExercise_war/submissionServlet?ret=1&sid="+sid);
+        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/submissionServlet?ret=1&sid="+sid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -268,7 +268,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","/0628JavaWebExercise_war/submissionServlet?ret=2&sid="+sid);
+        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/submissionServlet?ret=2&sid="+sid);
         xhttp.send();
 
         xhttp.onreadystatechange=function ()
@@ -324,7 +324,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","/0628JavaWebExercise_war/teamAdminServlet?ret=3&tid="+tid+"&name="+name+"&email="+email+"&tel="+tel+"&taskid="+taskid);
+        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=3&tid="+tid+"&name="+name+"&email="+email+"&tel="+tel+"&taskid="+taskid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {

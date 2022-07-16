@@ -57,7 +57,7 @@
     </div>
     <div>
         <button class="demo-button1" id="creatButton">提交</button>
-        <form action="/0628JavaWebExercise_war/TaskAdminServlet" method="get">
+        <form action="http://localhost:8080/0628JavaWebExercise_war/TaskAdminServlet" method="get">
             <input name="taskid" value="${tid}" style="display: none" id="tid">
             <input class="demo-button1" type="submit" value="返回"><br>
             <span id="msg" style="color: #dc3545"></span>
@@ -87,7 +87,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","/0628JavaWebExercise_war/newSubmiServlet?taskid="+taskid+"&name="+name+"&startTime="+st+"&deadline="+dt+"&description="+des);
+        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/newSubmiServlet?taskid="+taskid+"&name="+name+"&startTime="+st+"&deadline="+dt+"&description="+des);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {

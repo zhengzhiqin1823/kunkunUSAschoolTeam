@@ -156,7 +156,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","/0628JavaWebExercise_war/AdminServlet?ret=5");
+        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=5");
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -218,7 +218,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","/0628JavaWebExercise_war/AdminServlet?ret=6&tid="+id);
+        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=6&tid="+id);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -238,7 +238,7 @@
                         table += "<td>" + studentinfo[j] + "</td>";
                     }
                     table+="<td><input class=\"demo-button3\" type='button' value='项目详情' style='width: 140px;height: 40px' onclick="+"UpdateTask(\'"+studentinfo[0]+"\')></td>"//弹出项目详情
-                    table+="<td><form method='get' action='/demo_war_exploded/TaskAdminServlet' >";//生成对应的删除学生的按钮
+                    table+="<td><form method='get' action='http://localhost:8080/demo_war_exploded/TaskAdminServlet' >";//生成对应的删除学生的按钮
                     table+="<input style='display:none' name='taskid' value="+studentinfo[0]+">";
                     table+="<input class=\"demo-button3\" type='submit' value='项目管理' style='margin-left:-120px;width: 140px;height: 40px' id='ReportResultButton' onclick="+"SelectReportResultDetail(\'"+studentinfo[0]+"\')"+">"
                     table+="</form>";
@@ -260,7 +260,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET","/0628JavaWebExercise_war/AdminServlet?ret=7&tid="+tid);
+        xhttp.open("GET","http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=7&tid="+tid);
         xhttp.send();
         xhttp.onreadystatechange=function ()
         {
@@ -333,7 +333,7 @@
                 // code for IE6, IE5
                 xhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            xhttp.open("POST","/0628JavaWebExercise_war/UpdateTaskServlet");
+            xhttp.open("POST","http://localhost:8080/0628JavaWebExercise_war/UpdateTaskServlet");
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("tid="+tid+"&name="+name+"&startline="+startline+"&deadline="+deadline+"&description="+description+"&submitNum="+submitnum);
             xhttp.onreadystatechange=function ()
@@ -356,7 +356,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET", "/0628JavaWebExercise_war/AdminTaskServlet?ret=1&tid="+Tid);
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminTaskServlet?ret=1&tid="+Tid);
         xhttp.send();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -376,7 +376,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET", "/0628JavaWebExercise_war/AdminTaskServlet?ret=2&tid="+Tid);
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminTaskServlet?ret=2&tid="+Tid);
         xhttp.send();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -461,7 +461,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET", "/0628JavaWebExercise_war/newTaskServlet?name="+name+"&description="+des+"&submitNum="+submitNum+"&deadline="+dt+"&startedline="+st);
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/newTaskServlet?name="+name+"&description="+des+"&submitNum="+submitNum+"&deadline="+dt+"&startedline="+st);
         xhttp.send();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
