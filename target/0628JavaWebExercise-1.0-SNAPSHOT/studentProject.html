@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>项目页面</title>
+    <link rel="stylesheet" href="./css/studentProject.css"/>
+    <link rel="stylesheet" href="./css/demo-navigation.css"/>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="./css/demo-button1.css"/>
+    <script src="./scripts/demo-navigation1.js"></script>
+    <script src="./scripts/studentSubmit.js"></script>
+    <script src="./scripts/studentTask.js"></script>
+
+</head>
+
+<body>
+<div class="demo-navigation1" >
+    <div class="logo">坤坤的美国校队</div>
+    <nav>
+        <ul>
+            <li onclick = Home_click()>Home</li>
+            <li onclick = Personal_click()>Projects</li>
+        </ul>
+    </nav>
+    <div class="logo2">KunKunのUSA SchoolTeam</div>
+</div>
+
+<div class="top">
+    <p>坤坤的偶像剧评鉴</p>
+    <div class="head">
+        <div class="description">
+            &ensp;&ensp;&ensp;&ensp;《我才不会被女孩子欺负呢》，由蔡徐坤，卢洋洋，王咨越，杨景诚，蒋毓玮，王瑄等联衔主演，是坤坤的处女秀，主要讲述女生们围绕男主角叶麟（由蔡徐坤饰演）发生的一系列啼笑皆非的故事。每周四12点会员更新六集，非会员周四至周一更新一集。
+            作者：DNA双链 https://www.bilibili.com/read/cv2852925 出处：bilibili
+            最近《偶像练习生》大家有咩有看?绝对的实力C位坤坤火了,也正因为议论纷纷这样大家或多或少有些偏见和误会。小女子不才,
+            《女刑警李春春》这部剧是一部都市情感剧,在出演这部剧的时候坤坤还是一个小孩,看来蔡徐坤在小的时候还曾出演过很多的剧
+            呢,在剧中饰演的一个叫西西的小孩,这部剧至今都还没有播出。看看坤坤这害羞的模样 2020-03-02 23:0444回复 蓝默荨 承包
+            蔡徐坤(^・ω・^ )(^・ω・^ ) 2020-03-02 19:1844回复 关山月er 长得就是偶像剧的脸啊,不不不他就是偶像本人呐!
+        </div>
+    </div>
+    <br>
+</div>
+<div class="container">
+    <div class="container__column">
+        <div class="container__content">
+            <div class="title">
+                <h3>前期报告</h3>
+            </div>
+            <div class="father">
+                <div class="inner-container">
+                    <div class="menu">
+                        <li>
+                            <span class="icon">
+                              <ion-icon name="time-outline"></ion-icon>
+                            </span>
+                            <span class="status">已结束</span>
+                            <span class="time">2022-07-05</span>
+                        </li>
+                        <li>
+                            <span class="icon">
+                              <ion-icon name="time-outline"></ion-icon>
+                            </span>
+                            <span class="status">已提交</span>
+                            <span class="time">2022-07-04</span>
+                        </li>
+                        <li>
+                            <span class="icon">
+                              <ion-icon name="time-outline"></ion-icon>
+                            </span>
+                            <span class="status">已评审</span>
+                            <span class="time">2022-07-06</span>
+                        </li>
+                        <li>
+                <span class="icon">
+                  <ion-icon name="moon-outline"></ion-icon>
+                </span>
+                            <span class="status">成绩：</span>
+                            <span class="time">合格</span>
+
+                        </li>
+                    </div>
+                </div>
+            </div>
+            <div class="inner-button">
+                <button class="demo-button1" onclick="read_report('/0628JavaWebExercise_war/login')">查看详情</button>
+            </div>
+        </div>
+    </div>
+    <div class="container__column">
+        <div class="container__content">
+            <div class="title">
+                <h3>中期报告</h3>
+            </div>
+            <div class="father">
+                <div class="inner-container">
+                    <div class="menu">
+                        <li>
+                <span class="icon">
+                  <ion-icon name="time-outline"></ion-icon>
+                </span>
+                            <span class="status">进行中</span>
+                            <span class="time">2022-07-15</span>
+                        </li>
+                        <li>
+                <span class="icon">
+                  <ion-icon name="time-outline"></ion-icon>
+                </span>
+                            <span class="status">未提交</span>
+                            <span class="time"></span>
+                        </li>
+                        <li>
+                <span class="icon">
+                  <ion-icon name="time-outline"></ion-icon>
+                </span>
+                            <span class="status">未评审</span>
+                            <span class="time"></span>
+                        </li>
+                        <li>
+                <span class="icon">
+                  <ion-icon name="moon-outline"></ion-icon>
+                </span>
+                            <span class="status">成绩：</span>
+                            <span class="time"></span>
+
+                        </li>
+                    </div>
+                </div>
+            </div>
+            <div class="inner-button">
+                <button class="demo-button1">查看详情</button>
+                </button></button>
+            </div>
+        </div>
+    </div>
+    <div class="container__column">
+        <div class="container__content">
+            <div class="title">
+                <h3>期末报告</h3>
+            </div>
+            <div class="father">
+                <div class="inner-container">
+                    <div class="menu">
+                        <li>
+                <span class="icon">
+                  <ion-icon name="time-outline"></ion-icon>
+                </span>
+                            <span class="status">未开始</span>
+                            <span class="time">2022-07-25</span>
+                        </li>
+                        <li>
+                <span class="icon">
+                  <ion-icon name="time-outline"></ion-icon>
+                </span>
+                            <span class="status">未提交</span>
+                            <span class="time"></span>
+                        </li>
+                        <li>
+                <span class="icon">
+                  <ion-icon name="time-outline"></ion-icon>
+                </span>
+                            <span class="status">未评审</span>
+                            <span class="time"></span>
+                        </li>
+                        <li>
+                <span class="icon">
+                  <ion-icon name="moon-outline"></ion-icon>
+                </span>
+                            <span class="status">成绩：</span>
+                            <span class="time"></span>
+                        </li>
+
+                    </div>
+                </div>
+            </div>
+            <div class="inner-button">
+                <button class="demo-button1">查看详情</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>

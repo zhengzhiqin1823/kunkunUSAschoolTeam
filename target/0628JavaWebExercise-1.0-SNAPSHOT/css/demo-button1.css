@@ -1,0 +1,27 @@
+/*按钮*/
+/*
+
+<button class="demo-button1">我是傻瓜</button>
+
+*/
+.demo-button1 {
+    width:120px;
+    height:40px;
+    display: block;
+    text-align:center;
+    font-size:15px;
+    font-family:verdana;
+    color:#3c3c3c;
+    border:1px solid #3535357d;
+    border-radius:0.5ch;
+    background: rgba(255, 255, 255, 0.505);
+    cursor: pointer;/*光标小手*/
+}
+
+/*鼠标交互*/
+.demo-button1:hover {
+    background:#3cd8bead;
+    color:white;
+    transition: 0.5s;
+}
+

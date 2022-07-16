@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @WebServlet("/teacherJudgeServlet")
-public class teacherJudgeServlet extends HttpServlet {
+public class TeacherJudgeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("get");

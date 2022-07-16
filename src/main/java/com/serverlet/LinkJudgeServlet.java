@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "linkJudge", value = "/linkJudge")
-public class linkJudgeServlet extends HttpServlet {
+public class LinkJudgeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String link=request.getParameter("link");

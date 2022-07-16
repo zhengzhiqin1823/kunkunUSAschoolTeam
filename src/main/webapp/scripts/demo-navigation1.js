@@ -15,3 +15,7 @@ function Personal_click() {
     location.assign("/0628JavaWebExercise_war/team/personal")
 }
 
+function teacher_home()
+{
+    location.assign("/0628JavaWebExercise_war/teacherHome.html")
+}
