@@ -13,6 +13,8 @@ public interface taskMapper {
     List<task> selectAll();
     void deleteByKey(@Param("taskID")String taskID);
     List<submission> getAllSubmission();
+    void UpdateByKey(@Param("taskid") String taskID,@Param("name") String name,@Param("description") String description,@Param("startedline") String startline,@Param("deadline") String deadline,@Param("submitNum") String submitNum);
+    void updateSubmitnumByKey(@Param("taskID") String taskID,@Param("submitNum") String submitNum);
 }
 
 

@@ -10,6 +10,6 @@ public interface judgelinkMapper {
     List<judgelink> selectAll();
     void insert(@Param("lid") String lid,@Param("link") String link,@Param("submitID") String submitID,@Param("tid") String tid,@Param("taskID") String taskID,@Param("rID") String rID);
     void deleteByKey(@Param("lid") String lid);
-
+    List<judgelink> selectByRid(@Param("rID") String rID);
     List<judgelink> selectByLink(@Param("link") String link);
 }

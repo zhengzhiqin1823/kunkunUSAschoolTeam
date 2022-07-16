@@ -7,7 +7,6 @@ public class report {
     String toyalsize;
     String firstFm;
     String submitTime;
-    String taskID;
 
     public String getRid() {
         return rid;
@@ -59,13 +58,6 @@ public class report {
 
     @Override
     public String toString() {
-        return "report{" +
-                "rid='" + rid + '\'' +
-                ", submitID='" + submitID + '\'' +
-                ", teamid='" + teamid + '\'' +
-                ", toyalsize='" + toyalsize + '\'' +
-                ", firstFm='" + firstFm + '\'' +
-                ", submitTime='" + submitTime + '\'' +
-                '}';
+        return rid+","+submitID+","+teamid+","+toyalsize+","+firstFm+","+submitTime+";";
     }
 }

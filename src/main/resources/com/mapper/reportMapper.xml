@@ -21,4 +21,13 @@
     <delete id="deleteByKey" parameterType="com.test.pojo.report">
         delete from report where rid=#{rid};
     </delete>
+    <select id="selectoneByKey" resultType="com.test.pojo.report">
+        select * from report where  rid=#{rid};
+    </select>
+    <select id="selectBySubId" resultType="com.test.pojo.report" >
+        select *from report where submitID=#{submitID};
+    </select>
+    <select id="selectByRid" resultType="com.test.pojo.report">
+        select  *from report where rid=#{rid};
+    </select>
 </mapper>

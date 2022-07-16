@@ -23,6 +23,9 @@
     <select id="selectByLink" resultType="com.test.pojo.judgelink">
     select * from judge_link where link=#{link};
     </select>
+    <select id="selectByRid" resultType="com.test.pojo.judgelink">
+        select *from judge_link where rID=#{rID};
+    </select>
 
 
 </mapper>
