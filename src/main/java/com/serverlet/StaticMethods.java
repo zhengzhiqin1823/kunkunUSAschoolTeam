@@ -1,4 +1,4 @@
-package com.serverlet;
+package com.servlet;
 
 import com.mapper.fragmentMapper;
 import com.test.pojo.fragment;

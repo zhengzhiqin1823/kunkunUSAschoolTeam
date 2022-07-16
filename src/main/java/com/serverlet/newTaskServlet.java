@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.servlet;
 
 import com.mapper.submissionMapper;
 import com.mapper.taskMapper;
