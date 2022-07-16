@@ -9,7 +9,6 @@ public class task {
     private String startedline;
     private String deadline;
 
-
     public String getName() {
         return name;
     }
