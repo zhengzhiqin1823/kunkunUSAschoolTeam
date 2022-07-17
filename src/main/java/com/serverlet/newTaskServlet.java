@@ -26,13 +26,8 @@ public class newTaskServlet extends HttpServlet {
         String name=request.getParameter("name");
         String description=request.getParameter("description");
         String submitNum=request.getParameter("submitNum");
-        //获取服务器日期(不需要)
-       /* LocalDate date=LocalDate.now();
-        DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String startedline=date.format(formatter);*/
         String deadline=request.getParameter("deadline");
         String startedline=request.getParameter("startedline");
-        System.out.println(name);
         //获取SqlSession对象，来执行sql
         String resource = "mybatis-config.xml";
         InputStream is= Resources.getResourceAsStream(resource);
@@ -43,31 +38,34 @@ public class newTaskServlet extends HttpServlet {
         submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
         List<task> tasks = taskMapper.selectAll();
 
-
-
         List<submission> submissions=submissionMapper.selectAll();
-        String firstsm=String.valueOf(Integer.valueOf(submissions.get(submissions.size()-1).getSubmitID())+1);
+        String firstsm="1";
+        if(submissions.size()!=0){
+             firstsm=String.valueOf(Integer.valueOf(submissions.get(submissions.size()-1).getSubmitID())+1);}
+
+        String taskid="1";
+        if(tasks.size()!=0){
+            taskid=String.valueOf(Integer.valueOf(tasks.get(tasks.size()-1).getTaskid())+1);}
         //submission表插入
         if((submitNum.equals("1")))
         {
-            submissionMapper.insert(firstsm,null,"1","0",null,startedline,deadline,"0",null);
+            submissionMapper.insert(firstsm,null,"1","0",null,startedline,deadline,"0",null,taskid);
         }else {
             int nt=Integer.valueOf(firstsm)+1;
             int n=Integer.valueOf(submitNum);
             String next=String.valueOf(nt);
             String submitID=firstsm;
             for(int i=0;i<n-1;i++){
-                submissionMapper.insert(submitID,null,"1","0",next,startedline,deadline,"0",null);
+                submissionMapper.insert(submitID,null,"1","0",next,startedline,deadline,"0",null,taskid);
                 submitID=String.valueOf(nt);
                 nt++;
                 next=String.valueOf(nt);
             }
-            submissionMapper.insert(submitID,null,"1","0",null,startedline,deadline,"0",null);
+            submissionMapper.insert(submitID,null,"1","0",null,startedline,deadline,"0",null,taskid);
         }
 
         //项目表插入
 
-        String taskid=String.valueOf(Integer.valueOf(tasks.get(tasks.size()-1).getTaskid())+1);
         taskMapper.insert(taskid,name,description,submitNum,firstsm,startedline,deadline);
         PrintWriter writer = response.getWriter();
         writer.write("1");

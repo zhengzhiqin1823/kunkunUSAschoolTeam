@@ -66,7 +66,7 @@ public class UpdateTaskServlet extends HttpServlet {
                 num++;
                 String NewId="";
                 NewId+=num;
-                sm.insert(NewId,"","1","1",null,"1970-07-01","1970-07-01","0",null);
+                sm.insert(NewId,"","1","1",null,"1970-07-01","1970-07-01","0",null,TaskId);
                 sqs.commit();
                 sm.updateNext(sid,NewId);
             }
