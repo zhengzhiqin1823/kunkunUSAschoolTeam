@@ -39,13 +39,8 @@ public class newTaskServlet extends HttpServlet {
         List<task> tasks = taskMapper.selectAll();
 
         List<submission> submissions=submissionMapper.selectAll();
-        String firstsm="1";
-        if(submissions.size()!=0){
-             firstsm=String.valueOf(Integer.valueOf(submissions.get(submissions.size()-1).getSubmitID())+1);}
-
-        String taskid="1";
-        if(tasks.size()!=0){
-            taskid=String.valueOf(Integer.valueOf(tasks.get(tasks.size()-1).getTaskid())+1);}
+        String firstsm=submissions.size()+1+"";
+        String taskid=tasks.size()+1+"";
         //submission表插入
         if((submitNum.equals("1")))
         {

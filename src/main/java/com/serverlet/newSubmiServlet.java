@@ -47,9 +47,7 @@ public class newSubmiServlet extends HttpServlet {
             fm=s.getNext();
         }
         List<submission> submissions = submissionMapper.selectAll();
-        String submitid="1";
-        if(submissions.size()!=0){
-             submitid=String.valueOf(Integer.valueOf(submissions.get(submissions.size()-1).getSubmitID())+1);}
+        String submitid=submissions.size()+1+"";
         submissionMapper.insert(
                 submitid,
                 name,

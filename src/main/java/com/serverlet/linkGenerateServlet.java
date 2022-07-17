@@ -43,10 +43,7 @@ public class linkGenerateServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();
         //插入judgelink表
-        int n=1;
-        if(judgelinks.size()!=0){
-             n=Integer.valueOf(judgelinks.get(judgelinks.size()-1).getLid())+1;
-        }
+        int n=judgelinks.size()+1;
         String flag="1";
         List<String> ridstrue=new ArrayList<String>();
         StringBuilder alert1=new StringBuilder();
