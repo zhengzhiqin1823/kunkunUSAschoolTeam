@@ -18,7 +18,7 @@ public class AdminTaskSetvlet extends HttpServlet {
         Object id = session.getAttribute("id");
         Object type = session.getAttribute("type");
         if(id!=null&&type!=null) {
-            if(type.equals("admin"))
+            if(type.equals("admin")) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("id")) {
                         if (cookie.getValue().equals(id)) {
@@ -27,6 +27,7 @@ public class AdminTaskSetvlet extends HttpServlet {
                         }
                     }
                 }
+            }
         }
         //如果没有登陆,则返回登陆
         if (!isLogin) {

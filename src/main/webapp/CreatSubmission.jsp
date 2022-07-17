@@ -13,8 +13,8 @@
     <meta charset="UTF-8">
     <title>项目页面</title>
     <link rel="stylesheet" href="css/JudgeDetail.css" />
-    <link rel="stylesheet" href="./css/导航栏.css" />
-    <link rel="stylesheet" href="./css/按钮.css"></link>
+    <link rel="stylesheet" href="./css/demo-navigation.css" />
+    <link rel="stylesheet" href="./css/demo-button1.css"/>
 </head>
 
 <body>
