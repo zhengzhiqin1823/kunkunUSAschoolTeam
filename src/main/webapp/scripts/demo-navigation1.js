@@ -5,12 +5,15 @@ function Home_click() {
 function Messages_click() {
     location.assign("/0628JavaWebExercise_war/team/home")
 }
+
 function Projects_click() {
     location.assign("/0628JavaWebExercise_war/team/home")
 }
+
 function Submits_click() {
     location.assign("/0628JavaWebExercise_war/team/home")
 }
+
 function Personal_click() {
     location.assign("/0628JavaWebExercise_war/team/personal")
 }

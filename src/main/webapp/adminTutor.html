@@ -211,7 +211,6 @@
                         let studentinfo = student[i].split(",");
                         table += "<tr>"
                         for (j = 0; j < studentinfo.length; j++) {
-                            if (j == 1) continue;
                             table += "<td>" + studentinfo[j] + "</td>";
                         }
                         table += "<td><input class=\"demo-button3\"type='button' value='重置密码' style='width: 100px;height: 40px' onclick=" + "UpdateTutor(\'" + studentinfo[0] + "\')></td>"//弹出编辑框
@@ -224,7 +223,6 @@
                     document.getElementById("tutors").innerHTML = table;
                 }
             }
-
         }
     }
 
