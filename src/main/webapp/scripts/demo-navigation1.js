@@ -25,16 +25,16 @@ function teacher_home()
 
 function admin_team()
 {
-    location.assign("/0628JavaWebExercise_war/admin.html")
+    location.assign("/0628JavaWebExercise_war/admin/team")
 }
 
 function admin_tutor()
 {
-    location.assign("/0628JavaWebExercise_war/adminTutor.html")
+    location.assign("/0628JavaWebExercise_war/admin/tutor")
 }
 function admin_project()
 {
-    location.assign("/0628JavaWebExercise_war/adminTask.html")
+    location.assign("/0628JavaWebExercise_war/admin/task")
 }
 
 function logout()

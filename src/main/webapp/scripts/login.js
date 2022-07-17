@@ -27,6 +27,9 @@ function login(){
                 }else if(xmlHttpLogin.responseText=="tutor"){
                     location.assign("/0628JavaWebExercise_war/teacherHome.html")
                 }
+                else if(xmlHttpLogin.responseText=="admin"){
+                    location.assign("/0628JavaWebExercise_war/admin/team")
+                }
             }else if(xmlHttpLogin.status==401){
                 alert("用户名或密码错误")
             }
