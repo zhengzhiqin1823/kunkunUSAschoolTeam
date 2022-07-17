@@ -27,7 +27,18 @@ function getProjectData(rid,status) {
                         judge_text.value=xmlHttpRequest.responseText;
                     }
                 }
-                xmlHttpRequest.send("rid="+rid+"&status="+status)
+                xmlHttpRequest.send("rid="+rid+"&status="+status+"&type=text");
+
+                let xmlHttp = new XMLHttpRequest()
+                xmlHttp.open("POST", "/0628JavaWebExercise_war/teacherGetProjectData", true)
+                xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+                xmlHttp.onreadystatechange=function (){
+                    if(xmlHttp.readyState==4&&xmlHttp.status==200) {
+                        let score=document.getElementById('score')
+                        score.value=xmlHttp.responseText;
+                    }
+                }
+                xmlHttp.send("rid="+rid+"&status="+status+"&type=score")
             }
         }
     }

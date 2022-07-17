@@ -189,17 +189,28 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         String fm = "";
 
         String status = req.getParameter("status");
+        String type = req.getParameter("type");
         //System.out.println(status);
         if(status.equals("judged")) {
-            System.out.println("judged!");
+            if(type.equals("score")){
+                String score = ""+getauditedscore(rID,tID);
+                System.out.println("score:"+score);
+                printWriter.write(score);
+                return;
+            }
             try {
                 fm=getFirstfmidByrID(rID);
                 System.out.println("!fm:"+fm);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
-            System.out.println("unjudged!");
+        } else{
+            if(type.equals("score")){
+                String score = getCachescore(rID,tID);
+                System.out.println("score:"+score);
+                printWriter.write(score);
+                return;
+            }
             fm = getFmidByridAndtid(rID, tID);
         }
         //System.out.println("fm:"+fm);
@@ -223,6 +234,8 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         }
 
         printWriter.write(text);
+
+
     }
 
     public static List<String> getrIDbytID(String tID) throws Exception{//这个的作业是通过tID在opiniontutor表中找到rID
@@ -383,6 +396,36 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
 
         return fmid;
     }
+
+    public static String getCachescore(String rid,String tid) throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        opinionTutorCahceMapper tm=sqlSession.getMapper(opinionTutorCahceMapper.class);
+        String s=""+tm.selectByKey(rid,tid).get(0).getScore();
+
+        sqlSession.close();
+        return s;
+    }
+
+    public static int getauditedscore(String rid,String tid) throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        opiniontutorMapper tm=sqlSession.getMapper(opiniontutorMapper.class);
+        System.out.println("rid:"+rid);
+        System.out.println("tid:"+tid);
+        int s=tm.selectByKey(rid,tid).get(0).getScore();
+
+        sqlSession.close();
+        return s;
+    }
+
+
 
     public static String getFirstfmidByrID(String rid) throws Exception{
         String resource = "mybatis-config.xml";
