@@ -12,21 +12,24 @@
 <head>
     <meta charset="UTF-8">
     <title>项目页面</title>
-    <link rel="stylesheet" href="./css/评审信息.css" />
-    <link rel="stylesheet" href="./css/导航栏.css" />
-    <link rel="stylesheet" href="./css/按钮.css">
+    <link rel="stylesheet" href="css/JudgeDetail.css" />
+    <link rel="stylesheet" href="./css/demo-navigation.css.css" />
+    <link rel="stylesheet" href="./css/demo-button1.css.css">
 </head>
 
 <body onload="init(${sid},${tid})">
-<div class="demo-navigation1" >
+<div class="demo-navigation2">
+    <div class="logo">坤坤的美国校队</div>
     <nav>
         <ul>
-            <li><a href="admin.html">TeamAdmin</a></li>
-            <li><a href="adminTutor.html">TutorAdmin</a></li>
-            <li><a href="adminTask.html">TaskAdmin</a></li>
+            <li onclick="admin_team()">Team</li>
+            <li onclick="admin_tutor()">Tutor</li>
+            <li onclick="admin_project()">Task</li>
         </ul>
     </nav>
+    <div class="logo2" onclick="logout()">退出登陆</div>
 </div>
+
 <input style="display: none;" id="sid" value="${sid}">
 <div class="bottom">
     <div class="report_name" id="taskName">报告详情</div>

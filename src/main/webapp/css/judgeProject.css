@@ -3,6 +3,7 @@ body{
     flex-direction: column;
     align-content: center;
     justify-content: center;
+    background-color: #e0e0e0;
 }
 
 .d-md-flex{
@@ -52,6 +53,7 @@ textarea{
     justify-content: center;
     padding-left :5ch;
     padding-right :5ch;
+    margin-bottom: 20ch;
 }
 .demo-button2 {
     margin-left: 5ch;

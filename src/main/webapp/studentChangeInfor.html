@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="../css/demo-navigation.css">
     <link type="text/css" rel="stylesheet" href="../css/demo-input1.css">
     <link type="text/css" rel="stylesheet" href="../css/demo-button1.css">
+    <link type="text/css" rel="stylesheet" href="../css/scroll.css">
     <script type="text/javascript" src="../scripts/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../scripts/demo-navigation1.js"></script>
@@ -16,11 +17,11 @@
     <div class="logo">坤坤的美国校队</div>
     <nav>
         <ul>
-            <li onclick = Home_click()>Home</li>
-            <li onclick = Personal_click()>Projects</li>
+            <li onclick = Home_click()>Project</li>
+            <li onclick = Personal_click()>Personal</li>
         </ul>
     </nav>
-    <div class="logo2">KunKunのUSA SchoolTeam</div>
+    <div class="logo2" onclick="logout()">退出登陆</div>
 </div>
 
 <div class="body">
@@ -144,7 +145,6 @@
     })
 
     team.initInformation();
-
 
 </script>
 </html>

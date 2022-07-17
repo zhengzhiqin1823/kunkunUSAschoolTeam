@@ -189,18 +189,23 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
 //        String fm = "";
 
         String status = req.getParameter("status");
+        String type = req.getParameter("type");
         //System.out.println(status);
         if(status.equals("judged")) {
             System.out.println("judged!");
-            try {
-//                fm=getFirstfmidByrID(rID);
-//                System.out.println("!fm:"+fm);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(type.equals("score")){
+                String score = ""+getauditedscore(rID,tID);
+                System.out.println("score:"+score);
+                printWriter.write(score);
+                return;
             }
         }else {
-            System.out.println("unjudged!");
-//            fm = getFmidByridAndtid(rID, tID);
+            if(type.equals("score")){
+                String score = getCachescore(rID,tID);
+                System.out.println("score:"+score);
+                printWriter.write(score);
+                return;
+            }
         }
         //System.out.println("fm:"+fm);
 
@@ -306,6 +311,33 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         String name=tm.selectByKey(taskID).get(0).getDescription();
         sqlSession.close();
         return name;
+    }
+        public static String getCachescore(String rid,String tid) throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        opinionTutorCahceMapper tm=sqlSession.getMapper(opinionTutorCahceMapper.class);
+        String s=""+tm.selectByKey(rid,tid).get(0).getScore();
+
+        sqlSession.close();
+        return s;
+    }
+
+    public static int getauditedscore(String rid,String tid) throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        opiniontutorMapper tm=sqlSession.getMapper(opiniontutorMapper.class);
+        System.out.println("rid:"+rid);
+        System.out.println("tid:"+tid);
+        int s=tm.selectByKey(rid,tid).get(0).getScore();
+
+        sqlSession.close();
+        return s;
     }
 
 //    public static String getfmidByrid(String rid) throws IOException {

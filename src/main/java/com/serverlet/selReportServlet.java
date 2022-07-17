@@ -1,6 +1,6 @@
 package com.serverlet;
 
-import com.mapper.fragmentMapper;
+//import com.mapper.fragmentMapper;
 import com.mapper.reportMapper;
 import com.test.pojo.fragment;
 import com.test.pojo.report;
@@ -28,20 +28,21 @@ public class selReportServlet extends HttpServlet {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         SqlSession sqs=factory.openSession();
         reportMapper reportMapper = sqs.getMapper(reportMapper.class);
-        fragmentMapper fragmentMapper = sqs.getMapper(fragmentMapper.class);
+//        fragmentMapper fragmentMapper = sqs.getMapper(fragmentMapper.class);
         report r = reportMapper.selectoneByKey(rID);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();
 
-        if(r.getFirstFm()!=null) {
-            String firstFm = r.getFirstFm();
-            fragment fm = fragmentMapper.selectoneByKey(firstFm);
-            writer.write(fm.getData());
-            while (!fm.getNext().equals("")) {
-                fm = fragmentMapper.selectoneByKey(fm.getNext());
-                writer.write(fm.getData());
-            }
+        if(r.getData()!=null) {
+//            String firstFm = r.getFirstFm();
+//            fragment fm = fragmentMapper.selectoneByKey(firstFm);
+//            writer.write(fm.getData());
+//            while (!fm.getNext().equals("")) {
+//                fm = fragmentMapper.selectoneByKey(fm.getNext());
+//                writer.write(fm.getData());
+//            }
+            writer.write(r.getData());
         }
         else {
             writer.write("暂无报告");

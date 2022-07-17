@@ -9,9 +9,9 @@ function getProjectData(rid,status) {
             //console.log(xmlHttp.responseText)
             var data=JSON.parse(xmlHttp.responseText)
             //console.log(data)
-            let name="<h2><strong>"+data['name']+"</strong></h2>"
-            let description="<small>"+data['description']+"</small>"
-            let details="<p>"+data['details']+"</p>"
+            let name=""+data['name']+""
+            let description=""+data['description']+""
+            let details=""+data['details']+""
             document.getElementById('project_name').insertAdjacentHTML('beforeend',name)
             document.getElementById('project_description').insertAdjacentHTML('beforeend',description)
             document.getElementById('project_details').insertAdjacentHTML('beforeend',details)
@@ -75,7 +75,7 @@ function getAllProjects(){
                         console.log(x["description"])
                         let projects_container = document.getElementById("projects_container")
                         let project_h = "<h4>" + x['name'].toString() + "</h4>"
-                        let project_description = "<p>" + x['description'].toString() + "</p>"
+                        let project_description = "" + x['description'].toString() + ""
                         let project_demo =
                             "<div class=\"right_mid\">"
                             + project_h
@@ -115,7 +115,6 @@ function getAllProjects(){
         }
     }
     xmlHttp.send()
-
 }
 
 function getParams(key) {

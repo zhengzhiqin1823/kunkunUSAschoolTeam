@@ -6,10 +6,12 @@
     border: 1px solid black;
 }
 
-.time_and_title{
-    display: flex;
-    flex-direction: column;
+
+small{
+    width: 90%;
+    margin: auto;
 }
+
 
 .report .data{
     margin: 2.5ch;
@@ -17,6 +19,24 @@
     overflow-y: scroll;
     font-family: 'Courier New', Courier, monospace;
     line-height: 2em;
+}
+
+
+.team_and_time .team{
+    color: red;
+}
+
+.report{
+    margin-top: 2ch;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1.5ch;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.time_and_title{
+    display: flex;
+    flex-direction: column;
 }
 
 .team_and_time {
@@ -28,13 +48,15 @@
     margin-top: 1.2ch;
 }
 
-
-.team_and_time .team{
-    font-family: "STSong";
-    color: red;
-}
-
 .team_and_time .time{
     font-family:'Times New Roman', Times, serif;
-    color: rgb(44, 188, 44);
+    color: rgb(67, 67, 67);
+}
+
+.report_name{
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0.3ch;
+    text-align: center;
+    margin-top:2ch
 }

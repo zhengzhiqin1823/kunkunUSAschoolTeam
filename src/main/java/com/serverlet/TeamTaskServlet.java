@@ -161,6 +161,7 @@ public class TeamTaskServlet extends HttpServlet {
                 "    <link rel=\"stylesheet\" href=\"../css/demo-button1.css\"/>\n" +
                 "    <script src=\"../scripts/studentTask.js\"></script>"+
                 "    <script src=\"../scripts/demo-navigation1.js\"></script>"+
+                "    <link type=\"text/css\" rel=\"stylesheet\" href=\"../css/scroll.css\">"+
                 "\n" +
                 "   </head>\n" +
                 "\n" +
@@ -173,7 +174,7 @@ public class TeamTaskServlet extends HttpServlet {
                 "                <li onclick = Personal_click()>Personal</li>\n" +
                 "            </ul>\n" +
                 "        </nav>\n" +
-                "        <div class=\"logo2\">KunKunのUSA SchoolTeam</div>\n" +
+                "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
                 "</div>" +
                 "\n" +
                 "<div class=\"top\">\n" +

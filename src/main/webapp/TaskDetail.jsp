@@ -23,7 +23,7 @@
 </head>
 <body onload="init(${taskid})">
 
-<div class="demo-navigation2" >
+<div class="demo-navigation2">
     <div class="logo">坤坤的美国校队</div>
     <nav>
         <ul>
@@ -32,7 +32,7 @@
             <li onclick="admin_project()">Task</li>
         </ul>
     </nav>
-    <div class="logo2">KunKunのUSA SchoolTeam</div>
+    <div class="logo2" onclick="logout()">退出登陆</div>
 </div>
 
 <div class="bottom">

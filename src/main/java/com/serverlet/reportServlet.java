@@ -1,4 +1,4 @@
-package com.servlet;
+package com.serverlet;
 
 import com.mapper.*;
 import com.test.pojo.*;
@@ -38,7 +38,7 @@ public class reportServlet extends HttpServlet {
                 List<report> reports = mapper.selectBySubId(sid);
                 for(report r:reports)
                 {
-                    writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+r.getFirstFm()+","+r.getToyalsize()+";");
+                    writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getToyalsize()+";");
                 }
                 break;
             }
@@ -55,17 +55,17 @@ public class reportServlet extends HttpServlet {
                 reportMapper mapper = sqs.getMapper(reportMapper.class);
                 List<report> reports = mapper.selectByRid(rid);
                 report r=reports.get(0);
-                String firstfm=r.getFirstFm();
-                fragmentMapper fm = sqs.getMapper(fragmentMapper.class);
-                String next="";
-                next=firstfm;
-                String article="";
-                do {
-                    List<fragment> fragments = fm.selectByKey(next);
-                    fragment fragment = fragments.get(0);
-                    article+=fragment.getData();
-                    next=fragment.getNext();
-                } while(next!=null);
+//                String firstfm=r.getFirstFm();
+//                fragmentMapper fm = sqs.getMapper(fragmentMapper.class);
+//                String next="";
+//                next=firstfm;
+                String article= r.getData();
+//                do {
+//                    List<fragment> fragments = fm.selectByKey(next);
+//                    fragment fragment = fragments.get(0);
+//                    article+=fragment.getData();
+//                    next=fragment.getNext();
+//                } while(next!=null);
                 writer.write(article);
                 break;
             }
@@ -80,7 +80,7 @@ public class reportServlet extends HttpServlet {
                     List<judgelink> judgelinks = jm.selectByRid(r.getRid());
                     if(judgelinks.size()==0)
                     {
-                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+r.getFirstFm()+","+r.getToyalsize()+","+"未选择审批导师"+","+"未生成链接"+";");
+                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getToyalsize()+","+"未选择审批导师"+","+"未生成链接"+";");
                     }
                     else
                     {
@@ -89,7 +89,7 @@ public class reportServlet extends HttpServlet {
                         String link=judgelinks.get(0).getLink();
                         List<tutor> tutors = tm.selectByTid(tid);
                         tutor tutor = tutors.get(0);
-                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+r.getFirstFm()+","+r.getToyalsize()+","+tutor.getName()+","+link+";");
+                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getToyalsize()+","+tutor.getName()+","+link+";");
                     }
                 }
                 break;
@@ -100,6 +100,6 @@ public class reportServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     this.doGet(request,response);
+        this.doGet(request,response);
     }
 }

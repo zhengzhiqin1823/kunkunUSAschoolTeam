@@ -246,6 +246,7 @@ public class TeamSubmitServlet extends HttpServlet {
                         "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/demo-button1.css\">\n" +
                         "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/demo-input1.css\">\n" +
                         "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/demo-navigation.css\">\n" +
+                        "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/scroll.css\">"+
                         "    <script src=\"scripts/demo-navigation1.js\"></script>\n" +
                         "    <script type=\"text/javascript\" src=\"./scripts/vue.js\"></script>\n" +
                         "    <script src=\"https://unpkg.com/axios/dist/axios.min.js\"></script>\n" +
@@ -260,7 +261,7 @@ public class TeamSubmitServlet extends HttpServlet {
                         "                <li onclick = Personal_click()>Projects</li>\n" +
                         "            </ul>\n" +
                         "        </nav>\n" +
-                        "        <div class=\"logo2\">KunKunのUSA SchoolTeam</div>\n" +
+                        "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
                         "</div>" +
                         "\n" +
                         "<div class=\"body\">\n" +
@@ -398,6 +399,7 @@ public class TeamSubmitServlet extends HttpServlet {
                 "    <link rel=\"stylesheet\" href=\"./css/TeamReport.css\" />\n" +
                 "    <link rel=\"stylesheet\" href=\"./css/demo-navigation.css\" />\n" +
                 "    <link rel=\"stylesheet\" href=\"./css/demo-button1.css\">\n" +
+                "<link type=\"text/css\" rel=\"stylesheet\" href=\"../css/scroll.css\">"+
                 "    <script src=\"scripts/demo-navigation1.js\"></script>" +
                 "</head>\n" +
                 "\n" +
@@ -410,7 +412,7 @@ public class TeamSubmitServlet extends HttpServlet {
                 "                <li onclick = Personal_click()>Projects</li>\n" +
                 "            </ul>\n" +
                 "        </nav>\n" +
-                "        <div class=\"logo2\">KunKunのUSA SchoolTeam</div>\n" +
+                "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
                 "</div>" +
 
                 "<div class=\"bottom\" >\n" +

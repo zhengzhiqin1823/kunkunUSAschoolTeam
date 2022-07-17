@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url(../../../../../../../DeskTop/demo - 副本/src/main/webapp/images/1.png);
+    background-image: url(../image/bg1.jpg);
     background-size: cover;
     background-color: aqua;
 }

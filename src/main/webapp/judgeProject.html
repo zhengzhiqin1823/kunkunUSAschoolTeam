@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="./css/judgeProject.css">
     <link rel="stylesheet" href="./css/demo-button1.css"/>
     <link rel="stylesheet" href="./css/judgeHome.css"/>
+    <link rel="stylesheet" href="./css/scroll.css"/>
+    <script src="./scripts/demo-navigation1.js"></script>
     <script src="./scripts/teacherHome.js"></script>
     <script type="text/javascript">
         window.onload=function (){
@@ -30,7 +32,7 @@
 <body>
 
 <div class="demo-navigation1" >
-    <div class="logo">坤坤的美国校队</div>
+    <div class="logo" class="report_name">坤坤的美国校队</div>
     <nav>
         <ul>
             <li onclick="teacher_home()">Home</li>
@@ -40,25 +42,35 @@
 </div>
 
 <div class="d-md-flex" style="min-height: 100vh;">
-    <div id="project_data" class="col-lg-8">
-<!--        <div style="border:1px solid darkgray;border-radius: 1em;margin-top: 2em;width: 100%;min-height: 80%">-->
-        <div style="margin: 2ch;background-color: rgb(255, 255, 255);border-radius: 1.5ch;border: 1px solid black;min-height: 60%">
-            <div id="project_name" style="text-align: center;color: #4e555b">
+    <div id="project_name" class="report_name">
 
-            </div>
+    </div>
 
-            <div id="project_description" class="border-bottom" style="width: 80%;margin: 2em;">
+    <div class="report">
+        <div class="team_and_time">
+            <div class="team">坤坤的美国校队</div>
+            <div class="time">2022-07-07 18:00:00</div>
+        </div>
+        <div class="data" id="project_description">
 
-            </div>
-
-            <div id="project_details" style="width: 80%;margin: 2em;">
-
-            </div>
         </div>
     </div>
+
+
+    <div id="project_data" class="report">
+        <div class="team_and_time">
+            <div class="team">坤坤的美国校队</div>
+            <div class="time">2022-07-07 18:00:00</div>
+        </div>
+        <div class="data" id="project_details">
+
+        </div>
+    </div>
+
+
     <div id="judge" class="col-lg-4 border-left">
-        <div class="container" style="margin: 1em">
-            <textarea id="judge_text">
+        <div class="container" style="margin-top: 3em">
+            <textarea id="judge_text" placeholder="在这里输入评审意见">
             </textarea>
             <div class="input_line">
                 <span>得分 </span>

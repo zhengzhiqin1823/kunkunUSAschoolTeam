@@ -53,7 +53,7 @@
 }
 
 .demo-navigation1 .logo{
-    margin-left: 5ch;
+    margin-left: 3ch;
     margin-right: 8ch;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
@@ -62,14 +62,17 @@
 }
 
 .demo-navigation1 .logo2{
-
-    margin-right: 3ch;
+    margin-left: 8ch;
+    margin-right: 5ch;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 700;
     color: aliceblue;
 }
-
+.demo-navigation1 .logo2:hover{
+    color: rgb(255,255,255);
+    cursor: pointer;
+}
 
 
 /* 导航外围容器 */
@@ -127,7 +130,7 @@
 }
 
 .demo-navigation2 .logo{
-    margin-left: 5ch;
+    margin-left: 3ch;
     margin-right: 8ch;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
@@ -136,8 +139,8 @@
 }
 
 .demo-navigation2 .logo2{
-
-    margin-right: 3ch;
+    margin-left: 8ch;
+    margin-right: 5ch;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 700;

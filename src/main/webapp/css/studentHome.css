@@ -6,6 +6,7 @@
 .body{
 	display: flex;
 	background-color: white;
+	flex-direction: column;
 }
 
 .heading{
@@ -410,3 +411,13 @@ ul.timeline{
 	display: flex;
 	margin-left: 20px;
 }
+
+.description{
+	font-family: "STSong";
+	font-size: 16px;
+	font-weight: 600;
+	text-align: center;
+	margin-top: 5px;
+	line-height: 2.5em;
+}
+

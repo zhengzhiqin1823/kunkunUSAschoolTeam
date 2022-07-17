@@ -33,3 +33,8 @@ function admin_project()
 {
     location.assign("/0628JavaWebExercise_war/adminTask.html")
 }
+
+function logout()
+{
+    location.assign("/0628JavaWebExercise_war/logout")
+}
