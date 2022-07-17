@@ -5,7 +5,15 @@ public class opinionTutorCache {
     String tID;
     int score;
     String totalsize;
-    String firstFm;
+    String data;
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
 
     public String getrID() {
         return rID;
@@ -21,10 +29,6 @@ public class opinionTutorCache {
 
     public String getTotalsize() {
         return totalsize;
-    }
-
-    public String getFirstFm() {
-        return firstFm;
     }
 
     public void setrID(String rID) {
@@ -43,18 +47,14 @@ public class opinionTutorCache {
         this.totalsize = totalsize;
     }
 
-    public void setFirstFm(String firstFm) {
-        this.firstFm = firstFm;
-    }
-
     @Override
     public String toString() {
         return "opinionTutorCache{" +
                 "rID='" + rID + '\'' +
                 ", tID='" + tID + '\'' +
-                ", score='" + score + '\'' +
+                ", score=" + score +
                 ", totalsize='" + totalsize + '\'' +
-                ", firstFm='" + firstFm + '\'' +
+                ", data='" + data + '\'' +
                 '}';
     }
 }

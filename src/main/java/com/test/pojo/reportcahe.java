@@ -4,8 +4,16 @@ public class reportcahe {
     String cacheID;
     String submitID;
     String teamID;
-    String firstfm;
     String totalsize;
+    String data;
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
 
     public String getCacheID() {
         return cacheID;
@@ -17,10 +25,6 @@ public class reportcahe {
 
     public String getTeamID() {
         return teamID;
-    }
-
-    public String getFirstfm() {
-        return firstfm;
     }
 
     public String getTotalsize() {
@@ -39,10 +43,6 @@ public class reportcahe {
         this.teamID = teamID;
     }
 
-    public void setFirstfm(String firstfm) {
-        this.firstfm = firstfm;
-    }
-
     public void setTotalsize(String totalsize) {
         this.totalsize = totalsize;
     }
@@ -53,7 +53,6 @@ public class reportcahe {
                 "cacheID='" + cacheID + '\'' +
                 ", submitID='" + submitID + '\'' +
                 ", teamID='" + teamID + '\'' +
-                ", firstfm='" + firstfm + '\'' +
                 ", totalsize='" + totalsize + '\'' +
                 '}';
     }

@@ -61,7 +61,7 @@ public class TeamSubmitServlet extends HttpServlet {
         teamMapper teamMapper = sqs.getMapper(com.mapper.teamMapper.class);
         reportMapper reportMapper = sqs.getMapper(reportMapper.class);
         List<task> tasks = taskMapper.selectByKey(taskID);
-        fragmentMapper mapper = sqs.getMapper(fragmentMapper.class);
+
 
         team team = teamMapper.selectByKey(id.toString()).get(0);
         task t = tasks.get(0);
@@ -71,15 +71,14 @@ public class TeamSubmitServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         PrintWriter writer = resp.getWriter();
         List<report> reports = reportMapper.selectByTeamIDAndSubmitID((String) id, submitID);
-        fragmentMapper fragmentMapper = sqs.getMapper(com.mapper.fragmentMapper.class);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         String time = formatter.format(date);
         int submitStatus;
-        if (time.compareTo(s.getDeadLine()) > 0) {
+        if (time.compareTo(s.getStartTime()) >= 0 && s.getSubmitStatus().equals("0")) {
             submitStatus = 1;
-        } else if (time.compareTo(s.getStartTime()) >= 0) {
+        } else if (time.compareTo(s.getStartTime()) >= 0 || s.getSubmitStatus().equals("1")) {
             submitStatus = 0;
         } else {
             submitStatus = -1;
@@ -100,12 +99,13 @@ public class TeamSubmitServlet extends HttpServlet {
                 sc = "-1";
             } else {
                 ot = opiniontutors.get(0);
-                text = StaticMethods.getTextByFirstFm(ot.getFirstFm(), mapper);
+//                text = StaticMethods.getTextByFirstFm(ot.getFirstFm(), mapper);
+                text = reports.get(0).getData();
                 tutorMapper tutorMapper = sqs.getMapper(tutorMapper.class);
                 tutorName = tutorMapper.selectByTid(ot.gettID()).get(0).getName();
                 sc = opiniontutors.get(0).getScore() + "";
             }
-            writeHtml2(writer, t, s, team, tutorName, mapper, reports.get(0), text, sc);
+            writeHtml2(writer, t, s, team, tutorName, reports.get(0), text, sc);
             return;
         }
 
@@ -115,12 +115,14 @@ public class TeamSubmitServlet extends HttpServlet {
             if (reportcahes.size() == 0) {
                 writeHtml(writer, s, "",submitStatus);
             } else {
-                String text = StaticMethods.getTextByFirstFm(reportcahes.get(0).getFirstfm(), fragmentMapper);
-                writeHtml(writer, s, text,submitStatus);
+//                String text = StaticMethods.getTextByFirstFm(reportcahes.get(0).getFirstfm(), fragmentMapper);
+                String text = reportcahes.get(0).getData();
+                writeHtml(writer, s, text, submitStatus);
             }
         } else {
-            String text = StaticMethods.getTextByFirstFm(reports.get(0).getFirstFm(), fragmentMapper);
-            System.out.println(text);
+//            String text = StaticMethods.getTextByFirstFm(reports.get(0).getFirstFm(), fragmentMapper);
+
+            String text = reports.get(0).getData();
 //            text = text.substring(0,10);
 
             writeHtml(writer, s, text,submitStatus);
@@ -164,23 +166,23 @@ public class TeamSubmitServlet extends HttpServlet {
             int reportSize = reports.size();
             rID = reportSize + 1 + "";
 
-            fragmentMapper fragmentMapper = sqs.getMapper(com.mapper.fragmentMapper.class);
-
-            List<fragment> fragments = fragmentMapper.selectAll();
-            int size = fragments.size() + 1;
-            int init_size = size;
+//            fragmentMapper fragmentMapper = sqs.getMapper(com.mapper.fragmentMapper.class);
+//
+//            List<fragment> fragments = fragmentMapper.selectAll();
+//            int size = fragments.size() + 1;
+//            int init_size = size;
             int length = text.toString().length();
             String totalsize = length + "";
             //insert into table fragment
-            int now = 0;
-            while (length > 255) {
-                String data = text.substring(now, now + 255);
-                fragmentMapper.insert(size + "", size + 1 + "", data);
-                length -= 255;
-                size++;
-            }
-            String data = text.substring(now, now + length);
-            fragmentMapper.insert(size + "", "", data);
+//            int now = 0;
+//            while (length > 255) {
+//                String data = text.substring(now, now + 255);
+//                fragmentMapper.insert(size + "", size + 1 + "", data);
+//                length -= 255;
+//                size++;
+//            }
+//            String data = text.substring(now, now + length);
+//            fragmentMapper.insert(size + "", "", data);
 
             //insert into table report
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -195,27 +197,27 @@ public class TeamSubmitServlet extends HttpServlet {
             if (reqData.get("type").toString().equals("data")) {
                 List<report> reportss = reportMapper.selectByTeamIDAndSubmitID(teamID, submitID);
                 if (reportss.size() == 0) {
-                    reportMapper.insert(rID, submitID, teamID, String.valueOf(init_size), totalsize, time);
+                    reportMapper.insert(rID, submitID, teamID, totalsize, time, text);
                 } else {
                     rID = reportss.get(0).getRid();
                     reportMapper.deleteByKey(rID);
-                    reportMapper.insert(rID, submitID, teamID, String.valueOf(init_size), totalsize, time);
+                    reportMapper.insert(rID, submitID, teamID, totalsize, time, text);
                 }
             } else if (reqData.get("type").toString().equals("cache")) {
                 List<reportcahe> reportcahes = reportcaheMapper.selectByTeamIDAndSubmitID(teamID, submitID);
                 if (reportcahes.size() == 0) {
-                    reportcaheMapper.insert(cacheID, submitID, teamID, String.valueOf(init_size), totalsize);
+                    reportcaheMapper.insert(cacheID, submitID, teamID, totalsize,text);
                 } else {
                     cacheID = reportcahes.get(0).getCacheID();
                     reportcaheMapper.deleteByKey(cacheID);
-                    reportcaheMapper.insert(cacheID, submitID, teamID, String.valueOf(init_size), totalsize);
+                    reportcaheMapper.insert(cacheID, submitID, teamID, totalsize, text);
                 }
             }
             System.out.println(rID);
             System.out.println(submitID);
             System.out.println(teamID);
             System.out.println(totalsize);
-            System.out.println(String.valueOf(size));
+
             System.out.println(time);
             sqs.commit();
             sqs.close();
@@ -228,6 +230,8 @@ public class TeamSubmitServlet extends HttpServlet {
 
 
     private void writeHtml(PrintWriter writer, submission s, String text, int submitStatus) {
+        if(text==null)
+            text="";
         text = text.replace("\r\n", "&#13;");
         text = text.replace('\r', ' ');
         text = text.replace("\n", "&#13;");
@@ -381,8 +385,10 @@ public class TeamSubmitServlet extends HttpServlet {
     }
 
     private void writeHtml2(PrintWriter writer, task t, submission s, team team,
-                            String tutorName, fragmentMapper mapper,
+                            String tutorName,
                             report report, String text, String score) {
+        if(text==null)
+            text="";
         writer.write("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "\n" +
@@ -426,7 +432,7 @@ public class TeamSubmitServlet extends HttpServlet {
                 "            <div class=\"time\">" + report.getSubmitTime().substring(0, 10) + "</div>\n" +
                 "        </div>\n" +
                 "        <div class=\"data\">\n" +
-                StaticMethods.getTextByFirstFm(report.getFirstFm(), mapper) +
+                report.getData() +
                 "\n" +
                 "        </div>\n" +
                 "        <div class=\"file\">\n" +

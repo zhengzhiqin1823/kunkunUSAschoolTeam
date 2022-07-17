@@ -5,8 +5,16 @@ public class report {
     String submitID;
     String teamid;
     String toyalsize;
-    String firstFm;
     String submitTime;
+    String data;
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
 
     public String getRid() {
         return rid;
@@ -22,10 +30,6 @@ public class report {
 
     public String getToyalsize() {
         return toyalsize;
-    }
-
-    public String getFirstFm() {
-        return firstFm;
     }
 
     public String getSubmitTime() {
@@ -48,16 +52,20 @@ public class report {
         this.toyalsize = toyalsize;
     }
 
-    public void setFirstFm(String firstFm) {
-        this.firstFm = firstFm;
-    }
-
     public void setSubmitTime(String submitTime) {
         this.submitTime = submitTime;
     }
 
     @Override
     public String toString() {
-        return rid+","+submitID+","+teamid+","+toyalsize+","+firstFm+","+submitTime+";";
+        return "report{" +
+                "rid='" + rid + '\'' +
+                ", submitID='" + submitID + '\'' +
+                ", teamid='" + teamid + '\'' +
+                ", toyalsize='" + toyalsize + '\'' +
+
+                ", submitTime='" + submitTime + '\'' +
+                ", data='" + data + '\'' +
+                '}';
     }
 }

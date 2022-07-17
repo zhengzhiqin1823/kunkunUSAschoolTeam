@@ -47,7 +47,7 @@ public class TeamGetReportServlet extends HttpServlet {
 
         String text;
         List<report> reports = reportMapper.selectByTeamIDAndSubmitID((String) id, submitID);
-        fragmentMapper fragmentMapper = sqs.getMapper(com.mapper.fragmentMapper.class);
+//        fragmentMapper fragmentMapper = sqs.getMapper(com.mapper.fragmentMapper.class);
         if(s.getSubmitStatus().equals("0")) {
             req.getRequestDispatcher("TeamReport.html").forward(req,resp);
             return;
@@ -56,10 +56,10 @@ public class TeamGetReportServlet extends HttpServlet {
             if (reportcahes.size() == 0) {
                 text="";
             } else {
-                text = StaticMethods.getTextByFirstFm(reportcahes.get(0).getFirstfm(), fragmentMapper);
+                text = StaticMethods.getCacheByTeamIdAndSubmitID(id.toString(),submitID);
             }
         } else {
-            text = StaticMethods.getTextByFirstFm(reports.get(0).getFirstFm(), fragmentMapper);
+            text = StaticMethods.getReportByTeamIdAndSubmitID(id.toString(),submitID);
             System.out.println(text);
         }
         resp.setCharacterEncoding("UTF-8");//响应编码类型

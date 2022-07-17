@@ -16,7 +16,7 @@
     </select>
     <insert id="insert" parameterType="com.test.pojo.opiniontutor">
         insert into opinion_tutor
-        values (#{rID},#{tID},#{score},#{totalsize},#{firstFm},#{submitTime});
+        values (#{rID},#{tID},#{score},#{totalsize},#{submitTime},#{data});
     </insert>
     <delete id="deleteByKey" parameterType="com.test.pojo.opiniontutor">
         delete from opinion_tutor where rID=#{rID} and tID=#{tID};

@@ -16,7 +16,7 @@
     </select>
     <insert id="insert" parameterType="com.test.pojo.reportcahe">
         insert into report_cahe
-        values (#{cacheID},#{submitID},#{teamID},#{firstfm},#{totalsize});
+        values (#{cacheID},#{submitID},#{teamID},#{totalsize},#{data});
     </insert>
     <delete id="deleteByKey" parameterType="com.test.pojo.reportcahe">
         delete from report_cahe where cacheID=#{cacheID};

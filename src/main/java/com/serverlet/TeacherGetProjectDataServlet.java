@@ -186,21 +186,21 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         String rID = req.getParameter("rid");
         HttpSession session = req.getSession();
         String tID = session.getAttribute("t").toString();
-        String fm = "";
+//        String fm = "";
 
         String status = req.getParameter("status");
         //System.out.println(status);
         if(status.equals("judged")) {
             System.out.println("judged!");
             try {
-                fm=getFirstfmidByrID(rID);
-                System.out.println("!fm:"+fm);
+//                fm=getFirstfmidByrID(rID);
+//                System.out.println("!fm:"+fm);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }else {
             System.out.println("unjudged!");
-            fm = getFmidByridAndtid(rID, tID);
+//            fm = getFmidByridAndtid(rID, tID);
         }
         //System.out.println("fm:"+fm);
 
@@ -208,11 +208,14 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+//        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
 
         //System.out.println("oh tm!");
 
-        String text = getTextByFirstFm(fm, tm);
+//        String text = getTextByFirstFm(fm, tm);
+        reportMapper reportMapper = sqlSession.getMapper(reportMapper.class);
+
+        String text = reportMapper.selectByRid(rID).get(0).getData();
 
         //System.out.println("oh text!");
 
@@ -305,17 +308,17 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         return name;
     }
 
-    public static String getfmidByrid(String rid) throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        reportMapper tm = sqlSession.getMapper(reportMapper.class);
-        String s=tm.selectByKey(rid).get(0).getFirstFm();
-        sqlSession.close();
-        return s;
-    }
+//    public static String getfmidByrid(String rid) throws IOException {
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+//        reportMapper tm = sqlSession.getMapper(reportMapper.class);
+//        String s=tm.selectByKey(rid).get(0).getFirstFm();
+//        sqlSession.close();
+//        return s;
+//    }
 
 //    public static String getTextByStartfmid(String startfmid) throws IOException {
 //        String resource = "mybatis-config.xml";
@@ -334,16 +337,16 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
 //        return text;
 //    }
 
-    public static String getTextByFirstFm(String firstFm, fragmentMapper mapper) {
-        StringBuilder text = new StringBuilder();
-        fragment f1 = mapper.selectByKey(firstFm).get(0);
-        text.append(f1.getData());
-        while (!f1.getNext().equals("")) {
-            f1 = mapper.selectByKey(f1.getNext()).get(0);
-            text.append(f1.getData());
-        }
-        return text.toString();
-    }
+//    public static String getTextByFirstFm(String firstFm, fragmentMapper mapper) {
+//        StringBuilder text = new StringBuilder();
+//        fragment f1 = mapper.selectByKey(firstFm).get(0);
+//        text.append(f1.getData());
+//        while (!f1.getNext().equals("")) {
+//            f1 = mapper.selectByKey(f1.getNext()).get(0);
+//            text.append(f1.getData());
+//        }
+//        return text.toString();
+//    }
 
     public static boolean isLegaltoaudit(String rid) throws IOException{
         //先去report里面找submitid，然后再返回1或0
@@ -361,47 +364,47 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
     }
 
     public static String getTextByrid(String rid) throws IOException {//可以通过rid返回文章内容
-        String fm=getfmidByrid(rid);
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+        reportMapper mapper = sqlSession.getMapper(reportMapper.class);
+        return mapper.selectByRid(rid).get(0).getData();
         //return getTextByStartfmid(getfmidByrid(rid));
-        return getTextByFirstFm(fm,tm).replace("\r\n", "<br>");
+
     }
 
-    public static String getFmidByridAndtid(String rid,String tid) throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+//    public static String getFmidByridAndtid(String rid,String tid) throws IOException {
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+//        opinionTutorCahceMapper tm=sqlSession.getMapper(opinionTutorCahceMapper.class);
+//        String fmid=tm.selectByKey(rid,tid).get(0).getFirstFm();
+//        sqlSession.close();
+//
+//        return fmid;
+//    }
 
-        opinionTutorCahceMapper tm=sqlSession.getMapper(opinionTutorCahceMapper.class);
-        String fmid=tm.selectByKey(rid,tid).get(0).getFirstFm();
-        sqlSession.close();
-
-        return fmid;
-    }
-
-    public static String getFirstfmidByrID(String rid) throws Exception{
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        opiniontutorMapper tm=sqlSession.getMapper(opiniontutorMapper.class);
-        //找到rid对应的fmid
-        List<opiniontutor> l=tm.selectAll();
-        //遍历l，找到rID为rid的opiniontutor对象
-        String fmid=null;
-        for(opiniontutor o:l){
-            if(o.getrID().equals(rid)){
-                fmid=o.getFirstFm();
-                break;
-            }
-        }
-        sqlSession.close();
-        return fmid;
-    }
+//    public static String getFirstfmidByrID(String rid) throws Exception{
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+//        opiniontutorMapper tm=sqlSession.getMapper(opiniontutorMapper.class);
+//        //找到rid对应的fmid
+//        List<opiniontutor> l=tm.selectAll();
+//        //遍历l，找到rID为rid的opiniontutor对象
+//        String fmid=null;
+//        for(opiniontutor o:l){
+//            if(o.getrID().equals(rid)){
+//                fmid=o.getFirstFm();
+//                break;
+//            }
+//        }
+//        sqlSession.close();
+//        return fmid;
+//    }
 }

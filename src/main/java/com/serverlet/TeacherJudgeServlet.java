@@ -1,6 +1,5 @@
 package com.serverlet;
 
-import com.mapper.fragmentMapper;
 import com.mapper.opinionTutorCahceMapper;
 import com.mapper.opiniontutorMapper;
 import com.mapper.reportMapper;
@@ -103,45 +102,45 @@ public class TeacherJudgeServlet extends HttpServlet {
 //        sqlSession.close();
 //        return addFrontZero(startFmid);
 //    }
-    public static void storeTextTofragment(String text) throws Exception {
-        //首先要查到fragment中的第一个fmid
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
-
-        long maxFmid = -1;
-        for(int i = 0; i < tm.selectAllFmid().size(); i++)
-        {
-            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
-            {
-                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
-            }
-        }
-        long startFmid=maxFmid;
-
-        //有了startFmid,然后找到next，找到data
-        String[] data=text.split("\\s{1,127}");
-        //遍历data
-        for(int i=0;i<data.length;i++)
-        {
-            //查找next
-            startFmid+=1;
-            String next=data[i];
-            if(i!=data.length-1)
-            {
-                tm.insert(""+startFmid,""+(startFmid+1),next);
-            }
-            else
-            {
-                tm.insert(""+startFmid,"",next);
-            }
-        }
-        sqlSession.commit();
-        sqlSession.close();
-    }
+//    public static void storeTextTofragment(String text) throws Exception {
+//        //首先要查到fragment中的第一个fmid
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+////        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+//
+//        long maxFmid = -1;
+//        for(int i = 0; i < tm.selectAllFmid().size(); i++)
+//        {
+//            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
+//            {
+//                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
+//            }
+//        }
+//        long startFmid=maxFmid;
+//
+//        //有了startFmid,然后找到next，找到data
+//        String[] data=text.split("\\s{1,127}");
+//        //遍历data
+//        for(int i=0;i<data.length;i++)
+//        {
+//            //查找next
+//            startFmid+=1;
+//            String next=data[i];
+//            if(i!=data.length-1)
+//            {
+//                tm.insert(""+startFmid,""+(startFmid+1),next);
+//            }
+//            else
+//            {
+//                tm.insert(""+startFmid,"",next);
+//            }
+//        }
+//        sqlSession.commit();
+//        sqlSession.close();
+//    }
 
 //    public static String getFirstFmidbyrid(String rid) throws Exception
 //    {
@@ -155,85 +154,85 @@ public class TeacherJudgeServlet extends HttpServlet {
 //        return res;
 //    }
 
-    private static String getFmid() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+//    private static String getFmid() throws IOException {
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+////        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+//
+//        long maxFmid = -1;
+//        for(int i = 0; i < tm.selectAllFmid().size(); i++)
+//        {
+//            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
+//            {
+//                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
+//            }
+//        }
+//        sqlSession.close();
+//        return ""+maxFmid;
+//    }
 
-        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+//    public static String storeCacheTextTofragment(String text) throws Exception {
+//        //首先要查到fragment中的第一个fmid
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+//        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+//
+//        long maxFmid = -1;
+//        for(int i = 0; i < tm.selectAllFmid().size(); i++)
+//        {
+//            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
+//            {
+//                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
+//            }
+//        }
+//        long mark=maxFmid;
+//        long startFmid=maxFmid;
+//
+//        //有了startFmid,然后找到next，找到data
+//        String[] data=text.split("\\s{1,127}");
+//        //遍历data
+//        for(int i=0;i<data.length;i++)
+//        {
+//            //查找next
+//            startFmid+=1;
+//            String next=data[i];
+//            if(i!=data.length-1)
+//            {
+//                tm.insert(""+startFmid,""+(startFmid+1),next);
+//            }
+//            else
+//            {
+//                tm.insert(""+startFmid,"",next);
+//            }
+//        }
+//        sqlSession.commit();
+//        sqlSession.close();
+//        return ""+(mark+1);
+//    }
 
-        long maxFmid = -1;
-        for(int i = 0; i < tm.selectAllFmid().size(); i++)
-        {
-            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
-            {
-                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
-            }
-        }
-        sqlSession.close();
-        return ""+maxFmid;
-    }
-
-    public static String storeCacheTextTofragment(String text) throws Exception {
-        //首先要查到fragment中的第一个fmid
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
-
-        long maxFmid = -1;
-        for(int i = 0; i < tm.selectAllFmid().size(); i++)
-        {
-            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
-            {
-                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
-            }
-        }
-        long mark=maxFmid;
-        long startFmid=maxFmid;
-
-        //有了startFmid,然后找到next，找到data
-        String[] data=text.split("\\s{1,127}");
-        //遍历data
-        for(int i=0;i<data.length;i++)
-        {
-            //查找next
-            startFmid+=1;
-            String next=data[i];
-            if(i!=data.length-1)
-            {
-                tm.insert(""+startFmid,""+(startFmid+1),next);
-            }
-            else
-            {
-                tm.insert(""+startFmid,"",next);
-            }
-        }
-        sqlSession.commit();
-        sqlSession.close();
-        return ""+(mark+1);
-    }
-
-    public static void storeText(String rid,String tid,int score,String text) throws Exception {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        opiniontutorMapper tm = sqlSession.getMapper(opiniontutorMapper.class);
-
-        int f = Integer.valueOf(getFmid()) + 1;
-
-        storeTextTofragment(text);
-
-        tm.insert(rid, tid, score, "" + f, null, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-
-        sqlSession.commit();
-        sqlSession.close();
-    }
+//    public static void storeText(String rid,String tid,int score,String text) throws Exception {
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+//        opiniontutorMapper tm = sqlSession.getMapper(opiniontutorMapper.class);
+//
+//        int f = Integer.valueOf(getFmid()) + 1;
+//
+//        storeTextTofragment(text);
+//
+//        tm.insert(rid, tid, score, "" + f, null, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+//
+//        sqlSession.commit();
+//        sqlSession.close();
+//    }
 
     public static void storeTextbrief(String rid,String tid,int score,String text) throws Exception {
         String resource = "mybatis-config.xml";
@@ -249,57 +248,57 @@ public class TeacherJudgeServlet extends HttpServlet {
         {
             tm.deleteByKey(rid,tid);
         }
-        tm.insert(rid,tid,score,null,storeCacheTextTofragment(text));
+        tm.insert(rid,tid,score,null,text);
 
 
         sqlSession.commit();
         sqlSession.close();
     }
 
-    public static String storeTextTofragmentForce(String text) throws Exception {
-        //首先要查到fragment中的第一个fmid
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
-
-        long maxFmid = -1;
-        for(int i = 0; i < tm.selectAllFmid().size(); i++)
-        {
-            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
-            {
-                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
-            }
-        }
-        long mark=maxFmid;
-        long startFmid=maxFmid;
-
-        //有了startFmid,然后找到next，找到data
-        String[] data=text.split("\\s{1,127}");
-        //遍历data
-        for(int i=0;i<data.length;i++)
-        {
-            //查找next
-            startFmid+=1;
-            String next=data[i];
-            if(i!=data.length-1)
-            {
-                tm.insert(""+startFmid,""+(startFmid+1),next);
-            }
-            else
-            {
-                tm.insert(""+startFmid,"",next);
-            }
-        }
-        sqlSession.commit();
-        sqlSession.close();
-
-        System.out.println("mark:"+mark);
-
-        return ""+(mark+1);
-    }
+//    public static String storeTextTofragmentForce(String text) throws Exception {
+//        //首先要查到fragment中的第一个fmid
+//        String resource = "mybatis-config.xml";
+//        InputStream inputStream = Resources.getResourceAsStream(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+//        fragmentMapper tm = sqlSession.getMapper(fragmentMapper.class);
+//
+//        long maxFmid = -1;
+//        for(int i = 0; i < tm.selectAllFmid().size(); i++)
+//        {
+//            if(Long.parseLong(tm.selectAllFmid().get(i)) > maxFmid)
+//            {
+//                maxFmid = Long.parseLong(tm.selectAllFmid().get(i));
+//            }
+//        }
+//        long mark=maxFmid;
+//        long startFmid=maxFmid;
+//
+//        //有了startFmid,然后找到next，找到data
+//        String[] data=text.split("\\s{1,127}");
+//        //遍历data
+//        for(int i=0;i<data.length;i++)
+//        {
+//            //查找next
+//            startFmid+=1;
+//            String next=data[i];
+//            if(i!=data.length-1)
+//            {
+//                tm.insert(""+startFmid,""+(startFmid+1),next);
+//            }
+//            else
+//            {
+//                tm.insert(""+startFmid,"",next);
+//            }
+//        }
+//        sqlSession.commit();
+//        sqlSession.close();
+//
+//        System.out.println("mark:"+mark);
+//
+//        return ""+(mark+1);
+//    }
 
     public static void updateText(String rid,String tid,int score,String text) throws Exception {
         String resource = "mybatis-config.xml";
@@ -315,7 +314,9 @@ public class TeacherJudgeServlet extends HttpServlet {
         {
             tm.deleteByKey(rid,tid);
         }
-        tm.insert(rid,tid,score, storeTextTofragmentForce(text),null,  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+
+        tm.insert(rid,tid,score,null,
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),text);
 
         sqlSession.commit();
         sqlSession.close();

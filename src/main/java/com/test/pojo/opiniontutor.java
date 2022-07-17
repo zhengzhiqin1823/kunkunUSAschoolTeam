@@ -4,9 +4,30 @@ public class opiniontutor {
     String rID;
     String tID;
     int score;
-    String firstFm;
     String totalsize;
     String submitTime;
+
+    public String getData() {
+        return data;
+    }
+
+    @Override
+    public String toString() {
+        return "opiniontutor{" +
+                "rID='" + rID + '\'' +
+                ", tID='" + tID + '\'' +
+                ", score=" + score +
+                ", totalsize='" + totalsize + '\'' +
+                ", submitTime='" + submitTime + '\'' +
+                ", data='" + data + '\'' +
+                '}';
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    String data;
 
     public String getrID() {
         return rID;
@@ -18,10 +39,6 @@ public class opiniontutor {
 
     public int getScore() {
         return score;
-    }
-
-    public String getFirstFm() {
-        return firstFm;
     }
 
     public String getTotalsize() {
@@ -44,10 +61,6 @@ public class opiniontutor {
         this.score = score;
     }
 
-    public void setFirstFm(String firstFm) {
-        this.firstFm = firstFm;
-    }
-
     public void setTotalsize(String totalsize) {
         this.totalsize = totalsize;
     }
@@ -56,15 +69,4 @@ public class opiniontutor {
         this.submitTime = submitTime;
     }
 
-    @Override
-    public String toString() {
-        return "opiniontutor{" +
-                "rID='" + rID + '\'' +
-                ", tID='" + tID + '\'' +
-                ", score='" + score + '\'' +
-                ", firstFm='" + firstFm + '\'' +
-                ", totalsize='" + totalsize + '\'' +
-                ", submitTime='" + submitTime + '\'' +
-                '}';
-    }
 }
