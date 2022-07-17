@@ -81,6 +81,11 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.28</version>
     </dependency>
+    <dependency>
+      <groupId>org.wso2.orbit.org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.11.0.wso2v1</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

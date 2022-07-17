@@ -76,7 +76,7 @@ public class linkGenerateServlet extends HttpServlet {
                 n++;
             }
             //respomnse
-            String judgelink = "http://localhost:8080/demo_war_exploded/" + "linkJudgeServlet?link=" + link;
+            String judgelink = "http://localhost:8080/0628JavaWebExercise_war/" + "linkJudge?link=" + link;
             alert1.append(flag);
             alert1.append(";");
             alert1.append(judgelink);
