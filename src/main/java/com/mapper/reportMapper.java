@@ -10,9 +10,10 @@ public interface reportMapper {
     void insert(@Param("rid") String rid,
                 @Param("submitID") String submitID,
                 @Param("teamid") String teamid,
-                @Param("firstFm") String firstFm,
                 @Param("totalsize") String totalsize,
-                @Param("submitTime") String submitTime);
+                @Param("submitTime") String submitTime,
+                @Param("data") String data
+    );
 
     void insert(@Param("rid") String rid);
     List<report> selectByKey(@Param("rid") String rid);

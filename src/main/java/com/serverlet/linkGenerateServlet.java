@@ -3,7 +3,7 @@ package com.serverlet;
 import com.mapper.judgelinkMapper;
 import com.test.pojo.judgelink;
 
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

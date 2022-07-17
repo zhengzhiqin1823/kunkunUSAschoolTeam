@@ -13,7 +13,6 @@
     flex-direction: row;
 }
 
-
 .left{
     display: flex;
     flex-direction: column;

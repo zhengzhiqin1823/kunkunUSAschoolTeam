@@ -31,145 +31,152 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         String need=req.getParameter("need").toString();
-        if(need.equals("rid")) {
-            //System.out.println("need rid");
-            HttpSession session = req.getSession();
-            String tID = session.getAttribute("t").toString();
+        switch (need) {
+            case "rid": {
+                //System.out.println("need rid");
+                HttpSession session = req.getSession();
+                String tID = session.getAttribute("t").toString();
 
-            if (tID == null) {
-                resp.sendRedirect("/0628JavaWebExercise_war/index.html");
-            }
+                if (tID == null) {
+                    resp.sendRedirect("/0628JavaWebExercise_war/index.html");
+                    return;
+                }
 
-            List<String> Judged_rids = null;
+                List<String> Judged_rids = null;
 
-            List<String> rids = (List<String>) session.getAttribute("r");
-            try {
-                Judged_rids = getrIDbytID(tID);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                List<String> rids = (List<String>) session.getAttribute("r");
+                try {
+                    Judged_rids = getrIDbytID(tID);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
-            String rIDs = "[";
-            String rIDs_judged = "[";
-            for (String rid : rids) {
-                //System.out.println(isLegaltoaudit(rid));
-                if (rid != null && isLegaltoaudit(rid)) {
-                    for (String r : Judged_rids) {
-                        if (r.equals(rid)) {
-                            rIDs_judged = rIDs_judged + "\"" + rid.toString() + "\",";
-                        } else {
-                            rIDs = rIDs + "\"" + rid.toString() + "\",";
+                String rIDs = "[";
+                String rIDs_judged = "[";
+                for (String rid : rids) {
+                    //System.out.println(isLegaltoaudit(rid));
+                    if (rid != null && isLegaltoaudit(rid)) {
+                        for (String r : Judged_rids) {
+                            if (r.equals(rid)) {
+                                rIDs_judged = rIDs_judged + "\"" + rid.toString() + "\",";
+                            } else {
+                                rIDs = rIDs + "\"" + rid.toString() + "\",";
+                            }
                         }
                     }
                 }
-            }
-            if (rIDs.length() > 1) {
-                rIDs = rIDs.substring(0, rIDs.length() - 1);
-            }
-            if (rIDs_judged.length() > 1) {
-                rIDs_judged = rIDs_judged.substring(0, rIDs_judged.length() - 1);
-            }
-            rIDs = rIDs + "]";
-            rIDs_judged = rIDs_judged + "]";
-
-            resp.setContentType("text/text;charset=utf-8");
-            resp.setCharacterEncoding("utf-8");
-            resp.setStatus(200);
-            PrintWriter printWriter = resp.getWriter();
-
-            printWriter.write("{\"rids\":"+rIDs+",\"judged\":"+rIDs_judged+"}");
-            //System.out.println("rid ok");
-        }
-        else if(need.equals("demo")) {
-            //System.out.println("need demo");
-            HttpSession session = req.getSession();
-            String tID = session.getAttribute("t").toString();
-            if (tID == null) {
-                resp.sendRedirect("/0628JavaWebExercise_war/index.html");
-            }
-
-            String rID = req.getParameter("rid").toString();
-            System.out.println("rid="+rID);
-            String description="";
-            String name="";
-
-            try {
-                description = getdescriptionByrid(rID);
-            } catch (Exception e) {
-                System.out.println(1 + "error");
-                e.printStackTrace();
-            }
-
-            try {
-                name = getnameByrid(rID);
-            } catch (Exception e) {
-                System.out.println(2 + "error");
-                e.printStackTrace();
-            }
-
-            resp.setContentType("text/text;charset=utf-8");
-            resp.setCharacterEncoding("utf-8");
-            resp.setStatus(200);
-            PrintWriter printWriter = resp.getWriter();
-
-            printWriter.write("{ \"description\":\"" + description + "\", \"name\":\"" + name + "\" }");
-            //System.out.println("demo ok");
-        }
-        else if(need.equals("all")){
-            //System.out.println("need all");
-            HttpSession session = req.getSession();
-            String tID = session.getAttribute("t").toString();
-            if (tID == null) {
-                resp.sendRedirect("/0628JavaWebExercise_war/index.html");
-            }
-
-            String rID = req.getParameter("rid").toString();
-            //System.out.println(rID);
-            String name="";
-            String description="";
-            String details="";
-            String cache="false";
-
-            try {
-                List<String> cache_rids=getCacherIDbytID(tID);
-                for(String rid:cache_rids){
-                    if(rid.equals(rID)){
-                        cache="true";
-                    }
+                if (rIDs.length() > 1) {
+                    rIDs = rIDs.substring(0, rIDs.length() - 1);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+                if (rIDs_judged.length() > 1) {
+                    rIDs_judged = rIDs_judged.substring(0, rIDs_judged.length() - 1);
+                }
+                rIDs = rIDs + "]";
+                rIDs_judged = rIDs_judged + "]";
+
+                resp.setContentType("text/text;charset=utf-8");
+                resp.setCharacterEncoding("utf-8");
+                resp.setStatus(200);
+                PrintWriter printWriter = resp.getWriter();
+
+                printWriter.write("{\"rids\":" + rIDs + ",\"judged\":" + rIDs_judged + "}");
+                System.out.println("{\"rids\":" + rIDs + ",\"judged\":" + rIDs_judged + "}");
+                //System.out.println("rid ok");
+                break;
             }
+            case "demo": {
+                //System.out.println("need demo");
+                HttpSession session = req.getSession();
+                String tID = session.getAttribute("t").toString();
+                if (tID == null) {
+                    resp.sendRedirect("/0628JavaWebExercise_war/index.html");
+                }
 
-            try {
-                name = getnameByrid(rID);
-            } catch (Exception e) {
-                System.out.println(2 + "error");
-                e.printStackTrace();
+                String rID = req.getParameter("rid").toString();
+                System.out.println("rid=" + rID);
+                String description = "";
+                String name = "";
+
+                try {
+                    description = getdescriptionByrid(rID);
+                } catch (Exception e) {
+                    System.out.println(1 + "error");
+                    e.printStackTrace();
+                }
+
+                try {
+                    name = getnameByrid(rID);
+                } catch (Exception e) {
+                    System.out.println(2 + "error");
+                    e.printStackTrace();
+                }
+
+                resp.setContentType("text/text;charset=utf-8");
+                resp.setCharacterEncoding("utf-8");
+                resp.setStatus(200);
+                PrintWriter printWriter = resp.getWriter();
+
+                printWriter.write("{ \"description\":\"" + description + "\", \"name\":\"" + name + "\" }");
+                //System.out.println("demo ok");
+                break;
             }
+            case "all": {
+                //System.out.println("need all");
+                HttpSession session = req.getSession();
+                String tID = session.getAttribute("t").toString();
+                if (tID == null) {
+                    resp.sendRedirect("/0628JavaWebExercise_war/index.html");
+                }
 
-            try {
-                description = getdescriptionByrid(rID);
-            } catch (Exception e) {
-                System.out.println(1 + "error");
-                e.printStackTrace();
+                String rID = req.getParameter("rid").toString();
+                //System.out.println(rID);
+                String name = "";
+                String description = "";
+                String details = "";
+                String cache = "false";
+
+                try {
+                    List<String> cache_rids = getCacherIDbytID(tID);
+                    for (String rid : cache_rids) {
+                        if (rid.equals(rID)) {
+                            cache = "true";
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    name = getnameByrid(rID);
+                } catch (Exception e) {
+                    System.out.println(2 + "error");
+                    e.printStackTrace();
+                }
+
+                try {
+                    description = getdescriptionByrid(rID);
+                } catch (Exception e) {
+                    System.out.println(1 + "error");
+                    e.printStackTrace();
+                }
+
+                try {
+                    details = getTextByrid(rID);
+                } catch (Exception e) {
+                    System.out.println(0 + "error");
+                    e.printStackTrace();
+                }
+
+                resp.setContentType("text/text;charset=utf-8");
+                resp.setCharacterEncoding("utf-8");
+                resp.setStatus(200);
+                PrintWriter printWriter = resp.getWriter();
+
+                printWriter.write("{\"name\":\"" + name + "\",\"description\":\"" + description + "\",\"details\":\"" + details + "\",\"cache\":\"" + cache + "\"}");
+                //System.out.println("all ok");
+                break;
             }
-
-            try{
-                details=getTextByrid(rID);
-            }catch (Exception e){
-                System.out.println(0 + "error");
-                e.printStackTrace();
-            }
-
-            resp.setContentType("text/text;charset=utf-8");
-            resp.setCharacterEncoding("utf-8");
-            resp.setStatus(200);
-            PrintWriter printWriter = resp.getWriter();
-
-            printWriter.write("{\"name\":\""+name+"\",\"description\":\""+description+"\",\"details\":\""+details+"\",\"cache\":\""+cache+"\"}");
-            //System.out.println("all ok");
         }
     }
 
