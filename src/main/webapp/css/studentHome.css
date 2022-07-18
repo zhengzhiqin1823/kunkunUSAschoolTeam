@@ -8,6 +8,12 @@
 	background-color: white;
 	flex-direction: column;
 }
+#projects_container
+{
+
+	margin-left: 10ch;
+	margin-right: 10ch;
+}
 
 .heading{
 	width:auto;
