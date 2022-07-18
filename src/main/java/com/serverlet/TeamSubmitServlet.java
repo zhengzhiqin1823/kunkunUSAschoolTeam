@@ -461,7 +461,6 @@ public class TeamSubmitServlet extends HttpServlet {
             writer.write(score);
         }
         writer.write(
-
                 "</span></div>\n" +
                         "        </div>\n" +
                         "        <div class=\"data-judgement\">" +

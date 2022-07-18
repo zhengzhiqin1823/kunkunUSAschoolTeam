@@ -77,8 +77,8 @@ public class LoginServlet extends HttpServlet {
                     }
                 }
             }
-            sqs.close();
 
+            sqs.close();
             resp.setContentType("text/text;charset=utf-8");
             resp.setCharacterEncoding("utf-8");
 
