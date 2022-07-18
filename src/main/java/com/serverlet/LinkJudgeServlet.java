@@ -43,6 +43,11 @@ public class LinkJudgeServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         //PrintWriter writer = response.getWriter();
 
+        if(judgelinks.size()==0) {
+            response.sendRedirect("/0628JavaWebExercise_war/teacherError.html");
+            return;
+        }
+
         String tid=judgelinks.get(0).getTid();
 
         HttpSession session = request.getSession();
