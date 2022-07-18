@@ -4,7 +4,7 @@ public class report {
     String rid;
     String submitID;
     String teamid;
-    String toyalsize;
+    int totalsize;
     String submitTime;
     String data;
 
@@ -28,8 +28,9 @@ public class report {
         return teamid;
     }
 
-    public String getToyalsize() {
-        return toyalsize;
+    public String getTotalsize() {
+        System.out.println("totalsize"+totalsize);
+        return totalsize+"";
     }
 
     public String getSubmitTime() {
@@ -48,8 +49,8 @@ public class report {
         this.teamid = teamid;
     }
 
-    public void setToyalsize(String toyalsize) {
-        this.toyalsize = toyalsize;
+    public void setTotalsize(String toyalsize) {
+        this.totalsize = totalsize;
     }
 
     public void setSubmitTime(String submitTime) {
@@ -62,7 +63,7 @@ public class report {
                 "rid='" + rid + '\'' +
                 ", submitID='" + submitID + '\'' +
                 ", teamid='" + teamid + '\'' +
-                ", toyalsize='" + toyalsize + '\'' +
+                ", totalsize='" + totalsize + '\'' +
 
                 ", submitTime='" + submitTime + '\'' +
                 ", data='" + data + '\'' +

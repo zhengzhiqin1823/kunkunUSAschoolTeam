@@ -88,7 +88,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
                 PrintWriter printWriter = resp.getWriter();
 
                 printWriter.write("{\"rids\":" + rIDs + ",\"judged\":" + rIDs_judged + "}");
-                System.out.println("{\"rids\":" + rIDs + ",\"judged\":" + rIDs_judged + "}");
+                //System.out.println("{\"rids\":" + rIDs + ",\"judged\":" + rIDs_judged + "}");
                 //System.out.println("rid ok");
                 break;
             }
@@ -101,7 +101,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
                     resp.sendRedirect("/0628JavaWebExercise_war");
                 }
                 String rID = req.getParameter("rid").toString();
-                System.out.println("rid=" + rID);
+                //System.out.println("rid=" + rID);
                 String description = "";
                 String name = "";
 
@@ -207,17 +207,17 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         String type = req.getParameter("type");
         //System.out.println(status);
         if (status.equals("judged")) {
-            System.out.println("judged!");
+            //System.out.println("judged!");
             if (type.equals("score")) {
                 String score = "" + getauditedscore(rID, tID);
-                System.out.println("score:" + score);
+                //System.out.println("score:" + score);
                 printWriter.write(score);
                 return;
             }
         } else {
             if (type.equals("score")) {
                 String score = getCachescore(rID, tID);
-                System.out.println("score:" + score);
+                //System.out.println("score:" + score);
                 printWriter.write(score);
                 return;
             }
@@ -255,11 +255,11 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         text = text.replace("\n", "&#13;");
         //System.out.println("oh text!");
 
-        if (text != null) {
-            System.out.println("text:" + text);
-        } else {
-            System.out.println("text null");
-        }
+//        if (text != null) {
+//            System.out.println("text:" + text);
+//        } else {
+//            System.out.println("text null");
+//        }
 
         printWriter.write(text);
     }
@@ -392,8 +392,8 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         opiniontutorMapper tm = sqlSession.getMapper(opiniontutorMapper.class);
-        System.out.println("rid:" + rid);
-        System.out.println("tid:" + tid);
+        //System.out.println("rid:" + rid);
+        //System.out.println("tid:" + tid);
         int s = tm.selectByKey(rid, tid).get(0).getScore();
 
         sqlSession.close();

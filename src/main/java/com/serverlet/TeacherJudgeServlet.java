@@ -1,8 +1,6 @@
 package com.serverlet;
 
-import com.mapper.opinionTutorCahceMapper;
-import com.mapper.opiniontutorMapper;
-import com.mapper.reportMapper;
+import com.mapper.*;
 import com.test.pojo.opinionTutorCache;
 import com.test.pojo.opiniontutor;
 import org.apache.ibatis.io.Resources;
@@ -321,6 +319,47 @@ public class TeacherJudgeServlet extends HttpServlet {
 
         sqlSession.commit();
         sqlSession.close();
+    }
+
+    public static String getnameInsubmission(String rid) throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        reportMapper tm=sqlSession.getMapper(reportMapper.class);
+        String s=tm.selectByKey(rid).get(0).getSubmitID();
+        submissionMapper tm1=sqlSession.getMapper(submissionMapper.class);
+        String name=tm1.selectByKey(s).get(0).getName();
+        sqlSession.close();
+        return name;
+    }
+
+    public static String getnameInTeam(String rid) throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        reportMapper tm=sqlSession.getMapper(reportMapper.class);
+        String s=tm.selectByKey(rid).get(0).getTeamid();
+        teamMapper tm1=sqlSession.getMapper(teamMapper.class);
+        String name=tm1.selectByKey(s).get(0).getName();
+        sqlSession.close();
+        return name;
+    }
+
+    public static int getreportTotalsize(String rid) throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        reportMapper tm = sqlSession.getMapper(reportMapper.class);
+        System.out.println("report:"+tm.selectByKey(rid).get(0));
+        int s = Integer.parseInt(tm.selectByKey(rid).get(0).getTotalsize());
+        sqlSession.close();
+        return s;
     }
 
 }
