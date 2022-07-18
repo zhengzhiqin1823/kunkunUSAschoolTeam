@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @WebServlet("/team/home")
 public class TeamTaskServlet extends HttpServlet {
@@ -125,10 +123,29 @@ public class TeamTaskServlet extends HttpServlet {
                     mySubmission.isJudged = "已评审";
                     mySubmission.judgeDate = opiniontutors.get(0).getSubmitTime().substring(0, 10);
                     mySubmission.score = opiniontutors.get(0).getScore()+"";
-                    if(false)
+                    if(true)
                     {
-                        // TODO: 2022/7/15
-
+                        List<report> reports1 = reportMapper.selectBySubId(s.getSubmitID());
+                        TreeSet<Integer> scoreTree = new TreeSet<>();
+                        scoreTree = (TreeSet<Integer>) scoreTree.descendingSet();
+                        for(report r : reports1){
+                            List<opiniontutor> opiniontutors1 = opiniontutorMapper.selectByrID(r.getRid());
+                            if(opiniontutors1.size()!=0)
+                            {
+                                scoreTree.add(opiniontutors1.get(0).getScore());
+                            }
+                        }
+                        int size = scoreTree.size();
+                        int i =1;
+                        for(int score:scoreTree)
+                        {
+                            if(score==opiniontutors.get(0).getScore())
+                            {
+                                break;
+                            }
+                            else i++;
+                        }
+                        mySubmission.score+="<strong>  "+i+"/"+size+"名</strong>";
                     }
                 }
             }
@@ -260,6 +277,7 @@ public class TeamTaskServlet extends HttpServlet {
         public String isJudged;
         public String judgeDate;
         public String score;
+        public String rank;
 
         @Override
         public String toString() {

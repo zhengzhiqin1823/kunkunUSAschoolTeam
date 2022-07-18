@@ -24,7 +24,7 @@ function getProjectData(rid,status) {
                 xmlHttpRequest.onreadystatechange=function (){
                     if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200) {
                         let judge_text=document.getElementById('judge_text')
-                        judge_text.value=xmlHttpRequest.responseText;
+                        judge_text.innerHTML=xmlHttpRequest.responseText;
                     }
                 }
                 xmlHttpRequest.send("rid="+rid+"&status="+status+"&type=text");
@@ -63,7 +63,7 @@ function getAllProjects(){
             //console.log(xmlHttp.responseText)
             let rIDs = JSON.parse(xmlHttp.responseText)
             for(let index in rIDs['rids']){
-                rID=rIDs['rids'][index]
+                let rID=rIDs['rids'][index]
                 let xmlHttpDemo = new XMLHttpRequest()
                 xmlHttpDemo.open("GET","/0628JavaWebExercise_war/teacherGetProjectData?need=demo&rid="+rID.toString(), true)
                 xmlHttpDemo.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -75,7 +75,7 @@ function getAllProjects(){
                         console.log(x["description"])
                         let projects_container = document.getElementById("projects_container")
                         let project_h = "<h4>" + x['name'].toString() + "</h4>"
-                        let project_description = "" + x['description'].toString() + ""
+                        let project_description = "<p>" + x['description'].toString() + "</p>"
                         let project_demo =
                             "<div class=\"right_mid\">"
                             + project_h
@@ -88,7 +88,7 @@ function getAllProjects(){
                 xmlHttpDemo.send();
             }
             for(let index in rIDs['judged']){
-                rID=rIDs['judged'][index]
+                let rID=rIDs['judged'][index]
                 let xmlHttpDemo = new XMLHttpRequest()
                 xmlHttpDemo.open("GET","/0628JavaWebExercise_war/teacherGetProjectData?need=demo&rid="+rID.toString(), true)
                 xmlHttpDemo.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
