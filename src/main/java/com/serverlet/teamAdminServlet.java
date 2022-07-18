@@ -56,16 +56,12 @@ public class teamAdminServlet extends HttpServlet {
                 if("default".equals(tid))
                 {
                     List<team> teams =mapper.selectAll();
-                    team t=teams.get(teams.size()-1);
-                    String id="";
-                    String teamid = t.getTeamid();
-                    int num=Integer.parseInt(teamid);
-                    num++;
-                    id+=num;
+
+                    String id=teams.size()+1+"";
                     mapper.insert(
                             id,
-                            "123456",
                             name,
+                            MD5Utils.stringToMD5("123456"),
                             email,
                             tel,
                             taskid);
@@ -81,7 +77,7 @@ public class teamAdminServlet extends HttpServlet {
                             return;
                         }
                     }
-                    mapper.insert(tid,name,email,"123456",tel,taskid);
+                    mapper.insert(tid,name,MD5Utils.stringToMD5("123456"),email,tel,taskid);
                 }
             }
             case "4":
