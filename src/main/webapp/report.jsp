@@ -96,7 +96,8 @@
                     </table><br>
                     <table id="TaskInfoReportDetail" readonly="readonly"></table>
                     <h1 style="font-family: 华文宋体;margin-left:15px">报告详细:</h1>
-                    <textarea id="ReportDetailInfo" style="margin-left: 40px;width:760px;margin-right: 40px;height: 480px;resize: none; overflow-x:auto;" readonly="readonly">
+                    <textarea id="ReportDetailInfo" style="margin-left: 40px;width:760px;margin-right: 40px;height: 480px;
+                    resize: none; overflow-y:scroll;" readonly="readonly">
                     </textarea>
                     <table>
                         <tr>
@@ -190,21 +191,28 @@
                 let i;
                 let table="";
                 table+="<tr><th>批量选择</th><th>报告编号</th><th>团队编码</th><th>报告提交时间</th><th>评审导师</th><th>审批链接</th></tr>"
-                for(i=0;i<student.length-1;i++)
+                if(student.length==1)
                 {
-                    let studentinfo=student[i].split(",");
-                    table+="<tr style='height:40px ;'>"
-                    table+="<td><input type='checkbox' name='rid' value=\""+studentinfo[2]+"\"></td>"
-                    table+="<td>"+studentinfo[2]+"</td>";
-                    table+="<td>"+studentinfo[0]+"</td>";
-                    table+="<td>"+studentinfo[1]+"</td>";
-                    table+="<td>"+studentinfo[5]+"</td>";
-                    table+="<td>"+studentinfo[6]+"</td>";
-                    table+="<td><input  class='demo-button2' type='button' style='margin-top: 0px;'value='查看报告内容' onclick='reportDetail("+studentinfo[2]+")'></td>"
-                    table+="<td><form action='http://localhost:8080/0628JavaWebExercise_war/ReportJudgeServlet' method='get'>"
-                    table+="<input style='display: none'; type='text' name='rid' value=\""+studentinfo[0]+"\">"
-                    table+="<input class='demo-button2' style='margin-top: 0px;margin-left:-100px ' type='submit' value='报告审批详情' ></form></td>";
-                    table+="</tr>"
+                    table+="<tr>该报告暂无团队提交</tr>"
+                }
+                else
+                {
+                    for(i=0;i<student.length-1;i++)
+                    {
+                        let studentinfo=student[i].split(",");
+                        table+="<tr style='height:40px ;'>"
+                        table+="<td><input type='checkbox' name='rid' value=\""+studentinfo[2]+"\"></td>"
+                        table+="<td>"+studentinfo[2]+"</td>";
+                        table+="<td>"+studentinfo[0]+"</td>";
+                        table+="<td>"+studentinfo[1]+"</td>";
+                        table+="<td>"+studentinfo[5]+"</td>";
+                        table+="<td>"+studentinfo[6]+"</td>";
+                        table+="<td><input  class='demo-button2' type='button' style='margin-top: 0px;'value='报告内容' onclick='reportDetail("+studentinfo[2]+")'></td>"
+                        table+="<td><form action='http://localhost:8080/0628JavaWebExercise_war/ReportJudgeServlet' method='get'>"
+                        table+="<input style='display: none'; type='text' name='rid' value=\""+studentinfo[0]+"\">"
+                        table+="<input class='demo-button2' style='margin-top: 0px;margin-left:-100px ' type='submit' value='审批详情' ></form></td>";
+                        table+="</tr>"
+                    }
                 }
                 document.getElementById("submissionReports").innerHTML=table;
             }

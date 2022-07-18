@@ -64,8 +64,8 @@ public class teamAdminServlet extends HttpServlet {
                     id+=num;
                     mapper.insert(
                             id,
-                            name,
                             "123456",
+                            name,
                             email,
                             tel,
                             taskid);
