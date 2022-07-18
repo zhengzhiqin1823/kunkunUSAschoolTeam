@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         String id = req.getParameter("id");
-        String password = req.getParameter("password");
+        String password = MD5Utils.stringToMD5(req.getParameter("password"));
 
         System.out.println("用户名：" + id);
         System.out.println("密码：" + password);
