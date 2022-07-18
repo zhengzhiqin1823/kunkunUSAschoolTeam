@@ -47,7 +47,7 @@ public class newSubmiServlet extends HttpServlet {
             fm=s.getNext();
         }
         List<submission> submissions = submissionMapper.selectAll();
-        String submitid=String.valueOf(Integer.valueOf(submissions.get(submissions.size()-1).getSubmitID())+1);
+        String submitid=submissions.size()+1+"";
         submissionMapper.insert(
                 submitid,
                 name,
@@ -57,7 +57,8 @@ public class newSubmiServlet extends HttpServlet {
                 startTime,
                 deadLine,
                 submitTeams,
-                description);
+                description,
+                taskid);
 
         submissionMapper.updateNextByKey(fm,submitid);
 
