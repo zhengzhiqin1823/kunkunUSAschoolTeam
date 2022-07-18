@@ -460,6 +460,20 @@
         }
 
     }
+    document.getElementById("CreatTaskdescription").onfocus=function (){
+        let i=document.getElementById("CreatTaskdescription").value;
+        if(i=="请输入项目描述")
+        {
+            document.getElementById("CreatTaskdescription").value="";
+        }
+    }
+    document.getElementById("CreatTaskdescription").onblur=function (){
+        let i=document.getElementById("CreatTaskdescription").value;
+        if(i=="")
+        {
+            document.getElementById("CreatTaskdescription").value="请输入项目描述";
+        }
+    }
 </script>
 </body>
 </html>
