@@ -39,9 +39,16 @@ public class LinkJudgeServlet extends HttpServlet {
         //System.out.println(judgelinksss.toString());
 
         //respomnse
+
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
+
         //PrintWriter writer = response.getWriter();
+
+        if(judgelinks.size()==0) {
+            response.sendRedirect("/0628JavaWebExercise_war/teacherError.html");
+            return;
+        }
 
         String tid=judgelinks.get(0).getTid();
 
@@ -65,7 +72,8 @@ public class LinkJudgeServlet extends HttpServlet {
         //System.out.println("rid ok");
 
         //System.out.println("session ok");
-        response.sendRedirect("/0628JavaWebExercise_war/teacherHome.html");
+//        response.sendRedirect("/0628JavaWebExercise_war/teacherHome.html");
+        request.getRequestDispatcher("/WEB-INF/teacherHome.html").forward(request, response);
     }
 
     @Override
