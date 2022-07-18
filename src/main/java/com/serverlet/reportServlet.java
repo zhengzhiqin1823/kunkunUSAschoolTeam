@@ -61,7 +61,7 @@ public class reportServlet extends HttpServlet {
                 List<report> reports = mapper.selectBySubId(sid);
                 for(report r:reports)
                 {
-                    writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getToyalsize()+";");
+                    writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getTotalsize()+";");
                 }
                 break;
             }
@@ -103,7 +103,7 @@ public class reportServlet extends HttpServlet {
                     List<judgelink> judgelinks = jm.selectByRid(r.getRid());
                     if(judgelinks.size()==0)
                     {
-                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getToyalsize()+","+"未选择审批导师"+","+"未生成链接"+";");
+                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getTotalsize()+","+"未选择审批导师"+","+"未生成链接"+";");
                     }
                     else
                     {
@@ -112,7 +112,7 @@ public class reportServlet extends HttpServlet {
                         String link=judgelinks.get(0).getLink();
                         List<tutor> tutors = tm.selectByTid(tid);
                         tutor tutor = tutors.get(0);
-                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getToyalsize()+","+tutor.getName()+","+link+";");
+                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getTotalsize()+","+tutor.getName()+","+link+";");
                     }
                 }
                 break;

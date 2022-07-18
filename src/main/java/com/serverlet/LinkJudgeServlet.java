@@ -25,7 +25,7 @@ public class LinkJudgeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String link=request.getParameter("link");
-        System.out.println(link);
+        //System.out.println(link);
 
         //获取SqlSession对象，来执行sql
         String resource = "mybatis-config.xml";

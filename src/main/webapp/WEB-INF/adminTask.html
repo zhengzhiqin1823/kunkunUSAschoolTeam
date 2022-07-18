@@ -99,18 +99,21 @@
                                    id="CreatTaskName"></td>
                     <tr>
                         <td>报告提交次数:</td>
-                        <td><input type="text" value="请输入项目报告提交次数" style="width: 300px;color: #6c757d" name="submitNum"
+                        <td><input type="text" value="请输入项目报告提交次数(0~5)" style="width: 300px;color: #6c757d" name="submitNum"
                                    id="CreatTaskSubmitNum"></td>
+                    <td><span id="CreatTaskSubmitNumTip" style="color: #dc3545"></span></td>
                     </tr>
                     <tr>
                         <td>项目开始时间:</td>
-                        <td><input type="text" value="项目开始时间(yyyy-mm-dd)" style="width: 300px;color: #6c757d"
+                        <td><input type="date" value="项目开始时间(yyyy-mm-dd)" style="width: 300px;color: #6c757d"
                                    name="startline" id="CreatTaskStartline"></td>
+                        <td><span id="CreatTaskStartlineTip" style="color: #dc3545"></span></td>
                     </tr>
                     <tr>
                         <td>项目结束时间:</td>
-                        <td><input type="text" value="项目结束时间(yyyy-mm-dd)" style="width: 300px;color: #6c757d"
+                        <td><input type="date" value="项目结束时间(yyyy-mm-dd)" style="width: 300px;color: #6c757d"
                                    name="deadline" id="CreatTaskDeadline"></td>
+                        <td><span id="CreatTaskdeadlineTip" style="color: #dc3545"></span></td>
                     </tr>
                 </table>
                 <h1>项目描述</h1>
@@ -400,14 +403,14 @@
     }
     document.getElementById("CreatTaskSubmitNum").onfocus = function () {
         let id = document.getElementById("CreatTaskSubmitNum").value;
-        if (id == "请输入项目报告提交次数")
+        if (id == "请输入项目报告提交次数(0~5)")
             document.getElementById("CreatTaskSubmitNum").value = "";
         document.getElementById("CreatTaskSubmitNum").style.color = "black";
     }
     document.getElementById("CreatTaskSubmitNum").onblur = function () {
         let id = document.getElementById("CreatTaskSubmitNum").value;
         if (id == "")
-            document.getElementById("CreatTaskSubmitNum").value = "请输入项目报告提交次数";
+            document.getElementById("CreatTaskSubmitNum").value = "请输入项目报告提交次数(0~5)";
         document.getElementById("CreatTaskSubmitNum").style.color = "#6c757d";
     }
     document.getElementById("CreatTaskDeadline").onfocus = function () {
@@ -440,9 +443,23 @@
         let dt = document.getElementById("CreatTaskDeadline").value;
         let st = document.getElementById("CreatTaskStartline").value;
         let des = document.getElementById("CreatTaskdescription").value;
+        let num=parseInt(submitNum);
         if (name == "请输入项目名称" || submitNum == "请输入项目报告提交次数" || dt == "项目结束时间(yyyy-mm-dd)" || st == "项目开始时间(yyyy-mm-dd)" || des == "请输入项目描述") {
             document.getElementById("msg").innerText = "请输入详细信息!"
             return;
+        }
+        else
+        {
+            document.getElementById("msg").innerText = ""
+        }
+        if(num<=0||num>5||typeof(num)!="number")
+        {
+            document.getElementById("CreatTaskSubmitNumTip").innerText="请输入合法数字(0~5)";
+            return;
+        }
+        else
+        {
+            document.getElementById("CreatTaskSubmitNumTip").innerText="";
         }
         let xhttp;
         if (window.XMLHttpRequest) {
@@ -459,6 +476,20 @@
             }
         }
 
+    }
+    document.getElementById("CreatTaskdescription").onfocus=function (){
+        let i=document.getElementById("CreatTaskdescription").value;
+        if(i=="请输入项目描述")
+        {
+            document.getElementById("CreatTaskdescription").value="";
+        }
+    }
+    document.getElementById("CreatTaskdescription").onblur=function (){
+        let i=document.getElementById("CreatTaskdescription").value;
+        if(i=="")
+        {
+            document.getElementById("CreatTaskdescription").value="请输入项目描述";
+        }
     }
 </script>
 </body>
