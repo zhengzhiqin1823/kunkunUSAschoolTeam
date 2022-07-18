@@ -39,8 +39,10 @@ public class LinkJudgeServlet extends HttpServlet {
         //System.out.println(judgelinksss.toString());
 
         //respomnse
+
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
+
         //PrintWriter writer = response.getWriter();
 
         if(judgelinks.size()==0) {
