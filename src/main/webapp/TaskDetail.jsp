@@ -134,21 +134,20 @@
                 let str = this.responseText;
                 let student = str.split(";")
                 let i;
-                let j;
                 let table = "";
-                for (i = 0; i < student.length - 1; i++) {
-                    let studentinfo = student[i].split(",");
-                    table += "<tr><td >项目编号:" + studentinfo[0] + "</td></tr>"
-                    table += "<tr><td >项目名称:" + studentinfo[1] + "</td></tr>"
-                    table += "<tr><td >项目提交开始时间:" + studentinfo[4] + "</td></tr>"
-                    table += "<tr><td >项目提交结束时间:" + studentinfo[5] + "</td></tr>"
-                    table += "<tr></tr>"
-                    table += "<tr><td>项目描述:</td></tr>"
-                    table += "<tr><td>"
-                    table += "<div class='description'>" + studentinfo[3] + " </div>"
-                    table += "</td></tr>"
-                    document.getElementById("ProjectDetail").innerHTML = table;
-                }
+                    for (i = 0; i < student.length - 1; i++) {
+                        let studentinfo = student[i].split(",");
+                        table += "<tr><td >项目编号:" + studentinfo[0] + "</td></tr>"
+                        table += "<tr><td >项目名称:" + studentinfo[1] + "</td></tr>"
+                        table += "<tr><td >项目提交开始时间:" + studentinfo[4] + "</td></tr>"
+                        table += "<tr><td >项目提交结束时间:" + studentinfo[5] + "</td></tr>"
+                        table += "<tr></tr>"
+                        table += "<tr><td>项目描述:</td></tr>"
+                        table += "<tr><td>"
+                        table += "<div class='description'>" + studentinfo[3] + " </div>"
+                        table += "</td></tr>"
+                    }
+                document.getElementById("ProjectDetail").innerHTML = table;
             }
         }
         let xhtp;
@@ -167,36 +166,43 @@
                 let i;
                 let table = "";
                 table += "<tr><th >报告名称</th><th >提交权限</th><th >审批权限</th><th >开始时间</th><th >结束时间</th><th>提交数量</th><th></th><th>查看报告详情</th><th>查看提交报告</th></tr>"
-                for (i = 0; i < student.length - 1; i++) {
-                    let studentinfo = student[i].split(",");
-                    table += "<tr>"
-                    table += "<td >" + "<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\"" + studentinfo[0] + "N\" value='" + studentinfo[1] + "'</td>";
-                    if (studentinfo[2] == "1") {
-                        table += "<td>" + "<input class='demo-button3' style='width: 80px' type='button' value='可提交' id=\"" + studentinfo[0] + "SS\" onclick='changeSS(" + studentinfo[0] + ")'></td>";
-                    } else {
-                        table += "<td>" + "<input class='demo-button3' style='width: 80px' type='button' value='不可提交' id=\"" + studentinfo[0] + "SS\" onclick='changeSS(" + studentinfo[0] + ")'></td>";
-                    }
-                    // table+="<td >"+"<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\""+studentinfo[0]+"SS\" value='"+studentinfo[2]+"'</td>";
-                    if (studentinfo[3] == "1") {
-                        table += "<td>" + "<input class='demo-button3' style='width: 80px' type='button' value='可审批' id=\"" + studentinfo[0] + "JS\" onclick='changeJS(" + studentinfo[0] + ")'></td>";
-                    } else {
-                        table += "<td>" + "<input class='demo-button3' style='width: 80px' type='button' value='不可审批' id=\"" + studentinfo[0] + "JS\" onclick='changeJS(" + studentinfo[0] + ")'></td>";
-                    }
-                    //table+="<td >"+"<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\""+studentinfo[0]+"JS\" value='"+studentinfo[3]+"'</td>";
-                    table += "<td>" + "<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\"" + studentinfo[0] + "ST\" value='" + studentinfo[4] + "'</td>";
-                    table += "<td >" + "<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\"" + studentinfo[0] + "DT\" value='" + studentinfo[5] + "'</td>";
-                    table += "<td >" + "<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);' id=\"" + studentinfo[0] + "Num\" value='" + studentinfo[6] + "'</td>";
-                    table += "<td><input id=\'" + studentinfo[0] + "updateStatus\' style='display: none;' value='1'>" + "</td>"
+                if(student.length==1)
+                {
+                    table+="<tr>该项目暂无需要提交的报告，新建一个？</tr>"
+                }
+                else
+                {
+                    for (i = 0; i < student.length - 1; i++) {
+                        let studentinfo = student[i].split(",");
+                        table += "<tr>"
+                        table += "<td >" + "<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\"" + studentinfo[0] + "N\" value='" + studentinfo[1] + "'</td>";
+                        if (studentinfo[2] == "1") {
+                            table += "<td>" + "<input class='demo-button3' style='width: 80px' type='button' value='可提交' id=\"" + studentinfo[0] + "SS\" onclick='changeSS(" + studentinfo[0] + ")'></td>";
+                        } else {
+                            table += "<td>" + "<input class='demo-button3' style='width: 80px' type='button' value='不可提交' id=\"" + studentinfo[0] + "SS\" onclick='changeSS(" + studentinfo[0] + ")'></td>";
+                        }
+                        // table+="<td >"+"<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\""+studentinfo[0]+"SS\" value='"+studentinfo[2]+"'</td>";
+                        if (studentinfo[3] == "1") {
+                            table += "<td>" + "<input class='demo-button3' style='width: 80px' type='button' value='可审批' id=\"" + studentinfo[0] + "JS\" onclick='changeJS(" + studentinfo[0] + ")'></td>";
+                        } else {
+                            table += "<td>" + "<input class='demo-button3' style='width: 80px' type='button' value='不可审批' id=\"" + studentinfo[0] + "JS\" onclick='changeJS(" + studentinfo[0] + ")'></td>";
+                        }
+                        //table+="<td >"+"<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\""+studentinfo[0]+"JS\" value='"+studentinfo[3]+"'</td>";
+                        table += "<td>" + "<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\"" + studentinfo[0] + "ST\" value='" + studentinfo[4] + "'</td>";
+                        table += "<td >" + "<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);margin-left: 5%;margin-right:5%;' id=\"" + studentinfo[0] + "DT\" value='" + studentinfo[5] + "'</td>";
+                        table += "<td >" + "<input type='text' readonly='readonly' style='width:120px;border: 0;outline: 0;background-color: rgba(0, 0, 0, 0);' id=\"" + studentinfo[0] + "Num\" value='" + studentinfo[6] + "'</td>";
+                        table += "<td><input id=\'" + studentinfo[0] + "updateStatus\' style='display: none;' value='1'>" + "</td>"
 
-                    table += "<td><form action='http://localhost:8080/0628JavaWebExercise_war/GoSubmissionDetailServlet' method='get'><input type='text' style='display: none' name='sid' value=\"" + studentinfo[0] + "\">"
-                    table += "<input style='display: none'; type='text' name='taskid' value=\"" + tid + "\">"
-                    table += "<input class='demo-button2' type='submit' value='查看报告详情'></td></form>"//这个表单查看详情
+                        table += "<td><form action='http://localhost:8080/0628JavaWebExercise_war/GoSubmissionDetailServlet' method='get'><input type='text' style='display: none' name='sid' value=\"" + studentinfo[0] + "\">"
+                        table += "<input style='display: none'; type='text' name='taskid' value=\"" + tid + "\">"
+                        table += "<input class='demo-button2' type='submit' value='查看报告详情'></td></form>"//这个表单查看详情
 
-                    table += "<td><form action='http://localhost:8080/0628JavaWebExercise_war/SubmissionReportResultServlet' method='get'>"
-                    table += "<input style='display: none'; type='text' name='submitID' value=\"" + studentinfo[0] + "\">"
-                    table += "<input style='display: none'; type='text' name='taskid' value=\"" + tid + "\">"
-                    table += "<input class='demo-button2' style='margin-top: 30px;' type='submit' value='查看提交报告' ></form></td>";
-                    table += "</tr>"
+                        table += "<td><form action='http://localhost:8080/0628JavaWebExercise_war/SubmissionReportResultServlet' method='get'>"
+                        table += "<input style='display: none'; type='text' name='submitID' value=\"" + studentinfo[0] + "\">"
+                        table += "<input style='display: none'; type='text' name='taskid' value=\"" + tid + "\">"
+                        table += "<input class='demo-button2' style='margin-top: 30px;' type='submit' value='查看提交报告' ></form></td>";
+                        table += "</tr>"
+                    }
                 }
                 document.getElementById("submissions").innerHTML = table;
             }
