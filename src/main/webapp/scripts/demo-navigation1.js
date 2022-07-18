@@ -20,7 +20,7 @@ function Personal_click() {
 
 function teacher_home()
 {
-    location.assign("../WEB-INF/teacherHome.html")
+    location.assign("../teacherHome.html")
 }
 
 function admin_team()

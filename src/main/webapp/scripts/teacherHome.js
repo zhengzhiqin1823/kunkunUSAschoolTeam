@@ -197,12 +197,12 @@ function sendData(){
     xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlHttpRequest.onreadystatechange=function (){
         if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200) {
-            location.assign("../WEB-INF/teacherHome.html")
+            location.assign("/0628JavaWebExercise_war/teacherHome.html")
         }
     }
     console.log("rid:"+rid)
     console.log("score:"+score)
-    console.log("judge_text:"+judge_text)
+    console.log("judge_text/0628JavaWebExercise_war:"+judge_text)
     xmlHttpRequest.send("rid="+rid+"&score="+score+"&judge_text="+judge_text+"&type=save")
 }
 
@@ -215,7 +215,7 @@ function saveData(){
     xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlHttpRequest.onreadystatechange=function (){
         if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200) {
-            location.assign("../WEB-INF/teacherHome.html")
+            location.assign("/teacherHome.html")
         }
     }
     console.log("rid:"+rid)

@@ -13,7 +13,7 @@
     <script src="../scripts/demo-navigation1.js"></script>
 </head>
 <body>
-<div class="demo-navigation1">
+<div class="demo-navigation1" >
     <div class="logo">坤坤的美国校队</div>
     <nav>
         <ul>
@@ -28,29 +28,29 @@
     <div class="body_mid">
         <div class="body_mid_left">
             <ul>
-                <img src="../image/setting.jpg">
+                <img src="./image/setting.jpg">
                 <li><a href="#" @click="f1">团队信息</a></li>
-                <img src="../image/setting.jpg">
+                <img src="./image/setting.jpg">
                 <li><a href="#" @click="f2">修改基本信息</a></li>
-                <img src="../image/setting.jpg">
+                <img src="./image/setting.jpg">
                 <li><a href="#" @click="f3">修改密码</a></li>
             </ul>
         </div>
         <div class="body_mid_right">
             <div class="title">
-                <h1><strong>修改基本信息</strong></h1>
+                <h1><strong>{{title_name}}</strong></h1>
             </div>
 
             <ul v-if="h1">
-                <p>团队名称：{{teamName}}</p>
-                <p>团队ID：{{teamID}}</p>
-                <p>邮箱：{{email}}</p>
-                <p>电话：{{tel}}</p>
+                <p>团队名称：&emsp;{{teamName}}</p>
+                <p>团队ID&emsp;：&emsp;{{teamID}}</p>
+                <p>邮箱&emsp;&emsp;：&emsp;{{email}}</p>
+                <p>电话&emsp;&emsp;：&emsp;{{tel}}</p>
             </ul>
             <ul v-if="h2">
-                <p id="name">团队名称：<input name="id" class="demo-input1" type="text" v-model:value="teamName"></p>
-                <p id="email">邮箱：&emsp;&emsp;<input name="email" class="demo-input1" type="text" v-model:value="email"></p>
-                <p id="tel">电话：&emsp;&emsp;<input name="tel" class="demo-input1" type="text" v-model:value="tel"></p>
+                <p id="name">团队名称：&emsp;<input name="id" class="demo-input1" type="text" v-model:value="teamName"></p>
+                <p id="email">邮箱&emsp;&emsp;：&emsp;<input name="email" class="demo-input1" type="text" v-model:value="email"></p>
+                <p id="tel">电话&emsp;&emsp;：&emsp;<input name="tel" class="demo-input1" type="text" v-model:value="tel"></p>
             </ul>
             <ul v-if="h3">
                 <p>原始密码：&emsp;<input v-model:value="old" class="demo-input1" type="password" name="password" id="old-password" placeholder="原始密码"></p>
@@ -72,6 +72,7 @@
             h2:false,
             h3:false,
             h4:false,
+            title_name:'团队信息',
             teamName: "坤坤的美国校队",
             email: "222@11.com",
             tel: "12312312312",
@@ -94,7 +95,25 @@
                     this.tel = js.tel;
                 })
             },
+            //修改个人信息
             submit() {
+
+                if(this.teamName.length > 15){
+                    alert("团队名称过长，请重新输入");
+                    this.teamName = "";
+                    return;
+                }else if(this.tel.length >= 11){
+                    alert("电话长度多于11位，请重新输入");
+                    return;
+                }else if(this.tel.length <= 11){
+                    alert("电话长度少于11位，请重新输入");
+                    return;
+                }else{
+                    alert("团队信息修改成功！");
+                    return false;
+                }
+
+
                 let data = {
                     'name': this.teamName,
                     'email': this.email,
@@ -106,12 +125,29 @@
                         alert("修改成功!")
                     })
             },
+            //修改密码
             password()
             {
-                if(this.Newpass!==this.check) {
-                    alert("两次输入的密码不同！");
-                    return;
+
+                if(this.Newpass == "" || this.Newpass ==null){
+                    alert("新密码不能为空,请输入");
+                    return false;
+                }else if(this.check == "" || this.check == null){
+                    alert("确认密码不能为空,请输入");
+                    return false;
+                }else if(this.old == "" || this.old == null){
+                    alert("原始密码不能为空,请输入");
+                    return false;
+                }else if(this.Newpass!==this.check){
+                    alert("两次密码不一样,请重新输入");
+                    this.Newpass = "";
+                    this.check = "";
+                    return false;
+                }else{
+                    alert("您的密码修改成功！");
+                    return false;
                 }
+
                 let data = {
                     'old': this.old,
                     'new': this.Newpass
@@ -121,21 +157,25 @@
                     .then((res) => {
                         alert(res.data);
                     })
+
             }
             ,
             f1(){
+                this.title_name='团队信息';
                 this.h2=false;
                 this.h3=false;
                 this.h4=false;
                 this.h1=true;
             },
             f2(){
-                this.h1=false;
-                this.h3=false;
-                this.h2=true;
-                this.h4=true;
-            } ,
+                this.title_name='修改基本信息';
+                this.h1 = false;
+                this.h3 = false;
+                this.h2 = true;
+                this.h4 = true;
+            },
             f3(){
+                this.title_name='修改密码';
                 this.h2=false;
                 this.h1=false;
                 this.h3=true;
