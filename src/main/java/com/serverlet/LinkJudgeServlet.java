@@ -70,7 +70,8 @@ public class LinkJudgeServlet extends HttpServlet {
         //System.out.println("rid ok");
 
         //System.out.println("session ok");
-        response.sendRedirect("/0628JavaWebExercise_war/teacherHome.html");
+//        response.sendRedirect("/0628JavaWebExercise_war/teacherHome.html");
+        request.getRequestDispatcher("/WEB-INF/teacherHome.html").forward(request, response);
     }
 
     @Override

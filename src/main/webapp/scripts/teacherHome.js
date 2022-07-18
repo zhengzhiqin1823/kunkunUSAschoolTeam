@@ -197,7 +197,7 @@ function sendData(){
     xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlHttpRequest.onreadystatechange=function (){
         if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200) {
-            location.assign("/0628JavaWebExercise_war/teacherHome.html")
+            location.assign("../WEB-INF/teacherHome.html")
         }
     }
     console.log("rid:"+rid)
@@ -215,7 +215,7 @@ function saveData(){
     xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlHttpRequest.onreadystatechange=function (){
         if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200) {
-            location.assign("/0628JavaWebExercise_war/teacherHome.html")
+            location.assign("../WEB-INF/teacherHome.html")
         }
     }
     console.log("rid:"+rid)
