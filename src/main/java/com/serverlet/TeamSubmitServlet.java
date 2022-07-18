@@ -100,10 +100,12 @@ public class TeamSubmitServlet extends HttpServlet {
             } else {
                 ot = opiniontutors.get(0);
 //                text = StaticMethods.getTextByFirstFm(ot.getFirstFm(), mapper);
-                text = reports.get(0).getData();
+                text = ot.getData();
+                text = text.replace("\n","<br/>");
                 tutorMapper tutorMapper = sqs.getMapper(tutorMapper.class);
                 tutorName = tutorMapper.selectByTid(ot.gettID()).get(0).getName();
                 sc = opiniontutors.get(0).getScore() + "";
+
             }
             writeHtml2(writer, t, s, team, tutorName, reports.get(0), text, sc);
             return;
@@ -390,6 +392,11 @@ public class TeamSubmitServlet extends HttpServlet {
                             report report, String text, String score) {
         if(text==null)
             text="";
+        String s1 = report.getData();
+
+        if(s1!=null)
+            s1 = s1.replace("\n","<br/>");
+        else s1 = "";
         writer.write("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "\n" +
@@ -434,7 +441,7 @@ public class TeamSubmitServlet extends HttpServlet {
                 "            <div class=\"time\">" + report.getSubmitTime().substring(0, 10) + "</div>\n" +
                 "        </div>\n" +
                 "        <div class=\"data\">\n" +
-                report.getData() +
+                s1+
                 "\n" +
                 "        </div>\n" +
                 "        <div class=\"file\">\n" +

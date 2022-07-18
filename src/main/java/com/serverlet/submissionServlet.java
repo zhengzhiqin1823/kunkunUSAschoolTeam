@@ -19,6 +19,29 @@ import java.util.List;
 public class submissionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //检测用户是否登陆
+        boolean isLogin = false;
+        HttpSession session = request.getSession();
+        Cookie[] cookies = request.getCookies();
+        Object id = session.getAttribute("id");
+        Object type = session.getAttribute("type");
+        if(id!=null&&type!=null) {
+            if(type.equals("admin")) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("id")) {
+                        if (cookie.getValue().equals(id)) {
+                            isLogin = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        //如果没有登陆,则返回登陆
+        if (!isLogin) {
+            response.sendRedirect("/0628JavaWebExercise_war");
+            return;
+        }
         String sid=request.getParameter("sid");
         String ret = request.getParameter("ret");
         String resource = "mybatis-config.xml";

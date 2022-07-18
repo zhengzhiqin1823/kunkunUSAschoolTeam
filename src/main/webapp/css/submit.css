@@ -44,6 +44,8 @@ textarea{
 .button{
   display: flex;
   flex-direction: row;
+  margin-top: 5ch;
+  margin-bottom: 30ch;
 }
 
 .button button{
