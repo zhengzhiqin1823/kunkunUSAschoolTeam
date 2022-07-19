@@ -42,6 +42,7 @@ public class TeamChangePasswordServlet extends HttpServlet {
         PrintWriter p = resp.getWriter();
 
         String old = reqData.get("old").toString();
+
         String New = reqData.get("new").toString();
 
         String resource = "mybatis-config.xml";
@@ -56,8 +57,10 @@ public class TeamChangePasswordServlet extends HttpServlet {
         Object id = session.getAttribute("id");
         String teamID = id.toString();
         team team = mapper.selectByKey(teamID).get(0);
-        if (team.getPassword().equals(old)) {
-            mapper.updatePassword(teamID, New);
+
+
+        if (team.getPassword().equals(MD5Utils.stringToMD5( old))) {
+            mapper.updatePassword(teamID, MD5Utils.stringToMD5(New));
             sqs.commit();
             p.write("修改成功！");
         }

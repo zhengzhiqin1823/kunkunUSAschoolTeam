@@ -215,7 +215,7 @@ function saveData(){
     xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     xmlHttpRequest.onreadystatechange=function (){
         if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200) {
-            location.assign("/teacherHome.html")
+            location.assign("/0628JavaWebExercise_war/teacherHome.html")
         }
     }
     console.log("rid:"+rid)

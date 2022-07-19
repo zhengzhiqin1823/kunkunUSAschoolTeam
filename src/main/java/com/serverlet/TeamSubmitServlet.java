@@ -22,6 +22,8 @@ import java.util.List;
 @WebServlet("/submit")
 public class TeamSubmitServlet extends HttpServlet {
 
+
+    private String teamName;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -69,6 +71,7 @@ public class TeamSubmitServlet extends HttpServlet {
 
 
         team team = teamMapper.selectByKey(id.toString()).get(0);
+        teamName = team.getName();
         task t = tasks.get(0);
         List<submission> submissions = submissionMapper.selectByKey(submitID);
         submission s = submissions.get(0);
@@ -230,12 +233,7 @@ public class TeamSubmitServlet extends HttpServlet {
                     reportcaheMapper.insert(cacheID, submitID, teamID, totalsize, text);
                 }
             }
-            System.out.println(rID);
-            System.out.println(submitID);
-            System.out.println(teamID);
-            System.out.println(totalsize);
 
-            System.out.println(time);
             sqs.commit();
             sqs.close();
             PrintWriter p = resp.getWriter();
@@ -278,7 +276,7 @@ public class TeamSubmitServlet extends HttpServlet {
                         "                <li onclick = Personal_click()>Personal</li>\n" +
                         "            </ul>\n" +
                         "        </nav>\n" +
-                        "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
+                        "        <div class=\"logo2\" onclick=\"logout()\">"+teamName+"|退出登陆</div>" +
                         "</div>" +
                         "\n" +
                         "<div class=\"body\">\n" +
@@ -430,7 +428,7 @@ public class TeamSubmitServlet extends HttpServlet {
                 "                <li onclick = Personal_click()>Personal</li>\n" +
                 "            </ul>\n" +
                 "        </nav>\n" +
-                "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
+                "        <div class=\"logo2\" onclick=\"logout()\">"+teamName+"|退出登陆</div>" +
                 "</div>" +
 
                 "<div class=\"bottom\" >\n" +
@@ -474,7 +472,7 @@ public class TeamSubmitServlet extends HttpServlet {
                         "        </div>\n" +
                         "    </div>\n" +
                         "    <div class=\"button\">\n" +
-                        "        <button class=\"demo-button2\" onclick=\"admin_project()\">返回</button>\n" +
+                        "        <button class=\"demo-button2\" onclick=\"Home_click()\">返回</button>\n" +
                         "    </div>" +
                         "</div>\n" +
                         "\n" +
@@ -518,7 +516,7 @@ public class TeamSubmitServlet extends HttpServlet {
                 "                <li onclick = admin_project()>Project</li>\n" +
                 "            </ul>\n" +
                 "        </nav>\n" +
-                "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
+                "        <div class=\"logo2\" onclick=\"logout()\">管理员001|退出登陆</div>" +
                 "</div>" +
 
                 "<div class=\"bottom\" >\n" +

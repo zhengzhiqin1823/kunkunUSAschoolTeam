@@ -18,6 +18,7 @@ import java.util.*;
 
 @WebServlet("/team/home")
 public class TeamTaskServlet extends HttpServlet {
+    private String teamName;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -57,7 +58,7 @@ public class TeamTaskServlet extends HttpServlet {
 
         teamMapper teamMapper = sqs.getMapper(teamMapper.class);
         team team = teamMapper.selectByKey((String) teamID).get(0);
-
+        teamName = team.getName();
         taskID = team.getTaskID();
         opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
 
@@ -191,7 +192,7 @@ public class TeamTaskServlet extends HttpServlet {
                 "                <li onclick = Personal_click()>Personal</li>\n" +
                 "            </ul>\n" +
                 "        </nav>\n" +
-                "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
+                "        <div class=\"logo2\" onclick=\"logout()\">"+teamName+"|退出登陆</div>" +
                 "</div>" +
                 "\n" +
                 "<div class=\"top\">\n" +
