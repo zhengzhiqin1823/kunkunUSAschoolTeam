@@ -32,7 +32,7 @@
             <li onclick="admin_project()">Task</li>
         </ul>
     </nav>
-    <div class="logo2" onclick="logout()">退出登陆</div>
+    <div class="logo2" onclick="logout()">管理员001|退出登陆</div>
 </div>
 
 <div class="bottom">
@@ -290,6 +290,7 @@
         let tel = document.getElementById("InsertTeamTel").value;
         if (tid == "" || name == "" || email == "" || tel == "") {
             document.getElementById("InsertStudentMsg").innerText = "请输入完整信息!"
+            alert("请输入完整信息!")
             return;
         }
         let xhttp;

@@ -28,7 +28,7 @@
             <li onclick="admin_project()">Task</li>
         </ul>
     </nav>
-    <div class="logo2" onclick="logout()">退出登陆</div>
+    <div class="logo2" onclick="logout()">管理员001|退出登陆</div>
 </div>
 <!--    </header>-->
 
@@ -158,8 +158,10 @@
                 let str = this.responseText;
                 if (str == "1") {
                     document.getElementById("InsertTutorMsg").innerText = "导师编号已注册";
+                    alert("导师编号已注册")
                 } else {
                     document.getElementById("InsertTutorMsg").innerText = "注册成功";
+                    alert("注册成功")
                 }
             }
         }

@@ -27,7 +27,7 @@
             <li onclick="admin_project()">Task</li>
         </ul>
     </nav>
-    <div class="logo2" onclick="logout()">退出登陆</div>
+    <div class="logo2" onclick="logout()">管理员001|退出登陆</div>
 </div>
 
 <input style="display: none;" id="sid" value="${sid}">
@@ -100,10 +100,12 @@
                 if(str=="1")
                 {
                     document.getElementById("msg").innerText="创建成功!";
+                    alert("创建成功!")
                 }
                 else
                 {
                     document.getElementById("msg").innerText="创建失败!";
+                    alert("创建失败!")
                 }
             }
         }

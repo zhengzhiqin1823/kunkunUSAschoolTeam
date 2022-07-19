@@ -34,7 +34,7 @@
             <li onclick="admin_project()">Task</li>
         </ul>
     </nav>
-    <div class="logo2" onclick="logout()">退出登陆</div>
+    <div class="logo2" onclick="logout()">管理员001|退出登陆</div>
 </div>
 
 <div class="d-md-flex color-bg-inset" style="min-height: 100vh;">
