@@ -244,7 +244,7 @@
                     table+="<tr style='width: 670px;height: 60px'>"
                     table+="<td style='height: 40px'><input type='radio' name='tutor' value=\""+studentinfo[0]+"\" ></td>"
                     table += "<td style='height: 40px'>" + studentinfo[0] + "</td>";
-                    table += "<td style='height: 40px'>" + studentinfo[2] + "</td>";
+                    table += "<td style='height: 40px'>" + studentinfo[1] + "</td>";
                     table+="</tr>"
                 }
                 document.getElementById("tutors").innerHTML=table;
