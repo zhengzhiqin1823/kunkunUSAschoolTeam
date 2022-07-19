@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5Utils {
     public static void main(String[] args) {
-        System.out.println(stringToMD5("123456"));
+        System.out.println(stringToMD5("12345"));
     }
 
     public static String stringToMD5(String plainText) {

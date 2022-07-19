@@ -1,7 +1,5 @@
 package com.serverlet;
 
-import com.mapper.adminMapper;
-import com.mapper.studentMapper;
 import com.mapper.teamMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -29,7 +27,7 @@ public class delStudentServlet extends HttpServlet {
         sm.deleteByKey(sid);
         sqs.commit();
         sqs.close();
-        response.sendRedirect("admin.html");
+//        request.getRequestDispatcher("/WEB-INF/adminTask.html").forward(request, response);
     }
 
     @Override
