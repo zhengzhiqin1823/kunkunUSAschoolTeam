@@ -208,8 +208,11 @@
                         table+="<td>"+studentinfo[5]+"</td>";
                         table+="<td>"+studentinfo[6]+"</td>";
                         table+="<td><input  class='demo-button2' type='button' style='margin-top: 0px;'value='报告内容' onclick='reportDetail("+studentinfo[2]+")'></td>"
-                        table+="<td><form action='http://localhost:8080/0628JavaWebExercise_war/ReportJudgeServlet' method='get'>"
+                        table+="<td><form action='http://localhost:8080/0628JavaWebExercise_war/submit' method='get'>"
                         table+="<input style='display: none'; type='text' name='rid' value=\""+studentinfo[0]+"\">"
+                        table+="<input style='display: none'; type='text' name='taskID' value=\""+tid+"\">"
+                        table+="<input style='display: none'; type='text' name='submitID' value=\""+sid+"\">"
+                        table+="<input style='display: none'; type='text' name='teamID' value=\""+studentinfo[0]+"\">"
                         table+="<input class='demo-button2' style='margin-top: 0px;margin-left:-100px ' type='submit' value='审批详情' ></form></td>";
                         table+="</tr>"
                     }
