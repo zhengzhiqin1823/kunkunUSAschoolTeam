@@ -26,7 +26,6 @@ public class TeamSubmitServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-
         //检测用户是否登陆
         boolean isLogin = false;
         HttpSession session = req.getSession();
@@ -34,7 +33,7 @@ public class TeamSubmitServlet extends HttpServlet {
         Object type = session.getAttribute("type");
         Object id = session.getAttribute("id"); //teamID
 
-        if(type.equals("admin")) {
+        if (type!=null&& type.equals("admin")) {
             id = req.getParameter("teamID");
         } else {
             for (Cookie cookie : cookies) {
@@ -82,17 +81,23 @@ public class TeamSubmitServlet extends HttpServlet {
         Date date = new Date(System.currentTimeMillis());
         String time = formatter.format(date);
         int submitStatus;
-        if (type.equals("admin")||(time.compareTo(s.getStartTime()) >= 0 && s.getSubmitStatus().equals("0"))) {
+        if (type.equals("admin") || (time.compareTo(s.getStartTime()) >= 0 && s.getSubmitStatus().equals("0"))) {
             submitStatus = 1;
         } else if (time.compareTo(s.getStartTime()) >= 0 || s.getSubmitStatus().equals("1")) {
             submitStatus = 0;
         } else {
             submitStatus = -1;
         }
-        if (submitStatus==1) {
+        if (submitStatus == 1) {
             opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
+            if(reports.size()==0)
+            {
+                writeHtml2(resp.getWriter(),t,s,team,"",new report(),"","");
+                return;
+            }
 
             List<opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(reports.get(0).getRid());
+
             opiniontutor ot;
             String tutorName;
             String text;
@@ -107,13 +112,13 @@ public class TeamSubmitServlet extends HttpServlet {
                 ot = opiniontutors.get(0);
 //                text = StaticMethods.getTextByFirstFm(ot.getFirstFm(), mapper);
                 text = ot.getData();
-                text = text.replace("\n","<br/>");
+                text = text.replace("\n", "<br/>");
                 tutorMapper tutorMapper = sqs.getMapper(tutorMapper.class);
                 tutorName = tutorMapper.selectByTid(ot.gettID()).get(0).getName();
                 sc = opiniontutors.get(0).getScore() + "";
 
             }
-            if(!type.equals("admin"))
+            if (!type.equals("admin"))
                 writeHtml2(writer, t, s, team, tutorName, reports.get(0), text, sc);
             else {
                 writeHtml3(writer, t, s, team, tutorName, reports.get(0), text, sc);
@@ -125,7 +130,7 @@ public class TeamSubmitServlet extends HttpServlet {
         if (reports.size() == 0) {
             List<reportcahe> reportcahes = reportcaheMapper.selectByTeamIDAndSubmitID(id.toString(), submitID);
             if (reportcahes.size() == 0) {
-                writeHtml(writer, s, "",submitStatus);
+                writeHtml(writer, s, "", submitStatus);
             } else {
 //                String text = StaticMethods.getTextByFirstFm(reportcahes.get(0).getFirstfm(), fragmentMapper);
                 String text = reportcahes.get(0).getData();
@@ -137,7 +142,7 @@ public class TeamSubmitServlet extends HttpServlet {
             String text = reports.get(0).getData();
 //            text = text.substring(0,10);
 
-            writeHtml(writer, s, text,submitStatus);
+            writeHtml(writer, s, text, submitStatus);
         }
     }
 
@@ -218,7 +223,7 @@ public class TeamSubmitServlet extends HttpServlet {
             } else if (reqData.get("type").toString().equals("cache")) {
                 List<reportcahe> reportcahes = reportcaheMapper.selectByTeamIDAndSubmitID(teamID, submitID);
                 if (reportcahes.size() == 0) {
-                    reportcaheMapper.insert(cacheID, submitID, teamID, totalsize,text);
+                    reportcaheMapper.insert(cacheID, submitID, teamID, totalsize, text);
                 } else {
                     cacheID = reportcahes.get(0).getCacheID();
                     reportcaheMapper.deleteByKey(cacheID);
@@ -242,8 +247,8 @@ public class TeamSubmitServlet extends HttpServlet {
 
 
     private void writeHtml(PrintWriter writer, submission s, String text, int submitStatus) {
-        if(text==null)
-            text="";
+        if (text == null)
+            text = "";
         text = text.replace("\r\n", "&#13;");
         text = text.replace('\r', ' ');
         text = text.replace("\n", "&#13;");
@@ -258,7 +263,7 @@ public class TeamSubmitServlet extends HttpServlet {
                         "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/demo-button1.css\">\n" +
                         "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/demo-input1.css\">\n" +
                         "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/demo-navigation.css\">\n" +
-                        "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/scroll.css\">"+
+                        "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/scroll.css\">" +
                         "    <script src=\"scripts/demo-navigation1.js\"></script>\n" +
                         "    <script type=\"text/javascript\" src=\"./scripts/vue.js\"></script>\n" +
                         "    <script src=\"https://unpkg.com/axios/dist/axios.min.js\"></script>\n" +
@@ -298,114 +303,110 @@ public class TeamSubmitServlet extends HttpServlet {
 
 
                         "</textarea>\n" +
-                        "    </div>\n" +
-                        "    <div class=\"file\">\n" +
-                        "        <div>添加附件，只能添加一个文件，多个文件请打包后上传</div><input type=\"file\"\n" +
-                        "                                                  v-on:value=\"upath\" @change=\"preview($event)\" id=\"filepath\"></input>\n" +
                         "    </div>\n");
 
-        if (submitStatus==0)
+        if (submitStatus == 0)
             writer.write(
                     "    <div class=\"button\">\n" +
                             "        <button class=\"demo-button1\" type=\"button\" @click=\"cache\">暂存</button>\n" +
                             "        <button class=\"demo-button1\" type=\"button\" @click=\"submit\">提交</button>\n" +
-                            "    </div>\n" );
+                            "    </div>\n");
         else
             writer.write("    <div class=\"button\">\n" +
                     "        <button class=\"demo-button1\" type=\"button\">未开始</button>\n" +
                     "    </div>\n");
         writer.write(
-                            "</div>\n" +
-                            "</body>\n" +
-                            "<script>\n" +
-                            "    var app = new Vue({\n" +
-                            "        el: '.body',\n" +
-                            "        data: {\n" +
-                            "            submitID: " + s.getSubmitID() + ",\n" +
-                            "            report_text: '" + text + "',\n" +
-                            "            upath: \"\"\n" +
-                            "        },\n" +
-                            "        methods: {\n" +
-                            "            submit: function () {\n" +
-                            "                alert(\"submit!\")\n" +
-                            "                this.post_data()\n" +
-                            "            },\n" +
-                            "            cache: function () {\n" +
-                            "                alert(\"cache!\")\n" +
-                            "                this.post_cache()\n" +
-                            "            },\n" +
-                            "\n" +
-                            "            //上传文件函数\n" +
-                            "            upload: function () {\n" +
-                            "                var zipFormData = new FormData();\n" +
-                            "                zipFormData.append('filename', this.upath); //filename是键，file是值，就是要传的文件，test.zip是要传的文件名\n" +
-                            "                let config = { headers: { 'Content-Type': 'multipart/form-data' } };\n" +
-                            "                this.uping = 1;\n" +
-                            "                this.$http.post('http://localhost:42565/home/up', zipFormData, config).then(function (response) {\n" +
-                            "                    console.log(response);\n" +
-                            "                    console.log(response.data);\n" +
-                            "                    console.log(response.bodyText);\n" +
-                            "                    var resultobj = response.data;\n" +
-                            "                    this.uping = 0;\n" +
-                            "                    this.result = resultobj.msg;\n" +
-                            "                })\n" +
-                            "            },\n" +
-                            "\n" +
-                            "            //    post上传数据\n" +
-                            "            post_data: function () {\n" +
-                            "                let element = document.querySelector(\"#text\");" +
-                            "                let data = {\n" +
-                            "                    'type': \"data\",\n" +
-                            "                    'submitID': this.submitID,\n" +
-                            "                    'text': element.value\n" +
-                            "                }\n" +
-                            "                   alert(element.value);" +
-                            "                axios({\n" +
-                            "                    method: \"post\",\n" +
-                            "                    url: \"/0628JavaWebExercise_war/submit?type=data\",\n" +
-                            "                    data\n" +
-                            "                }).then((res) => {\n" +
-                            "                    alert(res.data)\n" +
-                            "                })\n" +
-                            "            },\n" +
-                            "            post_cache: function () {\n" +
-                            "                let element = document.querySelector(\"#text\");" +
-                            "                let data = {\n" +
-                            "                    'type': \"cache\",\n" +
-                            "                    'submitID': this.submitID,\n" +
-                            "                    'text': element.value\n" +
-                            "                }\n" +
-                            "                alert(element.value);" +
-                            "                axios\n" +
-                            "                    .post('/0628JavaWebExercise_war/submit?type=cache', data)\n" +
-                            "                    .then((res) => {\n" +
-                            "                        alert(res.data)\n" +
-                            "                    })\n" +
-                            "            },\n" +
-                            "             initinfor(){\n" +
-                            "                let element = document.querySelector(\"#text\");\n" +
-                            "                element.innerHTML =' " + text + "';\n" +
-                            "            }\n" +
-                            "        }\n" +
-                            "    })\n" +
+                "</div>\n" +
+                        "</body>\n" +
+                        "<script>\n" +
+                        "    var app = new Vue({\n" +
+                        "        el: '.body',\n" +
+                        "        data: {\n" +
+                        "            submitID: " + s.getSubmitID() + ",\n" +
+                        "            report_text: '" + text + "',\n" +
+                        "            upath: \"\"\n" +
+                        "        },\n" +
+                        "        methods: {\n" +
+                        "            submit: function () {\n" +
+                        "                alert(\"submit!\")\n" +
+                        "                this.post_data()\n" +
+                        "            },\n" +
+                        "            cache: function () {\n" +
+                        "                alert(\"cache!\")\n" +
+                        "                this.post_cache()\n" +
+                        "            },\n" +
+                        "\n" +
+                        "            //上传文件函数\n" +
+                        "            upload: function () {\n" +
+                        "                var zipFormData = new FormData();\n" +
+                        "                zipFormData.append('filename', this.upath); //filename是键，file是值，就是要传的文件，test.zip是要传的文件名\n" +
+                        "                let config = { headers: { 'Content-Type': 'multipart/form-data' } };\n" +
+                        "                this.uping = 1;\n" +
+                        "                this.$http.post('http://localhost:42565/home/up', zipFormData, config).then(function (response) {\n" +
+                        "                    console.log(response);\n" +
+                        "                    console.log(response.data);\n" +
+                        "                    console.log(response.bodyText);\n" +
+                        "                    var resultobj = response.data;\n" +
+                        "                    this.uping = 0;\n" +
+                        "                    this.result = resultobj.msg;\n" +
+                        "                })\n" +
+                        "            },\n" +
+                        "\n" +
+                        "            //    post上传数据\n" +
+                        "            post_data: function () {\n" +
+                        "                let element = document.querySelector(\"#text\");" +
+                        "                let data = {\n" +
+                        "                    'type': \"data\",\n" +
+                        "                    'submitID': this.submitID,\n" +
+                        "                    'text': element.value\n" +
+                        "                }\n" +
+                        "                   alert(element.value);" +
+                        "                axios({\n" +
+                        "                    method: \"post\",\n" +
+                        "                    url: \"/0628JavaWebExercise_war/submit?type=data\",\n" +
+                        "                    data\n" +
+                        "                }).then((res) => {\n" +
+                        "                    alert(res.data)\n" +
+                        "                })\n" +
+                        "            },\n" +
+                        "            post_cache: function () {\n" +
+                        "                let element = document.querySelector(\"#text\");" +
+                        "                let data = {\n" +
+                        "                    'type': \"cache\",\n" +
+                        "                    'submitID': this.submitID,\n" +
+                        "                    'text': element.value\n" +
+                        "                }\n" +
+                        "                alert(element.value);" +
+                        "                axios\n" +
+                        "                    .post('/0628JavaWebExercise_war/submit?type=cache', data)\n" +
+                        "                    .then((res) => {\n" +
+                        "                        alert(res.data)\n" +
+                        "                    })\n" +
+                        "            },\n" +
+                        "             initinfor(){\n" +
+                        "                let element = document.querySelector(\"#text\");\n" +
+                        "                element.innerHTML =' " + text + "';\n" +
+                        "            }\n" +
+                        "        }\n" +
+                        "    })\n" +
 
-                            "\n" +
-                            "</script>\n" +
-                            "\n" +
-                            "</html>"
+                        "\n" +
+                        "</script>\n" +
+                        "\n" +
+                        "</html>"
 
-            );
+        );
     }
 
     private void writeHtml2(PrintWriter writer, task t, submission s, team team,
                             String tutorName,
                             report report, String text, String score) {
-        if(text==null)
-            text="";
+        if (text == null)
+            text = "";
         String s1 = report.getData();
 
-        if(s1!=null)
-            s1 = s1.replace("\n","<br/>");
+        if (s1 != null)
+            s1 = s1.replace("\n", "<br/>");
         else s1 = "";
         writer.write("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -416,7 +417,7 @@ public class TeamSubmitServlet extends HttpServlet {
                 "    <link rel=\"stylesheet\" href=\"./css/TeamReport.css\" />\n" +
                 "    <link rel=\"stylesheet\" href=\"./css/demo-navigation.css\" />\n" +
                 "    <link rel=\"stylesheet\" href=\"./css/demo-button1.css\">\n" +
-                "<link type=\"text/css\" rel=\"stylesheet\" href=\"../css/scroll.css\">"+
+                "<link type=\"text/css\" rel=\"stylesheet\" href=\"../css/scroll.css\">" +
                 "    <script src=\"scripts/demo-navigation1.js\"></script>" +
                 "</head>\n" +
                 "\n" +
@@ -448,16 +449,11 @@ public class TeamSubmitServlet extends HttpServlet {
                 "    <div class=\"report\">\n" +
                 "        <div class=\"team_and_time\">\n" +
                 "            <div class=\"team\">" + team.getName() + "</div>\n" +
-                "            <div class=\"time\">" + report.getSubmitTime().substring(0, 10) + "</div>\n" +
+                "            <div class=\"time\">" + report.getSubmitTime() + "</div>\n" +
                 "        </div>\n" +
                 "        <div class=\"data\">\n" +
-                s1+
+                s1 +
                 "\n" +
-                "        </div>\n" +
-                "        <div class=\"file\">\n" +
-                "            <div>附件</div>\n" +
-                "            <div>实验报告.zip 128KB</div>\n" +
-                "            <button class=\"demo-button2\">下载附件</button>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "\n" +
@@ -488,15 +484,16 @@ public class TeamSubmitServlet extends HttpServlet {
                         "</html>");
 
     }
+
     private void writeHtml3(PrintWriter writer, task t, submission s, team team,
                             String tutorName,
                             report report, String text, String score) {
-        if(text==null)
-            text="";
+        if (text == null)
+            text = "";
         String s1 = report.getData();
 
-        if(s1!=null)
-            s1 = s1.replace("\n","<br/>");
+        if (s1 != null)
+            s1 = s1.replace("\n", "<br/>");
         else s1 = "";
         writer.write("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -507,7 +504,7 @@ public class TeamSubmitServlet extends HttpServlet {
                 "    <link rel=\"stylesheet\" href=\"./css/TeamReport.css\" />\n" +
                 "    <link rel=\"stylesheet\" href=\"./css/demo-navigation.css\" />\n" +
                 "    <link rel=\"stylesheet\" href=\"./css/demo-button1.css\">\n" +
-                "<link type=\"text/css\" rel=\"stylesheet\" href=\"../css/scroll.css\">"+
+                "<link type=\"text/css\" rel=\"stylesheet\" href=\"../css/scroll.css\">" +
                 "    <script src=\"scripts/demo-navigation1.js\"></script>" +
                 "</head>\n" +
                 "\n" +
@@ -543,14 +540,10 @@ public class TeamSubmitServlet extends HttpServlet {
                 "            <div class=\"time\">" + report.getSubmitTime().substring(0, 10) + "</div>\n" +
                 "        </div>\n" +
                 "        <div class=\"data\">\n" +
-                s1+
+                s1 +
                 "\n" +
                 "        </div>\n" +
-                "        <div class=\"file\">\n" +
-                "            <div>附件</div>\n" +
-                "            <div>实验报告.zip 128KB</div>\n" +
-                "            <button class=\"demo-button2\">下载附件</button>\n" +
-                "        </div>\n" +
+
                 "    </div>\n" +
                 "\n" +
                 "    <div class=\"tutor\">\n" +
