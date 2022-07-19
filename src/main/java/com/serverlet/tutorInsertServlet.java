@@ -36,9 +36,7 @@ public class tutorInsertServlet extends HttpServlet {
         if(tid.equals("default"))
         {
             List<tutor> tutors = mapper.selectAll();
-            tutor t=tutors.get(tutors.size()-1);
-            String s=t.getTid();
-            int num=Integer.parseInt(s);
+            int num=tutors.size();
             num++;
             id+=num;
             System.out.println(id);
@@ -55,6 +53,7 @@ public class tutorInsertServlet extends HttpServlet {
                     return;
                 }
             }
+            id+=tid;
         }
         mapper.insert(id,"123456",name,email,tel);
         sqs.commit();
