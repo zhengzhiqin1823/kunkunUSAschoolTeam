@@ -94,7 +94,6 @@ public class teamAdminServlet extends HttpServlet {
             }
             case "5":
             {
-                System.out.println("ento");
                 mapper.updateEmail(tid,email);
                 mapper.updateName(tid,name);
                 mapper.updateTel(tid,tel);

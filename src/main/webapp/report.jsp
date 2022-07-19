@@ -70,7 +70,7 @@
         -->
         <div id="project-tabContent" class="tab-content" style="width: 1270px">
             <div style="display: none;margin-left:165px;margin-top:145px;width: 750px;height: 450px;z-index: 20;position: fixed;background-color: #c8cbcf;" id="Tutorselect">
-                <table id="tutors" style="width: 670px;height:360px;margin-top: 20px;margin-left: 40px">
+                <table id="tutors" style="width: 670px;margin-top: 20px;margin-left: 40px;">
                 </table>
                 <div style="bottom: 0;position:relative;">
                     <tr>
