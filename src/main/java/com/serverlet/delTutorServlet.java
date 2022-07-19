@@ -28,7 +28,7 @@ public class delTutorServlet extends HttpServlet {
         mapper.deleteByTid(tid);
         sqs.commit();
         sqs.close();
-        response.sendRedirect("admin.html");
+        response.sendRedirect("/0628JavaWebExercise_war/admin/tutor");
     }
 
     @Override

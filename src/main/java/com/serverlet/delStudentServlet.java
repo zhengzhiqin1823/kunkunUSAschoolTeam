@@ -28,6 +28,7 @@ public class delStudentServlet extends HttpServlet {
         sqs.commit();
         sqs.close();
 //        request.getRequestDispatcher("/WEB-INF/adminTask.html").forward(request, response);
+        response.sendRedirect("/0628JavaWebExercise_war/admin/team");
     }
 
     @Override
