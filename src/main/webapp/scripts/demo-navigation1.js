@@ -36,6 +36,10 @@ function admin_project()
 {
     location.assign("/0628JavaWebExercise_war/admin/task")
 }
+function admin_personal()
+{
+    location.assign("/0628JavaWebExercise_war/admin/personal")
+}
 
 function logout()
 {

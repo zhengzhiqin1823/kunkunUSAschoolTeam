@@ -18,4 +18,22 @@
     <delete id="deleteById" parameterType="com.test.pojo.admin">
         delete from admin where aid=#{aid};
     </delete>
+
+    <update id="updatePassword" parameterType="com.test.pojo.team">
+        update admin set password=#{password} where aid=#{aid};
+    </update>
+    <update id="updateEmail" parameterType="com.test.pojo.team">
+        update admin set email=#{email} where aid=#{aid};
+    </update>
+    <update id="updateName" parameterType="com.test.pojo.team">
+        update admin set name=#{name} where aid=#{aid};
+    </update>
+    <update id="updateTel" parameterType="com.test.pojo.team">
+        update admin set tel=#{tel} where aid=#{aid};
+    </update>
+    <update id="updatePass" parameterType="com.test.pojo.team">
+        update  admin
+        set password="123456"
+        where aid=#{aid}
+    </update>
 </mapper>

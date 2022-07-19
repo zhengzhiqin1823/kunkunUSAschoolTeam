@@ -55,7 +55,7 @@
     <!--
         显示项目概览的部分
     -->
-    <div class="flex-auto col-md-8 col-lg-8 px-3 px-lg-5">
+    <div style="width:65%;margin:auto;margin-top:2ch;">
 
         <!--
             项目选项栏, 用于选择全部项目, 未结题项目等: project-tab
@@ -68,7 +68,7 @@
         <!--
             项目页表
         -->
-        <div id="project-tabContent" class="tab-content" style="width: 1270px">
+        <div id="project-tabContent" class="tab-content">
             <div style="display: none;margin-left:165px;margin-top:145px;width: 750px;height: 450px;z-index: 20;position: fixed;background-color: #c8cbcf;" id="Tutorselect">
                 <table id="tutors" style="width: 670px;margin-top: 20px;margin-left: 40px;">
                 </table>

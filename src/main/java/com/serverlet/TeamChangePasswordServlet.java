@@ -1,7 +1,9 @@
 package com.serverlet;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mapper.adminMapper;
 import com.mapper.teamMapper;
+import com.test.pojo.admin;
 import com.test.pojo.team;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -35,39 +37,68 @@ public class TeamChangePasswordServlet extends HttpServlet {
             return;
         }
 
+
         req.setCharacterEncoding("UTF-8");//请求编码类型
         resp.setCharacterEncoding("UTF-8");//响应编码类型
 
         JSONObject reqData = HttpGetJson.getJson(req);
         PrintWriter p = resp.getWriter();
 
-        String old = reqData.get("old").toString();
+        String type = req.getParameter("user");
 
-        String New = reqData.get("new").toString();
+        if(type==null) {
+            String old = reqData.get("old").toString();
 
-        String resource = "mybatis-config.xml";
-        InputStream is = Resources.getResourceAsStream(resource);
-        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
-        //获取SqlSession对象，来执行sql
-        SqlSession sqs = factory.openSession();
-        //执行sql
-        teamMapper mapper = sqs.getMapper(teamMapper.class);
+            String New = reqData.get("new").toString();
 
-        HttpSession session = req.getSession();
-        Object id = session.getAttribute("id");
-        String teamID = id.toString();
-        team team = mapper.selectByKey(teamID).get(0);
+            String resource = "mybatis-config.xml";
+            InputStream is = Resources.getResourceAsStream(resource);
+            SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
+            //获取SqlSession对象，来执行sql
+            SqlSession sqs = factory.openSession();
+            //执行sql
+            teamMapper mapper = sqs.getMapper(teamMapper.class);
+
+            HttpSession session = req.getSession();
+            Object id = session.getAttribute("id");
+            String teamID = id.toString();
+            team team = mapper.selectByKey(teamID).get(0);
 
 
-        if (team.getPassword().equals(MD5Utils.stringToMD5( old))) {
-            mapper.updatePassword(teamID, MD5Utils.stringToMD5(New));
-            sqs.commit();
-            p.write("修改成功！");
+            if (team.getPassword().equals(MD5Utils.stringToMD5(old))) {
+                mapper.updatePassword(teamID, MD5Utils.stringToMD5(New));
+                sqs.commit();
+                p.write("修改成功！");
+            } else {
+                p.write("原始密码错误！");
+            }
+            sqs.close();
         }
         else {
-            p.write("原始密码错误！");
-        }
-        sqs.close();
+            String old = reqData.get("old").toString();
+            String New = reqData.get("new").toString();
+            String resource = "mybatis-config.xml";
+            InputStream is = Resources.getResourceAsStream(resource);
+            SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
+            //获取SqlSession对象，来执行sql
+            SqlSession sqs = factory.openSession();
+            //执行sql
+            adminMapper mapper = sqs.getMapper(adminMapper.class);
 
+            HttpSession session = req.getSession();
+            Object id = session.getAttribute("id");
+            String aid = id.toString();
+            admin admin = mapper.selectById(aid).get(0);
+
+
+            if (admin.getPassword().equals(MD5Utils.stringToMD5(old))) {
+                mapper.updatePassword(aid, MD5Utils.stringToMD5(New));
+                sqs.commit();
+                p.write("修改成功！");
+            } else {
+                p.write("原始密码错误！");
+            }
+            sqs.close();
+        }
     }
 }
