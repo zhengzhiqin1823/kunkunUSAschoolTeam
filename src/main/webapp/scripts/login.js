@@ -24,8 +24,6 @@ function login(){
                 console.log(xmlHttpLogin.responseText)
                 if(xmlHttpLogin.responseText=="team") {
                     location.assign("/0628JavaWebExercise_war/team/home")
-                }else if(xmlHttpLogin.responseText=="tutor"){
-                    location.assign("../teacherHome.html")
                 }
                 else if(xmlHttpLogin.responseText=="admin"){
                     location.assign("/0628JavaWebExercise_war/admin/team")

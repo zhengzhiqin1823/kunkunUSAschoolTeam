@@ -112,8 +112,8 @@ body {
 .box .btn-box > #submit > .button {
     width: 120px;
     height: 35px;
-    border: 1px solid rgba(197, 81, 58,0.8);
-    background: rgba(197, 81, 58,0.5);
+    border: 1px solid rgb(58, 169, 197);
+    background: rgb(58, 197, 192);
     color: rgba(255,255,255,0.9);
     border-radius: 5px;
     transition: 0.2s;
@@ -123,6 +123,6 @@ body {
 }
 
 .box .btn-box > #submit > .button:hover {
-    border: 1px solid rgba(248, 108, 76, 0.8);
-    background: rgba(248, 108, 76, 0.5);
+    border: 1px solid rgb(76, 248, 234);
+    background: rgb(76, 248, 228);
 }
