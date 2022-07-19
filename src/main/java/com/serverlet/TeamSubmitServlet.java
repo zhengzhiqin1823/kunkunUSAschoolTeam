@@ -82,7 +82,7 @@ public class TeamSubmitServlet extends HttpServlet {
         Date date = new Date(System.currentTimeMillis());
         String time = formatter.format(date);
         int submitStatus;
-        if (time.compareTo(s.getStartTime()) >= 0 && s.getSubmitStatus().equals("0")) {
+        if (type.equals("admin")||(time.compareTo(s.getStartTime()) >= 0 && s.getSubmitStatus().equals("0"))) {
             submitStatus = 1;
         } else if (time.compareTo(s.getStartTime()) >= 0 || s.getSubmitStatus().equals("1")) {
             submitStatus = 0;
