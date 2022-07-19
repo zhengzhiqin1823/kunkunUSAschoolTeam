@@ -25,26 +25,32 @@ public class TeamSubmitServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
+
         //检测用户是否登陆
         boolean isLogin = false;
         HttpSession session = req.getSession();
         Cookie[] cookies = req.getCookies();
+        Object type = session.getAttribute("type");
         Object id = session.getAttribute("id"); //teamID
-        System.out.println(id);
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("id")) {
-                if (cookie.getValue().equals(id)) {
-                    isLogin = true;
-                    break;
+
+        if(type.equals("admin")) {
+            id = req.getParameter("teamID");
+        } else {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    if (cookie.getValue().equals(id)) {
+                        isLogin = true;
+                        break;
+                    }
                 }
             }
+            //如果没有登陆,则返回登陆
+            if (!isLogin) {
+                resp.sendRedirect("/0628JavaWebExercise_war");
+                return;
+            }
         }
-        //如果没有登陆,则返回登陆
-        if (!isLogin) {
-            resp.sendRedirect("/0628JavaWebExercise_war");
-            return;
-        }
-
         String submitID = req.getParameter("submitID");
         String taskID = req.getParameter("taskID");
 
