@@ -6,12 +6,11 @@
     <link rel="shortcut icon" href="../main.ico" type="image/x-icon"/>
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <!--    <link rel="stylesheet". href="./css/ReadTeamReport.css">-->
+    <link rel="stylesheet" href="../css/ReadTeamReport.css">
     <link rel="stylesheet" href="../css/demo-navigation.css">
     <link rel="stylesheet" href="../css/demo-button1.css ">
-    <link rel="stylesheet" href="../css/scroll.css">
-    <script src="../scripts/jquery.slim.min.js"></script>
-    <script src="../scripts/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="../scripts/demo-navigation1.js"></script>
     <title>后台管理系统</title>
 </head>
@@ -39,16 +38,16 @@
 
         <div id="student_admin" class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-home-tab"
              style="z-index: 1;">
-            <dialog style="display: none;margin-top: 0%;margin-left: 40%;width: 400px;height: 230px;z-index:20;position: fixed ;"
-                    id="StudentInfoInsert">
+            <dialog style="display: none;margin-top: 0%;margin-left: 40%;width: 400px;height: 200px;z-index:20;position: fixed ;border: #1d2124 solid 2px"
+                    id="StudentInfoUpdate">
                 <div>
-                    团队编号<input type="text" id="InsertStudentId" value="default">
-                    <span id="InsertStudentMsg"></span><br>
-                    团队名称<input type="text" id="InsertStudentName"><br>
-                    团队邮箱<input type="text" id="InsertStudentEmail"><br>
-                    团队电话<input type="text" id="InsertStudentTel"><br>
-                    <input class="demo-button3" type="button" value="确认提交" id="StudentInfoInsertConfirm">
-                    <input class="demo-button3" type="button" value="关闭窗口" id="StudentInfoInsertCancel">
+                    <input type="text" id="UpdateStudentId" value="default" style="display:none">
+                    团队名称<input type="text" id="UpdateStudentName"><br>
+                    团队邮箱<input type="text" id="UpdateStudentEmail"><br>
+                    团队电话<input type="text" id="UpdateStudentTel"><br>
+                    <span id="UpdateStudentMsg"></span><br>
+                    <input class="demo-button3" type="button" value="确认提交" id="StudentInfoUpdateConfirm">
+                    <input class="demo-button3" type="button" value="关闭窗口" id="StudentInfoUpdateCancel">
                 </div>
             </dialog>
             <div>
@@ -131,6 +130,7 @@
                         table += "<td>" + studentinfo[j] + "</td>";
                     }
                     table += "<td><input class=\"demo-button3\" type='button' value='重置密码' style='width: 100px;height: 40px' onclick=\"UpdateStudent(" + studentinfo[0] + ")\"></td>"//弹出编辑框
+                    table += "<td><input class=\"demo-button3\" type='button' value='修改信息' style='width: 100px;height: 40px;margin-left: -60px' onclick=\"UpdateStudentInfo(" + studentinfo[0] + ")\"></td>"//弹出编辑框
                     table += "<td><form method='get' action='/0628JavaWebExercise_war/delStudentServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
                     table += "<input style='display:none' name='sid' value=" + studentinfo[0] + ">";
                     table += "<input class=\"demo-button3\" type='submit' value='删除' style='margin-left:-60px;width: 60px;height: 40px''>";
@@ -162,49 +162,6 @@
         }
         xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=2&tid=" + tid);
         xhttp.send();
-    }
-
-    //新增团队
-    document.getElementById("InsertStudent").onclick = function () {
-        document.getElementById("StudentInfoInsert").style.display = "block";
-    }
-    //提交新增信息
-    document.getElementById("StudentInfoInsertConfirm").onclick = function () {
-        let id = document.getElementById("InsertStudentId").value;
-        let name = document.getElementById("InsertStudentName").value;
-        let email = document.getElementById("InsertStudentEmail").value;
-        let tel = document.getElementById("InsertStudentTel").value;
-        if (id == "" || name == "" || email == "" || tel == "") {
-            alert("请输入详细信息!");
-            return;
-        }
-        let xhttp;
-        if (window.XMLHttpRequest) {
-            xhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=3&tid=" + id + "&name=" + name + "&email=" + email + "&tel=" + tel);
-        xhttp.send();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                let str = this.responseText;
-                if (str == "1") {
-                    document.getElementById("InsertStudentMsg").innerText = "团队已存在";
-                } else {
-                    document.getElementById("InsertStudentMsg").innerText = "创建成功";
-                }
-            }
-        }
-    }
-    //关闭窗口
-    document.getElementById("StudentInfoInsertCancel").onclick = function () {
-        document.getElementById("StudentInfoInsert").style.display = "none";
-        document.getElementById("InsertStudentId").value = "default";
-        document.getElementById("InsertStudentName").value = "";
-        document.getElementById("InsertStudentEmail").value = "";
-        document.getElementById("InsertStudentTel").value = "";
     }
     //搜索团队(编号)
     document.getElementById("SelectStudentBySid").onfocus = function () {
@@ -247,19 +204,70 @@
                             table += "<td>" + studentinfo[j] + "</td>";
                         }
                         table += "<td><input class=\"demo-button3\" type='button' value='重置密码' style='width: 100px;height: 40px' onclick=\"UpdateStudent(" + studentinfo[0] + ")\"></td>"//弹出编辑框
-                        table += "<td><form method='get' action='http://localhost:8080/0628JavaWebExercise_war/delStudentServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
+                        table += "<td><input class=\"demo-button3\" type='button' value='修改信息' style='width: 100px;height: 40px;margin-left: -60px' onclick=\"UpdateStudentInfo(" + studentinfo[0] + ")\"></td>"//弹出编辑框
+                        table += "<td><form method='get' action='/0628JavaWebExercise_war/delStudentServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
                         table += "<input style='display:none' name='sid' value=" + studentinfo[0] + ">";
                         table += "<input class=\"demo-button3\" type='submit' value='删除' style='margin-left:-60px;width: 60px;height: 40px''>";
                         table += "</form>";
                         table += "</td></tr>";
                     }
                     document.getElementById("students").innerHTML = table;
-
-                    //let table="<tr><th>学号</th><th>姓名</th><th>邮箱</th><th>电话</th></tr>";
-                    //for(int i)
                 }
             }
         }
+    }
+    function UpdateStudentInfo(tid)
+    {
+        let xhttp;
+        if (window.XMLHttpRequest) {
+            xhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=4&tid=" + tid);
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let str = this.responseText;
+                let student = str.split(";")
+                let studentinfo = student[0].split(",");
+                document.getElementById("UpdateStudentName").value=studentinfo[2];
+                document.getElementById("UpdateStudentId").value=studentinfo[0];
+                document.getElementById("UpdateStudentEmail").value=studentinfo[1];
+                document.getElementById("UpdateStudentTel").value=studentinfo[3];
+            }
+        }
+        document.getElementById("StudentInfoUpdate").style.display="block";
+        document.getElementById("UpdateStudentMsg").innerText="";
+    }
+    document.getElementById("StudentInfoUpdateConfirm").onclick=function (){
+        let name=document.getElementById("UpdateStudentName").value;
+        let id=document.getElementById("UpdateStudentId").value;
+        let email=document.getElementById("UpdateStudentEmail").value;
+        let tel=document.getElementById("UpdateStudentTel").value;
+        let xhttp;
+        if (window.XMLHttpRequest) {
+            xhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/teamAdminServlet?ret=5&tid="+id+"&email="+email+"&tel="+tel+"&name="+name);
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let str=this.responseText;
+                if(str=="1")
+                {
+                    document.getElementById("UpdateStudentMsg").style.color="red";
+                    document.getElementById("UpdateStudentMsg").innerText="修改成功，请刷新";
+                }
+            }
+        }
+    }
+    document.getElementById("StudentInfoUpdateCancel").onclick=function () {
+        document.getElementById("StudentInfoUpdate").style.display="none";
     }
 </script>
 </body>

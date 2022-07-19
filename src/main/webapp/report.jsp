@@ -70,7 +70,7 @@
         -->
         <div id="project-tabContent" class="tab-content" style="width: 1270px">
             <div style="display: none;margin-left:165px;margin-top:145px;width: 750px;height: 450px;z-index: 20;position: fixed;background-color: #c8cbcf;" id="Tutorselect">
-                <table id="tutors" style="width: 670px;height:360px;margin-top: 20px;margin-left: 40px">
+                <table id="tutors" style="width: 670px;margin-top: 20px;margin-left: 40px;">
                 </table>
                 <div style="bottom: 0;position:relative;">
                     <tr>
@@ -244,7 +244,7 @@
                     table+="<tr style='width: 670px;height: 60px'>"
                     table+="<td style='height: 40px'><input type='radio' name='tutor' value=\""+studentinfo[0]+"\" ></td>"
                     table += "<td style='height: 40px'>" + studentinfo[0] + "</td>";
-                    table += "<td style='height: 40px'>" + studentinfo[2] + "</td>";
+                    table += "<td style='height: 40px'>" + studentinfo[1] + "</td>";
                     table+="</tr>"
                 }
                 document.getElementById("tutors").innerHTML=table;

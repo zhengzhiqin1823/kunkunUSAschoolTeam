@@ -92,6 +92,13 @@ public class teamAdminServlet extends HttpServlet {
                 }
                 break;
             }
+            case "5":
+            {
+                mapper.updateEmail(tid,email);
+                mapper.updateName(tid,name);
+                mapper.updateTel(tid,tel);
+                writer.write("1");
+                break;            }
         }
         sqs.commit();
         sqs.close();

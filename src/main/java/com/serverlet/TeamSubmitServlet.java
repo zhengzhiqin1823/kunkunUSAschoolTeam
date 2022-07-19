@@ -474,7 +474,7 @@ public class TeamSubmitServlet extends HttpServlet {
                         "        </div>\n" +
                         "    </div>\n" +
                         "    <div class=\"button\">\n" +
-                        "        <button class=\"demo-button2\" onclick=\"Home_click()\">返回</button>\n" +
+                        "        <button class=\"demo-button2\" onclick=\"admin_project()\">返回</button>\n" +
                         "    </div>" +
                         "</div>\n" +
                         "\n" +
