@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="css/JudgeDetail.css" />
     <link rel="stylesheet" href="./css/demo-navigation.css" />
     <link rel="stylesheet" href="./css/demo-button1.css">
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/demo-navigation1.js"></script>
 </head>
 
 <body onload="init(${sid},${tid})">
