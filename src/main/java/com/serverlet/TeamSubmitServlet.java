@@ -113,7 +113,11 @@ public class TeamSubmitServlet extends HttpServlet {
                 sc = opiniontutors.get(0).getScore() + "";
 
             }
-            writeHtml2(writer, t, s, team, tutorName, reports.get(0), text, sc);
+            if(!type.equals("admin"))
+                writeHtml2(writer, t, s, team, tutorName, reports.get(0), text, sc);
+            else {
+                writeHtml3(writer, t, s, team, tutorName, reports.get(0), text, sc);
+            }
             return;
         }
 
@@ -423,6 +427,98 @@ public class TeamSubmitServlet extends HttpServlet {
                 "            <ul>\n" +
                 "                <li onclick = Home_click()>Project</li>\n" +
                 "                <li onclick = Personal_click()>Personal</li>\n" +
+                "            </ul>\n" +
+                "        </nav>\n" +
+                "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
+                "</div>" +
+
+                "<div class=\"bottom\" >\n" +
+                "    <div class=\"report_name\">" + t.getName() + "</div>\n" +
+                "    <div class=\"report\" id=\"description\">\n" +
+                "        <div class=\"team_and_time\">\n" +
+                "            <div class=\"team\">" + s.getName() + "</div>\n" +
+                "            <div class=\"time\">" + s.getDeadLine() + "</div>\n" +
+                "        </div>\n" +
+                "        <div class=\"data\">\n" +
+                s.getDescription() +
+                "\n" +
+                "        </div>\n" +
+                "    </div>\n" +
+                "\n" +
+                "    <div class=\"report\">\n" +
+                "        <div class=\"team_and_time\">\n" +
+                "            <div class=\"team\">" + team.getName() + "</div>\n" +
+                "            <div class=\"time\">" + report.getSubmitTime().substring(0, 10) + "</div>\n" +
+                "        </div>\n" +
+                "        <div class=\"data\">\n" +
+                s1+
+                "\n" +
+                "        </div>\n" +
+                "        <div class=\"file\">\n" +
+                "            <div>附件</div>\n" +
+                "            <div>实验报告.zip 128KB</div>\n" +
+                "            <button class=\"demo-button2\">下载附件</button>\n" +
+                "        </div>\n" +
+                "    </div>\n" +
+                "\n" +
+                "    <div class=\"tutor\">\n" +
+                "        <div class=\"title\">\n" +
+                "            <div class=\"t\">导师评价 <span>" +
+                tutorName +
+                "               </span></div>\n" +
+                "            <div class=\"score\">得分：<span>");
+        if (!score.equals("-1")) {
+            writer.write(score);
+        }
+        writer.write(
+                "</span></div>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"data-judgement\">" +
+                        text +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "    <div class=\"button\">\n" +
+                        "        <button class=\"demo-button2\" onclick=\"admin_project()\">返回</button>\n" +
+                        "    </div>" +
+                        "</div>\n" +
+                        "\n" +
+                        "\n" +
+                        "</body>\n" +
+                        "\n" +
+                        "</html>");
+
+    }
+    private void writeHtml3(PrintWriter writer, task t, submission s, team team,
+                            String tutorName,
+                            report report, String text, String score) {
+        if(text==null)
+            text="";
+        String s1 = report.getData();
+
+        if(s1!=null)
+            s1 = s1.replace("\n","<br/>");
+        else s1 = "";
+        writer.write("<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>报告页面</title>\n" +
+                "    <link rel=\"stylesheet\" href=\"./css/TeamReport.css\" />\n" +
+                "    <link rel=\"stylesheet\" href=\"./css/demo-navigation.css\" />\n" +
+                "    <link rel=\"stylesheet\" href=\"./css/demo-button1.css\">\n" +
+                "<link type=\"text/css\" rel=\"stylesheet\" href=\"../css/scroll.css\">"+
+                "    <script src=\"scripts/demo-navigation1.js\"></script>" +
+                "</head>\n" +
+                "\n" +
+                "<body>\n" +
+                "<div class=\"demo-navigation1\" >\n" +
+                "        <div class=\"logo\">坤坤的美国校队</div>\n" +
+                "        <nav>\n" +
+                "            <ul>\n" +
+                "                <li onclick = admin_team()>Team</li>\n" +
+                "                <li onclick = admin_tutor()>Tutor</li>\n" +
+                "                <li onclick = admin_project()>Project</li>\n" +
                 "            </ul>\n" +
                 "        </nav>\n" +
                 "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
