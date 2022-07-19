@@ -96,14 +96,14 @@
   align-content: center;
 }
 
-
 .demo-button2 {
-  transform: translateX(50%);
-  width:120px;
-  height:40px;
+  width:125px;
+  height:45px;
   display: block;
+  margin-top: 30px;
+  margin-left: 300px;
   text-align:center;
-  font-size:15px;
+  font-size:18px;
   font-family:verdana;
   color: #ffffff;
   border:1px solid #3535357d;

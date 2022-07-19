@@ -259,8 +259,8 @@ public class TeamSubmitServlet extends HttpServlet {
                         "        <div class=\"logo\">坤坤的美国校队</div>\n" +
                         "        <nav>\n" +
                         "            <ul>\n" +
-                        "                <li onclick = Home_click()>Home</li>\n" +
-                        "                <li onclick = Personal_click()>Projects</li>\n" +
+                        "                <li onclick = Home_click()>Project</li>\n" +
+                        "                <li onclick = Personal_click()>Personal</li>\n" +
                         "            </ul>\n" +
                         "        </nav>\n" +
                         "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
@@ -415,8 +415,8 @@ public class TeamSubmitServlet extends HttpServlet {
                 "        <div class=\"logo\">坤坤的美国校队</div>\n" +
                 "        <nav>\n" +
                 "            <ul>\n" +
-                "                <li onclick = Home_click()>Home</li>\n" +
-                "                <li onclick = Personal_click()>Projects</li>\n" +
+                "                <li onclick = Home_click()>Project</li>\n" +
+                "                <li onclick = Personal_click()>Personal</li>\n" +
                 "            </ul>\n" +
                 "        </nav>\n" +
                 "        <div class=\"logo2\" onclick=\"logout()\">退出登陆</div>" +
