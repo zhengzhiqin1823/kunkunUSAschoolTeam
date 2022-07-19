@@ -243,7 +243,7 @@ public class TeamSubmitServlet extends HttpServlet {
                         "<html lang=\"en\">\n" +
                         "<head>\n" +
                         "    <meta charset=\"UTF-8\">\n" +
-                        "    <title>Title</title>\n" +
+                        "    <title>项目提交页面</title>\n" +
                         "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/submit.css\">\n" +
                         "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/demo-button1.css\">\n" +
                         "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./css/demo-input1.css\">\n" +

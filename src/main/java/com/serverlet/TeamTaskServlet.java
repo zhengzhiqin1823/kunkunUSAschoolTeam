@@ -170,7 +170,7 @@ public class TeamTaskServlet extends HttpServlet {
                 "\n" +
                 "<head>\n" +
                 "    <meta charset=\"UTF-8\">\n" +
-                "    <title>项目页面</title>\n" +
+                "    <title>团队项目页面</title>\n" +
                 "    <link rel=\"stylesheet\" href=\"../css/studentProject.css\"/>\n" +
                 "    <link rel=\"stylesheet\" href=\"../css/demo-navigation.css\"/>\n" +
                 "    <script type=\"module\" src=\"https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js\"></script>\n" +
