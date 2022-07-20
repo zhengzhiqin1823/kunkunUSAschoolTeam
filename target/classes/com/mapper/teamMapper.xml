@@ -15,6 +15,9 @@
     <select id="selectAll" resultType="com.test.pojo.team">
         select * from team;
     </select>
+    <select id="selectByTaskID" resultType="com.test.pojo.team">
+        select * from team where taskid=#{taskid};
+    </select>
     <delete id="deleteByKey" parameterType="com.test.pojo.team">
         delete from team where teamid=#{teamid};
     </delete>

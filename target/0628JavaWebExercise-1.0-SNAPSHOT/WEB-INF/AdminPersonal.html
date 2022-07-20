@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>团队个人信息</title>
+    <link type="text/css" rel="stylesheet" href="../css/edit-information.css">
+    <link type="text/css" rel="stylesheet" href="../css/demo-navigation.css">
+    <link type="text/css" rel="stylesheet" href="../css/demo-input1.css">
+    <link type="text/css" rel="stylesheet" href="../css/demo-button1.css">
+    <link type="text/css" rel="stylesheet" href="../css/scroll.css">
+    <script type="text/javascript" src="../scripts/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../scripts/demo-navigation1.js"></script>
+</head>
+<body>
+<div class="demo-navigation1" >
+    <div class="logo">坤坤的美国校队</div>
+    <nav>
+        <ul>
+            <li onclick="admin_team()">Team</li>
+            <li onclick="admin_tutor()">Tutor</li>
+            <li onclick="admin_project()">Task</li>
+            <li onclick="admin_personal()">Personal</li>
+        </ul>
+    </nav>
+    <div class="logo2" onclick="logout()">{{teamName}}|退出登陆</div>
+</div>
+
+<div class="body">
+    <div class="body_mid">
+        <div class="body_mid_left">
+            <ul>
+                <img src="../image/setting.jpg">
+                <li><a href="#" @click="f1">管理员信息</a></li>
+                <img src="../image/setting.jpg">
+                <li><a href="#" @click="f2">修改基本信息</a></li>
+                <img src="../image/setting.jpg">
+                <li><a href="#" @click="f3">修改密码</a></li>
+            </ul>
+        </div>
+        <div class="body_mid_right">
+            <div class="title">
+                <h1><strong>{{title_name}}</strong></h1>
+            </div>
+
+            <ul v-if="h1">
+                <p>名称：&emsp;{{teamName}}</p>
+                <p>ID&emsp; ：&emsp;{{teamID}}</p>
+                <p>邮箱：&emsp;{{email}}</p>
+                <p>电话：&emsp;{{tel}}</p>
+            </ul>
+            <ul v-if="h2">
+                <p id="name">名称：&emsp;<input name="id" class="demo-input1" type="text" v-model:value="teamName"></p>
+                <p id="email">邮箱：&emsp;<input name="email" class="demo-input1" type="text" v-model:value="email"></p>
+                <p id="tel">电话：&emsp;<input name="tel" class="demo-input1" type="text" v-model:value="tel"></p>
+            </ul>
+            <ul v-if="h3">
+                <p>原始密码：&emsp;<input v-model:value="old" class="demo-input1" type="password" name="password" id="old-password" placeholder="原始密码"></p>
+                <p>新的密码：&emsp;<input v-model:value="Newpass" class="demo-input1" type="password" name="password" id="password" placeholder="新密码"></p>
+                <p>确认密码：&emsp;<input v-model:value="check" class="demo-input1" type="password" name="newPassword" id="new-password" placeholder="确认密码"></p>
+            </ul>
+
+            <button @click="submit" class="demo-button2" v-if="h2">提交</button>
+            <button @click="password" class="demo-button2" v-if="h3">提交</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var team = new Vue({
+        el: ".body",
+        data: {
+            h1:true,
+            h2:false,
+            h3:false,
+            h4:false,
+            title_name:'管理员信息',
+            teamName: "",
+            email: "",
+            tel: "",
+            old:"",
+            Newpass:"",
+            check:""
+        },
+        methods: {
+            initInformation() {
+                axios({
+                    method: "get",
+                    url: "/0628JavaWebExercise_war/admin/personal/getInfor"
+                }).then((res) => {
+                    let rj = JSON.stringify(res.data);
+                    let js = JSON.parse(rj);
+                    console.log(js);
+                    this.teamName = js.name;
+                    a.teamName = js.name;
+                    this.teamID = js.teamID;
+                    this.email = js.email;
+                    this.tel = js.tel;
+                })
+            },
+            //修改个人信息
+            submit() {
+
+                if(this.teamName.length > 15){
+                    alert("名称过长，请重新输入");
+                    this.teamName = "";
+                    return;
+                }else if(this.tel.length > 11){
+                    alert("电话长度多于11位，请重新输入");
+                    return;
+                }
+
+
+                let data = {
+                    'name': this.teamName,
+                    'email': this.email,
+                    'tel': this.tel
+                }
+                axios
+                    .post('/0628JavaWebExercise_war/team/personal/changeInfor?user=admin', data)
+                    .then((res) => {
+                        alert("修改成功!")
+                    })
+            },
+            //修改密码
+            password()
+            {
+                if(this.Newpass == "" || this.Newpass ==null){
+                    alert("新密码不能为空,请输入");
+                    return false;
+                }else if(this.check == "" || this.check == null){
+                    alert("确认密码不能为空,请输入");
+                    return false;
+                }else if(this.old == "" || this.old == null){
+                    alert("原始密码不能为空,请输入");
+                    return false;
+                }else if(this.Newpass!==this.check){
+                    alert("两次密码不一样,请重新输入");
+                    this.Newpass = "";
+                    this.check = "";
+                    return false;
+                }
+
+                let data = {
+                    'old': this.old,
+                    'new': this.Newpass
+                }
+                axios
+                    .post('/0628JavaWebExercise_war/team/personal/changePassword?user=admin', data)
+                    .then((res) => {
+                        alert(res.data);
+                    })
+
+            }
+            ,
+            f1(){
+                this.title_name='团队信息';
+                this.h2=false;
+                this.h3=false;
+                this.h4=false;
+                this.h1=true;
+            },
+            f2(){
+                this.title_name='修改基本信息';
+                this.h1 = false;
+                this.h3 = false;
+                this.h2 = true;
+                this.h4 = true;
+            },
+            f3(){
+                this.title_name='修改密码';
+                this.h2=false;
+                this.h1=false;
+                this.h3=true;
+                this.h4=true;
+            }
+        }
+    })
+
+    team.initInformation();
+    var a = new Vue({
+        el:'.demo-navigation1',
+        data:{
+            teamName:team.teamName
+        }
+    })
+
+</script>
+</html>
