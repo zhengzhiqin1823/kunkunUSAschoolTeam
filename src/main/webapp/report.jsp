@@ -111,6 +111,16 @@
                 </div>
                 <br/>
             </div>
+            <div id="report_admin_false" class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-profile-tab"style="z-index: 1;">
+                <div>
+                    未提交的团队
+                </div>
+                <!--这里显示学生表-->
+                <div class="card">
+                    <table style="width: 1270px" id="submissionReports_false"></table>
+                </div>
+                <br/>
+            </div>
 
         </div>
 
@@ -190,7 +200,7 @@
                 let student=str.split(";")
                 let i;
                 let table="";
-                table+="<tr><th>批量选择</th><th>报告编号</th><th>团队编码</th><th>报告提交时间</th><th>评审导师</th><th>审批链接</th></tr>"
+                table+="<tr><th>批量选择</th><th>报告编号</th><th>团队编码</th><th>报告提交时间</th><th>评审导师</th><th>审批链接</th><th>审批状态</th></tr>"
                 if(student.length==1)
                 {
                     table+="<tr>该报告暂无团队提交</tr>"
@@ -207,6 +217,7 @@
                         table+="<td>"+studentinfo[1]+"</td>";
                         table+="<td>"+studentinfo[5]+"</td>";
                         table+="<td>"+studentinfo[6]+"</td>";
+                        table+="<td>"+studentinfo[7]+"</td>";
                         table+="<td><input  class='demo-button2' type='button' style='margin-top: 0px;'value='报告内容' onclick='reportDetail("+studentinfo[2]+")'></td>"
                         table+="<td><form action='http://localhost:8080/0628JavaWebExercise_war/submit' method='get'>"
                         table+="<input style='display: none'; type='text' name='rid' value=\""+studentinfo[0]+"\">"
@@ -251,6 +262,44 @@
             }
         }
     }
+    //未提交报告
+    let xhtpf;
+    if (window.XMLHttpRequest) {
+        xhtpf = new XMLHttpRequest();
+    } else {
+        // code for IE6, IE5
+        xhtpf = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhtpf.open("GET","http://localhost:8080/0628JavaWebExercise_war/reportServlet?ret=5&sid="+sid);
+    xhtpf.send();
+    xhtpf.onreadystatechange=function ()
+    {
+        if (this.readyState == 4 && this.status == 200) {
+            let str=this.responseText;
+            let student=str.split(";")
+            let i;
+            let table="";
+            table+="<tr><th>报告编号</th><th>团队编码</th><th>报告提交时间</th>"
+            if(student.length==1)
+            {
+                table+="<tr>该报告暂无团队提交</tr>"
+            }
+            else
+            {
+                for(i=0;i<student.length-1;i++)
+                {
+                    let studentinfo=student[i].split(",");
+                    table+="<tr style='height:40px ;'>"
+                    table+="<td>"+studentinfo[2]+"</td>";
+                    table+="<td>"+studentinfo[0]+"</td>";
+                    table+="<td>"+studentinfo[1]+"</td>";
+                    table+="</tr>"
+                }
+            }
+            document.getElementById("submissionReports_false").innerHTML=table;
+        }
+    }
+
     //生成导师链接
     document.getElementById("selectTutor").onclick=function (){
         document.getElementById("Tutorselect").style.display="block";

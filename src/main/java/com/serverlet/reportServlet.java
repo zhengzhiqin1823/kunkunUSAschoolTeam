@@ -100,10 +100,18 @@ public class reportServlet extends HttpServlet {
                 {
                     judgelinkMapper jm = sqs.getMapper(judgelinkMapper.class);
                     tutorMapper tm = sqs.getMapper(tutorMapper.class);
+                    opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
                     List<judgelink> judgelinks = jm.selectByRid(r.getRid());
+                    List<opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(r.getRid());
+                    String opinionstatus;
+                    if(opiniontutors.size()==0){
+                        opinionstatus="未审批";
+                    }else {
+                        opinionstatus="已审批";
+                    }
                     if(judgelinks.size()==0)
                     {
-                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getTotalsize()+","+"未选择审批导师"+","+"未生成链接"+";");
+                        writer.write(r.getTeamid()+","+r.getSubmitTime().substring(0,10)+","+r.getRid()+","+"r.getFirstFm()"+","+r.getTotalsize()+","+"未选择审批导师"+","+"未生成链接"+","+opinionstatus+";");
                     }
                     else
                     {
@@ -112,7 +120,25 @@ public class reportServlet extends HttpServlet {
                         String link=judgelinks.get(0).getLink();
                         List<tutor> tutors = tm.selectByTid(tid);
                         tutor tutor = tutors.get(0);
-                        writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getTotalsize()+","+tutor.getName()+","+link+";");
+                        writer.write(r.getTeamid()+","+r.getSubmitTime().substring(0,10)+","+r.getRid()+","+"r.getFirstFm()"+","+r.getTotalsize()+","+tutor.getName()+","+link+","+opinionstatus+";");
+                    }
+                }
+                break;
+            }
+            case "5":{
+                reportMapper mapper = sqs.getMapper(reportMapper.class);
+                submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
+                teamMapper teamMapper = sqs.getMapper(teamMapper.class);
+                List<submission> submissions = submissionMapper.selectByKey(sid);
+                String taskid=submissions.get(0).getTaskID();
+                List<team> teams = teamMapper.selectByTaskID(taskid);
+                int k=0;
+                for(team t:teams){
+                    List<report> reports = mapper.selectByTeamIDAndSubmitID(t.getTeamid(), sid);
+                    if(reports.size()==0){
+                        writer.write(t.getTeamid()+","+"未提交"+","+"default"+";");
+                    }else {
+                        k++;
                     }
                 }
                 break;

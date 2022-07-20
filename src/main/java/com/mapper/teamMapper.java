@@ -19,7 +19,7 @@ public interface teamMapper {
     void updateEmail(@Param("teamid") String teamid,@Param("email") String email);
     void updateTel(@Param("teamid") String teamid,@Param("tel") String tel);
 
-
+    List<team> selectByTaskID(@Param("taskid") String taskid);
     List<team> selectByKey(@Param("teamid")String teamid);
     List<team> selectAll();
     void deleteByKey(@Param("teamid")String teamid);
