@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="demo-navigation1" >
-    <div class="logo"></div>
+    <div class="logo">坤坤的美国校队</div>
     <nav>
         <ul>
             <li onclick = Home_click()>Project</li>
@@ -118,7 +118,7 @@
                 axios
                     .post('/0628JavaWebExercise_war/team/personal/changeInfor', data)
                     .then((res) => {
-                        alert(res.data)
+                        alert("修改成功！")
                     })
             },
             //修改密码
