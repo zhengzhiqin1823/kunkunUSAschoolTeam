@@ -47,7 +47,7 @@ public class TeamGetReportServlet extends HttpServlet {
 
         String text;
         List<report> reports = reportMapper.selectByTeamIDAndSubmitID((String) id, submitID);
-//        fragmentMapper fragmentMapper = sqs.getMapper(com.mapper.fragmentMapper.class);
+
         if(s.getSubmitStatus().equals("0")) {
             req.getRequestDispatcher("TeamReport.html").forward(req,resp);
             return;

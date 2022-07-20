@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="demo-navigation1" >
-    <div class="logo">坤坤的美国校队</div>
+    <div class="logo"></div>
     <nav>
         <ul>
             <li onclick = Home_click()>Project</li>
@@ -103,18 +103,13 @@
                     alert("团队名称过长，请重新输入");
                     this.teamName = "";
                     return;
-                }else if(this.tel.length >= 11){
+                }else if(this.tel.length > 11){
                     alert("电话长度多于11位，请重新输入");
                     return;
-                }else if(this.tel.length <= 11){
-                    alert("电话长度少于11位，请重新输入");
+                }else if(this.email.length > 30){
+                    alert("邮箱长度多于30位，请重新输入");
                     return;
-                }else{
-                    alert("团队信息修改成功！");
-                    return false;
                 }
-
-
                 let data = {
                     'name': this.teamName,
                     'email': this.email,
@@ -123,7 +118,7 @@
                 axios
                     .post('/0628JavaWebExercise_war/team/personal/changeInfor', data)
                     .then((res) => {
-                        alert("修改成功!")
+                        alert(res.data)
                     })
             },
             //修改密码
