@@ -136,7 +136,7 @@ public class reportServlet extends HttpServlet {
                 for(team t:teams){
                     List<report> reports = mapper.selectByTeamIDAndSubmitID(t.getTeamid(), sid);
                     if(reports.size()==0){
-                        writer.write(t.getTeamid()+","+"未提交"+","+"default"+";");
+                        writer.write(t.getTeamid()+","+"未提交"+","+"default"+","+t.getEmail()+","+t.getTel()+";");
                     }else {
                         k++;
                     }

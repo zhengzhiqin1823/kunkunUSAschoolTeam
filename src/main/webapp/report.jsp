@@ -25,13 +25,14 @@
 <!--
     首部栏: header
 -->
-<div class="demo-navigation2">
+<div class="demo-navigation1">
     <div class="logo">坤坤的美国校队</div>
     <nav>
         <ul>
             <li onclick="admin_team()">Team</li>
             <li onclick="admin_tutor()">Tutor</li>
             <li onclick="admin_project()">Task</li>
+            <li onclick="admin_personal()">Personal</li>
         </ul>
     </nav>
     <div class="logo2" onclick="logout()">管理员001|退出登陆 </div>
@@ -218,7 +219,7 @@
                         table+="<td>"+studentinfo[5]+"</td>";
                         table+="<td>"+studentinfo[6]+"</td>";
                         table+="<td>"+studentinfo[7]+"</td>";
-                        table+="<td><input  class='demo-button2' type='button' style='margin-top: 0px;'value='报告内容' onclick='reportDetail("+studentinfo[2]+")'></td>"
+                        table+="<td></td>";
                         table+="<td><form action='http://localhost:8080/0628JavaWebExercise_war/submit' method='get'>"
                         table+="<input style='display: none'; type='text' name='rid' value=\""+studentinfo[0]+"\">"
                         table+="<input style='display: none'; type='text' name='taskID' value=\""+tid+"\">"
@@ -277,7 +278,7 @@
                 let student=str.split(";")
                 let i;
                 let table="";
-                table+="<tr><th>团队编号</th><th>报告提交时间</th>"
+                table+="<tr><th>团队编号</th><th>报告提交时间</th><th>团队邮箱</th><th>团队联系电话</th></tr>"
                 if(student.length==1)
                 {
                     table+="<tr>该报告暂无团队提交</tr>"
@@ -290,6 +291,8 @@
                         table+="<tr style='height:40px ;'>"
                         table+="<td>"+studentinfo[0]+"</td>";
                         table+="<td>"+studentinfo[1]+"</td>";
+                        table+="<td>"+studentinfo[3]+"</td>";
+                        table+="<td>"+studentinfo[4]+"</td>";
                         table+="</tr>"
                     }
                 }
