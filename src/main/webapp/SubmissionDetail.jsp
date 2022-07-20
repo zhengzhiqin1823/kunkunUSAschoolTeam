@@ -21,13 +21,14 @@
 </head>
 
 <body onload="init(${sid},${tid})">
-<div class="demo-navigation2">
+<div class="demo-navigation1">
     <div class="logo">坤坤的美国校队</div>
     <nav>
         <ul>
             <li onclick="admin_team()">Team</li>
             <li onclick="admin_tutor()">Tutor</li>
             <li onclick="admin_project()">Task</li>
+            <li onclick="admin_personal()">Personal</li>
         </ul>
     </nav>
     <div class="logo2" onclick="logout()">管理员001|退出登陆</div>

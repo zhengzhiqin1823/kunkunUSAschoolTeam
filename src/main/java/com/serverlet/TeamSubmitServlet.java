@@ -514,6 +514,7 @@ public class TeamSubmitServlet extends HttpServlet {
                 "                <li onclick = admin_team()>Team</li>\n" +
                 "                <li onclick = admin_tutor()>Tutor</li>\n" +
                 "                <li onclick = admin_project()>Project</li>\n" +
+                "<li onclick=\"admin_personal()\">Personal</li>"+
                 "            </ul>\n" +
                 "        </nav>\n" +
                 "        <div class=\"logo2\" onclick=\"logout()\">管理员001|退出登陆</div>" +
