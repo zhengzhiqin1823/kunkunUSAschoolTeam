@@ -109,9 +109,9 @@ public class AdminServlet extends HttpServlet {
             {
                 String sid=request.getParameter("sid");
                 SubmissionMapper mapper = sqs.getMapper(SubmissionMapper.class);
-                List<submission> submissions = mapper.selectByKey(sid);
+                List<Submission> submissions = mapper.selectByKey(sid);
                 PrintWriter writer = response.getWriter();
-                submission s=submissions.get(0);
+                Submission s=submissions.get(0);
                 String reportType=s.getName();
                 String startTime=s.getStartTime();
                 String deadLine=s.getDeadLine();

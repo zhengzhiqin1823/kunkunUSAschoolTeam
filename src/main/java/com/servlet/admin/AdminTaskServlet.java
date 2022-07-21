@@ -2,7 +2,7 @@ package com.servlet.admin;
 
 import com.mapper.SubmissionMapper;
 import com.mapper.TaskMapper;
-import com.test.pojo.submission;
+import com.test.pojo.Submission;
 import com.test.pojo.task;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -42,8 +42,8 @@ public class AdminTaskServlet extends HttpServlet {
                 sid=t.getFirstsm();
                 SubmissionMapper submapper = sqs.getMapper(SubmissionMapper.class);
                 do{
-                    List<submission> submissions = submapper.selectByKey(sid);
-                    submission submission = submissions.get(0);
+                    List<Submission> submissions = submapper.selectByKey(sid);
+                    Submission submission = submissions.get(0);
                     submapper.CloseSubmit(sid);
                     sid=submission.getNext();
                 }
@@ -56,8 +56,8 @@ public class AdminTaskServlet extends HttpServlet {
                 sid=t.getFirstsm();
                 SubmissionMapper submapper = sqs.getMapper(SubmissionMapper.class);
                 do{
-                    List<submission> submissions = submapper.selectByKey(sid);
-                    submission submission = submissions.get(0);
+                    List<Submission> submissions = submapper.selectByKey(sid);
+                    Submission submission = submissions.get(0);
                     submapper.CloseTutorJudge(sid);
                     sid=submission.getNext();
                 }
@@ -72,8 +72,8 @@ public class AdminTaskServlet extends HttpServlet {
                 SubmissionMapper submapper = sqs.getMapper(SubmissionMapper.class);
                 for(int i=0;i<num;i++)
                 {
-                    List<submission> submissions = submapper.selectByKey(sid);
-                    submission s = submissions.get(0);
+                    List<Submission> submissions = submapper.selectByKey(sid);
+                    Submission s = submissions.get(0);
                     String ss=s.getSubmitID()+","+s.getName()+","+s.getSubmitStatus()+","+s.getJudgeStatus()+","+s.getStartTime()+","+s.getDeadLine()+","+s.getSubmitTeams()+";";
                     writer.write(ss);
                     sid=s.getNext();

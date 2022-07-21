@@ -233,8 +233,8 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         OpiniontutorMapper opiniontutorMapper = sqlSession.getMapper(OpiniontutorMapper.class);
         OpinionTutorCahceMapper opinionTutorCahceMapper = sqlSession.getMapper(OpinionTutorCahceMapper.class);
 
-        List<opinionTutorCache> opinionTutorCaches = opinionTutorCahceMapper.selectByKey(rID, tID);
-        List<opiniontutor> opiniontutors = opiniontutorMapper.selectByKey(rID, tID);
+        List<OpinionTutorCache> opinionTutorCaches = opinionTutorCahceMapper.selectByKey(rID, tID);
+        List<Opiniontutor> opiniontutors = opiniontutorMapper.selectByKey(rID, tID);
         String text;
 
         if (opiniontutors.size() == 0) {
@@ -268,9 +268,9 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         OpiniontutorMapper tm = sqlSession.getMapper(OpiniontutorMapper.class);
-        List<opiniontutor> s = tm.selectBytID(tID);
+        List<Opiniontutor> s = tm.selectBytID(tID);
         sqlSession.close();
-        return s.stream().map(opiniontutor::getrID).collect(Collectors.toList());
+        return s.stream().map(Opiniontutor::getrID).collect(Collectors.toList());
     }
 
     public static List<String> getCacherIDbytID(String tID) throws Exception {
@@ -280,9 +280,9 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         OpinionTutorCahceMapper tm = sqlSession.getMapper(OpinionTutorCahceMapper.class);
-        List<opinionTutorCache> s = tm.selectBytID(tID);
+        List<OpinionTutorCache> s = tm.selectBytID(tID);
         sqlSession.close();
-        return s.stream().map(opinionTutorCache::getrID).collect(Collectors.toList());
+        return s.stream().map(OpinionTutorCache::getrID).collect(Collectors.toList());
     }
 
     public static String getSubmitIDByrID(String rid) throws Exception {
@@ -333,7 +333,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         TeamMapper teamMapper = sqlSession.getMapper(TeamMapper.class);
         ReportMapper reportMapper = sqlSession.getMapper(ReportMapper.class);
-        report report = reportMapper.selectByRid(rid).get(0);
+        Report report = reportMapper.selectByRid(rid).get(0);
         TaskMapper tm = sqlSession.getMapper(TaskMapper.class);
 
         team team = teamMapper.selectByKey(report.getTeamid()).get(0);
@@ -353,7 +353,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         ReportMapper reportMapper = sqlSession.getMapper(ReportMapper.class);
-        report report = reportMapper.selectByRid(rid).get(0);
+        Report report = reportMapper.selectByRid(rid).get(0);
 
         TaskMapper tm = sqlSession.getMapper(TaskMapper.class);
 //        String name = tm.selectByKey(taskID).get(0).getDescription();
@@ -474,7 +474,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         ReportMapper mapper = sqlSession.getMapper(ReportMapper.class);
         SubmissionMapper submissionMapper = sqlSession.getMapper(SubmissionMapper.class);
 
-        report report = mapper.selectByKey(rid).get(0);
+        Report report = mapper.selectByKey(rid).get(0);
         return submissionMapper.selectByKey(report.getSubmitID()).get(0).getDescription();
     }
 

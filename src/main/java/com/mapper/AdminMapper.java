@@ -1,13 +1,13 @@
 package com.mapper;
 
-import com.test.pojo.admin;
+import com.test.pojo.Admin;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface AdminMapper {
-    List<admin> selectById(@Param("aid") String aid);
-    List<admin> selectAll();
+    List<Admin> selectById(@Param("aid") String aid);
+    List<Admin> selectAll();
     void insert(@Param("aid") String aid,@Param("password") String password,@Param("name") String name,@Param("email") String email,@Param("tel") String tel);
     void deleteById(@Param("aid") String aid);
 

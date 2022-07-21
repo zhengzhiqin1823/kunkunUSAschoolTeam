@@ -1,7 +1,7 @@
 package com.servlet.tutor;
 
 import com.mapper.*;
-import com.test.pojo.opinionTutorCache;
+import com.test.pojo.OpinionTutorCache;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -241,7 +241,7 @@ public class TeacherJudgeServlet extends HttpServlet {
         OpinionTutorCahceMapper tm=sqlSession.getMapper(OpinionTutorCahceMapper.class);
 
 //        System.out.println(tm.selectByKey(rid,tid));
-        List<opinionTutorCache> opinionTutorCaches = tm.selectByKey(rid, tid);
+        List<OpinionTutorCache> opinionTutorCaches = tm.selectByKey(rid, tid);
         if(opinionTutorCaches.size()!=0)//说明这里面有rid，tid，要先删再插入
         {
             tm.deleteByKey(rid,tid);

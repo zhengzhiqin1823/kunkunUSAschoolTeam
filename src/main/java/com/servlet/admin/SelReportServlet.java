@@ -2,7 +2,7 @@ package com.servlet.admin;
 
 //import com.mapper.fragmentMapper;
 import com.mapper.ReportMapper;
-import com.test.pojo.report;
+import com.test.pojo.Report;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,7 +28,7 @@ public class SelReportServlet extends HttpServlet {
         SqlSession sqs=factory.openSession();
         ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
 //        fragmentMapper fragmentMapper = sqs.getMapper(fragmentMapper.class);
-        report r = reportMapper.selectoneByKey(rID);
+        Report r = reportMapper.selectoneByKey(rID);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();

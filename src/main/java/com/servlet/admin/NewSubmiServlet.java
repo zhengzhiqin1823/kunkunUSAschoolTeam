@@ -14,7 +14,7 @@ import java.util.List;
 
 import com.mapper.TaskMapper;
 import com.mapper.SubmissionMapper;
-import com.test.pojo.submission;
+import com.test.pojo.Submission;
 import com.test.pojo.task;
 
 @WebServlet(name = "newSubmiServlet", value = "/newSubmiServlet")
@@ -43,10 +43,10 @@ public class NewSubmiServlet extends HttpServlet {
         int snum=Integer.valueOf(t.getSubmitNum());
         String fm=t.getFirstsm();
         for(int i=0;i<snum-1;i++){
-            submission s = submissionMapper.selectoneByKey(fm);
+            Submission s = submissionMapper.selectoneByKey(fm);
             fm=s.getNext();
         }
-        List<submission> submissions = submissionMapper.selectAll();
+        List<Submission> submissions = submissionMapper.selectAll();
         String submitid=submissions.size()+1+"";
         submissionMapper.insert(
                 submitid,

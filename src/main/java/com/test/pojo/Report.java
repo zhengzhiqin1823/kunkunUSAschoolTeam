@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-public class report {
+public class Report {
     String rid;
     String submitID;
     String teamid;

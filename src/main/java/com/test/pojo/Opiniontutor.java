@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-public class opiniontutor {
+public class Opiniontutor {
     String rID;
     String tID;
     int score;

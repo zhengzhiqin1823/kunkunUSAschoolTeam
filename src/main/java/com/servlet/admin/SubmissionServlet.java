@@ -1,7 +1,7 @@
 package com.servlet.admin;
 
 import com.mapper.SubmissionMapper;
-import com.test.pojo.submission;
+import com.test.pojo.Submission;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -56,7 +56,7 @@ public class SubmissionServlet extends HttpServlet {
         switch (ret)
         {
             case "1":{
-                List<submission> submissions = mapper.selectByKey(sid);
+                List<Submission> submissions = mapper.selectByKey(sid);
                 String s=submissions.get(0).getSubmitStatus();
                 if("1".equals(s))
                 {
@@ -69,7 +69,7 @@ public class SubmissionServlet extends HttpServlet {
                 break;
             }
             case "2":{
-                List<submission> submissions = mapper.selectByKey(sid);
+                List<Submission> submissions = mapper.selectByKey(sid);
                 String s=submissions.get(0).getJudgeStatus();
                 if("1".equals(s))
                 {
@@ -82,7 +82,7 @@ public class SubmissionServlet extends HttpServlet {
                 break;
             }
             case "3":{
-                List<submission> submissions = mapper.selectByKey(sid);
+                List<Submission> submissions = mapper.selectByKey(sid);
                 String s=submissions.get(0).getDescription();
                 String ss=submissions.get(0).getName();
                 String st=submissions.get(0).getStartTime();

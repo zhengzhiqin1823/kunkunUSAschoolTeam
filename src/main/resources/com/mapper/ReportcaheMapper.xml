@@ -5,23 +5,23 @@
 <!-- namespace:命名空间,做sql隔离 -->
 
 <mapper namespace="com.mapper.ReportcaheMapper">
-    <select id="selectByKey" resultType="com.test.pojo.reportcahe">
+    <select id="selectByKey" resultType="com.test.pojo.ReportCache">
         select * from report_cahe where cacheID=#{cacheID};
     </select>
-    <select id="selectByTeamIDAndSubmitID" resultType="com.test.pojo.reportcahe">
+    <select id="selectByTeamIDAndSubmitID" resultType="com.test.pojo.ReportCache">
         select * from report_cahe where teamID=#{teamID} and submitID=#{submitID};
     </select>
-    <select id="selectAll" resultType="com.test.pojo.reportcahe">
+    <select id="selectAll" resultType="com.test.pojo.ReportCache">
         select * from report_cahe;
     </select>
-    <insert id="insert" parameterType="com.test.pojo.reportcahe">
+    <insert id="insert" parameterType="com.test.pojo.ReportCache">
         insert into report_cahe
         values (#{cacheID},#{submitID},#{teamID},#{totalsize},#{data});
     </insert>
-    <delete id="deleteByKey" parameterType="com.test.pojo.reportcahe">
+    <delete id="deleteByKey" parameterType="com.test.pojo.ReportCache">
         delete from report_cahe where cacheID=#{cacheID};
     </delete>
-    <delete id="deleteByTeamIDAndSubmitID" parameterType="com.test.pojo.reportcahe">
+    <delete id="deleteByTeamIDAndSubmitID" parameterType="com.test.pojo.ReportCache">
         delete from report_cahe where teamID=#{teamID} and submitID=#{submitID};
     </delete>
 </mapper>

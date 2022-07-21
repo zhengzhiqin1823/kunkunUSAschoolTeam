@@ -66,10 +66,10 @@ public class TeamTaskServlet extends HttpServlet {
         task t = tasks.get(0);
         String num = t.getSubmitNum();
         int submitNum = Integer.parseInt(num);
-        List<submission> submissionArr = new ArrayList<>();
+        List<Submission> submissionArr = new ArrayList<>();
         if (submitNum > 0) {
             String firstsm = t.getFirstsm();
-            List<submission> submissions = submissionMapper.selectByKey(firstsm);
+            List<Submission> submissions = submissionMapper.selectByKey(firstsm);
             submissionArr.add(submissions.get(0));
             submitNum--;
             while (submitNum > 0) {
@@ -83,7 +83,7 @@ public class TeamTaskServlet extends HttpServlet {
 
         List<MySubmission> mySubList = new ArrayList<>();
         int index = 0;
-        for (submission s : submissionArr) {
+        for (Submission s : submissionArr) {
             MySubmission mySubmission = new MySubmission();
             mySubmission.name = s.getName();
             mySubmission.submitID=s.getSubmitID();
@@ -105,7 +105,7 @@ public class TeamTaskServlet extends HttpServlet {
             }
 
 //            是否提交和评审
-            List<report> reports = reportMapper.selectByTeamIDAndSubmitID((String) teamID, s.getSubmitID());
+            List<Report> reports = reportMapper.selectByTeamIDAndSubmitID((String) teamID, s.getSubmitID());
             if (reports.size() == 0) {
                 mySubmission.isSubmit = "未提交";
                 mySubmission.submitDate = "";
@@ -115,7 +115,7 @@ public class TeamTaskServlet extends HttpServlet {
             } else {
                 mySubmission.isSubmit = "已提交";
                 mySubmission.submitDate = reports.get(0).getSubmitTime().substring(0, 10);
-                List<opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(reports.get(0).getRid());
+                List<Opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(reports.get(0).getRid());
                 if (opiniontutors.size() == 0) {
                     mySubmission.isJudged = "未评审";
                     mySubmission.judgeDate = "";
@@ -126,11 +126,11 @@ public class TeamTaskServlet extends HttpServlet {
                     mySubmission.score = opiniontutors.get(0).getScore()+"";
                     if(true)
                     {
-                        List<report> reports1 = reportMapper.selectBySubId(s.getSubmitID());
+                        List<Report> reports1 = reportMapper.selectBySubId(s.getSubmitID());
                         TreeSet<Integer> scoreTree = new TreeSet<>();
                         scoreTree = (TreeSet<Integer>) scoreTree.descendingSet();
-                        for(report r : reports1){
-                            List<opiniontutor> opiniontutors1 = opiniontutorMapper.selectByrID(r.getRid());
+                        for(Report r : reports1){
+                            List<Opiniontutor> opiniontutors1 = opiniontutorMapper.selectByrID(r.getRid());
                             if(opiniontutors1.size()!=0)
                             {
                                 scoreTree.add(opiniontutors1.get(0).getScore());

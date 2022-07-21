@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-public class judgelink {
+public class Judgelink {
     String lid;
     String link;
     String submitID;

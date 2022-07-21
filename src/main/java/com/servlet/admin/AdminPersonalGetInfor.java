@@ -1,7 +1,7 @@
 package com.servlet.admin;
 
 import com.mapper.AdminMapper;
-import com.test.pojo.admin;
+import com.test.pojo.Admin;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -40,7 +40,7 @@ public class AdminPersonalGetInfor extends HttpServlet {
         //获取SqlSession对象，来执行sql
         SqlSession sqs = factory.openSession();
         AdminMapper adminMapper = sqs.getMapper(AdminMapper.class);
-        admin admin = adminMapper.selectById(id.toString()).get(0);
+        Admin admin = adminMapper.selectById(id.toString()).get(0);
 
 
         json.append("{" +

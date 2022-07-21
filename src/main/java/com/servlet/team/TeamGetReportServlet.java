@@ -41,19 +41,19 @@ public class TeamGetReportServlet extends HttpServlet {
         ReportcaheMapper reportcaheMapper = sqs.getMapper(ReportcaheMapper.class);
         ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
 
-        List<submission> submissions = submissionMapper.selectByKey(submitID);
-        submission s = submissions.get(0);
+        List<Submission> submissions = submissionMapper.selectByKey(submitID);
+        Submission s = submissions.get(0);
         resp.setContentType("text/html;charset=UTF-8");
 
         String text;
-        List<report> reports = reportMapper.selectByTeamIDAndSubmitID((String) id, submitID);
+        List<Report> reports = reportMapper.selectByTeamIDAndSubmitID((String) id, submitID);
 
         if(s.getSubmitStatus().equals("0")) {
             req.getRequestDispatcher("TeamReport.html").forward(req,resp);
             return;
         }if (reports.size() == 0) {
-            List<reportcahe> reportcahes = reportcaheMapper.selectByTeamIDAndSubmitID(id.toString(), submitID);
-            if (reportcahes.size() == 0) {
+            List<ReportCache> ReportCaches = reportcaheMapper.selectByTeamIDAndSubmitID(id.toString(), submitID);
+            if (ReportCaches.size() == 0) {
                 text="";
             } else {
                 text = StaticMethods.getCacheByTeamIdAndSubmitID(id.toString(),submitID);

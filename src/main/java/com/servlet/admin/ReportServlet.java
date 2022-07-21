@@ -58,8 +58,8 @@ public class ReportServlet extends HttpServlet {
             case "1":
             {
                 ReportMapper mapper = sqs.getMapper(ReportMapper.class);
-                List<report> reports = mapper.selectBySubId(sid);
-                for(report r:reports)
+                List<Report> reports = mapper.selectBySubId(sid);
+                for(Report r:reports)
                 {
                     writer.write(r.getTeamid()+","+r.getSubmitTime()+","+r.getRid()+","+"r.getFirstFm()"+","+r.getTotalsize()+";");
                 }
@@ -68,16 +68,16 @@ public class ReportServlet extends HttpServlet {
             case "2":
             {
                 ReportMapper mapper = sqs.getMapper(ReportMapper.class);
-                List<report> reports = mapper.selectByRid(rid);
-                report r=reports.get(0);
+                List<Report> reports = mapper.selectByRid(rid);
+                Report r=reports.get(0);
                 writer.write(r.getRid()+","+r.getTeamid()+","+r.getSubmitTime()+";");
                 break;
             }
             case "3":
             {
                 ReportMapper mapper = sqs.getMapper(ReportMapper.class);
-                List<report> reports = mapper.selectByRid(rid);
-                report r=reports.get(0);
+                List<Report> reports = mapper.selectByRid(rid);
+                Report r=reports.get(0);
 //                String firstfm=r.getFirstFm();
 //                fragmentMapper fm = sqs.getMapper(fragmentMapper.class);
 //                String next="";
@@ -95,14 +95,14 @@ public class ReportServlet extends HttpServlet {
             case "4":
             {
                 ReportMapper mapper = sqs.getMapper(ReportMapper.class);
-                List<report> reports = mapper.selectBySubId(sid);
-                for(report r:reports)
+                List<Report> reports = mapper.selectBySubId(sid);
+                for(Report r:reports)
                 {
                     JudgelinkMapper jm = sqs.getMapper(JudgelinkMapper.class);
                     TutorMapper tm = sqs.getMapper(TutorMapper.class);
                     OpiniontutorMapper opiniontutorMapper = sqs.getMapper(OpiniontutorMapper.class);
-                    List<judgelink> judgelinks = jm.selectByRid(r.getRid());
-                    List<opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(r.getRid());
+                    List<Judgelink> judgelinks = jm.selectByRid(r.getRid());
+                    List<Opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(r.getRid());
                     String opinionstatus;
                     if(opiniontutors.size()==0){
                         opinionstatus="未审批";
@@ -115,7 +115,7 @@ public class ReportServlet extends HttpServlet {
                     }
                     else
                     {
-                        judgelink judgelink = judgelinks.get(0);
+                        Judgelink judgelink = judgelinks.get(0);
                         String tid = judgelink.getTid();
                         String link=judgelinks.get(0).getLink();
                         List<tutor> tutors = tm.selectByTid(tid);
@@ -129,12 +129,12 @@ public class ReportServlet extends HttpServlet {
                 ReportMapper mapper = sqs.getMapper(ReportMapper.class);
                 SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
                 TeamMapper teamMapper = sqs.getMapper(TeamMapper.class);
-                List<submission> submissions = submissionMapper.selectByKey(sid);
+                List<Submission> submissions = submissionMapper.selectByKey(sid);
                 String taskid=submissions.get(0).getTaskID();
                 List<team> teams = teamMapper.selectByTaskID(taskid);
                 int k=0;
                 for(team t:teams){
-                    List<report> reports = mapper.selectByTeamIDAndSubmitID(t.getTeamid(), sid);
+                    List<Report> reports = mapper.selectByTeamIDAndSubmitID(t.getTeamid(), sid);
                     if(reports.size()==0){
                         writer.write(t.getTeamid()+","+"未提交"+","+"default"+","+t.getEmail()+","+t.getTel()+";");
                     }else {

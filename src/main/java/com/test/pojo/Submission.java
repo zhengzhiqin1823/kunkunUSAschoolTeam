@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-public class submission {
+public class Submission {
     String submitID;
     String name;
     String submitStatus;

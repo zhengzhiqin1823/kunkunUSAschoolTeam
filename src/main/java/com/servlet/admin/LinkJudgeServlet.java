@@ -1,7 +1,7 @@
 package com.servlet.admin;
 
 import com.mapper.JudgelinkMapper;
-import com.test.pojo.judgelink;
+import com.test.pojo.Judgelink;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -31,8 +31,8 @@ public class LinkJudgeServlet extends HttpServlet {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         SqlSession sqs=factory.openSession();
         JudgelinkMapper judgelinkMapper = sqs.getMapper(JudgelinkMapper.class);
-        List<judgelink> judgelinks = judgelinkMapper.selectByLink(link);
-        List<judgelink> judgelinksss = judgelinkMapper.selectAll();
+        List<Judgelink> judgelinks = judgelinkMapper.selectByLink(link);
+        List<Judgelink> judgelinksss = judgelinkMapper.selectAll();
 
         //System.out.println(judgelinksss.toString());
 
@@ -57,7 +57,7 @@ public class LinkJudgeServlet extends HttpServlet {
 
         List<String> rids = new ArrayList<>();
 
-        for (judgelink j:judgelinks){
+        for (Judgelink j:judgelinks){
             String rid=j.getrID();
             rids.add(rid);
         }

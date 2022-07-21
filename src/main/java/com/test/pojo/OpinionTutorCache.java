@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-public class opinionTutorCache {
+public class OpinionTutorCache {
     String rID;
     String tID;
     int score;

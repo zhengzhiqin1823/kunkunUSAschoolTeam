@@ -73,12 +73,12 @@ public class TeamSubmitServlet extends HttpServlet {
         team team = teamMapper.selectByKey(id.toString()).get(0);
         teamName = team.getName();
         task t = tasks.get(0);
-        List<submission> submissions = submissionMapper.selectByKey(submitID);
-        submission s = submissions.get(0);
+        List<Submission> submissions = submissionMapper.selectByKey(submitID);
+        Submission s = submissions.get(0);
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=utf-8");
         PrintWriter writer = resp.getWriter();
-        List<report> reports = reportMapper.selectByTeamIDAndSubmitID((String) id, submitID);
+        List<Report> reports = reportMapper.selectByTeamIDAndSubmitID((String) id, submitID);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
@@ -95,18 +95,18 @@ public class TeamSubmitServlet extends HttpServlet {
             OpiniontutorMapper opiniontutorMapper = sqs.getMapper(OpiniontutorMapper.class);
             if(reports.size()==0)
             {
-                writeHtml2(resp.getWriter(),t,s,team,"",new report(),"","");
+                writeHtml2(resp.getWriter(),t,s,team,"",new Report(),"","");
                 return;
             }
 
-            List<opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(reports.get(0).getRid());
+            List<Opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(reports.get(0).getRid());
 
-            opiniontutor ot;
+            Opiniontutor ot;
             String tutorName;
             String text;
             String sc;
             if (opiniontutors.size() == 0) {
-                ot = new opiniontutor();
+                ot = new Opiniontutor();
                 ot.setScore(-1);
                 tutorName = "等待评审";
                 text = "";
@@ -131,12 +131,12 @@ public class TeamSubmitServlet extends HttpServlet {
 
 
         if (reports.size() == 0) {
-            List<reportcahe> reportcahes = reportcaheMapper.selectByTeamIDAndSubmitID(id.toString(), submitID);
-            if (reportcahes.size() == 0) {
+            List<ReportCache> ReportCaches = reportcaheMapper.selectByTeamIDAndSubmitID(id.toString(), submitID);
+            if (ReportCaches.size() == 0) {
                 writeHtml(writer, s, "", submitStatus);
             } else {
 //                String text = StaticMethods.getTextByFirstFm(reportcahes.get(0).getFirstfm(), fragmentMapper);
-                String text = reportcahes.get(0).getData();
+                String text = ReportCaches.get(0).getData();
                 writeHtml(writer, s, text, submitStatus);
             }
         } else {
@@ -182,11 +182,11 @@ public class TeamSubmitServlet extends HttpServlet {
             //执行sql
             ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
             SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
-            submission submission = submissionMapper.selectByKey(submitID).get(0);
+            Submission submission = submissionMapper.selectByKey(submitID).get(0);
             submissionMapper.updateSubmitTeams(submitID);
 
             //rID
-            List<report> reports = reportMapper.selectAll();
+            List<Report> reports = reportMapper.selectAll();
             int reportSize = reports.size();
             rID = reportSize + 1 + "";
 
@@ -219,7 +219,7 @@ public class TeamSubmitServlet extends HttpServlet {
             int cache_size = reportcaheMapper.selectAll().size();
             cacheID = cache_size + 1 + "";
             if (reqData.get("type").toString().equals("data")) {
-                List<report> reportss = reportMapper.selectByTeamIDAndSubmitID(teamID, submitID);
+                List<Report> reportss = reportMapper.selectByTeamIDAndSubmitID(teamID, submitID);
                 if (reportss.size() == 0) {
                     reportMapper.insert(rID, submitID, teamID, totalsize, time, text);
                 } else {
@@ -228,11 +228,11 @@ public class TeamSubmitServlet extends HttpServlet {
                     reportMapper.insert(rID, submitID, teamID, totalsize, time, text);
                 }
             } else if (reqData.get("type").toString().equals("cache")) {
-                List<reportcahe> reportcahes = reportcaheMapper.selectByTeamIDAndSubmitID(teamID, submitID);
-                if (reportcahes.size() == 0) {
+                List<ReportCache> ReportCaches = reportcaheMapper.selectByTeamIDAndSubmitID(teamID, submitID);
+                if (ReportCaches.size() == 0) {
                     reportcaheMapper.insert(cacheID, submitID, teamID, totalsize, text);
                 } else {
-                    cacheID = reportcahes.get(0).getCacheID();
+                    cacheID = ReportCaches.get(0).getCacheID();
                     reportcaheMapper.deleteByKey(cacheID);
                     reportcaheMapper.insert(cacheID, submitID, teamID, totalsize, text);
                 }
@@ -248,7 +248,7 @@ public class TeamSubmitServlet extends HttpServlet {
     }
 
 
-    private void writeHtml(PrintWriter writer, submission s, String text, int submitStatus) {
+    private void writeHtml(PrintWriter writer, Submission s, String text, int submitStatus) {
         if (text == null)
             text = "";
         text = text.replace("\r\n", "&#13;");
@@ -400,9 +400,9 @@ public class TeamSubmitServlet extends HttpServlet {
         );
     }
 
-    private void writeHtml2(PrintWriter writer, task t, submission s, team team,
+    private void writeHtml2(PrintWriter writer, task t, Submission s, team team,
                             String tutorName,
-                            report report, String text, String score) {
+                            Report report, String text, String score) {
         if (text == null)
             text = "";
         String s1 = report.getData();
@@ -487,9 +487,9 @@ public class TeamSubmitServlet extends HttpServlet {
 
     }
 
-    private void writeHtml3(PrintWriter writer, task t, submission s, team team,
+    private void writeHtml3(PrintWriter writer, task t, Submission s, team team,
                             String tutorName,
-                            report report, String text, String score) {
+                            Report report, String text, String score) {
         if (text == null)
             text = "";
         String s1 = report.getData();

@@ -6,7 +6,7 @@ import com.mapper.AdminMapper;
 import com.servlet.methods.MD5Utils;
 import com.test.pojo.team;
 import com.test.pojo.tutor;
-import com.test.pojo.admin;
+import com.test.pojo.Admin;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
         //执行sql
         try {
             AdminMapper adminMapper = sqs.getMapper(AdminMapper.class);
-            List<admin> admins = adminMapper.selectById(id);
+            List<Admin> admins = adminMapper.selectById(id);
             sqs.commit();
             if (admins.size() > 0 && admins.get(0).password.equals(password)) {
                 flag = 1;

@@ -5,17 +5,17 @@
 <!-- namespace:命名空间,做sql隔离 -->
 
 <mapper namespace="com.mapper.AdminMapper">
-    <select id="selectById" resultType="com.test.pojo.admin">
+    <select id="selectById" resultType="com.test.pojo.Admin">
         select * from admin where aid=#{aid};
     </select>
-    <select id="selectAll" resultType="com.test.pojo.admin">
+    <select id="selectAll" resultType="com.test.pojo.Admin">
         select * from admin;
     </select>
-    <insert id="insert" parameterType="com.test.pojo.admin">
+    <insert id="insert" parameterType="com.test.pojo.Admin">
         insert into admin
         values (#{aid},#{password},#{email},#{tel});
     </insert>
-    <delete id="deleteById" parameterType="com.test.pojo.admin">
+    <delete id="deleteById" parameterType="com.test.pojo.Admin">
         delete from admin where aid=#{aid};
     </delete>
 

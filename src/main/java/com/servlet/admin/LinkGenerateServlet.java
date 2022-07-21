@@ -1,7 +1,7 @@
 package com.servlet.admin;
 
 import com.mapper.JudgelinkMapper;
-import com.test.pojo.judgelink;
+import com.test.pojo.Judgelink;
 
 
 import org.apache.ibatis.io.Resources;
@@ -38,7 +38,7 @@ public class LinkGenerateServlet extends HttpServlet {
         SqlSession sqs=factory.openSession();
         //获取mapper
         JudgelinkMapper judgelinkMapper=sqs.getMapper(JudgelinkMapper.class);
-        List<judgelink> judgelinks = judgelinkMapper.selectAll();
+        List<Judgelink> judgelinks = judgelinkMapper.selectAll();
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();

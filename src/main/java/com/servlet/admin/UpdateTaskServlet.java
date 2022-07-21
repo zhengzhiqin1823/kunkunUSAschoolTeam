@@ -2,7 +2,7 @@ package com.servlet.admin;
 
 import com.mapper.SubmissionMapper;
 import com.mapper.TaskMapper;
-import com.test.pojo.submission;
+import com.test.pojo.Submission;
 import com.test.pojo.task;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -46,21 +46,21 @@ public class UpdateTaskServlet extends HttpServlet {
         if(srcSubmitNum!=destSubmitNum)
         {
             SubmissionMapper sm = sqs.getMapper(SubmissionMapper.class);
-            List<submission> submissions = sm.selectByKey(firstsm);
-            submission s=submissions.get(0);
+            List<Submission> submissions = sm.selectByKey(firstsm);
+            Submission s=submissions.get(0);
             String next=s.getNext();
             String sid="";
             while (next!=null)
             {
                 sid=next;
-                List<submission> submissions1 = sm.selectByKey(sid);
-                submission ss=submissions1.get(0);
+                List<Submission> submissions1 = sm.selectByKey(sid);
+                Submission ss=submissions1.get(0);
                 next=ss.getNext();
             }
             for(int i=srcSubmitNum;i<destSubmitNum;i++)
             {
-                List<submission> submissions1 = sm.selectAll();
-                submission send=submissions1.get(submissions1.size()-1);
+                List<Submission> submissions1 = sm.selectAll();
+                Submission send=submissions1.get(submissions1.size()-1);
                 String NewNext=send.getSubmitID();
                 int num=Integer.parseInt(NewNext);
                 num++;

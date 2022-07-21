@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-public class admin {
+public class Admin {
      public String  aid;
      public String password;
      public  String name;

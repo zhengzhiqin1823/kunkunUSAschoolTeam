@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-public class reportcahe {
+public class ReportCache {
     String cacheID;
     String submitID;
     String teamID;
