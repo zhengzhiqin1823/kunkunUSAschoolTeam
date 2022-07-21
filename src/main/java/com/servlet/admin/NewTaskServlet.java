@@ -44,19 +44,19 @@ public class NewTaskServlet extends HttpServlet {
         //submission表插入
         if((submitNum.equals("1")))
         {
-            submissionMapper.insert(firstsm,null,"1","0",null,startedline,deadline,"0",null,taskid);
+            submissionMapper.insert(firstsm,null,"0","0",null,startedline,deadline,"0",null,taskid);
         }else {
             int nt=Integer.valueOf(firstsm)+1;
             int n=Integer.valueOf(submitNum);
             String next=String.valueOf(nt);
             String submitID=firstsm;
             for(int i=0;i<n-1;i++){
-                submissionMapper.insert(submitID,null,"1","0",next,startedline,deadline,"0",null,taskid);
+                submissionMapper.insert(submitID,null,"0","0",next,startedline,deadline,"0",null,taskid);
                 submitID=String.valueOf(nt);
                 nt++;
                 next=String.valueOf(nt);
             }
-            submissionMapper.insert(submitID,null,"1","0",null,startedline,deadline,"0",null,taskid);
+            submissionMapper.insert(submitID,null,"0","0",null,startedline,deadline,"0",null,taskid);
         }
 
         //项目表插入

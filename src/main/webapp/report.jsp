@@ -281,7 +281,7 @@
                 table+="<tr><th>团队编号</th><th>报告提交时间</th><th>团队邮箱</th><th>团队联系电话</th></tr>"
                 if(student.length==1)
                 {
-                    table+="<tr>该报告暂无团队提交</tr>"
+                    table+="<tr>所有团队都提交了此报告</tr>"
                 }
                 else
                 {

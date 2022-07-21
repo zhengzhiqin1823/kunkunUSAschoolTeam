@@ -179,12 +179,14 @@
                         if (j == 2 || j == 3) continue;
                         table += "<td>" + studentinfo[j] + "</td>";
                     }
-                    table += "<td><input class=\"demo-button3\" type='button' value='项目详情' style='width: 140px;height: 40px' " +
+                    table += "<td><input class=\"demo-button3\" type='button' value='项目详情' style='width: 140px;height: 40px'" +
                         "onclick=" + "UpdateTask(\'" + studentinfo[0] + "\')" + "></td>"
                     table += "<td><form method='get' action='/0628JavaWebExercise_war/TaskAdminServlet' >";//转到管理页面
                     table += "<input style='display:none' name='taskid' value=" + studentinfo[0] + ">";
                     table += "<input class=\"demo-button3\" type='submit' value='项目管理' style='width: 140px;height: 40px' id='ReportResultButton' >"
                     table += "</form>";
+                    table+="</td><td> <input style='width: 140px;height: 40px' class=\"demo-button3\"class=\"demo-button3\" type='button' value='删除项目'" +
+                        "onclick=" + "deleteTask(\'" + studentinfo[0] + "\')" + "></td>"
                     table += "</td></tr>";
                 }
                 document.getElementById("projects").innerHTML = table;
@@ -490,6 +492,26 @@
         if(i=="")
         {
             document.getElementById("CreatTaskdescription").value="请输入项目描述";
+        }
+    }
+    function deleteTask(tid){
+        if(!confirm("确认删除?"))
+        {
+            return ;
+        }
+        let xhttp;
+        if (window.XMLHttpRequest) {
+            xhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/DeletTask?tid="+tid);
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                alert("删除成功！")
+            }
         }
     }
 </script>
