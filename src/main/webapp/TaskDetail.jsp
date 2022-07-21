@@ -128,7 +128,7 @@
             // code for IE6, IE5
             xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=6&tid=" + tid);
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=1&tid=" + tid);
         xhttp.send();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {

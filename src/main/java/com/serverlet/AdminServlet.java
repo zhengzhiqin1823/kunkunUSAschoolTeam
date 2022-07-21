@@ -31,6 +31,19 @@ public class AdminServlet extends HttpServlet {
         SqlSession sqs=factory.openSession();
         switch (ret)
         {
+            case "1":
+            {
+                String id=request.getParameter("tid");
+                TaskMapper mapper = sqs.getMapper(TaskMapper.class);
+                List<task> tasks = mapper.selectAll();
+                PrintWriter writer = response.getWriter();
+                for(task t:tasks)
+                {
+                    if(t.getTaskid().equals(id))
+                        writer.write(t.toString());
+                }
+                break;
+            }
             case "2":
             {
                 TutorMapper tm = sqs.getMapper(TutorMapper.class);

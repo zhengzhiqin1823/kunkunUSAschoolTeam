@@ -219,7 +219,7 @@
                         table+="<td>"+studentinfo[5]+"</td>";
                         table+="<td>"+studentinfo[6]+"</td>";
                         table+="<td>"+studentinfo[7]+"</td>";
-                        table+="<td></td>";
+                        table+="<td><p>\"\"\"<p/></td>";
                         table+="<td><form action='http://localhost:8080/0628JavaWebExercise_war/submit' method='get'>"
                         table+="<input style='display: none'; type='text' name='rid' value=\""+studentinfo[0]+"\">"
                         table+="<input style='display: none'; type='text' name='taskID' value=\""+tid+"\">"

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="./css/demo-button1.css"/>
     <script src="js/jquery.slim.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="../scripts/demo-navigation1.js"></script>
+    <script src="./scripts/demo-navigation1.js"></script>
 </head>
 
 <body>
@@ -54,10 +54,10 @@
                 <tr><th>请输入报告提交开始时间</th><th>请输入报告提交结束时间</th></tr>
                 <tr>
                     <td>
-                        <input id="start"  style="border: #1d2124 solid 2px;width:150px;height: 40px;font-size: 15px;text-align: center;margin-left: 15px" type="text" value="yyyy-mm-dd">
+                        <input id="start"  style="border: #1d2124 solid 2px;width:150px;height: 40px;font-size: 15px;text-align: center;margin-left: 15px" type="date" value="yyyy-mm-dd">
                     </td>
                     <td>
-                        <input id="deadline"  style="border: #1d2124 solid 2px;width:150px;height: 40px;font-size: 15px;text-align: center;margin-left: 15px" type="text" value="yyyy-mm-dd">
+                        <input id="deadline"  style="border: #1d2124 solid 2px;width:150px;height: 40px;font-size: 15px;text-align: center;margin-left: 15px" type="date" value="yyyy-mm-dd">
                     </td>
                 </tr>
             </table>
