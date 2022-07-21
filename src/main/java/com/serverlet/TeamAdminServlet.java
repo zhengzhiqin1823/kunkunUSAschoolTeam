@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "teamAdminServlet", value = "/teamAdminServlet")
-public class teamAdminServlet extends HttpServlet {
+public class TeamAdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

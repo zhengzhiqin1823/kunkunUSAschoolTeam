@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Random;
 
 @WebServlet(name = "linkGenerateServlet", value = "/linkGenerateServlet")
-public class linkGenerateServlet extends HttpServlet {
+public class LinkGenerateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tid=request.getParameter("tid");

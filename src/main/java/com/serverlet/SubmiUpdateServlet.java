@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @WebServlet(name = "submiUpdateServlet", value = "/submiUpdateServlet")
-public class submiUpdateServlet extends HttpServlet {
+public class SubmiUpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String submitID=request.getParameter("submitID");

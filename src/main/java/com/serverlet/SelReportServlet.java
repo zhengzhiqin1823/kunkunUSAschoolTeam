@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 
 @WebServlet(name = "selReportServlet", value = "/selReportServlet")
-public class selReportServlet extends HttpServlet {
+public class SelReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String rID=request.getParameter("rid");

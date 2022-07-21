@@ -1,7 +1,6 @@
 package com.mapper;
 
 import com.test.pojo.report;
-import com.test.pojo.studentteam;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

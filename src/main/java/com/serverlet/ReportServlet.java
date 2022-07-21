@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "reportServlet", value = "/reportServlet")
-public class reportServlet extends HttpServlet {
+public class ReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //检测用户是否登陆

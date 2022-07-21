@@ -18,7 +18,7 @@ import com.test.pojo.submission;
 import com.test.pojo.task;
 
 @WebServlet(name = "newSubmiServlet", value = "/newSubmiServlet")
-public class newSubmiServlet extends HttpServlet {
+public class NewSubmiServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String taskid=request.getParameter("taskid");

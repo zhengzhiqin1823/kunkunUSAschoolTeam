@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "tutorInsertServlet", value = "/tutorInsertServlet")
-public class tutorInsertServlet extends HttpServlet {
+public class TutorInsertServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tid=request.getParameter("tid");

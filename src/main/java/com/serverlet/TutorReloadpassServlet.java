@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @WebServlet(name = "tutorReloadpassServlet", value = "/tutorReloadpassServlet")
-public class tutorReloadpassServlet extends HttpServlet {
+public class TutorReloadpassServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id=request.getParameter("tid");
