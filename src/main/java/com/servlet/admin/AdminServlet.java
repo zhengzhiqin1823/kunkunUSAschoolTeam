@@ -35,9 +35,9 @@ public class AdminServlet extends HttpServlet {
             {
                 String id=request.getParameter("tid");
                 TaskMapper mapper = sqs.getMapper(TaskMapper.class);
-                List<task> tasks = mapper.selectAll();
+                List<Task> tasks = mapper.selectAll();
                 PrintWriter writer = response.getWriter();
-                for(task t:tasks)
+                for(Task t:tasks)
                 {
                     if(t.getTaskid().equals(id))
                         writer.write(t.toString());
@@ -47,9 +47,9 @@ public class AdminServlet extends HttpServlet {
             case "2":
             {
                 TutorMapper tm = sqs.getMapper(TutorMapper.class);
-                List<tutor> tutors=tm.selectAll();
+                List<Tutor> tutors=tm.selectAll();
                 PrintWriter writer = response.getWriter();
-                for(tutor t:tutors)
+                for(Tutor t:tutors)
                 {
                     writer.write(t.toString());
                 }
@@ -60,9 +60,9 @@ public class AdminServlet extends HttpServlet {
             {
                 String tid = request.getParameter("tid");
                 TutorMapper tm = sqs.getMapper(TutorMapper.class);
-                List<tutor> tutors=tm.selectAll();
+                List<Tutor> tutors=tm.selectAll();
                 PrintWriter writer = response.getWriter();
-                for(tutor t:tutors)
+                for(Tutor t:tutors)
                 {
                     if(t.getTid().contains(tid))
                         writer.write(t.toString());
@@ -72,9 +72,9 @@ public class AdminServlet extends HttpServlet {
             case "5":
             {
                 TaskMapper mapper = sqs.getMapper(TaskMapper.class);
-                List<task> tasks = mapper.selectAll();
+                List<Task> tasks = mapper.selectAll();
                 PrintWriter writer = response.getWriter();
-                for(task t:tasks)
+                for(Task t:tasks)
                 {
                     writer.write(t.toString());
                 }
@@ -84,9 +84,9 @@ public class AdminServlet extends HttpServlet {
             {
                 String id=request.getParameter("tid");
                 TaskMapper mapper = sqs.getMapper(TaskMapper.class);
-                List<task> tasks = mapper.selectAll();
+                List<Task> tasks = mapper.selectAll();
                 PrintWriter writer = response.getWriter();
-                for(task t:tasks)
+                for(Task t:tasks)
                 {
                     if(t.getTaskid().contains(id))
                         writer.write(t.toString());
@@ -97,9 +97,9 @@ public class AdminServlet extends HttpServlet {
             {
                 String tid=request.getParameter("tid");
                 TaskMapper mapper = sqs.getMapper(TaskMapper.class);
-                List<task> tasks = mapper.selectByKey(tid);
+                List<Task> tasks = mapper.selectByKey(tid);
                 PrintWriter writer = response.getWriter();
-                for(task t:tasks)
+                for(Task t:tasks)
                 {
                     writer.write(t.toString());
                 }
@@ -117,8 +117,8 @@ public class AdminServlet extends HttpServlet {
                 String deadLine=s.getDeadLine();
                 String id=request.getParameter("tid");
                 TaskMapper tm = sqs.getMapper(TaskMapper.class);
-                List<task> tasks = tm.selectByKey(id);
-                task t=tasks.get(0);
+                List<Task> tasks = tm.selectByKey(id);
+                Task t=tasks.get(0);
                 String des=t.getDescription();
                 String name=t.getName();
                 writer.write(id+","+name+","+reportType+","+startTime+","+deadLine+","+des+";");

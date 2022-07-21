@@ -4,8 +4,8 @@ import com.mapper.TeamMapper;
 import com.mapper.TutorMapper;
 import com.mapper.AdminMapper;
 import com.servlet.methods.MD5Utils;
-import com.test.pojo.team;
-import com.test.pojo.tutor;
+import com.test.pojo.Team;
+import com.test.pojo.Tutor;
 import com.test.pojo.Admin;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -64,14 +64,14 @@ public class LoginServlet extends HttpServlet {
                 flag = 1;
             } else {
                 TutorMapper tutormapper = sqs.getMapper(TutorMapper.class);
-                List<tutor> tutors = tutormapper.selectByTid(id);
+                List<Tutor> tutors = tutormapper.selectByTid(id);
                 sqs.commit();
                 if (tutors.size() > 0 && tutors.get(0).password.equals(password)) {
                     flag = 2;
                 }
                 else {
                     TeamMapper teamMapper = sqs.getMapper(TeamMapper.class);
-                    List<team> teams = teamMapper.selectByKey(id);
+                    List<Team> teams = teamMapper.selectByKey(id);
                     sqs.commit();
                     if (teams.size() > 0 && teams.get(0).getPassword().equals(password)) {
                         flag = 3;

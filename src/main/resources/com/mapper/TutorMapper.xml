@@ -5,25 +5,25 @@
 <!-- namespace:命名空间,做sql隔离 -->
 
 <mapper namespace="com.mapper.TutorMapper">
-    <insert id="insert" parameterType="com.test.pojo.tutor">
+    <insert id="insert" parameterType="com.test.pojo.Tutor">
         insert into tutor(tid,password,name,email,tel)
         values (#{tid},#{password},#{name},#{email},#{tel});
     </insert>
-    <select id="selectByTid" resultType="com.test.pojo.tutor">
+    <select id="selectByTid" resultType="com.test.pojo.Tutor">
             select *from tutor where tid=#{tid};
         </select>
-        <select id="selectAll" resultType="com.test.pojo.tutor">
+        <select id="selectAll" resultType="com.test.pojo.Tutor">
                 select *from tutor;
             </select>
-            <delete id="deleteByTid" parameterType="com.test.pojo.tutor">
+            <delete id="deleteByTid" parameterType="com.test.pojo.Tutor">
                     delete  from tutor where tid=#{tid};
                 </delete>
-        <update id="updatePass" parameterType="com.test.pojo.tutor">
+        <update id="updatePass" parameterType="com.test.pojo.Tutor">
                      update tutor
                      set password=#{password}
                      where tid=#{tid};
              </update>
-       <update id="update" parameterType="com.test.pojo.tutor">
+       <update id="update" parameterType="com.test.pojo.Tutor">
             update tutor
             set name=#{name},email=#{email},tel=#{tel}
             where tid=#{tid};

@@ -1,11 +1,11 @@
 package com.test.pojo;
 
-public class tutor {
+public class Tutor {
     public String  tid;
     public String password;
-    public  String name;
-    public  String email;
-    public  String tel;
+    public String name;
+    public String email;
+    public String tel;
 
     public String getTid() {
         return tid;

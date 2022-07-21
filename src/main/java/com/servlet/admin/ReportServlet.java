@@ -118,8 +118,8 @@ public class ReportServlet extends HttpServlet {
                         Judgelink judgelink = judgelinks.get(0);
                         String tid = judgelink.getTid();
                         String link=judgelinks.get(0).getLink();
-                        List<tutor> tutors = tm.selectByTid(tid);
-                        tutor tutor = tutors.get(0);
+                        List<Tutor> tutors = tm.selectByTid(tid);
+                        Tutor tutor = tutors.get(0);
                         writer.write(r.getTeamid()+","+r.getSubmitTime().substring(0,10)+","+r.getRid()+","+"r.getFirstFm()"+","+r.getTotalsize()+","+tutor.getName()+","+link+","+opinionstatus+";");
                     }
                 }
@@ -131,9 +131,9 @@ public class ReportServlet extends HttpServlet {
                 TeamMapper teamMapper = sqs.getMapper(TeamMapper.class);
                 List<Submission> submissions = submissionMapper.selectByKey(sid);
                 String taskid=submissions.get(0).getTaskID();
-                List<team> teams = teamMapper.selectByTaskID(taskid);
+                List<Team> teams = teamMapper.selectByTaskID(taskid);
                 int k=0;
-                for(team t:teams){
+                for(Team t:teams){
                     List<Report> reports = mapper.selectByTeamIDAndSubmitID(t.getTeamid(), sid);
                     if(reports.size()==0){
                         writer.write(t.getTeamid()+","+"未提交"+","+"default"+","+t.getEmail()+","+t.getTel()+";");

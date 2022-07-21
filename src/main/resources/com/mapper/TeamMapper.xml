@@ -5,35 +5,35 @@
 <!-- namespace:命名空间,做sql隔离 -->
 
 <mapper namespace="com.mapper.TeamMapper">
-    <insert id="insert" parameterType="com.test.pojo.team">
+    <insert id="insert" parameterType="com.test.pojo.Team">
         insert  into team
         values(#{teamid},#{password},#{name},#{email},#{tel},#{taskid});
     </insert>
-    <select id="selectByKey" resultType="com.test.pojo.team">
+    <select id="selectByKey" resultType="com.test.pojo.Team">
         select * from team where teamid=#{teamid};
     </select>
-    <select id="selectAll" resultType="com.test.pojo.team">
+    <select id="selectAll" resultType="com.test.pojo.Team">
         select * from team;
     </select>
-    <select id="selectByTaskID" resultType="com.test.pojo.team">
+    <select id="selectByTaskID" resultType="com.test.pojo.Team">
         select * from team where taskid=#{taskid};
     </select>
-    <delete id="deleteByKey" parameterType="com.test.pojo.team">
+    <delete id="deleteByKey" parameterType="com.test.pojo.Team">
         delete from team where teamid=#{teamid};
     </delete>
-    <update id="updatePassword" parameterType="com.test.pojo.team">
+    <update id="updatePassword" parameterType="com.test.pojo.Team">
         update team set password=#{password} where teamid=#{teamid};
     </update>
-    <update id="updateEmail" parameterType="com.test.pojo.team">
+    <update id="updateEmail" parameterType="com.test.pojo.Team">
         update team set email=#{email} where teamid=#{teamid};
     </update>
-    <update id="updateName" parameterType="com.test.pojo.team">
+    <update id="updateName" parameterType="com.test.pojo.Team">
         update team set name=#{name} where teamid=#{teamid};
     </update>
-    <update id="updateTel" parameterType="com.test.pojo.team">
+    <update id="updateTel" parameterType="com.test.pojo.Team">
         update team set tel=#{tel} where teamid=#{teamid};
     </update>
-    <update id="updatePass" parameterType="com.test.pojo.team">
+    <update id="updatePass" parameterType="com.test.pojo.Team">
         update  team
         set password="49ba59abbe56e057"
         where teamid=#{teamid}

@@ -67,12 +67,12 @@ public class TeamSubmitServlet extends HttpServlet {
         ReportcaheMapper reportcaheMapper = sqs.getMapper(ReportcaheMapper.class);
         TeamMapper teamMapper = sqs.getMapper(TeamMapper.class);
         ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
-        List<task> tasks = taskMapper.selectByKey(taskID);
+        List<Task> tasks = taskMapper.selectByKey(taskID);
 
 
-        team team = teamMapper.selectByKey(id.toString()).get(0);
+        Team team = teamMapper.selectByKey(id.toString()).get(0);
         teamName = team.getName();
-        task t = tasks.get(0);
+        Task t = tasks.get(0);
         List<Submission> submissions = submissionMapper.selectByKey(submitID);
         Submission s = submissions.get(0);
         resp.setCharacterEncoding("UTF-8");
@@ -400,7 +400,7 @@ public class TeamSubmitServlet extends HttpServlet {
         );
     }
 
-    private void writeHtml2(PrintWriter writer, task t, Submission s, team team,
+    private void writeHtml2(PrintWriter writer, Task t, Submission s, Team team,
                             String tutorName,
                             Report report, String text, String score) {
         if (text == null)
@@ -487,7 +487,7 @@ public class TeamSubmitServlet extends HttpServlet {
 
     }
 
-    private void writeHtml3(PrintWriter writer, task t, Submission s, team team,
+    private void writeHtml3(PrintWriter writer, Task t, Submission s, Team team,
                             String tutorName,
                             Report report, String text, String score) {
         if (text == null)

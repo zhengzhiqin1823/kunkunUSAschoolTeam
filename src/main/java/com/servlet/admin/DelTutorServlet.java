@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @WebServlet(name = "delTutorServlet", value = "/delTutorServlet")
-public class delTutorServlet extends HttpServlet {
+public class DelTutorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tid=request.getParameter("tid");

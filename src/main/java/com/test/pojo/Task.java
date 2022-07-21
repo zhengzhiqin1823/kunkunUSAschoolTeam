@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-public class task {
+public class Task {
     private String taskid;
     private String name;
     private String description;

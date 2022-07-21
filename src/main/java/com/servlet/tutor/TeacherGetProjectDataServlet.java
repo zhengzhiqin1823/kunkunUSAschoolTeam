@@ -304,7 +304,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
         TaskMapper taskMapper = sqlSession.getMapper(TaskMapper.class);
-        task task = taskMapper.selectByKey(taskID).get(0);
+        Task task = taskMapper.selectByKey(taskID).get(0);
         return task.getName();
     }
 
@@ -336,7 +336,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         Report report = reportMapper.selectByRid(rid).get(0);
         TaskMapper tm = sqlSession.getMapper(TaskMapper.class);
 
-        team team = teamMapper.selectByKey(report.getTeamid()).get(0);
+        Team team = teamMapper.selectByKey(report.getTeamid()).get(0);
 
 //        String name = tm.selectByKey(taskID).get(0).getName();
         String name = team.getName();

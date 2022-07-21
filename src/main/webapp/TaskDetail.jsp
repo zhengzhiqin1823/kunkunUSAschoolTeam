@@ -15,9 +15,8 @@
     <link rel="stylesheet" href="css/ReadTeamReport.css">
     <link rel="stylesheet" href="./css/demo-navigation.css">
     <link rel="stylesheet" href="./css/demo-button1.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery.slim.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./css/student.css">
+
     <script src="scripts/demo-navigation1.js"></script>
     <title>项目详情</title>
 </head>

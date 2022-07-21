@@ -3,7 +3,7 @@ package com.servlet.admin;
 import com.mapper.SubmissionMapper;
 import com.mapper.TaskMapper;
 import com.test.pojo.Submission;
-import com.test.pojo.task;
+import com.test.pojo.Task;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,7 +36,7 @@ public class NewTaskServlet extends HttpServlet {
 
         TaskMapper taskMapper = sqs.getMapper(TaskMapper.class);
         SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
-        List<task> tasks = taskMapper.selectAll();
+        List<Task> tasks = taskMapper.selectAll();
 
         List<Submission> submissions=submissionMapper.selectAll();
         String firstsm=submissions.size()+1+"";

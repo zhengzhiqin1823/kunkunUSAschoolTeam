@@ -1,11 +1,8 @@
 package com.servlet.admin;
 
-import com.mapper.SubmissionMapper;
 import com.mapper.TaskMapper;
-import com.test.pojo.submission;
-import com.test.pojo.task;
-import javafx.application.Application;
-import javafx.stage.Stage;
+import com.test.pojo.Task;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -18,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 
 @WebServlet("/DeletTask")

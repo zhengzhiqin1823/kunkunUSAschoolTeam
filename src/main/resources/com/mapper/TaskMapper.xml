@@ -5,25 +5,25 @@
 <!-- namespace:命名空间,做sql隔离 -->
 
 <mapper namespace="com.mapper.TaskMapper">
-    <insert id="insert" parameterType="com.test.pojo.task">
+    <insert id="insert" parameterType="com.test.pojo.Task">
         insert  into task
         values(#{taskID},#{name},#{description},#{submitNum},#{firstsm},#{startedline},#{deadline});
     </insert>
-    <select id="selectByKey" resultType="com.test.pojo.task">
+    <select id="selectByKey" resultType="com.test.pojo.Task">
         select * from task where  taskID=#{taskID};
     </select>
-    <select id="selectAll" resultType="com.test.pojo.task">
+    <select id="selectAll" resultType="com.test.pojo.Task">
         select * from task;
     </select>
-    <delete id="deleteByKey" parameterType="com.test.pojo.task">
+    <delete id="deleteByKey" parameterType="com.test.pojo.Task">
         delete from task where taskID=#{taskID};
     </delete>
-    <update id="UpdateByKey" parameterType="com.test.pojo.task">
+    <update id="UpdateByKey" parameterType="com.test.pojo.Task">
         update task
         set description=#{description},name=#{name},startedline=#{startedline},deadline=#{deadline},submitNum=#{submitNum}
         where  taskid=#{taskid};
     </update>
-    <update id="updateSubmitnumByKey" parameterType="com.test.pojo.task">
+    <update id="updateSubmitnumByKey" parameterType="com.test.pojo.Task">
         update task set submitNum=#{submitNum} where taskid=#{taskID};
     </update>
 </mapper>

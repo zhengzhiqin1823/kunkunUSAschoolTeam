@@ -2,7 +2,7 @@ package com.servlet.team;
 
 import com.mapper.TeamMapper;
 import com.servlet.methods.MD5Utils;
-import com.test.pojo.team;
+import com.test.pojo.Team;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -40,8 +40,8 @@ public class TeamAdminServlet extends HttpServlet {
         {
             case "1":
             {
-                List<team> teams = mapper.selectAll();
-                for(team t:teams)
+                List<Team> teams = mapper.selectAll();
+                for(Team t:teams)
                 {
                     writer.write(t.getTeamid()+","+t.getEmail()+","+t.getName()+","+t.getTel()+","+t.getTaskID()+";");
                 }
@@ -56,7 +56,7 @@ public class TeamAdminServlet extends HttpServlet {
             {
                 if("default".equals(tid))
                 {
-                    List<team> teams =mapper.selectAll();
+                    List<Team> teams =mapper.selectAll();
 
                     String id=teams.size()+1+"";
                     mapper.insert(
@@ -69,8 +69,8 @@ public class TeamAdminServlet extends HttpServlet {
                 }
                 else
                 {
-                    List<team> teams =mapper.selectAll();
-                    for(team t:teams)
+                    List<Team> teams =mapper.selectAll();
+                    for(Team t:teams)
                     {
                         if(t.getTeamid().equals(tid))
                         {
@@ -83,8 +83,8 @@ public class TeamAdminServlet extends HttpServlet {
             }
             case "4":
             {
-                List<team> teams =mapper.selectAll();
-                for(team t:teams)
+                List<Team> teams =mapper.selectAll();
+                for(Team t:teams)
                 {
                     if(t.getTeamid().contains(tid))
                     {

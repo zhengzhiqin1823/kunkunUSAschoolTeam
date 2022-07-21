@@ -3,7 +3,7 @@ package com.servlet.admin;
 import com.mapper.SubmissionMapper;
 import com.mapper.TaskMapper;
 import com.test.pojo.Submission;
-import com.test.pojo.task;
+import com.test.pojo.Task;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,8 +36,8 @@ public class UpdateTaskServlet extends HttpServlet {
         SqlSession sqs=factory.openSession();
 
         TaskMapper mapper = sqs.getMapper(TaskMapper.class);
-        List<task> tasks = mapper.selectByKey(TaskId);
-        task t=tasks.get(0);
+        List<Task> tasks = mapper.selectByKey(TaskId);
+        Task t=tasks.get(0);
         String firstsm = t.getFirstsm();
         int srcSubmitNum=Integer.parseInt(t.getSubmitNum());
         mapper.UpdateByKey(TaskId,name,description,startline,deadline,submitNum);

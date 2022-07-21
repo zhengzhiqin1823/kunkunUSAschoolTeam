@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @WebServlet(name = "delStudentServlet", value = "/delStudentServlet")
-public class delStudentServlet extends HttpServlet {
+public class DelStudentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String sid=request.getParameter("sid");

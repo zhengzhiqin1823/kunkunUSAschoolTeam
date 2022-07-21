@@ -3,7 +3,7 @@ package com.servlet.admin;
 import com.mapper.SubmissionMapper;
 import com.mapper.TaskMapper;
 import com.test.pojo.Submission;
-import com.test.pojo.task;
+import com.test.pojo.Task;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -37,8 +37,8 @@ public class AdminTaskServlet extends HttpServlet {
         {
             case "1":
             {
-                List<task> tasks = mapper.selectByKey(tid);
-                task t=tasks.get(0);
+                List<Task> tasks = mapper.selectByKey(tid);
+                Task t=tasks.get(0);
                 sid=t.getFirstsm();
                 SubmissionMapper submapper = sqs.getMapper(SubmissionMapper.class);
                 do{
@@ -51,8 +51,8 @@ public class AdminTaskServlet extends HttpServlet {
             }
             case "2":
             {
-                List<task> tasks = mapper.selectByKey(tid);
-                task t=tasks.get(0);
+                List<Task> tasks = mapper.selectByKey(tid);
+                Task t=tasks.get(0);
                 sid=t.getFirstsm();
                 SubmissionMapper submapper = sqs.getMapper(SubmissionMapper.class);
                 do{
@@ -65,8 +65,8 @@ public class AdminTaskServlet extends HttpServlet {
             }
             case "3":
             {
-                List<task> tasks = mapper.selectByKey(tid);
-                task t=tasks.get(0);
+                List<Task> tasks = mapper.selectByKey(tid);
+                Task t=tasks.get(0);
                 sid=t.getFirstsm();
                 int num=Integer.parseInt(t.getSubmitNum());
                 SubmissionMapper submapper = sqs.getMapper(SubmissionMapper.class);
@@ -81,8 +81,8 @@ public class AdminTaskServlet extends HttpServlet {
             }
             case "4":
             {
-                List<task> tasks = mapper.selectByKey(tid);
-                task t=tasks.get(0);
+                List<Task> tasks = mapper.selectByKey(tid);
+                Task t=tasks.get(0);
                 writer.write(t.getName());
                 break;
             }

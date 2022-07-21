@@ -1,13 +1,13 @@
 package com.test.pojo;
 
-public class team {
+public class Team {
 
-    String teamid;
-    String password;
-    String name;
-    String email;
-    String tel;
-    String taskID;
+    private String teamid;
+    private String password;
+    private String name;
+    private String email;
+    private String tel;
+    private String taskID;
 
     public String getTaskID() {
         return taskID;

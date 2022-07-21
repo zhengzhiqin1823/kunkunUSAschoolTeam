@@ -7,7 +7,7 @@ import com.servlet.admin.HttpGetJson;
 import com.servlet.login.LoginServlet;
 import com.servlet.methods.MD5Utils;
 import com.test.pojo.Admin;
-import com.test.pojo.team;
+import com.test.pojo.Team;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -65,7 +65,7 @@ public class TeamChangePasswordServlet extends HttpServlet {
             HttpSession session = req.getSession();
             Object id = session.getAttribute("id");
             String teamID = id.toString();
-            team team = mapper.selectByKey(teamID).get(0);
+            Team team = mapper.selectByKey(teamID).get(0);
 
 
             if (team.getPassword().equals(MD5Utils.stringToMD5(old))) {

@@ -1,7 +1,6 @@
 package com.mapper;
 
-import com.test.pojo.task;
-import com.test.pojo.team;
+import com.test.pojo.Team;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,9 +18,9 @@ public interface TeamMapper {
     void updateEmail(@Param("teamid") String teamid,@Param("email") String email);
     void updateTel(@Param("teamid") String teamid,@Param("tel") String tel);
 
-    List<team> selectByTaskID(@Param("taskid") String taskid);
-    List<team> selectByKey(@Param("teamid")String teamid);
-    List<team> selectAll();
+    List<Team> selectByTaskID(@Param("taskid") String taskid);
+    List<Team> selectByKey(@Param("teamid")String teamid);
+    List<Team> selectAll();
     void deleteByKey(@Param("teamid")String teamid);
     void updatePass(@Param("teamid") String teamid);
 }

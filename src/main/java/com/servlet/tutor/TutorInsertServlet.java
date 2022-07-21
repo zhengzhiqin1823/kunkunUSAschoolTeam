@@ -1,7 +1,7 @@
 package com.servlet.tutor;
 
 import com.mapper.TutorMapper;
-import com.test.pojo.tutor;
+import com.test.pojo.Tutor;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -33,7 +33,7 @@ public class TutorInsertServlet extends HttpServlet {
         String id="";
         if(tid.equals("default"))
         {
-            List<tutor> tutors = mapper.selectAll();
+            List<Tutor> tutors = mapper.selectAll();
             int num=tutors.size();
             num++;
             id+="tutor";
@@ -41,8 +41,8 @@ public class TutorInsertServlet extends HttpServlet {
         }
         else
         {
-            List<tutor> tutors = mapper.selectAll();
-            for(tutor s:tutors)
+            List<Tutor> tutors = mapper.selectAll();
+            for(Tutor s:tutors)
             {
                 if(tid.equals(s.getTid()))
                 {

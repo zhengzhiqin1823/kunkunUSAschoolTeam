@@ -57,13 +57,13 @@ public class TeamTaskServlet extends HttpServlet {
         ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
 
         TeamMapper teamMapper = sqs.getMapper(TeamMapper.class);
-        team team = teamMapper.selectByKey((String) teamID).get(0);
+        Team team = teamMapper.selectByKey((String) teamID).get(0);
         teamName = team.getName();
         taskID = team.getTaskID();
         OpiniontutorMapper opiniontutorMapper = sqs.getMapper(OpiniontutorMapper.class);
 
-        List<task> tasks = taskMapper.selectByKey(taskID);
-        task t = tasks.get(0);
+        List<Task> tasks = taskMapper.selectByKey(taskID);
+        Task t = tasks.get(0);
         String num = t.getSubmitNum();
         int submitNum = Integer.parseInt(num);
         List<Submission> submissionArr = new ArrayList<>();
@@ -122,6 +122,7 @@ public class TeamTaskServlet extends HttpServlet {
                     mySubmission.score = "";
                 } else {
                     mySubmission.isJudged = "已评审";
+                    mySubmission.status = "已结束";
                     mySubmission.judgeDate = opiniontutors.get(0).getSubmitTime().substring(0, 10);
                     mySubmission.score = opiniontutors.get(0).getScore()+"";
                     if(true)
@@ -165,7 +166,7 @@ public class TeamTaskServlet extends HttpServlet {
         super.doPost(req, resp);
     }
 
-    private void writeHtml(PrintWriter writer, task t, List<MySubmission> list) {
+    private void writeHtml(PrintWriter writer, Task t, List<MySubmission> list) {
         writer.write("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "\n" +
