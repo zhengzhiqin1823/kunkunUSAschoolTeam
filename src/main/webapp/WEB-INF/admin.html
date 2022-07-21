@@ -62,7 +62,7 @@
             </div>
             <!--这里显示学生表-->
             <div class="card">
-                <table id="students"></table>
+                <table id="students" style="border-collapse: separate; border-spacing: 4px"></table>
             </div>
             <br/>
         </div>
@@ -131,7 +131,7 @@
                         table += "<td>" + studentinfo[j] + "</td>";
                     }
                     table += "<td><input class=\"demo-button3\" type='button' value='重置密码' style='width: 100px;height: 40px' onclick=\"UpdateStudent(" + studentinfo[0] + ")\"></td>"//弹出编辑框
-                    table += "<td><input class=\"demo-button3\" type='button' value='修改信息' style='width: 100px;height: 40px;margin-left: -60px' onclick=\"UpdateStudentInfo(" + studentinfo[0] + ")\"></td>"//弹出编辑框
+                    table += "<td><input class=\"demo-button3\" type='button' value='修改信息' style='width: 100px;height: 40px;' onclick=\"UpdateStudentInfo(" + studentinfo[0] + ")\"></td>"//弹出编辑框
                     table += "<td><form method='get' action='/0628JavaWebExercise_war/delStudentServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
                     table += "<input style='display:none' name='sid' value=" + studentinfo[0] + ">";
                     table += "<input class=\"demo-button3\" type='submit' value='删除' style='margin-left:-60px;width: 60px;height: 40px''>";
@@ -139,9 +139,6 @@
                     table += "</td></tr>";
                 }
                 document.getElementById("students").innerHTML = table;
-
-                //let table="<tr><th>学号</th><th>姓名</th><th>邮箱</th><th>电话</th></tr>";
-                //for(int i)
             }
         }
     }
@@ -205,7 +202,7 @@
                             table += "<td>" + studentinfo[j] + "</td>";
                         }
                         table += "<td><input class=\"demo-button3\" type='button' value='重置密码' style='width: 100px;height: 40px' onclick=\"UpdateStudent(" + studentinfo[0] + ")\"></td>"//弹出编辑框
-                        table += "<td><input class=\"demo-button3\" type='button' value='修改信息' style='width: 100px;height: 40px;margin-left: -60px' onclick=\"UpdateStudentInfo(" + studentinfo[0] + ")\"></td>"//弹出编辑框
+                        table += "<td><input class=\"demo-button3\" type='button' value='修改信息' style='width: 100px;height: 40px' onclick=\"UpdateStudentInfo(" + studentinfo[0] + ")\"></td>"//弹出编辑框
                         table += "<td><form method='get' action='/0628JavaWebExercise_war/delStudentServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
                         table += "<input style='display:none' name='sid' value=" + studentinfo[0] + ">";
                         table += "<input class=\"demo-button3\" type='submit' value='删除' style='margin-left:-60px;width: 60px;height: 40px''>";

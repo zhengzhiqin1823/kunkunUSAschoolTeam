@@ -50,6 +50,18 @@
                 <input class="demo-button3" type="button" value="关闭窗口" id="TutorInfoInsertCancel">
             </div>
         </dialog>
+        <dialog style="display: none;margin-top: 0%;margin-left: 40%;width: 400px;height: 200px;z-index:20;position: fixed ;border: #1d2124 solid 2px"
+                id="TutorInfoUpdate">
+            <div>
+                <input type="text" id="UpdateTutorId" style="display: none">
+                导师姓名<input type="text" id="UpdateTutorName"><br>
+                导师邮箱<input type="text" id="UpdateTutorEmail"><br>
+                导师电话<input type="text" id="UpdateTutorTel"><br>
+                <span id="UpdateTutorMsg" style="color: #dc3545"></span><br>
+                <input class="demo-button3" type="button" value="确认提交" id="TutorInfoUpdateConfirm">
+                <input class="demo-button3" type="button" value="关闭窗口" id="TutorInfoUpdateCancel">
+            </div>
+        </dialog>
         <div>
             <!--这里显示一个详细按钮-->
             <form method="post" action="#tutor_admin">
@@ -61,7 +73,7 @@
 
         </div>
         <div class="card">
-            <table id="tutors"></table>
+            <table id="tutors" style="border-collapse: separate; border-spacing: 4px"></table>
         </div>
         <br/>
 
@@ -98,6 +110,7 @@
                         table += "<td>" + studentinfo[j] + "</td>";
                     }
                     table += "<td><input class=\"demo-button3\" type='button' value='重置密码' style='width: 100px;height: 40px' onclick=" + "UpdateTutor(\'" + studentinfo[0] + "\')></td>"//弹出编辑框
+                    table += "<td><input class=\"demo-button3\" type='button' value='修改信息' style='width: 100px;height: 40px' onclick=\"UpdateTutorInfo(" + studentinfo[0] + ")\"></td>"//弹出编辑框
                     table += "<td><form method='get' action='/0628JavaWebExercise_war/delTutorServlet' onsubmit=\"javascript: return confirmdel()\" >";//生成对应的删除学生的按钮
                     table += "<input style='display:none' name='tid' value=" + studentinfo[0] + ">";
                     table += "<input class=\"demo-button3\" type='submit' value='删除' style='margin-left:-180px;width: 60px;height: 40px''>";
@@ -227,7 +240,65 @@
             }
         }
     }
+function UpdateTutorInfo(tid)
+{
+    document.getElementById("TutorInfoUpdate").style.display="block";
+    document.getElementById("UpdateTutorId").value=tid;
+    let xhttp;
+    if (window.XMLHttpRequest) {
+        xhttp = new XMLHttpRequest();
+    } else {
+        // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=4&tid=" + tid);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let str = this.responseText;
+            let student = str.split(";")
+            let i;
+            for (i = 0; i < student.length - 1; i++) {
+                let studentinfo = student[i].split(",");
+                document.getElementById("UpdateTutorName").value=studentinfo[1];
+                document.getElementById("UpdateTutorEmail").value=studentinfo[2];
+                document.getElementById("UpdateTutorTel").value=studentinfo[3];
+            }
+        }
+    }
+}
+document.getElementById("TutorInfoUpdateCancel").onclick=function (){
+    document.getElementById("TutorInfoUpdate").style.display="none";
+}
+document.getElementById("TutorInfoUpdateConfirm").onclick=function () {
+    let name=document.getElementById("UpdateTutorName").value;
+    let email=document.getElementById("UpdateTutorEmail").value;
+    let tel=document.getElementById("UpdateTutorTel").value;
+    let tid=document.getElementById("UpdateTutorId").value;
+    if(name==""||email==""||tel=="")
+    {
+        document.getElementById("UpdateTutorMsg").innerText="输入完整信息";
+        return;
+    }
+    else
+    {
+        let xhttp;
+        if (window.XMLHttpRequest) {
+            xhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhttp.open("GET", "http://localhost:8080/0628JavaWebExercise_war/AdminServlet?ret=9&tid=" + tid+"&name="+name+"&email="+email+"&tel="+tel);
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("UpdateTutorMsg").innerText="修改成功";
+                }
+            }
+    }
 
+}
 </script>
 </body>
 </html>

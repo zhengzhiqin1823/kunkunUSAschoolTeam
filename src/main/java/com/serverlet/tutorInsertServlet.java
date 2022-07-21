@@ -38,8 +38,8 @@ public class tutorInsertServlet extends HttpServlet {
             List<tutor> tutors = mapper.selectAll();
             int num=tutors.size();
             num++;
+            id+="tutor";
             id+=num;
-            System.out.println(id);
         }
         else
         {

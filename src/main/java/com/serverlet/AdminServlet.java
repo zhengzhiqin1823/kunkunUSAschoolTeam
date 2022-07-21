@@ -135,6 +135,17 @@ public class AdminServlet extends HttpServlet {
                 writer.write(id+","+name+","+reportType+","+startTime+","+deadLine+","+des+";");
                 break;
             }
+            case "9":
+            {
+                String tid = request.getParameter("tid");
+                String email = request.getParameter("email");
+                String tel = request.getParameter("tel");
+                String name = request.getParameter("name");
+                tutorMapper mapper = sqs.getMapper(tutorMapper.class);
+                mapper.update(name,email,tid,tel);
+                sqs.commit();
+                break;
+            }
         }
         sqs.close();
     }
