@@ -183,7 +183,7 @@
                         "onclick=" + "UpdateTask(\'" + studentinfo[0] + "\')" + "></td>"
                     table += "<td><form method='get' action='/0628JavaWebExercise_war/TaskAdminServlet' >";//转到管理页面
                     table += "<input style='display:none' name='taskid' value=" + studentinfo[0] + ">";
-                    table += "<input class=\"demo-button3\" type='submit' value='项目管理' style='margin-left:-120px;width: 140px;height: 40px' id='ReportResultButton' >"
+                    table += "<input class=\"demo-button3\" type='submit' value='项目管理' style='width: 140px;height: 40px' id='ReportResultButton' >"
                     table += "</form>";
                     table += "</td></tr>";
                 }
@@ -240,7 +240,7 @@
                     table += "<td><input class=\"demo-button3\" type='button' value='项目详情' style='width: 140px;height: 40px' onclick=" + "UpdateTask(\'" + studentinfo[0] + "\')></td>"//弹出项目详情
                     table += "<td><form method='get' action='http://localhost:8080/0628JavaWebExercise_war/TaskAdminServlet' >";//生成对应的删除学生的按钮
                     table += "<input style='display:none' name='taskid' value=" + studentinfo[0] + ">";
-                    table += "<input class=\"demo-button3\" type='submit' value='项目管理' style='margin-left:-120px;width: 140px;height: 40px' id='ReportResultButton' onclick=" + "SelectReportResultDetail(\'" + studentinfo[0] + "\')" + ">"
+                    table += "<input class=\"demo-button3\" type='submit' value='项目管理' style='width: 140px;height: 40px' id='ReportResultButton' onclick=" + "SelectReportResultDetail(\'" + studentinfo[0] + "\')" + ">"
                     table += "</form>";
                     table += "</td></tr>";
                 }
