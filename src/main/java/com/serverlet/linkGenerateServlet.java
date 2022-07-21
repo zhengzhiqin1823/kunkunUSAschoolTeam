@@ -1,6 +1,6 @@
 package com.serverlet;
 
-import com.mapper.judgelinkMapper;
+import com.mapper.JudgelinkMapper;
 import com.test.pojo.judgelink;
 
 
@@ -37,7 +37,7 @@ public class linkGenerateServlet extends HttpServlet {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         SqlSession sqs=factory.openSession();
         //获取mapper
-        judgelinkMapper judgelinkMapper=sqs.getMapper(com.mapper.judgelinkMapper.class);
+        JudgelinkMapper judgelinkMapper=sqs.getMapper(JudgelinkMapper.class);
         List<judgelink> judgelinks = judgelinkMapper.selectAll();
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");

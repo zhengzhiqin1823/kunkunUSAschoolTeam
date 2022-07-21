@@ -12,8 +12,8 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
 
-import com.mapper.taskMapper;
-import com.mapper.submissionMapper;
+import com.mapper.TaskMapper;
+import com.mapper.SubmissionMapper;
 import com.test.pojo.submission;
 import com.test.pojo.task;
 
@@ -35,8 +35,8 @@ public class newSubmiServlet extends HttpServlet {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         SqlSession sqs=factory.openSession();
 
-        taskMapper taskMapper = sqs.getMapper(taskMapper.class);
-        submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
+        TaskMapper taskMapper = sqs.getMapper(TaskMapper.class);
+        SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
 
         List<task> tasks = taskMapper.selectByKey(taskid);
         task t=tasks.get(0);

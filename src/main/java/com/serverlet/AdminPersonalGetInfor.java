@@ -1,9 +1,7 @@
 package com.serverlet;
 
-import com.mapper.adminMapper;
-import com.mapper.teamMapper;
+import com.mapper.AdminMapper;
 import com.test.pojo.admin;
-import com.test.pojo.team;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.List;
 
 
 @WebServlet("/admin/personal/getInfor")
@@ -42,7 +39,7 @@ public class AdminPersonalGetInfor extends HttpServlet {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         //获取SqlSession对象，来执行sql
         SqlSession sqs = factory.openSession();
-        adminMapper adminMapper = sqs.getMapper(adminMapper.class);
+        AdminMapper adminMapper = sqs.getMapper(AdminMapper.class);
         admin admin = adminMapper.selectById(id.toString()).get(0);
 
 

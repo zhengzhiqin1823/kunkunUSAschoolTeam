@@ -1,9 +1,6 @@
 package com.serverlet;
 
-import com.mapper.studentMapper;
-import com.mapper.tutorMapper;
-import com.test.pojo.student;
-import com.test.pojo.tutor;
+import com.mapper.TutorMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,7 +11,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 @WebServlet(name = "tutorReloadpassServlet", value = "/tutorReloadpassServlet")
 public class tutorReloadpassServlet extends HttpServlet {
@@ -26,7 +22,7 @@ public class tutorReloadpassServlet extends HttpServlet {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         //获取SqlSession对象，来执行sql
         SqlSession sqs=factory.openSession();
-        tutorMapper mapper = sqs.getMapper(tutorMapper.class);
+        TutorMapper mapper = sqs.getMapper(TutorMapper.class);
         mapper.updatePass(id,"123456");
         sqs.commit();
         sqs.close();

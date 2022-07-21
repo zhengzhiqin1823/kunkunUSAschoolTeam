@@ -27,7 +27,6 @@ public class TeamSubmitServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         //检测用户是否登陆
         boolean isLogin = false;
         HttpSession session = req.getSession();
@@ -62,11 +61,11 @@ public class TeamSubmitServlet extends HttpServlet {
         //获取SqlSession对象，来执行sql
         SqlSession sqs = factory.openSession();
         //执行sql
-        taskMapper taskMapper = sqs.getMapper(taskMapper.class);
-        submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
-        reportcaheMapper reportcaheMapper = sqs.getMapper(com.mapper.reportcaheMapper.class);
-        teamMapper teamMapper = sqs.getMapper(com.mapper.teamMapper.class);
-        reportMapper reportMapper = sqs.getMapper(reportMapper.class);
+        TaskMapper taskMapper = sqs.getMapper(TaskMapper.class);
+        SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
+        ReportcaheMapper reportcaheMapper = sqs.getMapper(ReportcaheMapper.class);
+        TeamMapper teamMapper = sqs.getMapper(TeamMapper.class);
+        ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
         List<task> tasks = taskMapper.selectByKey(taskID);
 
 
@@ -92,7 +91,7 @@ public class TeamSubmitServlet extends HttpServlet {
             submitStatus = -1;
         }
         if (submitStatus == 1) {
-            opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
+            OpiniontutorMapper opiniontutorMapper = sqs.getMapper(OpiniontutorMapper.class);
             if(reports.size()==0)
             {
                 writeHtml2(resp.getWriter(),t,s,team,"",new report(),"","");
@@ -116,7 +115,7 @@ public class TeamSubmitServlet extends HttpServlet {
 //                text = StaticMethods.getTextByFirstFm(ot.getFirstFm(), mapper);
                 text = ot.getData();
                 text = text.replace("\n", "<br/>");
-                tutorMapper tutorMapper = sqs.getMapper(tutorMapper.class);
+                TutorMapper tutorMapper = sqs.getMapper(TutorMapper.class);
                 tutorName = tutorMapper.selectByTid(ot.gettID()).get(0).getName();
                 sc = opiniontutors.get(0).getScore() + "";
 
@@ -170,6 +169,7 @@ public class TeamSubmitServlet extends HttpServlet {
             //submitID
             submitID = String.valueOf(reqData.get("submitID"));
 
+
             String text = reqData.get("text").toString();
 
             /*访问数据库，生成一个HTML文件*/
@@ -179,7 +179,10 @@ public class TeamSubmitServlet extends HttpServlet {
             //获取SqlSession对象，来执行sql
             SqlSession sqs = factory.openSession();
             //执行sql
-            reportMapper reportMapper = sqs.getMapper(reportMapper.class);
+            ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
+            SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
+            submission submission = submissionMapper.selectByKey(submitID).get(0);
+            submissionMapper.updateSubmitTeams(submitID);
 
             //rID
             List<report> reports = reportMapper.selectAll();
@@ -211,7 +214,7 @@ public class TeamSubmitServlet extends HttpServlet {
             time += ".0";
 
             String cacheID;
-            reportcaheMapper reportcaheMapper = sqs.getMapper(reportcaheMapper.class);
+            ReportcaheMapper reportcaheMapper = sqs.getMapper(ReportcaheMapper.class);
             int cache_size = reportcaheMapper.selectAll().size();
             cacheID = cache_size + 1 + "";
             if (reqData.get("type").toString().equals("data")) {

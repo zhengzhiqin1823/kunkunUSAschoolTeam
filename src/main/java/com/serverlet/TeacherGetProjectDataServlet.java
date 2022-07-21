@@ -1,6 +1,5 @@
 package com.serverlet;
 
-import com.jcraft.jsch.Session;
 import com.mapper.*;
 import com.test.pojo.*;
 import org.apache.ibatis.io.Resources;
@@ -17,8 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -233,8 +230,8 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         //System.out.println("oh tm!");
 
 //        String text = getTextByFirstFm(fm, tm);
-        opiniontutorMapper opiniontutorMapper = sqlSession.getMapper(opiniontutorMapper.class);
-        opinionTutorCahceMapper opinionTutorCahceMapper = sqlSession.getMapper(opinionTutorCahceMapper.class);
+        OpiniontutorMapper opiniontutorMapper = sqlSession.getMapper(OpiniontutorMapper.class);
+        OpinionTutorCahceMapper opinionTutorCahceMapper = sqlSession.getMapper(OpinionTutorCahceMapper.class);
 
         List<opinionTutorCache> opinionTutorCaches = opinionTutorCahceMapper.selectByKey(rID, tID);
         List<opiniontutor> opiniontutors = opiniontutorMapper.selectByKey(rID, tID);
@@ -270,7 +267,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        opiniontutorMapper tm = sqlSession.getMapper(opiniontutorMapper.class);
+        OpiniontutorMapper tm = sqlSession.getMapper(OpiniontutorMapper.class);
         List<opiniontutor> s = tm.selectBytID(tID);
         sqlSession.close();
         return s.stream().map(opiniontutor::getrID).collect(Collectors.toList());
@@ -282,7 +279,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        opinionTutorCahceMapper tm = sqlSession.getMapper(opinionTutorCahceMapper.class);
+        OpinionTutorCahceMapper tm = sqlSession.getMapper(OpinionTutorCahceMapper.class);
         List<opinionTutorCache> s = tm.selectBytID(tID);
         sqlSession.close();
         return s.stream().map(opinionTutorCache::getrID).collect(Collectors.toList());
@@ -293,7 +290,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        reportMapper tm = sqlSession.getMapper(reportMapper.class);
+        ReportMapper tm = sqlSession.getMapper(ReportMapper.class);
         //System.out.println("rid"+rid);
         String s = tm.selectByKey(rid).get(0).getSubmitID();
         sqlSession.close();
@@ -306,7 +303,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        taskMapper taskMapper = sqlSession.getMapper(taskMapper.class);
+        TaskMapper taskMapper = sqlSession.getMapper(TaskMapper.class);
         task task = taskMapper.selectByKey(taskID).get(0);
         return task.getName();
     }
@@ -320,7 +317,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        submissionMapper tm = sqlSession.getMapper(submissionMapper.class);
+        SubmissionMapper tm = sqlSession.getMapper(SubmissionMapper.class);
         String taskID = tm.selectByKey(submitID).get(0).getTaskID();
         sqlSession.close();
         return taskID;
@@ -334,10 +331,10 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        teamMapper teamMapper = sqlSession.getMapper(teamMapper.class);
-        reportMapper reportMapper = sqlSession.getMapper(reportMapper.class);
+        TeamMapper teamMapper = sqlSession.getMapper(TeamMapper.class);
+        ReportMapper reportMapper = sqlSession.getMapper(ReportMapper.class);
         report report = reportMapper.selectByRid(rid).get(0);
-        taskMapper tm = sqlSession.getMapper(taskMapper.class);
+        TaskMapper tm = sqlSession.getMapper(TaskMapper.class);
 
         team team = teamMapper.selectByKey(report.getTeamid()).get(0);
 
@@ -355,10 +352,10 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        reportMapper reportMapper = sqlSession.getMapper(reportMapper.class);
+        ReportMapper reportMapper = sqlSession.getMapper(ReportMapper.class);
         report report = reportMapper.selectByRid(rid).get(0);
 
-        taskMapper tm = sqlSession.getMapper(taskMapper.class);
+        TaskMapper tm = sqlSession.getMapper(TaskMapper.class);
 //        String name = tm.selectByKey(taskID).get(0).getDescription();
         String name = report.getData();
         if (name.length() > 240) {
@@ -378,7 +375,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        opinionTutorCahceMapper tm = sqlSession.getMapper(opinionTutorCahceMapper.class);
+        OpinionTutorCahceMapper tm = sqlSession.getMapper(OpinionTutorCahceMapper.class);
         String s = "" + tm.selectByKey(rid, tid).get(0).getScore();
 
         sqlSession.close();
@@ -391,7 +388,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        opiniontutorMapper tm = sqlSession.getMapper(opiniontutorMapper.class);
+        OpiniontutorMapper tm = sqlSession.getMapper(OpiniontutorMapper.class);
         //System.out.println("rid:" + rid);
         //System.out.println("tid:" + tid);
         int s = tm.selectByKey(rid, tid).get(0).getScore();
@@ -447,9 +444,9 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        reportMapper tm = sqlSession.getMapper(reportMapper.class);
+        ReportMapper tm = sqlSession.getMapper(ReportMapper.class);
         String submitID = tm.selectByKey(rid).get(0).getSubmitID();
-        submissionMapper tm1 = sqlSession.getMapper(submissionMapper.class);
+        SubmissionMapper tm1 = sqlSession.getMapper(SubmissionMapper.class);
         int state = Integer.parseInt(tm1.selectByKey(submitID).get(0).getJudgeStatus());
         sqlSession.close();
         return state == 1 ? true : false;
@@ -460,7 +457,7 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        reportMapper mapper = sqlSession.getMapper(reportMapper.class);
+        ReportMapper mapper = sqlSession.getMapper(ReportMapper.class);
         String text = mapper.selectByRid(rid).get(0).getData();
         text = text.replace("\r\n", "<br/>");
         text = text.replace("\n", "<br/>");
@@ -474,8 +471,8 @@ public class TeacherGetProjectDataServlet extends HttpServlet {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        reportMapper mapper = sqlSession.getMapper(reportMapper.class);
-        submissionMapper submissionMapper = sqlSession.getMapper(submissionMapper.class);
+        ReportMapper mapper = sqlSession.getMapper(ReportMapper.class);
+        SubmissionMapper submissionMapper = sqlSession.getMapper(SubmissionMapper.class);
 
         report report = mapper.selectByKey(rid).get(0);
         return submissionMapper.selectByKey(report.getSubmitID()).get(0).getDescription();

@@ -1,7 +1,7 @@
 package com.serverlet;
 
-import com.mapper.submissionMapper;
-import com.mapper.taskMapper;
+import com.mapper.SubmissionMapper;
+import com.mapper.TaskMapper;
 import com.test.pojo.submission;
 import com.test.pojo.task;
 import org.apache.ibatis.io.Resources;
@@ -35,7 +35,7 @@ public class UpdateTaskServlet extends HttpServlet {
 
         SqlSession sqs=factory.openSession();
 
-        taskMapper mapper = sqs.getMapper(taskMapper.class);
+        TaskMapper mapper = sqs.getMapper(TaskMapper.class);
         List<task> tasks = mapper.selectByKey(TaskId);
         task t=tasks.get(0);
         String firstsm = t.getFirstsm();
@@ -45,7 +45,7 @@ public class UpdateTaskServlet extends HttpServlet {
         //随机加入或删除submission
         if(srcSubmitNum!=destSubmitNum)
         {
-            submissionMapper sm = sqs.getMapper(submissionMapper.class);
+            SubmissionMapper sm = sqs.getMapper(SubmissionMapper.class);
             List<submission> submissions = sm.selectByKey(firstsm);
             submission s=submissions.get(0);
             String next=s.getNext();

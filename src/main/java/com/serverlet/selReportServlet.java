@@ -1,8 +1,7 @@
 package com.serverlet;
 
 //import com.mapper.fragmentMapper;
-import com.mapper.reportMapper;
-import com.test.pojo.fragment;
+import com.mapper.ReportMapper;
 import com.test.pojo.report;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -27,7 +26,7 @@ public class selReportServlet extends HttpServlet {
         InputStream is= Resources.getResourceAsStream(resource);
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         SqlSession sqs=factory.openSession();
-        reportMapper reportMapper = sqs.getMapper(reportMapper.class);
+        ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
 //        fragmentMapper fragmentMapper = sqs.getMapper(fragmentMapper.class);
         report r = reportMapper.selectoneByKey(rID);
         response.setCharacterEncoding("utf-8");

@@ -1,6 +1,6 @@
 package com.serverlet;
 
-import com.mapper.teamMapper;
+import com.mapper.TeamMapper;
 import com.test.pojo.team;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -31,7 +31,7 @@ public class TeamGetInforSevlet extends HttpServlet {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         //获取SqlSession对象，来执行sql
         SqlSession sqs = factory.openSession();
-        teamMapper tm = sqs.getMapper(teamMapper.class);
+        TeamMapper tm = sqs.getMapper(TeamMapper.class);
         team team = tm.selectByKey(id.toString()).get(0);
 
         json.append("{" +

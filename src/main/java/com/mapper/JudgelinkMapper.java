@@ -1,0 +1,15 @@
+package com.mapper;
+
+import com.test.pojo.judgelink;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface JudgelinkMapper {
+    List<judgelink> selectByKey(@Param("lid") String lid);
+    List<judgelink> selectAll();
+    void insert(@Param("lid") String lid,@Param("link") String link,@Param("submitID") String submitID,@Param("tid") String tid,@Param("taskID") String taskID,@Param("rID") String rID);
+    void deleteByKey(@Param("lid") String lid);
+    List<judgelink> selectByRid(@Param("rID") String rID);
+    List<judgelink> selectByLink(@Param("link") String link);
+}

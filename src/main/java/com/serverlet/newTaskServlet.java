@@ -1,7 +1,7 @@
 package com.serverlet;
 
-import com.mapper.submissionMapper;
-import com.mapper.taskMapper;
+import com.mapper.SubmissionMapper;
+import com.mapper.TaskMapper;
 import com.test.pojo.submission;
 import com.test.pojo.task;
 import org.apache.ibatis.io.Resources;
@@ -34,8 +34,8 @@ public class newTaskServlet extends HttpServlet {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         SqlSession sqs=factory.openSession();
 
-        taskMapper taskMapper = sqs.getMapper(com.mapper.taskMapper.class);
-        submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
+        TaskMapper taskMapper = sqs.getMapper(TaskMapper.class);
+        SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
         List<task> tasks = taskMapper.selectAll();
 
         List<submission> submissions=submissionMapper.selectAll();

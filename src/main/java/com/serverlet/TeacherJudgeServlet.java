@@ -2,7 +2,6 @@ package com.serverlet;
 
 import com.mapper.*;
 import com.test.pojo.opinionTutorCache;
-import com.test.pojo.opiniontutor;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -239,7 +238,7 @@ public class TeacherJudgeServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        opinionTutorCahceMapper tm=sqlSession.getMapper(opinionTutorCahceMapper.class);
+        OpinionTutorCahceMapper tm=sqlSession.getMapper(OpinionTutorCahceMapper.class);
 
 //        System.out.println(tm.selectByKey(rid,tid));
         List<opinionTutorCache> opinionTutorCaches = tm.selectByKey(rid, tid);
@@ -305,7 +304,7 @@ public class TeacherJudgeServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        opiniontutorMapper tm=sqlSession.getMapper(opiniontutorMapper.class);
+        OpiniontutorMapper tm=sqlSession.getMapper(OpiniontutorMapper.class);
 
         // System.out.println(tm.selectByKey(rid,tid));
 
@@ -327,9 +326,9 @@ public class TeacherJudgeServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        reportMapper tm=sqlSession.getMapper(reportMapper.class);
+        ReportMapper tm=sqlSession.getMapper(ReportMapper.class);
         String s=tm.selectByKey(rid).get(0).getSubmitID();
-        submissionMapper tm1=sqlSession.getMapper(submissionMapper.class);
+        SubmissionMapper tm1=sqlSession.getMapper(SubmissionMapper.class);
         String name=tm1.selectByKey(s).get(0).getName();
         sqlSession.close();
         return name;
@@ -341,9 +340,9 @@ public class TeacherJudgeServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        reportMapper tm=sqlSession.getMapper(reportMapper.class);
+        ReportMapper tm=sqlSession.getMapper(ReportMapper.class);
         String s=tm.selectByKey(rid).get(0).getTeamid();
-        teamMapper tm1=sqlSession.getMapper(teamMapper.class);
+        TeamMapper tm1=sqlSession.getMapper(TeamMapper.class);
         String name=tm1.selectByKey(s).get(0).getName();
         sqlSession.close();
         return name;
@@ -355,7 +354,7 @@ public class TeacherJudgeServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        reportMapper tm = sqlSession.getMapper(reportMapper.class);
+        ReportMapper tm = sqlSession.getMapper(ReportMapper.class);
         System.out.println("report:"+tm.selectByKey(rid).get(0));
         int s = Integer.parseInt(tm.selectByKey(rid).get(0).getTotalsize());
         sqlSession.close();

@@ -1,10 +1,9 @@
 package com.serverlet;
 
-import com.mapper.reportMapper;
-import com.mapper.submissionMapper;
-import com.mapper.taskMapper;
-import com.mapper.teamMapper;
-import com.test.pojo.report;
+import com.mapper.ReportMapper;
+import com.mapper.SubmissionMapper;
+import com.mapper.TaskMapper;
+import com.mapper.TeamMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.List;
 
 @WebServlet("/TeacherJudgeS")
 public class TeacherJudgeSServlet extends HttpServlet {
@@ -66,9 +64,9 @@ public class TeacherJudgeSServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        reportMapper tm=sqlSession.getMapper(reportMapper.class);
+        ReportMapper tm=sqlSession.getMapper(ReportMapper.class);
         String s=tm.selectByKey(rid).get(0).getSubmitID();
-        submissionMapper tm1=sqlSession.getMapper(submissionMapper.class);
+        SubmissionMapper tm1=sqlSession.getMapper(SubmissionMapper.class);
         String name=tm1.selectByKey(s).get(0).getName();
         sqlSession.close();
         return name;
@@ -80,9 +78,9 @@ public class TeacherJudgeSServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        reportMapper tm=sqlSession.getMapper(reportMapper.class);
+        ReportMapper tm=sqlSession.getMapper(ReportMapper.class);
         String s=tm.selectByKey(rid).get(0).getTeamid();
-        teamMapper tm1=sqlSession.getMapper(teamMapper.class);
+        TeamMapper tm1=sqlSession.getMapper(TeamMapper.class);
         String name=tm1.selectByKey(s).get(0).getName();
         sqlSession.close();
         return name;
@@ -94,7 +92,7 @@ public class TeacherJudgeSServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        reportMapper tm = sqlSession.getMapper(reportMapper.class);
+        ReportMapper tm = sqlSession.getMapper(ReportMapper.class);
         //System.out.println("report:"+tm.selectByKey(rid).get(0));
         //System.out.printf(tm.selectByKey(rid).get(0));
         int s = tm.selectByKey(rid).get(0).getData().length();
@@ -109,11 +107,11 @@ public class TeacherJudgeSServlet extends HttpServlet {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        reportMapper tm=sqlSession.getMapper(reportMapper.class);
+        ReportMapper tm=sqlSession.getMapper(ReportMapper.class);
         String s=tm.selectByKey(rid).get(0).getTeamid();
-        teamMapper tm1=sqlSession.getMapper(teamMapper.class);
+        TeamMapper tm1=sqlSession.getMapper(TeamMapper.class);
         String taskid=tm1.selectByKey(s).get(0).getTaskID();
-        taskMapper tm2=sqlSession.getMapper(taskMapper.class);
+        TaskMapper tm2=sqlSession.getMapper(TaskMapper.class);
         String res=tm2.selectByKey(taskid).get(0).getDeadline();
         sqlSession.close();
         sqlSession.close();

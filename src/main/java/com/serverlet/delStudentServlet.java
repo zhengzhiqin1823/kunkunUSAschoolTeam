@@ -1,6 +1,6 @@
 package com.serverlet;
 
-import com.mapper.teamMapper;
+import com.mapper.TeamMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -23,7 +23,7 @@ public class delStudentServlet extends HttpServlet {
         //获取SqlSession对象，来执行sql
         SqlSession sqs=factory.openSession();
         //执行sql
-        teamMapper sm=sqs.getMapper(teamMapper.class);
+        TeamMapper sm=sqs.getMapper(TeamMapper.class);
         sm.deleteByKey(sid);
         sqs.commit();
         sqs.close();

@@ -12,7 +12,7 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
                 <property name="url"
-                          value="jdbc:mysql:///iosystem" />
+                          value="jdbc:mysql:///oisystem" />
                 <property name="username" value="root" />
                 <property name="password" value="1234" />
             </dataSource>
@@ -21,18 +21,16 @@
 
     <!-- 加载映射文件 -->
     <mappers>
-        <mapper resource="com/mapper/adminMapper.xml"/>
-        <mapper resource="com/mapper/fragmentMapper.xml"/>
-        <mapper resource="com/mapper/judgelinkMapper.xml"/>
-        <mapper resource="com/mapper/messageMapper.xml"/>
+        <mapper resource="com/mapper/AdminMapper.xml"/>
+        <mapper resource="com/mapper/JudgelinkMapper.xml"/>
         <mapper resource="com/mapper/OpinionAdminMapper.xml"/>
-        <mapper resource="com/mapper/opinionTutorCacheMapper.xml"/>
-        <mapper resource="com/mapper/opinionTutorMapper.xml"/>
-        <mapper resource="com/mapper/reportcaheMapper.xml"/>
-        <mapper resource="com/mapper/submissionMapper.xml"/>
-        <mapper resource="com/mapper/taskMapper.xml"/>
-        <mapper resource="com/mapper/teamMapper.xml"/>
-        <mapper resource="com/mapper/tutorMapper.xml"/>
-        <mapper resource="com/mapper/reportMapper.xml"/>
+        <mapper resource="com/mapper/OpinionTutorCacheMapper.xml"/>
+        <mapper resource="com/mapper/OpinionTutorMapper.xml"/>
+        <mapper resource="com/mapper/ReportcaheMapper.xml"/>
+        <mapper resource="com/mapper/SubmissionMapper.xml"/>
+        <mapper resource="com/mapper/TaskMapper.xml"/>
+        <mapper resource="com/mapper/TeamMapper.xml"/>
+        <mapper resource="com/mapper/TutorMapper.xml"/>
+        <mapper resource="com/mapper/ReportMapper.xml"/>
     </mappers>
 </configuration>

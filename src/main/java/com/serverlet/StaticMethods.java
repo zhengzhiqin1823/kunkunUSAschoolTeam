@@ -1,8 +1,7 @@
 package com.serverlet;
 
-import com.mapper.reportMapper;
-import com.mapper.reportcaheMapper;
-import com.test.pojo.fragment;
+import com.mapper.ReportMapper;
+import com.mapper.ReportcaheMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -46,7 +45,7 @@ public class StaticMethods {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         //获取SqlSession对象，来执行sql
         SqlSession sqs = factory.openSession();
-        reportcaheMapper mapper = sqs.getMapper(reportcaheMapper.class);
+        ReportcaheMapper mapper = sqs.getMapper(ReportcaheMapper.class);
         return mapper.selectByTeamIDAndSubmitID(teamID, submitID).get(0).getData();
     }
 
@@ -63,7 +62,7 @@ public class StaticMethods {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         //获取SqlSession对象，来执行sql
         SqlSession sqs = factory.openSession();
-        reportMapper mapper = sqs.getMapper(reportMapper.class);
+        ReportMapper mapper = sqs.getMapper(ReportMapper.class);
         return mapper.selectByTeamIDAndSubmitID(teamID, submitID).get(0).getData();
     }
 

@@ -1,7 +1,7 @@
 package com.serverlet;
 
-import com.mapper.submissionMapper;
-import com.mapper.taskMapper;
+import com.mapper.SubmissionMapper;
+import com.mapper.TaskMapper;
 import com.test.pojo.submission;
 import com.test.pojo.task;
 import org.apache.ibatis.io.Resources;
@@ -29,7 +29,7 @@ public class AdminTaskServlet extends HttpServlet {
         //获取SqlSession对象，来执行sql
         SqlSession sqs=factory.openSession();
         String sid="";
-        taskMapper mapper = sqs.getMapper(taskMapper.class);
+        TaskMapper mapper = sqs.getMapper(TaskMapper.class);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();
@@ -40,7 +40,7 @@ public class AdminTaskServlet extends HttpServlet {
                 List<task> tasks = mapper.selectByKey(tid);
                 task t=tasks.get(0);
                 sid=t.getFirstsm();
-                submissionMapper submapper = sqs.getMapper(submissionMapper.class);
+                SubmissionMapper submapper = sqs.getMapper(SubmissionMapper.class);
                 do{
                     List<submission> submissions = submapper.selectByKey(sid);
                     submission submission = submissions.get(0);
@@ -54,7 +54,7 @@ public class AdminTaskServlet extends HttpServlet {
                 List<task> tasks = mapper.selectByKey(tid);
                 task t=tasks.get(0);
                 sid=t.getFirstsm();
-                submissionMapper submapper = sqs.getMapper(submissionMapper.class);
+                SubmissionMapper submapper = sqs.getMapper(SubmissionMapper.class);
                 do{
                     List<submission> submissions = submapper.selectByKey(sid);
                     submission submission = submissions.get(0);
@@ -69,7 +69,7 @@ public class AdminTaskServlet extends HttpServlet {
                 task t=tasks.get(0);
                 sid=t.getFirstsm();
                 int num=Integer.parseInt(t.getSubmitNum());
-                submissionMapper submapper = sqs.getMapper(submissionMapper.class);
+                SubmissionMapper submapper = sqs.getMapper(SubmissionMapper.class);
                 for(int i=0;i<num;i++)
                 {
                     List<submission> submissions = submapper.selectByKey(sid);

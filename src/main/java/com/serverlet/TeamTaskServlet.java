@@ -52,15 +52,15 @@ public class TeamTaskServlet extends HttpServlet {
         //获取SqlSession对象，来执行sql
         SqlSession sqs = factory.openSession();
         //执行sql
-        taskMapper taskMapper = sqs.getMapper(taskMapper.class);
-        submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
-        reportMapper reportMapper = sqs.getMapper(reportMapper.class);
+        TaskMapper taskMapper = sqs.getMapper(TaskMapper.class);
+        SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
+        ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
 
-        teamMapper teamMapper = sqs.getMapper(teamMapper.class);
+        TeamMapper teamMapper = sqs.getMapper(TeamMapper.class);
         team team = teamMapper.selectByKey((String) teamID).get(0);
         teamName = team.getName();
         taskID = team.getTaskID();
-        opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
+        OpiniontutorMapper opiniontutorMapper = sqs.getMapper(OpiniontutorMapper.class);
 
         List<task> tasks = taskMapper.selectByKey(taskID);
         task t = tasks.get(0);

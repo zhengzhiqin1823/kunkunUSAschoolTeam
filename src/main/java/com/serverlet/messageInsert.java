@@ -1,6 +1,6 @@
 package com.serverlet;
 
-import com.mapper.messageMapper;
+import com.mapper.MessageMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,7 +16,7 @@ public class messageInsert {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         //获取SqlSession对象，来执行sql
         SqlSession sqs=factory.openSession();
-        messageMapper mapper = sqs.getMapper(messageMapper.class);
+        MessageMapper mapper = sqs.getMapper(MessageMapper.class);
         mapper.insert(messageId,From,To,Title,firstFm,totalSize,isRead,time);
         sqs.commit();
         sqs.close();

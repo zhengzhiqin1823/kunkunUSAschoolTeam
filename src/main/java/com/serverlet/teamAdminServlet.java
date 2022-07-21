@@ -1,6 +1,6 @@
 package com.serverlet;
 
-import com.mapper.teamMapper;
+import com.mapper.TeamMapper;
 import com.test.pojo.team;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -34,7 +34,7 @@ public class teamAdminServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();
-        teamMapper mapper = sqs.getMapper(teamMapper.class);
+        TeamMapper mapper = sqs.getMapper(TeamMapper.class);
         switch (ret)
         {
             case "1":

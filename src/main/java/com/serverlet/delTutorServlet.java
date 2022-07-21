@@ -1,7 +1,6 @@
 package com.serverlet;
 
-import com.mapper.studentMapper;
-import com.mapper.tutorMapper;
+import com.mapper.TutorMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -24,7 +23,7 @@ public class delTutorServlet extends HttpServlet {
         //获取SqlSession对象，来执行sql
         SqlSession sqs=factory.openSession();
         //执行sql
-        tutorMapper mapper = sqs.getMapper(tutorMapper.class);
+        TutorMapper mapper = sqs.getMapper(TutorMapper.class);
         mapper.deleteByTid(tid);
         sqs.commit();
         sqs.close();

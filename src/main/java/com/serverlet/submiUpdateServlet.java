@@ -1,6 +1,6 @@
 package com.serverlet;
 
-import com.mapper.submissionMapper;
+import com.mapper.SubmissionMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,7 +28,7 @@ public class submiUpdateServlet extends HttpServlet {
         InputStream is= Resources.getResourceAsStream(resource);
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         SqlSession sqs=factory.openSession();
-        submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
+        SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
         submissionMapper.updateAllByKey(submitID,name,startTime,deadLine,description);
         response.getWriter().write("1");
         sqs.commit();

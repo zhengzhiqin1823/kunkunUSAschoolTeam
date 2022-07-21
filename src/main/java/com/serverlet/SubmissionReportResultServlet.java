@@ -1,18 +1,9 @@
 package com.serverlet;
 
-import com.mapper.submissionMapper;
-import com.test.pojo.submission;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 @WebServlet(name = "SubmissionReportResultServlet", value = "/SubmissionReportResultServlet")
 public class SubmissionReportResultServlet extends HttpServlet {

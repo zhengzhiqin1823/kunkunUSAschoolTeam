@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间,做sql隔离 -->
+
+<mapper namespace="com.mapper.ReportMapper">
+    <select id="selectByKey" resultType="com.test.pojo.report">
+        select * from report where rid=#{rid};
+    </select>
+    <select id="selectAll" resultType="com.test.pojo.report">
+        select * from report;
+    </select>
+    <select id="selectByTeamIDAndSubmitID" resultType="com.test.pojo.report">
+        select * from report where teamID=#{teamID} and submitID=#{submitID};
+    </select>
+    <insert id="insert" parameterType="com.test.pojo.report">
+        insert into report
+        values (#{rid},#{submitID},#{teamid},#{totalsize},#{submitTime},#{data});
+    </insert>
+    <delete id="deleteByKey" parameterType="com.test.pojo.report">
+        delete from report where rid=#{rid};
+    </delete>
+    <select id="selectoneByKey" resultType="com.test.pojo.report">
+        select * from report where  rid=#{rid};
+    </select>
+    <select id="selectBySubId" resultType="com.test.pojo.report" >
+        select *from report where submitID=#{submitID};
+    </select>
+    <select id="selectByRid" resultType="com.test.pojo.report">
+        select  *from report where rid=#{rid};
+    </select>
+</mapper>

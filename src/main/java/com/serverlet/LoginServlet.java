@@ -1,8 +1,8 @@
 package com.serverlet;
 
-import com.mapper.teamMapper;
-import com.mapper.tutorMapper;
-import com.mapper.adminMapper;
+import com.mapper.TeamMapper;
+import com.mapper.TutorMapper;
+import com.mapper.AdminMapper;
 import com.test.pojo.team;
 import com.test.pojo.tutor;
 import com.test.pojo.admin;
@@ -56,20 +56,20 @@ public class LoginServlet extends HttpServlet {
 
         //执行sql
         try {
-            adminMapper adminMapper = sqs.getMapper(com.mapper.adminMapper.class);
+            AdminMapper adminMapper = sqs.getMapper(AdminMapper.class);
             List<admin> admins = adminMapper.selectById(id);
             sqs.commit();
             if (admins.size() > 0 && admins.get(0).password.equals(password)) {
                 flag = 1;
             } else {
-                tutorMapper tutormapper = sqs.getMapper(tutorMapper.class);
+                TutorMapper tutormapper = sqs.getMapper(TutorMapper.class);
                 List<tutor> tutors = tutormapper.selectByTid(id);
                 sqs.commit();
                 if (tutors.size() > 0 && tutors.get(0).password.equals(password)) {
                     flag = 2;
                 }
                 else {
-                    teamMapper teamMapper = sqs.getMapper(teamMapper.class);
+                    TeamMapper teamMapper = sqs.getMapper(TeamMapper.class);
                     List<team> teams = teamMapper.selectByKey(id);
                     sqs.commit();
                     if (teams.size() > 0 && teams.get(0).getPassword().equals(password)) {

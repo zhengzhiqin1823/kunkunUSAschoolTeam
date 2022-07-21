@@ -1,8 +1,6 @@
 package com.serverlet;
 
-import com.mapper.studentMapper;
-import com.mapper.tutorMapper;
-import com.test.pojo.student;
+import com.mapper.TutorMapper;
 import com.test.pojo.tutor;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -31,7 +29,7 @@ public class tutorInsertServlet extends HttpServlet {
         //获取SqlSession对象，来执行sql
         SqlSession sqs=factory.openSession();
         //执行sql
-        tutorMapper mapper = sqs.getMapper(tutorMapper.class);
+        TutorMapper mapper = sqs.getMapper(TutorMapper.class);
         String id="";
         if(tid.equals("default"))
         {

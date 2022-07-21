@@ -57,7 +57,7 @@ public class reportServlet extends HttpServlet {
         {
             case "1":
             {
-                reportMapper mapper = sqs.getMapper(reportMapper.class);
+                ReportMapper mapper = sqs.getMapper(ReportMapper.class);
                 List<report> reports = mapper.selectBySubId(sid);
                 for(report r:reports)
                 {
@@ -67,7 +67,7 @@ public class reportServlet extends HttpServlet {
             }
             case "2":
             {
-                reportMapper mapper = sqs.getMapper(reportMapper.class);
+                ReportMapper mapper = sqs.getMapper(ReportMapper.class);
                 List<report> reports = mapper.selectByRid(rid);
                 report r=reports.get(0);
                 writer.write(r.getRid()+","+r.getTeamid()+","+r.getSubmitTime()+";");
@@ -75,7 +75,7 @@ public class reportServlet extends HttpServlet {
             }
             case "3":
             {
-                reportMapper mapper = sqs.getMapper(reportMapper.class);
+                ReportMapper mapper = sqs.getMapper(ReportMapper.class);
                 List<report> reports = mapper.selectByRid(rid);
                 report r=reports.get(0);
 //                String firstfm=r.getFirstFm();
@@ -94,13 +94,13 @@ public class reportServlet extends HttpServlet {
             }
             case "4":
             {
-                reportMapper mapper = sqs.getMapper(reportMapper.class);
+                ReportMapper mapper = sqs.getMapper(ReportMapper.class);
                 List<report> reports = mapper.selectBySubId(sid);
                 for(report r:reports)
                 {
-                    judgelinkMapper jm = sqs.getMapper(judgelinkMapper.class);
-                    tutorMapper tm = sqs.getMapper(tutorMapper.class);
-                    opiniontutorMapper opiniontutorMapper = sqs.getMapper(opiniontutorMapper.class);
+                    JudgelinkMapper jm = sqs.getMapper(JudgelinkMapper.class);
+                    TutorMapper tm = sqs.getMapper(TutorMapper.class);
+                    OpiniontutorMapper opiniontutorMapper = sqs.getMapper(OpiniontutorMapper.class);
                     List<judgelink> judgelinks = jm.selectByRid(r.getRid());
                     List<opiniontutor> opiniontutors = opiniontutorMapper.selectByrID(r.getRid());
                     String opinionstatus;
@@ -126,9 +126,9 @@ public class reportServlet extends HttpServlet {
                 break;
             }
             case "5":{
-                reportMapper mapper = sqs.getMapper(reportMapper.class);
-                submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
-                teamMapper teamMapper = sqs.getMapper(teamMapper.class);
+                ReportMapper mapper = sqs.getMapper(ReportMapper.class);
+                SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
+                TeamMapper teamMapper = sqs.getMapper(TeamMapper.class);
                 List<submission> submissions = submissionMapper.selectByKey(sid);
                 String taskid=submissions.get(0).getTaskID();
                 List<team> teams = teamMapper.selectByTaskID(taskid);

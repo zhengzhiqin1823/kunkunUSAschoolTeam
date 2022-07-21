@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/team/report/getInfor")
@@ -36,10 +35,10 @@ public class TeamGetReportServlet extends HttpServlet {
         //获取SqlSession对象，来执行sql
         SqlSession sqs = factory.openSession();
         //执行sql
-        taskMapper taskMapper = sqs.getMapper(taskMapper.class);
-        submissionMapper submissionMapper = sqs.getMapper(submissionMapper.class);
-        reportcaheMapper reportcaheMapper = sqs.getMapper(com.mapper.reportcaheMapper.class);
-        reportMapper reportMapper = sqs.getMapper(reportMapper.class);
+        TaskMapper taskMapper = sqs.getMapper(TaskMapper.class);
+        SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
+        ReportcaheMapper reportcaheMapper = sqs.getMapper(ReportcaheMapper.class);
+        ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
 
         List<submission> submissions = submissionMapper.selectByKey(submitID);
         submission s = submissions.get(0);

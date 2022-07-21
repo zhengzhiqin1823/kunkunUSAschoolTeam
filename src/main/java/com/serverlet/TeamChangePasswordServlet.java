@@ -1,8 +1,8 @@
 package com.serverlet;
 
 import com.alibaba.fastjson.JSONObject;
-import com.mapper.adminMapper;
-import com.mapper.teamMapper;
+import com.mapper.AdminMapper;
+import com.mapper.TeamMapper;
 import com.test.pojo.admin;
 import com.test.pojo.team;
 import org.apache.ibatis.io.Resources;
@@ -57,7 +57,7 @@ public class TeamChangePasswordServlet extends HttpServlet {
             //获取SqlSession对象，来执行sql
             SqlSession sqs = factory.openSession();
             //执行sql
-            teamMapper mapper = sqs.getMapper(teamMapper.class);
+            TeamMapper mapper = sqs.getMapper(TeamMapper.class);
 
             HttpSession session = req.getSession();
             Object id = session.getAttribute("id");
@@ -83,7 +83,7 @@ public class TeamChangePasswordServlet extends HttpServlet {
             //获取SqlSession对象，来执行sql
             SqlSession sqs = factory.openSession();
             //执行sql
-            adminMapper mapper = sqs.getMapper(adminMapper.class);
+            AdminMapper mapper = sqs.getMapper(AdminMapper.class);
 
             HttpSession session = req.getSession();
             Object id = session.getAttribute("id");

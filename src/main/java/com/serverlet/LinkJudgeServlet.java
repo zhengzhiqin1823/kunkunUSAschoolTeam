@@ -1,6 +1,6 @@
 package com.serverlet;
 
-import com.mapper.judgelinkMapper;
+import com.mapper.JudgelinkMapper;
 import com.test.pojo.judgelink;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class LinkJudgeServlet extends HttpServlet {
         InputStream is= Resources.getResourceAsStream(resource);
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         SqlSession sqs=factory.openSession();
-        judgelinkMapper judgelinkMapper = sqs.getMapper(judgelinkMapper.class);
+        JudgelinkMapper judgelinkMapper = sqs.getMapper(JudgelinkMapper.class);
         List<judgelink> judgelinks = judgelinkMapper.selectByLink(link);
         List<judgelink> judgelinksss = judgelinkMapper.selectAll();
 

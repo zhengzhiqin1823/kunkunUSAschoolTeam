@@ -1,6 +1,6 @@
 package com.serverlet;
 
-import com.mapper.submissionMapper;
+import com.mapper.SubmissionMapper;
 import com.test.pojo.submission;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -49,7 +49,7 @@ public class submissionServlet extends HttpServlet {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
         //获取SqlSession对象，来执行sql
         SqlSession sqs=factory.openSession();
-        submissionMapper mapper = sqs.getMapper(submissionMapper.class);
+        SubmissionMapper mapper = sqs.getMapper(SubmissionMapper.class);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();
