@@ -183,7 +183,7 @@ public class TeamSubmitServlet extends HttpServlet {
             ReportMapper reportMapper = sqs.getMapper(ReportMapper.class);
             SubmissionMapper submissionMapper = sqs.getMapper(SubmissionMapper.class);
             submission submission = submissionMapper.selectByKey(submitID).get(0);
-            submissionMapper.updateSubmitTeams(submitID);
+
 
             //rID
             List<report> reports = reportMapper.selectAll();
@@ -221,6 +221,7 @@ public class TeamSubmitServlet extends HttpServlet {
             if (reqData.get("type").toString().equals("data")) {
                 List<report> reportss = reportMapper.selectByTeamIDAndSubmitID(teamID, submitID);
                 if (reportss.size() == 0) {
+                    submissionMapper.updateSubmitTeams(submitID);
                     reportMapper.insert(rID, submitID, teamID, totalsize, time, text);
                 } else {
                     rID = reportss.get(0).getRid();
@@ -330,11 +331,9 @@ public class TeamSubmitServlet extends HttpServlet {
                         "        },\n" +
                         "        methods: {\n" +
                         "            submit: function () {\n" +
-                        "                alert(\"submit!\")\n" +
                         "                this.post_data()\n" +
                         "            },\n" +
                         "            cache: function () {\n" +
-                        "                alert(\"cache!\")\n" +
                         "                this.post_cache()\n" +
                         "            },\n" +
                         "\n" +
@@ -362,7 +361,6 @@ public class TeamSubmitServlet extends HttpServlet {
                         "                    'submitID': this.submitID,\n" +
                         "                    'text': element.value\n" +
                         "                }\n" +
-                        "                   alert(element.value);" +
                         "                axios({\n" +
                         "                    method: \"post\",\n" +
                         "                    url: \"/0628JavaWebExercise_war/submit?type=data\",\n" +
@@ -378,7 +376,6 @@ public class TeamSubmitServlet extends HttpServlet {
                         "                    'submitID': this.submitID,\n" +
                         "                    'text': element.value\n" +
                         "                }\n" +
-                        "                alert(element.value);" +
                         "                axios\n" +
                         "                    .post('/0628JavaWebExercise_war/submit?type=cache', data)\n" +
                         "                    .then((res) => {\n" +

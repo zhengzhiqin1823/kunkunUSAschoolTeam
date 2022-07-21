@@ -23,7 +23,7 @@ public class NewSubmiServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String taskid=request.getParameter("taskid");
         String name=request.getParameter("name");
-        String submitStatus="1";
+        String submitStatus="0";
         String judgeStatus="0";
         String startTime=request.getParameter("startTime");
         String deadLine=request.getParameter("deadline");
@@ -41,27 +41,46 @@ public class NewSubmiServlet extends HttpServlet {
         List<task> tasks = taskMapper.selectByKey(taskid);
         task t=tasks.get(0);
         int snum=Integer.valueOf(t.getSubmitNum());
-        String fm=t.getFirstsm();
-        for(int i=0;i<snum-1;i++){
-            submission s = submissionMapper.selectoneByKey(fm);
-            fm=s.getNext();
+        if(snum!=0) {
+            String fm = t.getFirstsm();
+            for (int i = 0; i < snum - 1; i++) {
+                submission s = submissionMapper.selectoneByKey(fm);
+                fm = s.getNext();
+            }
+            List<submission> submissions = submissionMapper.selectAll();
+            String submitid = submissions.size() + 1 + "";
+
+            submissionMapper.insert(
+                    submitid,
+                    name,
+                    submitStatus,
+                    judgeStatus,
+                    null,
+                    startTime,
+                    deadLine,
+                    submitTeams,
+                    description,
+                    taskid);
+
+            submissionMapper.updateNextByKey(fm, submitid);
         }
-        List<submission> submissions = submissionMapper.selectAll();
-        String submitid=submissions.size()+1+"";
-        submissionMapper.insert(
-                submitid,
-                name,
-                submitStatus,
-                judgeStatus,
-                null,
-                startTime,
-                deadLine,
-                submitTeams,
-                description,
-                taskid);
+        else {
+            List<submission> submissions = submissionMapper.selectAll();
+            String submitid = submissions.size() + 1 + "";
 
-        submissionMapper.updateNextByKey(fm,submitid);
+            submissionMapper.insert(
+                    submitid,
+                    name,
+                    submitStatus,
+                    judgeStatus,
+                    null,
+                    startTime,
+                    deadLine,
+                    submitTeams,
+                    description,
+                    taskid);
 
+        }
         String submitNum=String.valueOf(snum+1);
         taskMapper.updateSubmitnumByKey(taskid,submitNum);
         PrintWriter writer = response.getWriter();

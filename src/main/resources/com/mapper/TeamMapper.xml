@@ -35,7 +35,7 @@
     </update>
     <update id="updatePass" parameterType="com.test.pojo.team">
         update  team
-        set password="123456"
+        set password="49ba59abbe56e057"
         where teamid=#{teamid}
     </update>
 </mapper>
